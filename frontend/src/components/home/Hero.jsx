@@ -111,7 +111,7 @@ export default function Hero() {
           </div>
 
           <div className="absolute -bottom-5 right-3 z-10 rounded-2xl border border-border bg-card/90 px-5 py-4 shadow-xl backdrop-blur-md sm:-right-6">
-            <p className="text-2xl font-bold text-secondary">5000+</p>
+            <p className="text-2xl font-bold text-secondary">500+</p>
 
             <p className="mt-1 text-xs font-medium text-muted">
               Students Guided

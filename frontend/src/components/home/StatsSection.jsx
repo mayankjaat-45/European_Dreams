@@ -7,7 +7,7 @@ const fallbackStats = {
   partnerUniversities: 200,
   availableCourses: 2000,
   europeanCountries: 28,
-  studentsGuided: 5000,
+  studentsGuided: 500,
   showPlusSign: true,
 };
 
