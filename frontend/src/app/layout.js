@@ -33,6 +33,9 @@ export const metadata = {
     "European Dreams",
     "Student visa assistance",
   ],
+  verification: {
+    google: "ZU-fHs01QUNKfLf6QDJxE8uiB_ratA1Yt2ftRbt2ttA",
+  },
 };
 
 export default function RootLayout({ children }) {
