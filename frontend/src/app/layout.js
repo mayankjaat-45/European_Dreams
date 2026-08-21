@@ -24,8 +24,10 @@ export const metadata = {
     default: "European Dreams | Study in Europe",
     template: "%s | European Dreams",
   },
+
   description:
     "Get expert guidance for studying in Europe, including university selection, applications, scholarships and student visa assistance.",
+
   keywords: [
     "Study in Europe",
     "European universities",
@@ -33,6 +35,8 @@ export const metadata = {
     "European Dreams",
     "Student visa assistance",
   ],
+
+  // Google Search Console verification
   verification: {
     google: "ZU-fHs01QUNKfLf6QDJxE8uiB_ratA1Yt2ftRbt2ttA",
   },
@@ -47,6 +51,7 @@ export default function RootLayout({ children }) {
             __html: `
               try {
                 const savedTheme = localStorage.getItem("theme");
+
                 const prefersDark = window.matchMedia(
                   "(prefers-color-scheme: dark)"
                 ).matches;
@@ -87,12 +92,13 @@ export default function RootLayout({ children }) {
           }}
         />
 
+        {/* Google Analytics and Google Ads */}
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=AW-18374171344"
+          src="https://www.googletagmanager.com/gtag/js?id=G-DZC6LC5WJK"
           strategy="afterInteractive"
         />
 
-        <Script id="google-ads-tag" strategy="afterInteractive">
+        <Script id="google-tag" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
 
@@ -101,6 +107,8 @@ export default function RootLayout({ children }) {
             }
 
             gtag("js", new Date());
+
+            gtag("config", "G-DZC6LC5WJK");
             gtag("config", "AW-18374171344");
           `}
         </Script>
