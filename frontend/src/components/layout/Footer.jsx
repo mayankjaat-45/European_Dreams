@@ -504,7 +504,7 @@ export default async function Footer() {
               rel="noopener noreferrer"
               className="inline-block font-semibold text-amber-400 transition-all duration-300 hover:-translate-y-0.5 hover:text-amber-300 hover:underline"
             >
-              MayTech Solutions
+              MayTech Solution
             </a>
           </p>
 
