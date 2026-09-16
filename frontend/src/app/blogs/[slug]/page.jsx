@@ -24,6 +24,8 @@ function formatDate(date) {
   }).format(new Date(date));
 }
 
+const SITE_URL = "https://www.europeandreamss.com";
+
 const getBlogData = async (slug) => {
   try {
     return await getBlogBySlug(slug);
@@ -39,6 +41,42 @@ const getBlogData = async (slug) => {
   }
 };
 
+function truncate(value, maxLength) {
+  const text = String(value || "").trim().replace(/\s+/g, " ");
+  if (!text) return "";
+  if (text.length <= maxLength) return text;
+  return `${text.slice(0, maxLength - 1).trim()}…`;
+}
+
+function stripContent(value) {
+  return String(value || "")
+    .replace(/[#>*`]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function buildBlogDescription(blog) {
+  if (blog.metaDescription?.trim()) return truncate(blog.metaDescription, 155);
+  if (blog.excerpt?.trim()) return truncate(blog.excerpt, 155);
+  if (blog.content?.trim()) return truncate(stripContent(blog.content), 155);
+  return "Read the latest Study in Italy guidance from European Dreams.";
+}
+
+function stripBrandSuffix(value) {
+  return String(value || "")
+    .trim()
+    .replace(/\s*\|\s*European Dreams\s*$/i, "")
+    .trim();
+}
+
+function buildBlogTitle(blog) {
+  if (blog.seoTitle?.trim())
+    return truncate(stripBrandSuffix(blog.seoTitle), 60);
+  const base = blog.title;
+  if (base.length <= 60) return base;
+  return truncate(base, 60);
+}
+
 export async function generateMetadata({ params }) {
   const { slug } = await params;
 
@@ -46,42 +84,50 @@ export async function generateMetadata({ params }) {
 
   if (!blog) {
     return {
-      title: "Blog Not Found | European Dreams",
+      title: "Blog Not Found",
+      description: "The requested article could not be found.",
     };
   }
 
+  const title = buildBlogTitle(blog);
+  const description = buildBlogDescription(blog);
+  const canonicalUrl =
+    blog.canonicalUrl?.trim() ||
+    `${SITE_URL}/blogs/${blog.slug || slug}`;
+  const ogTitle = `${title} | European Dreams`;
+  const ogDescription = description;
+
   return {
-    title: blog.seoTitle || `${blog.title} | European Dreams`,
-
-    description: blog.metaDescription || blog.excerpt,
-
-    keywords: blog.keywords?.length ? blog.keywords : blog.tags,
-
-    alternates: blog.canonicalUrl
-      ? {
-          canonical: blog.canonicalUrl,
-        }
-      : undefined,
-
+    title,
+    description,
+    alternates: {
+      canonical: canonicalUrl,
+    },
     openGraph: {
-      title: blog.seoTitle || blog.title,
-
-      description: blog.metaDescription || blog.excerpt,
-
+      title: ogTitle,
+      description: ogDescription,
+      url: canonicalUrl,
+      siteName: "European Dreams",
       type: "article",
-
+      locale: "en_IN",
       publishedTime: blog.publishedAt || undefined,
-
       authors: blog.authorName ? [blog.authorName] : ["European Dreams"],
-
       images: blog.featuredImage
         ? [
             {
               url: blog.featuredImage,
+              width: 1200,
+              height: 630,
               alt: blog.featuredImageAlt || blog.title,
             },
           ]
         : [],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: ogTitle,
+      description: ogDescription,
+      images: blog.featuredImage ? [blog.featuredImage] : [],
     },
   };
 }

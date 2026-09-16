@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import { cache } from "react";
 import { getUniversityBySlug } from "@/services/universities.service";
 
+const SITE_URL = "https://www.europeandreamss.com";
+
 const getCachedUniversity = cache(getUniversityBySlug);
 
 async function loadUniversity(slug) {
@@ -24,22 +26,94 @@ function normalizeResult(result) {
   };
 }
 
+function truncate(value, maxLength) {
+  const text = String(value || "").trim().replace(/\s+/g, " ");
+  if (!text) return "";
+  if (text.length <= maxLength) return text;
+  return `${text.slice(0, maxLength - 1).trim()}…`;
+}
+
+function buildUniversityDescription(university) {
+  if (university.metaDescription?.trim()) {
+    return truncate(university.metaDescription, 155);
+  }
+  if (university.shortDescription?.trim()) {
+    return truncate(university.shortDescription, 155);
+  }
+  if (university.overview?.trim()) {
+    return truncate(university.overview, 155);
+  }
+  const location = [university.city, university.country]
+    .filter(Boolean)
+    .join(", ");
+  const locationSuffix = location ? ` in ${location}` : "";
+  return `Explore courses and admission guidance for ${university.name}${locationSuffix}. Get expert assistance from European Dreams.`;
+}
+
+function stripBrandSuffix(value) {
+  return String(value || "")
+    .trim()
+    .replace(/\s*\|\s*European Dreams\s*$/i, "")
+    .trim();
+}
+
+function buildUniversityTitle(university) {
+  if (university.seoTitle?.trim())
+    return truncate(stripBrandSuffix(university.seoTitle), 60);
+  const base = `${university.name} – Courses, Fees & Admission`;
+  if (base.length <= 60) return base;
+  const fallback = university.name;
+  if (fallback.length <= 60) return fallback;
+  return truncate(fallback, 60);
+}
+
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const { university } = normalizeResult(await loadUniversity(slug));
 
-  if (!university) return { title: "University not found" };
+  if (!university) {
+    return {
+      title: "University Not Found",
+      description: "The requested university could not be found.",
+    };
+  }
+
+  const title = buildUniversityTitle(university);
+  const description = buildUniversityDescription(university);
+  const canonical = `${SITE_URL}/universities/${university.slug || slug}`;
+  const ogImage = university.heroImage || university.image || null;
+  const ogTitle = `${title} | European Dreams`;
 
   return {
-    title: university.seoTitle || university.name,
-    description:
-      university.metaDescription ||
-      university.shortDescription ||
-      `Explore courses, admissions and student opportunities at ${university.name}.`,
-    keywords: university.keywords,
-    alternates: university.canonicalUrl
-      ? { canonical: university.canonicalUrl }
-      : undefined,
+    title,
+    description,
+    alternates: {
+      canonical,
+    },
+    openGraph: {
+      title: ogTitle,
+      description,
+      url: canonical,
+      siteName: "European Dreams",
+      type: "website",
+      locale: "en_IN",
+      images: ogImage
+        ? [
+            {
+              url: ogImage,
+              width: 1200,
+              height: 630,
+              alt: university.name,
+            },
+          ]
+        : [],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: ogTitle,
+      description,
+      images: ogImage ? [ogImage] : [],
+    },
   };
 }
 

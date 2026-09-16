@@ -19,22 +19,53 @@ const playfairDisplay = Playfair_Display({
   display: "swap",
 });
 
+const SITE_URL = "https://www.europeandreamss.com";
+
 export const metadata = {
+  metadataBase: new URL(SITE_URL),
+
   title: {
-    default: "European Dreams | Study in Europe",
+    default: "Study in Europe & Italy for Indian Students | European Dreams",
     template: "%s | European Dreams",
   },
 
   description:
-    "Get expert guidance for studying in Europe, including university selection, applications, scholarships and student visa assistance.",
+    "Explore universities, courses, scholarships and admission guidance for studying in Europe and Italy. Get expert assistance for Indian students from European Dreams.",
 
-  keywords: [
-    "Study in Europe",
-    "European universities",
-    "Study abroad consultancy",
-    "European Dreams",
-    "Student visa assistance",
-  ],
+  alternates: {
+    canonical: "/",
+  },
+
+  openGraph: {
+    type: "website",
+    locale: "en_IN",
+    url: SITE_URL,
+    siteName: "European Dreams",
+    title: "Study in Europe & Italy for Indian Students | European Dreams",
+    description:
+      "Explore universities, courses, scholarships and admission guidance for studying in Europe and Italy. Get expert assistance for Indian students from European Dreams.",
+    images: [
+      {
+        url: "/images/hero.jpg",
+        width: 1200,
+        height: 630,
+        alt: "European Dreams - Study in Italy and Europe",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Study in Europe & Italy for Indian Students | European Dreams",
+    description:
+      "Explore universities, courses, scholarships and admission guidance for studying in Europe and Italy. Get expert assistance for Indian students from European Dreams.",
+    images: ["/images/hero.jpg"],
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+  },
 
   // Google Search Console verification
   verification: {
