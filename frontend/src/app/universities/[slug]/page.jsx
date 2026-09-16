@@ -77,6 +77,10 @@ export async function generateMetadata({ params }) {
     return {
       title: "University Not Found",
       description: "The requested university could not be found.",
+      robots: {
+        index: false,
+        follow: true,
+      },
     };
   }
 

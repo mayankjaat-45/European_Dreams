@@ -88,6 +88,10 @@ export async function generateMetadata({ params }) {
     return {
       title: "Blog Not Found",
       description: "The requested article could not be found.",
+      robots: {
+        index: false,
+        follow: true,
+      },
     };
   }
 

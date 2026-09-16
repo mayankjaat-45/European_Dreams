@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 import {
   ArrowRight,
@@ -69,6 +70,10 @@ export default async function BlogsPage({ searchParams }) {
     }),
     getBlogCategories(),
   ]);
+
+  if (pagination.totalPages > 0 && page > pagination.totalPages) {
+    notFound();
+  }
 
   return (
     <main className="min-h-screen bg-[var(--background)]">
