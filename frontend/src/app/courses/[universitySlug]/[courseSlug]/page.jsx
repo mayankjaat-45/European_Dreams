@@ -24,6 +24,8 @@ const formatLabel = (value = "") =>
     .replaceAll("-", " ")
     .replace(/\b\w/g, (letter) => letter.toUpperCase());
 
+const SITE_URL = "https://www.europeandreamss.com";
+
 const getCourseData = async (universitySlug, courseSlug) => {
   try {
     return await getCourseBySlug(universitySlug, courseSlug);
@@ -39,24 +41,96 @@ const getCourseData = async (universitySlug, courseSlug) => {
   }
 };
 
+function truncate(value, maxLength) {
+  const text = String(value || "").trim().replace(/\s+/g, " ");
+  if (!text) return "";
+  if (text.length <= maxLength) return text;
+  return `${text.slice(0, maxLength - 1).trim()}…`;
+}
+
+function stripMarkup(value) {
+  return String(value || "")
+    .replace(/<[^>]*>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function stripBrandSuffix(value) {
+  return String(value || "")
+    .trim()
+    .replace(/\s*\|\s*European Dreams\s*$/i, "")
+    .trim();
+}
+
+function buildCourseTitle(course, university) {
+  if (course.seoTitle?.trim())
+    return truncate(stripBrandSuffix(course.seoTitle), 60);
+  const uniName = university?.name || "";
+  const base = uniName
+    ? `${course.name} – ${uniName} | Admission`
+    : course.name;
+  if (base.length <= 60) return base;
+  const fallback = uniName ? `${course.name} – ${uniName}` : course.name;
+  if (fallback.length <= 60) return fallback;
+  return truncate(fallback, 60);
+}
+
+function buildCourseDescription(course, university) {
+  if (course.metaDescription?.trim()) return truncate(course.metaDescription, 155);
+  if (course.shortDescription?.trim()) return truncate(course.shortDescription, 155);
+  if (course.overview?.trim()) return truncate(stripMarkup(course.overview), 155);
+  const uniName = university?.name ? ` at ${university.name}` : "";
+  return `Explore ${course.name}${uniName}. Find eligibility, duration and admission guidance from European Dreams.`;
+}
+
 export async function generateMetadata({ params }) {
   const { universitySlug, courseSlug } = await params;
   const data = await getCourseData(universitySlug, courseSlug);
 
   if (!data?.course) {
-    return { title: "Course Not Found | European Dreams" };
+    return {
+      title: "Course Not Found",
+      description: "The requested course could not be found.",
+    };
   }
 
   const { course, university } = data;
+  const title = buildCourseTitle(course, university);
+  const description = buildCourseDescription(course, university);
+  const canonical = `${SITE_URL}/courses/${university?.slug || universitySlug}/${course.slug || courseSlug}`;
+  const ogImage = university?.heroImage || null;
+  const ogTitle = `${title} | European Dreams`;
 
   return {
-    title:
-      course.seoTitle ||
-      `${course.name} at ${university?.name} | European Dreams`,
-    description:
-      course.metaDescription ||
-      course.shortDescription ||
-      `Explore ${course.name} at ${university?.name}.`,
+    title,
+    description,
+    alternates: {
+      canonical,
+    },
+    openGraph: {
+      title: ogTitle,
+      description,
+      url: canonical,
+      siteName: "European Dreams",
+      type: "website",
+      locale: "en_IN",
+      images: ogImage
+        ? [
+            {
+              url: ogImage,
+              width: 1200,
+              height: 630,
+              alt: `${course.name} at ${university?.name || "European Dreams"}`,
+            },
+          ]
+        : [],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: ogTitle,
+      description,
+      images: ogImage ? [ogImage] : [],
+    },
   };
 }
 
