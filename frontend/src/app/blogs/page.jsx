@@ -71,7 +71,7 @@ export default async function BlogsPage({ searchParams }) {
     getBlogCategories(),
   ]);
 
-  if (pagination.totalPages > 0 && page > pagination.totalPages) {
+  if ((pagination.totalPages > 0 && page > pagination.totalPages) || (page > 1 && blogs.length === 0)) {
     notFound();
   }
 
