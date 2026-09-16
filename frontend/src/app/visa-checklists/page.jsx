@@ -241,7 +241,15 @@ export default function VisaChecklistsPage() {
 
           <p className="mx-auto mt-3 max-w-2xl opacity-80">
             European Dreams can guide you through documentation, university
-            applications, scholarships, and the study visa process.
+            applications, scholarships, and the study visa process. You can
+            also follow our{" "}
+            <Link
+              href="/study-in-italy"
+              className="font-semibold underline underline-offset-2"
+            >
+              Study in Italy guide
+            </Link>{" "}
+            for the complete journey from admission to arrival.
           </p>
 
           <Link

@@ -4,6 +4,7 @@ import { getSiteSettings } from "@/lib/getSiteSettings";
 const exploreLinks = [
   { label: "Italian Universities", href: "/universities" },
   { label: "Courses in Italy", href: "/courses" },
+  { label: "Study in Italy Guide", href: "/study-in-italy" },
   { label: "Latest Blogs", href: "/blogs" },
   { label: "About European Dreams", href: "/about" },
 ];
