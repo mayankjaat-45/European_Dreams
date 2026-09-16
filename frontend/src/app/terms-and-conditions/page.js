@@ -4,6 +4,9 @@ export const metadata = {
   title: "Terms and Conditions | European Dreams",
   description:
     "Read the terms and conditions governing the use of the European Dreams website and educational consultancy services.",
+  alternates: {
+    canonical: "https://www.europeandreamss.com/terms-and-conditions",
+  },
 };
 
 const sections = [

@@ -19,11 +19,36 @@ function formatDate(date) {
   }).format(new Date(date));
 }
 
-export const metadata = {
-  title: "Study in Italy Blogs | European Dreams",
-  description:
-    "Explore Study in Italy guides covering universities, admissions, scholarships, student visas, pre-enrolment and student life.",
-};
+export async function generateMetadata({ searchParams }) {
+  const params = await searchParams;
+  const canonical = "https://www.europeandreamss.com/blogs";
+
+  const getFirst = (value) =>
+    Array.isArray(value) ? value[0] : value;
+
+  const search = getFirst(params?.search)?.trim();
+  const category = getFirst(params?.category)?.trim();
+  const sort = getFirst(params?.sort)?.trim();
+  const page = getFirst(params?.page);
+
+  const hasSearch = Boolean(search);
+  const hasCategory = Boolean(category);
+  const hasSort = Boolean(sort && sort !== "publishedAt");
+  // page param alone should not force noindex per P0 instruction (canonicalize only)
+  const hasFilter = hasSearch || hasCategory || hasSort;
+
+  return {
+    title: "Study in Italy Blogs | European Dreams",
+    description:
+      "Explore Study in Italy guides covering universities, admissions, scholarships, student visas, pre-enrolment and student life.",
+    alternates: {
+      canonical,
+    },
+    robots: hasFilter
+      ? { index: false, follow: true }
+      : { index: true, follow: true },
+  };
+}
 
 export default async function BlogsPage({ searchParams }) {
   const params = await searchParams;

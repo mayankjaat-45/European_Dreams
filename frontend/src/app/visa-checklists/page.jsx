@@ -4,6 +4,9 @@ export const metadata = {
   title: "Italian Study Visa Checklists",
   description:
     "Download the latest Italian study visa document checklists for the New Delhi Embassy and Bengaluru, Mumbai, and Kolkata consulates.",
+  alternates: {
+    canonical: "https://www.europeandreamss.com/visa-checklists",
+  },
 };
 
 const visaChecklists = [
