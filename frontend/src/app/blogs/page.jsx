@@ -8,7 +8,44 @@ import {
   Search,
   Sparkles,
 } from "lucide-react";
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
+import JsonLd from "@/components/seo/JsonLd";
 import { getBlogCategories, getBlogs } from "@/services/blogs.service.js";
+
+const CANONICAL = "https://www.europeandreamss.com/blogs";
+
+const PAGE_TITLE = "Study in Italy Blogs for Indian Students";
+const PAGE_DESCRIPTION =
+  "Read Study in Italy guides for Indian students covering Italian universities, admission, scholarships, student visas, fees, pre-enrolment and student life.";
+
+const breadcrumbItems = [
+  { name: "Home", href: "https://www.europeandreamss.com/" },
+  { name: "Study in Italy Blogs", href: CANONICAL },
+];
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "@id": `${CANONICAL}#breadcrumb`,
+  itemListElement: breadcrumbItems.map((item, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    name: item.name,
+    item: item.href,
+  })),
+};
+
+const collectionSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "@id": `${CANONICAL}#webpage`,
+  url: CANONICAL,
+  name: "Study in Italy Blogs for Indian Students | European Dreams",
+  description: PAGE_DESCRIPTION,
+  isPartOf: { "@id": "https://www.europeandreamss.com/#website" },
+  breadcrumb: { "@id": `${CANONICAL}#breadcrumb` },
+  inLanguage: "en-IN",
+};
 
 function formatDate(date) {
   if (!date) return "";
@@ -22,7 +59,6 @@ function formatDate(date) {
 
 export async function generateMetadata({ searchParams }) {
   const params = await searchParams;
-  const canonical = "https://www.europeandreamss.com/blogs";
 
   const getFirst = (value) =>
     Array.isArray(value) ? value[0] : value;
@@ -38,12 +74,28 @@ export async function generateMetadata({ searchParams }) {
   // page param alone should not force noindex per P0 instruction (canonicalize only)
   const hasFilter = hasSearch || hasCategory || hasSort;
 
+  const pageNum = Math.max(Number(page) || 1, 1);
+  const canonical =
+    !hasFilter && pageNum > 1 ? `${CANONICAL}?page=${pageNum}` : CANONICAL;
+
   return {
-    title: "Study in Italy Blogs | European Dreams",
-    description:
-      "Explore Study in Italy guides covering universities, admissions, scholarships, student visas, pre-enrolment and student life.",
+    title: PAGE_TITLE,
+    description: PAGE_DESCRIPTION,
     alternates: {
       canonical,
+    },
+    openGraph: {
+      title: `${PAGE_TITLE} | European Dreams`,
+      description: PAGE_DESCRIPTION,
+      url: canonical,
+      siteName: "European Dreams",
+      type: "website",
+      locale: "en_IN",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${PAGE_TITLE} | European Dreams`,
+      description: PAGE_DESCRIPTION,
     },
     robots: hasFilter
       ? { index: false, follow: true }
@@ -76,6 +128,9 @@ export default async function BlogsPage({ searchParams }) {
   }
 
   return (
+    <>
+      <JsonLd data={breadcrumbSchema} />
+      <JsonLd data={collectionSchema} />
     <main className="min-h-screen bg-[var(--background)]">
       {/* HERO */}
 
@@ -85,6 +140,9 @@ export default async function BlogsPage({ searchParams }) {
         <div className="pointer-events-none absolute -bottom-28 -left-32 h-80 w-80 rounded-full bg-[var(--secondary)]/10 blur-[120px]" />
 
         <div className="container-custom relative mx-auto px-4 py-16 md:py-24">
+          <div className="mb-7 flex justify-center">
+            <Breadcrumbs items={breadcrumbItems} />
+          </div>
           <div className="mx-auto max-w-3xl text-center">
             <div className="inline-flex items-center gap-2 rounded-full border border-[var(--secondary)]/20 bg-[var(--secondary)]/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-[var(--secondary)]">
               <Sparkles size={15} />
@@ -92,15 +150,61 @@ export default async function BlogsPage({ searchParams }) {
             </div>
 
             <h1 className="mt-5 text-4xl font-bold tracking-tight text-[var(--foreground)] md:text-5xl">
-              Guides, updates and advice for your
-              <span className="text-[var(--primary)]"> Italy journey</span>
+              Study in Italy Blogs for Indian Students
             </h1>
 
             <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-[var(--muted)] md:text-lg">
-              Explore practical articles about Italian universities, admissions,
-              scholarships, pre-enrolment, student visas and life in Italy.
+              Practical Study in Italy guides for Indian students — Italian
+              universities, admission, scholarships, student visas, fees,
+              pre-enrolment and student life, explained step by step.
             </p>
           </div>
+        </div>
+      </section>
+
+      {/* SEO supporting section */}
+
+      <section className="border-b border-[var(--border)] bg-[var(--card)]">
+        <div className="container-custom mx-auto px-4 py-10">
+          <h2 className="text-center text-2xl font-bold tracking-tight text-[var(--foreground)] sm:text-3xl">
+            Study in Italy Guides
+          </h2>
+          <p className="mx-auto mt-3 max-w-3xl text-center text-sm leading-6 text-[var(--muted)] sm:text-base">
+            Researching Italian universities, admissions, scholarships, visas,
+            costs and student life? These articles walk through each stage
+            with practical, up-to-date guidance for Indian students.
+          </p>
+          <p className="mx-auto mt-3 max-w-3xl text-center text-sm leading-6 text-[var(--muted)] sm:text-base">
+            Start with our{" "}
+            <Link
+              href="/study-in-italy"
+              className="font-semibold text-[var(--primary)] hover:underline"
+            >
+              Study in Italy guide
+            </Link>
+            {", "}
+            <Link
+              href="/italy-university-admission"
+              className="font-semibold text-[var(--primary)] hover:underline"
+            >
+              Italy university admission guide
+            </Link>
+            {", "}
+            <Link
+              href="/italy-student-visa"
+              className="font-semibold text-[var(--primary)] hover:underline"
+            >
+              Italy student visa guide
+            </Link>
+            {" and "}
+            <Link
+              href="/universities"
+              className="font-semibold text-[var(--primary)] hover:underline"
+            >
+              Universities in Italy
+            </Link>
+            .
+          </p>
         </div>
       </section>
 
@@ -267,6 +371,7 @@ export default async function BlogsPage({ searchParams }) {
         )}
       </section>
     </main>
+    </>
   );
 }
 
