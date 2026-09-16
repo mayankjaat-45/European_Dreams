@@ -54,7 +54,7 @@ export async function generateMetadata({ searchParams }) {
 export default async function BlogsPage({ searchParams }) {
   const params = await searchParams;
 
-  const page = Number(params?.page) || 1;
+  const page = Math.max(Number(params?.page) || 1, 1);
   const search = params?.search || "";
   const category = params?.category || "";
   const sort = params?.sort || "publishedAt";
