@@ -1,7 +1,40 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
+import JsonLd from "@/components/seo/JsonLd";
 import UniversitiesExplorer from "@/components/home/universities/UniversitiesExplorer";
 
 const CANONICAL = "https://www.europeandreamss.com/universities";
+
+const breadcrumbItems = [
+  { name: "Home", href: "https://www.europeandreamss.com/" },
+  { name: "Universities in Italy", href: CANONICAL },
+];
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "@id": `${CANONICAL}#breadcrumb`,
+  itemListElement: breadcrumbItems.map((item, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    name: item.name,
+    item: item.href,
+  })),
+};
+
+const webPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "@id": `${CANONICAL}#webpage`,
+  url: CANONICAL,
+  name: "Universities in Italy for International Students | European Dreams",
+  description:
+    "Directory of universities in Italy for international and Indian students: compare Italian universities, English-taught programmes, admission requirements and study options.",
+  isPartOf: { "@id": "https://www.europeandreamss.com/#website" },
+  breadcrumb: { "@id": `${CANONICAL}#breadcrumb` },
+  inLanguage: "en-IN",
+};
 
 export async function generateMetadata({ searchParams }) {
   const params = await searchParams;
@@ -10,11 +43,20 @@ export async function generateMetadata({ searchParams }) {
   const hasSearch = Boolean(search);
 
   return {
-    title: "European Universities | European Dreams",
+    title: "Universities in Italy for International Students",
     description:
-      "Explore European universities, compare destinations and discover programmes for international students.",
+      "Explore universities in Italy for international students and Indian students. Compare Italian universities, courses, English-taught programmes, admission requirements and study options.",
     alternates: {
       canonical: CANONICAL,
+    },
+    openGraph: {
+      title: "Universities in Italy for International Students",
+      description:
+        "Explore universities in Italy for international students and Indian students. Compare Italian universities, courses, English-taught programmes, admission requirements and study options.",
+      url: CANONICAL,
+      siteName: "European Dreams",
+      type: "website",
+      locale: "en_IN",
     },
     robots: hasSearch ? { index: false, follow: true } : { index: true, follow: true },
   };
@@ -68,21 +110,64 @@ export default async function UniversitiesPage({ searchParams }) {
   }
 
   return (
+    <>
+      <JsonLd data={breadcrumbSchema} />
+      <JsonLd data={webPageSchema} />
     <main className="min-h-screen bg-background">
       <section className="relative overflow-hidden border-b border-border bg-card">
         <div className="absolute -right-24 -top-24 h-80 w-80 rounded-full bg-primary/15 blur-3xl" />
         <div className="absolute -bottom-32 left-10 h-80 w-80 rounded-full bg-secondary/15 blur-3xl" />
 
         <div className="relative mx-auto max-w-300 px-5 py-16 text-center sm:px-6 lg:px-8 lg:py-20">
+          <div className="mb-6 flex justify-center">
+            <Breadcrumbs items={breadcrumbItems} />
+          </div>
           <p className="text-sm font-bold uppercase tracking-[0.2em] text-secondary">
             Find your university
           </p>
           <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl">
-            Explore European Universities
+            Universities in Italy
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-muted sm:text-lg">
-            Compare universities across Europe and discover the right institution for your academic goals.
+            Explore Italian universities for international and Indian students.
+            Compare public universities, Bachelor&apos;s and Master&apos;s
+            programmes, English-taught courses, admission requirements,
+            tuition fees and scholarships to find the right fit.
           </p>
+        </div>
+      </section>
+
+      <section className="border-b border-border bg-card">
+        <div className="mx-auto max-w-300 px-5 py-10 sm:px-6 lg:px-8">
+          <h2 className="text-center text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+            Explore Universities in Italy
+          </h2>
+          <p className="mx-auto mt-3 max-w-3xl text-center text-sm leading-6 text-muted sm:text-base">
+            Shortlist by programme and language of instruction, then check
+            each university&apos;s admission requirements, tuition, location,
+            deadlines and scholarship options. The guide below explains the
+            full journey around this directory.
+          </p>
+          <div className="mt-5 flex flex-wrap items-center justify-center gap-3 text-sm font-semibold">
+            <Link
+              href="/italy-university-admission"
+              className="rounded-xl border border-border bg-background px-5 py-2.5 text-foreground transition hover:border-primary hover:text-primary"
+            >
+              Admission guide
+            </Link>
+            <Link
+              href="/study-in-italy"
+              className="rounded-xl border border-border bg-background px-5 py-2.5 text-foreground transition hover:border-primary hover:text-primary"
+            >
+              Study in Italy guide
+            </Link>
+            <Link
+              href="/courses"
+              className="rounded-xl border border-border bg-background px-5 py-2.5 text-foreground transition hover:border-primary hover:text-primary"
+            >
+              Browse courses
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -90,5 +175,6 @@ export default async function UniversitiesPage({ searchParams }) {
         <UniversitiesExplorer universities={universities} pagination={pagination} search={search} currentPage={page} />
       </section>
     </main>
+    </>
   );
 }
