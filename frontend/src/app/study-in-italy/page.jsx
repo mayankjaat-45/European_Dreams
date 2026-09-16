@@ -524,6 +524,16 @@ export default function StudyInItalyPage() {
                 </li>
               ))}
             </ol>
+            <p className="mx-auto mt-8 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
+              For the complete application flow, see our{" "}
+              <Link
+                href="/italy-university-admission"
+                className="font-semibold text-[var(--primary)] hover:underline"
+              >
+                Italy university admission guide
+              </Link>
+              .
+            </p>
           </div>
         </section>
 
