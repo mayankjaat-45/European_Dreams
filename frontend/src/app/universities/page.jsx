@@ -63,7 +63,7 @@ export default async function UniversitiesPage({ searchParams }) {
 
   const { universities, pagination } = await fetchUniversities({ page, search });
 
-  if (pagination.totalPages > 0 && page > pagination.totalPages) {
+  if ((pagination.totalPages > 0 && page > pagination.totalPages) || (page > 1 && universities.length === 0)) {
     notFound();
   }
 

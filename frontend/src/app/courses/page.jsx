@@ -72,7 +72,7 @@ export default async function CoursesPage({ searchParams }) {
 
   const { courses, pagination } = await fetchCourses({ page, search, degreeLevel, country });
 
-  if (pagination.totalPages > 0 && page > pagination.totalPages) {
+  if ((pagination.totalPages > 0 && page > pagination.totalPages) || (page > 1 && courses.length === 0)) {
     notFound();
   }
 
