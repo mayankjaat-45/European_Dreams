@@ -93,6 +93,7 @@ export default async function sitemap() {
     "/contact",
     "/universities",
     "/courses",
+    "/visa-checklists",
     "/blogs",
     "/testimonials",
     "/privacy-policy",
