@@ -93,6 +93,10 @@ export async function generateMetadata({ params }) {
     return {
       title: "Course Not Found",
       description: "The requested course could not be found.",
+      robots: {
+        index: false,
+        follow: true,
+      },
     };
   }
 
