@@ -35,7 +35,7 @@ function truncate(value, maxLength) {
   return `${text.slice(0, maxLength - 1).trim()}…`;
 }
 
-function buildUniversityDescription(university) {
+function buildUniversityDescription(university, courseCount) {
   if (university.metaDescription?.trim()) {
     return truncate(university.metaDescription, 155);
   }
@@ -48,8 +48,13 @@ function buildUniversityDescription(university) {
   const location = [university.city, university.country]
     .filter(Boolean)
     .join(", ");
-  const locationSuffix = location ? ` in ${location}` : "";
-  return `Explore courses and admission guidance for ${university.name}${locationSuffix}. Get expert assistance from European Dreams.`;
+  const locationSuffix = location ? ` in ${location}` : " in Italy";
+  const coursesSuffix =
+    Number(courseCount) > 0 ? ` Explore ${courseCount} courses,` : "";
+  return truncate(
+    `${university.name}${locationSuffix}.${coursesSuffix} Find admission requirements, fees and English-taught programmes with European Dreams guidance.`,
+    155,
+  );
 }
 
 function stripBrandSuffix(value) {
@@ -62,16 +67,19 @@ function stripBrandSuffix(value) {
 function buildUniversityTitle(university) {
   if (university.seoTitle?.trim())
     return truncate(stripBrandSuffix(university.seoTitle), 60);
-  const base = `${university.name} – Courses, Fees & Admission`;
-  if (base.length <= 60) return base;
-  const fallback = university.name;
-  if (fallback.length <= 60) return fallback;
-  return truncate(fallback, 60);
+  const name = String(university.name || "").trim();
+  const full = `${name} in Italy – Courses, Fees & Admission`;
+  if (full.length <= 60) return full;
+  const shortSuffix = " – Courses, Fees & Admission";
+  if (name.length + shortSuffix.length <= 60) return `${name}${shortSuffix}`;
+  return truncate(`${name}${shortSuffix}`, 60);
 }
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  const { university } = normalizeResult(await loadUniversity(slug));
+  const { university, courses, totals } = normalizeResult(
+    await loadUniversity(slug),
+  );
 
   if (!university) {
     return {
@@ -84,8 +92,9 @@ export async function generateMetadata({ params }) {
     };
   }
 
+  const courseCount = totals.courses ?? courses.length;
   const title = buildUniversityTitle(university);
-  const description = buildUniversityDescription(university);
+  const description = buildUniversityDescription(university, courseCount);
   const canonical = `${SITE_URL}/universities/${university.slug || slug}`;
   const ogImage = university.heroImage || university.image || null;
   const ogTitle = `${title} | European Dreams`;
@@ -95,6 +104,10 @@ export async function generateMetadata({ params }) {
     description,
     alternates: {
       canonical,
+    },
+    robots: {
+      index: true,
+      follow: true,
     },
     openGraph: {
       title: ogTitle,
@@ -176,7 +189,7 @@ export default async function UniversityDetailsPage({ params }) {
 
   const breadcrumbItems = [
     { name: "Home", href: `${SITE_URL}/` },
-    { name: "Universities", href: `${SITE_URL}/universities` },
+    { name: "Universities in Italy", href: `${SITE_URL}/universities` },
     { name: university.name, href: canonical },
   ];
 
@@ -199,7 +212,10 @@ export default async function UniversityDetailsPage({ params }) {
       "@id": `${canonical}#university`,
       name: university.name,
       url: canonical,
-      description: buildUniversityDescription(university),
+      description: buildUniversityDescription(
+        university,
+        totals.courses ?? courses.length,
+      ),
     };
 
     const image = university.heroImage || university.image;
@@ -279,6 +295,7 @@ export default async function UniversityDetailsPage({ params }) {
 
               <h1 className="mt-4 font-display text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
                 {university.name}
+                {university.country ? `, ${university.country}` : " in Italy"}
               </h1>
               {location && (
                 <p className="mt-4 text-lg font-semibold text-white/90">
@@ -287,8 +304,30 @@ export default async function UniversityDetailsPage({ params }) {
               )}
               <p className="mt-5 max-w-3xl text-lg leading-8 text-white/80">
                 {university.shortDescription ||
-                  `Discover programmes, admission requirements and student opportunities at ${university.name}.`}
+                  `Discover courses, admission requirements, fees and scholarships at ${university.name} in Italy.`}
               </p>
+              {(() => {
+                const courseCount = totals.courses ?? courses.length;
+                const typePart = university.universityType
+                  ? ` is a ${String(university.universityType).toLowerCase()}`
+                  : "";
+                const locationPart = location
+                  ? ` located in ${location}`
+                  : " in Italy";
+                if (!typePart && !courseCount) return null;
+                return (
+                  <p className="mt-4 max-w-3xl text-base leading-7 text-white/70">
+                    {university.name}
+                    {typePart}
+                    {locationPart}
+                    {Number(courseCount) > 0
+                      ? ` with ${courseCount} course${Number(courseCount) === 1 ? "" : "s"} listed below`
+                      : ""}
+                    . Explore English-taught programmes, admission guidance
+                    and opportunities for international and Indian students.
+                  </p>
+                );
+              })()}
 
               <div className="mt-8 flex flex-wrap gap-3">
                 <a
@@ -364,13 +403,28 @@ export default async function UniversityDetailsPage({ params }) {
                       Programmes
                     </p>
                     <h2 className="mt-2 font-display text-2xl font-bold text-foreground sm:text-3xl">
-                      Courses offered
+                      Courses at {university.name}
                     </h2>
                   </div>
                   <span className="rounded-full bg-primary-light px-4 py-2 text-sm font-bold text-primary">
                     {totals.courses ?? courses.length} courses
                   </span>
                 </div>
+                <p className="mt-4 text-sm leading-6 text-muted">
+                  <Link
+                    href="/courses"
+                    className="font-semibold text-primary transition hover:text-primary-hover"
+                  >
+                    Browse all courses in Italy
+                  </Link>
+                  {" · "}
+                  <Link
+                    href="/study-in-italy"
+                    className="font-semibold text-primary transition hover:text-primary-hover"
+                  >
+                    Study in Italy guide
+                  </Link>
+                </p>
 
                 {courses.length > 0 ? (
                   <div className="mt-6 grid gap-4 sm:grid-cols-2">
@@ -414,7 +468,7 @@ export default async function UniversityDetailsPage({ params }) {
               </section>
 
               {admissionRequirements.length > 0 && (
-                <Section title="Admission requirements">
+                <Section title={`Admission requirements at ${university.name}`}>
                   {Array.isArray(admissionRequirements) ? (
                     <ul className="space-y-3">
                       {admissionRequirements.map((requirement) => (
@@ -429,6 +483,14 @@ export default async function UniversityDetailsPage({ params }) {
                       {admissionRequirements}
                     </p>
                   )}
+                  <p className="mt-5 text-sm leading-6 text-muted">
+                    <Link
+                      href="/italy-university-admission"
+                      className="font-bold text-primary transition hover:text-primary-hover"
+                    >
+                      Full Italy university admission guide →
+                    </Link>
+                  </p>
                 </Section>
               )}
 
@@ -483,6 +545,18 @@ export default async function UniversityDetailsPage({ params }) {
                   className="mt-6 inline-flex rounded-xl bg-secondary px-5 py-3 font-bold text-white transition hover:bg-secondary-hover"
                 >
                   Book free consultation
+                </Link>
+                <Link
+                  href="/italy-university-admission"
+                  className="mt-3 inline-flex font-bold text-white/80 transition hover:text-white"
+                >
+                  Italy university admission guide →
+                </Link>
+                <Link
+                  href="/italy-student-visa"
+                  className="mt-3 inline-flex font-bold text-white/80 transition hover:text-white"
+                >
+                  Italy student visa guide →
                 </Link>
               </div>
 
