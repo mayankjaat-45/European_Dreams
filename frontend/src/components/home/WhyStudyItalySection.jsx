@@ -138,6 +138,21 @@ export default function WhyStudyItalySection() {
             Explore Universities
           </Link>
         </div>
+
+        <p
+          data-reveal
+          data-delay="5"
+          className="mt-6 text-center text-sm text-muted"
+        >
+          Planning the full journey?{" "}
+          <Link
+            href="/study-in-italy"
+            className="font-semibold text-primary hover:underline"
+          >
+            Read our Study in Italy guide
+          </Link>
+          .
+        </p>
       </div>
     </section>
   );
