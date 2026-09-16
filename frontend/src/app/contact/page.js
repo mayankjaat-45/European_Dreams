@@ -3,11 +3,25 @@ import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import EnquiryForm from "@/components/home/EnquiryForm";
 import { getSiteSettings } from "@/lib/getSiteSettings";
 
-export const metadata = {
-  title: "Free Study in Italy Consultation",
-  description:
-    "Contact European Dreams for personalised guidance on Italian universities, courses, scholarships, admissions and student visas.",
-};
+export async function generateMetadata({ searchParams }) {
+  const params = await searchParams;
+  const hasQuery = Boolean(
+    params?.type || params?.university || params?.course,
+  );
+  const canonical = "https://www.europeandreamss.com/contact";
+
+  return {
+    title: "Free Study in Italy Consultation",
+    description:
+      "Contact European Dreams for personalised guidance on Italian universities, courses, scholarships, admissions and student visas.",
+    alternates: {
+      canonical,
+    },
+    robots: hasQuery
+      ? { index: false, follow: true }
+      : { index: true, follow: true },
+  };
+}
 
 const supportItems = [
   {

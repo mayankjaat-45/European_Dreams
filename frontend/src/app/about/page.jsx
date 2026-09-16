@@ -5,6 +5,9 @@ export const metadata = {
   title: "About European Dreams | Study in Italy Guidance",
   description:
     "Learn how European Dreams helps students study in Italy with university selection, admissions, scholarships, student visa guidance and complete pre-departure support.",
+  alternates: {
+    canonical: "https://www.europeandreamss.com/about",
+  },
 };
 
 const stats = [

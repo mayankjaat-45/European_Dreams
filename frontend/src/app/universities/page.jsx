@@ -5,6 +5,9 @@ export const metadata = {
   title: "European Universities | European Dreams",
   description:
     "Explore European universities, compare destinations and discover programmes for international students.",
+  alternates: {
+    canonical: "https://www.europeandreamss.com/universities",
+  },
 };
 
 export default function UniversitiesPage() {

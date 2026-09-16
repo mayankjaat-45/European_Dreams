@@ -4,6 +4,9 @@ export const metadata = {
   title: "Privacy Policy | European Dreams",
   description:
     "Learn how European Dreams collects, uses, stores and protects information submitted through its enquiry and contact forms.",
+  alternates: {
+    canonical: "https://www.europeandreamss.com/privacy-policy",
+  },
 };
 
 const sections = [

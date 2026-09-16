@@ -20,7 +20,6 @@ async function fetchItems(endpoint) {
     return (
       result?.data?.universities ||
       result?.data?.courses ||
-      result?.data?.countries ||
       result?.data?.blogs ||
       result?.data ||
       []
@@ -32,10 +31,9 @@ async function fetchItems(endpoint) {
 }
 
 export default async function sitemap() {
-  const [universities, courses, countries, blogs] = await Promise.all([
+  const [universities, courses, blogs] = await Promise.all([
     fetchItems("/api/universities?limit=1000"),
     fetchItems("/api/courses?limit=1000"),
-    fetchItems("/api/countries?limit=1000"),
     fetchItems("/api/blogs?status=published&limit=1000"),
   ]);
 
@@ -45,7 +43,6 @@ export default async function sitemap() {
     "/contact",
     "/universities",
     "/courses",
-    "/countries",
     "/blogs",
     "/testimonials",
     "/privacy-policy",
@@ -85,15 +82,6 @@ export default async function sitemap() {
       };
     });
 
-  const countryPages = countries
-    .filter((item) => item.slug)
-    .map((item) => ({
-      url: `${WEBSITE_URL}/countries/${item.slug}`,
-      lastModified: item.updatedAt ? new Date(item.updatedAt) : new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    }));
-
   const blogPages = blogs
     .filter((item) => item.slug)
     .map((item) => ({
@@ -107,7 +95,6 @@ export default async function sitemap() {
     ...staticPages,
     ...universityPages,
     ...coursePages,
-    ...countryPages,
     ...blogPages,
   ];
 }

@@ -4,6 +4,9 @@ export const metadata = {
   title: "Student Success Stories | European Dreams",
   description:
     "Read real student experiences with European Dreams, including Study in Italy admissions, visa approvals and scholarship success stories.",
+  alternates: {
+    canonical: "https://www.europeandreamss.com/testimonials",
+  },
 };
 
 export default function TestimonialsPage() {

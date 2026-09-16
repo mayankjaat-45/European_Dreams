@@ -4,6 +4,9 @@ export const metadata = {
   title: "Courses in Europe | European Dreams",
   description:
     "Explore bachelor, master and postgraduate courses at leading European universities.",
+  alternates: {
+    canonical: "https://www.europeandreamss.com/courses",
+  },
 };
 
 export default function CoursesPage() {

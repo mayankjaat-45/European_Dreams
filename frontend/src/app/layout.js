@@ -33,10 +33,6 @@ export const metadata = {
   description:
     "Explore universities, courses, scholarships and admission guidance for studying in Europe and Italy. Get expert assistance for Indian students from European Dreams.",
 
-  alternates: {
-    canonical: "/",
-  },
-
   openGraph: {
     type: "website",
     locale: "en_IN",
