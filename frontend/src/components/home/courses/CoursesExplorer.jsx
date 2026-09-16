@@ -1,100 +1,49 @@
-"use client";
-
-import { useCallback, useEffect, useState } from "react";
-
-import { getCourses } from "@/services/courses.service";
+import Link from "next/link";
 import CourseCard from "./CoursesCard";
 
-function CourseSkeleton() {
-  return (
-    <div className="animate-pulse rounded-[1.75rem] border border-border bg-card p-6">
-      <div className="h-6 w-24 rounded-full bg-card-hover" />
-      <div className="mt-5 h-7 w-4/5 rounded bg-card-hover" />
-      <div className="mt-3 h-4 w-2/3 rounded bg-card-hover" />
-      <div className="mt-5 h-16 rounded bg-card-hover" />
-      <div className="mt-6 grid grid-cols-2 gap-3">
-        <div className="h-16 rounded-xl bg-card-hover" />
-        <div className="h-16 rounded-xl bg-card-hover" />
-      </div>
-    </div>
-  );
-}
-
-export default function CoursesExplorer() {
-  const [courses, setCourses] = useState([]);
-  const [pagination, setPagination] = useState(null);
-  const [searchInput, setSearchInput] = useState("");
-  const [search, setSearch] = useState("");
-  const [degreeLevel, setDegreeLevel] = useState("");
-  const [country, setCountry] = useState("");
-  const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-
-  const loadCourses = useCallback(async () => {
-    try {
-      const result = await getCourses({
-        page,
-        limit: 12,
-        search: search || undefined,
-        degreeLevel: degreeLevel || undefined,
-        country: country || undefined,
-        sort: "displayOrder",
-        order: "asc",
-      });
-      setCourses(result.courses);
-      setPagination(result.pagination);
-      setError("");
-    } catch (requestError) {
-      console.error("Unable to load courses:", requestError);
-      setCourses([]);
-      setPagination(null);
-      setError("We could not load the courses. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  }, [country, degreeLevel, page, search]);
-
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    loadCourses();
-  }, [loadCourses]);
-
-  function applyFilters(event) {
-    event.preventDefault();
-    setLoading(true);
-    setPage(1);
-    setSearch(searchInput.trim());
-  }
-
-  function updateFilter(setter, value) {
-    setLoading(true);
-    setPage(1);
-    setter(value);
-  }
-
-  const currentPage = pagination?.currentPage ?? page;
+export default function CoursesExplorer({
+  courses = [],
+  pagination = {},
+  search = "",
+  degreeLevel = "",
+  country = "",
+  currentPage = 1,
+}) {
   const totalPages = pagination?.totalPages ?? 1;
+  const page = pagination?.currentPage ?? currentPage;
   const totalItems = pagination?.totalItems ?? courses.length;
+
+  function createHref(targetPage) {
+    const params = new URLSearchParams();
+    if (search) params.set("search", search);
+    if (degreeLevel) params.set("degreeLevel", degreeLevel);
+    if (country) params.set("country", country);
+    if (targetPage > 1) params.set("page", String(targetPage));
+    const qs = params.toString();
+    return qs ? `/courses?${qs}` : "/courses";
+  }
+
+  const prevHref = page > 1 ? createHref(page - 1) : null;
+  const nextHref = page < totalPages ? createHref(page + 1) : null;
 
   return (
     <div>
       <form
-        data-reveal="scale"
-        onSubmit={applyFilters}
+        method="GET"
+        action="/courses"
         className="grid gap-3 rounded-2xl border border-border bg-card p-3 shadow-sm transition duration-300 hover:shadow-md lg:grid-cols-[minmax(0,1fr)_190px_190px_auto]"
       >
         <input
           type="search"
-          value={searchInput}
-          onChange={(event) => setSearchInput(event.target.value)}
+          name="search"
+          defaultValue={search}
           placeholder="Search course, field or university..."
           aria-label="Search courses"
           className="min-h-12 rounded-xl border border-border bg-background px-4 text-foreground outline-none focus:border-primary"
         />
         <select
-          value={degreeLevel}
-          onChange={(event) => updateFilter(setDegreeLevel, event.target.value)}
+          name="degreeLevel"
+          defaultValue={degreeLevel}
           aria-label="Degree level"
           className="min-h-12 rounded-xl border border-border bg-background px-4 text-foreground outline-none focus:border-primary"
         >
@@ -105,8 +54,8 @@ export default function CoursesExplorer() {
           <option value="diploma">Diploma</option>
         </select>
         <select
-          value={country}
-          onChange={(event) => updateFilter(setCountry, event.target.value)}
+          name="country"
+          defaultValue={country}
           aria-label="Country"
           className="min-h-12 rounded-xl border border-border bg-background px-4 text-foreground outline-none focus:border-primary"
         >
@@ -124,95 +73,55 @@ export default function CoursesExplorer() {
         </button>
       </form>
 
-      {!loading && !error && (
-        <p data-reveal className="mt-6 text-sm text-muted">
-          {totalItems} course{totalItems === 1 ? "" : "s"} found.
-        </p>
-      )}
+      <p className="mt-6 text-sm text-muted">
+        {totalItems} course{totalItems === 1 ? "" : "s"} found.
+      </p>
 
-      {error && (
-        <div
-          data-reveal="scale"
-          className="mt-8 rounded-2xl border border-danger/25 bg-danger/5 p-6 text-center"
-        >
-          <p className="font-medium text-danger">{error}</p>
-          <button
-            type="button"
-            onClick={() => {
-              setLoading(true);
-              loadCourses();
-            }}
-            className="mt-4 rounded-xl bg-primary px-5 py-2.5 text-sm font-bold text-white"
-          >
-            Try again
-          </button>
-        </div>
-      )}
-
-      {!error && (
+      {courses.length > 0 ? (
         <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {loading
-            ? Array.from({ length: 6 }, (_, index) => (
-                <CourseSkeleton key={index} />
-              ))
-            : courses.map((course, index) => (
-                <div
-                  key={course._id || course.slug}
-                  data-reveal="scale"
-                  data-delay={(index % 3) + 1}
-                  className="h-full"
-                >
-                  <CourseCard course={course} />
-                </div>
-              ))}
+          {courses.map((course, index) => (
+            <div
+              key={course._id || course.slug}
+              data-reveal="scale"
+              data-delay={(index % 3) + 1}
+              className="h-full"
+            >
+              <CourseCard course={course} />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="mt-8 rounded-2xl border border-border bg-card px-6 py-14 text-center">
+          <h2 className="text-2xl font-bold text-foreground">No courses found</h2>
+          <p className="mt-2 text-muted">Try changing your search or filters.</p>
         </div>
       )}
 
-      {!loading && !error && courses.length === 0 && (
-        <div
-          data-reveal="scale"
-          className="mt-8 rounded-2xl border border-border bg-card px-6 py-14 text-center"
-        >
-          <h2 className="text-2xl font-bold text-foreground">
-            No courses found
-          </h2>
-          <p className="mt-2 text-muted">
-            Try changing your search or filters.
-          </p>
-        </div>
-      )}
-
-      {!loading && !error && totalPages > 1 && (
-        <nav
-          data-reveal
-          className="mt-12 flex items-center justify-center gap-4"
-          aria-label="Courses pagination"
-        >
-          <button
-            type="button"
-            disabled={page <= 1}
-            onClick={() => {
-              setLoading(true);
-              setPage(page - 1);
-            }}
-            className="rounded-xl border border-border bg-card px-5 py-2.5 font-semibold disabled:opacity-40"
-          >
-            ← Previous
-          </button>
+      {totalPages > 1 && (
+        <nav className="mt-12 flex items-center justify-center gap-4" aria-label="Courses pagination">
+          {page > 1 ? (
+            <Link
+              href={prevHref}
+              className="rounded-xl border border-border bg-card px-5 py-2.5 font-semibold disabled:opacity-40"
+            >
+              ← Previous
+            </Link>
+          ) : (
+            <span className="rounded-xl border border-border bg-card px-5 py-2.5 font-semibold opacity-40">← Previous</span>
+          )}
           <span className="text-sm font-medium text-muted">
-            Page {currentPage} of {totalPages}
+            Page {page} of {totalPages}
           </span>
-          <button
-            type="button"
-            disabled={page >= totalPages}
-            onClick={() => {
-              setLoading(true);
-              setPage(page + 1);
-            }}
-            className="rounded-xl border border-border bg-card px-5 py-2.5 font-semibold disabled:opacity-40"
-          >
-            Next →
-          </button>
+          {page < totalPages ? (
+            <Link
+              href={nextHref}
+              className="rounded-xl border border-border bg-card px-5 py-2.5 font-semibold disabled:opacity-40"
+            >
+              Next →
+            </Link>
+          ) : (
+            <span className="rounded-xl border border-border bg-card px-5 py-2.5 font-semibold opacity-40">Next →</span>
+          )}
         </nav>
       )}
     </div>
