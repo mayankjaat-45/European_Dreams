@@ -17,6 +17,8 @@ import {
   Sparkles,
 } from "lucide-react";
 
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
+import JsonLd from "@/components/seo/JsonLd";
 import { getCourseBySlug } from "@/services/courses.service";
 
 const formatLabel = (value = "") =>
@@ -175,20 +177,80 @@ export default async function CourseDetailsPage({ params }) {
       : []),
   ];
 
-  return (
-    <main className="min-h-screen bg-background">
-      <section className="relative overflow-hidden border-b border-border bg-(--hero-gradient)">
-        <div className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full bg-primary/15 blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-40 -left-24 h-96 w-96 rounded-full bg-secondary/15 blur-3xl" />
+  const canonical = `${SITE_URL}/courses/${university?.slug || universitySlug}/${course.slug || courseSlug}`;
+  const universityCanonical = `${SITE_URL}/universities/${university?.slug || universitySlug}`;
 
-        <div className="container-custom relative mx-auto px-4 py-14 md:py-20">
-          <Link
-            href={`/universities/${university.slug}`}
-            className="mb-8 inline-flex items-center gap-2 text-sm font-semibold text-primary transition hover:-translate-x-1 hover:text-primary-hover"
-          >
-            <ArrowLeft size={18} />
-            Back to {university.name}
-          </Link>
+  const breadcrumbItems = [
+    { name: "Home", href: `${SITE_URL}/` },
+    { name: "Universities", href: `${SITE_URL}/universities` },
+    { name: university.name, href: universityCanonical },
+    { name: course.name, href: canonical },
+  ];
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "@id": `${canonical}#breadcrumb`,
+    itemListElement: breadcrumbItems.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: item.href,
+    })),
+  };
+
+  const courseSchema = (() => {
+    const schema = {
+      "@context": "https://schema.org",
+      "@type": "Course",
+      "@id": `${canonical}#course`,
+      name: course.name,
+      description: buildCourseDescription(course, university),
+      url: canonical,
+      provider: {
+        "@type": "CollegeOrUniversity",
+        name: university.name,
+        url: universityCanonical,
+      },
+    };
+
+    if (course.language?.trim()) {
+      schema.inLanguage = course.language.trim();
+    }
+
+    if (course.degreeLevel?.trim()) {
+      schema.educationalLevel = course.degreeLevel.trim();
+    }
+
+    const duration = course.duration?.trim();
+    if (duration && /^\d+\s+Years$/i.test(duration)) {
+      const years = duration.match(/^\d+/)[0];
+      schema.timeToComplete = `P${years}Y`;
+    }
+
+    return schema;
+  })();
+
+  return (
+    <>
+      <JsonLd data={breadcrumbSchema} />
+      <JsonLd data={courseSchema} />
+      <main className="min-h-screen bg-background">
+        <section className="relative overflow-hidden border-b border-border bg-(--hero-gradient)">
+          <div className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full bg-primary/15 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-40 -left-24 h-96 w-96 rounded-full bg-secondary/15 blur-3xl" />
+
+          <div className="container-custom relative mx-auto px-4 py-14 md:py-20">
+            <div className="mb-6">
+              <Breadcrumbs items={breadcrumbItems} />
+            </div>
+            <Link
+              href={`/universities/${university.slug}`}
+              className="mb-8 inline-flex items-center gap-2 text-sm font-semibold text-primary transition hover:-translate-x-1 hover:text-primary-hover"
+            >
+              <ArrowLeft size={18} />
+              Back to {university.name}
+            </Link>
 
           <div className="grid gap-10 lg:grid-cols-[1fr_420px] lg:items-center">
             <div className="animate-[fade-up_0.6s_ease-out_both]">
@@ -413,6 +475,7 @@ export default async function CourseDetailsPage({ params }) {
         </Link>
       </div>
     </main>
+    </>
   );
 }
 

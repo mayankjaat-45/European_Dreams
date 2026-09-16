@@ -11,6 +11,8 @@ import {
   Tag,
   UserRound,
 } from "lucide-react";
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
+import JsonLd from "@/components/seo/JsonLd";
 import { getBlogBySlug, getRelatedBlogs } from "@/services/blogs.service";
 
 
@@ -141,6 +143,75 @@ export default async function BlogDetailPage({ params }) {
     notFound();
   }
 
+  const canonicalUrl =
+    blog.canonicalUrl?.trim() || `${SITE_URL}/blogs/${blog.slug || slug}`;
+
+  const breadcrumbItems = [
+    { name: "Home", href: `${SITE_URL}/` },
+    { name: "Blogs", href: `${SITE_URL}/blogs` },
+    { name: blog.title, href: canonicalUrl },
+  ];
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "@id": `${canonicalUrl}#breadcrumb`,
+    itemListElement: breadcrumbItems.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: item.href,
+    })),
+  };
+
+  const blogPostingSchema = (() => {
+    const schema = {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "@id": `${canonicalUrl}#blogposting`,
+      headline: buildBlogTitle(blog),
+      description: buildBlogDescription(blog),
+      url: canonicalUrl,
+      mainEntityOfPage: canonicalUrl,
+      author: {
+        "@type": "Person",
+        name: blog.authorName?.trim() || "European Dreams",
+      },
+      publisher: {
+        "@type": "Organization",
+        "@id": `${SITE_URL}/#organization`,
+      },
+    };
+
+    if (blog.featuredImage?.trim()) {
+      schema.image = blog.featuredImage.trim();
+    }
+
+    if (blog.publishedAt) {
+      schema.datePublished = new Date(blog.publishedAt).toISOString();
+    }
+
+    if (blog.updatedAt) {
+      schema.dateModified = new Date(blog.updatedAt).toISOString();
+    } else if (blog.publishedAt) {
+      schema.dateModified = new Date(blog.publishedAt).toISOString();
+    }
+
+    if (blog.category?.trim()) {
+      schema.articleSection = blog.category.trim();
+    }
+
+    const keywordsSource = blog.tags?.length
+      ? blog.tags
+      : blog.keywords || [];
+    const keywords = keywordsSource.filter(Boolean).join(", ");
+    if (keywords) {
+      schema.keywords = keywords;
+    }
+
+    return schema;
+  })();
+
   let relatedBlogs = [];
 
   try {
@@ -154,8 +225,11 @@ export default async function BlogDetailPage({ params }) {
   }
 
   return (
-    <main className="min-h-screen bg-[var(--background)]">
-      {/* Hero */}
+    <>
+      <JsonLd data={breadcrumbSchema} />
+      <JsonLd data={blogPostingSchema} />
+      <main className="min-h-screen bg-[var(--background)]">
+        {/* Hero */}
 
       <section
         className="
@@ -204,6 +278,9 @@ export default async function BlogDetailPage({ params }) {
           md:py-16
           "
         >
+          <div className="mb-6">
+            <Breadcrumbs items={breadcrumbItems} />
+          </div>
           <Link
             href="/blogs"
             className="
@@ -630,6 +707,7 @@ export default async function BlogDetailPage({ params }) {
         </section>
       )}
     </main>
+    </>
   );
 }
 

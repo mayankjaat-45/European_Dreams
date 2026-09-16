@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { cache } from "react";
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
+import JsonLd from "@/components/seo/JsonLd";
 import { getUniversityBySlug } from "@/services/universities.service";
 
 const SITE_URL = "https://www.europeandreamss.com";
@@ -166,8 +168,75 @@ export default async function UniversityDetailsPage({ params }) {
   const admissionRequirements =
     university.admissionRequirements || university.eligibility || [];
 
+  const canonical = `${SITE_URL}/universities/${university.slug || slug}`;
+
+  const breadcrumbItems = [
+    { name: "Home", href: `${SITE_URL}/` },
+    { name: "Universities", href: `${SITE_URL}/universities` },
+    { name: university.name, href: canonical },
+  ];
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "@id": `${canonical}#breadcrumb`,
+    itemListElement: breadcrumbItems.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: item.href,
+    })),
+  };
+
+  const universitySchema = (() => {
+    const schema = {
+      "@context": "https://schema.org",
+      "@type": "CollegeOrUniversity",
+      "@id": `${canonical}#university`,
+      name: university.name,
+      url: canonical,
+      description: buildUniversityDescription(university),
+    };
+
+    const image = university.heroImage || university.image;
+    if (image?.trim()) {
+      schema.image = image.trim();
+    }
+
+    if (university.logo?.trim()) {
+      schema.logo = university.logo.trim();
+    }
+
+    const city = university.city?.trim();
+    const region = university.region?.trim();
+    if (city || region) {
+      const address = {
+        "@type": "PostalAddress",
+        addressCountry: "Italy",
+      };
+      if (city) address.addressLocality = city;
+      if (region) address.addressRegion = region;
+      schema.address = address;
+    }
+
+    if (university.establishedYear) {
+      schema.foundingDate = String(university.establishedYear);
+    }
+
+    const websiteUrl = (
+      university.officialWebsite || university.website || ""
+    ).trim();
+    if (websiteUrl) {
+      schema.sameAs = websiteUrl;
+    }
+
+    return schema;
+  })();
+
   return (
     <>
+      <JsonLd data={breadcrumbSchema} />
+      <JsonLd data={universitySchema} />
       <main className="min-h-screen bg-background">
         <header
           className="relative isolate min-h-125 overflow-hidden bg-slate-950 bg-cover bg-center"
@@ -180,6 +249,9 @@ export default async function UniversityDetailsPage({ params }) {
 
           <div className="mx-auto flex min-h-125 max-w-300 items-end px-5 py-14 text-white sm:px-6 lg:px-8 lg:py-20">
             <div className="max-w-4xl">
+              <div className="mb-6">
+                <Breadcrumbs items={breadcrumbItems} variant="dark" />
+              </div>
               <Link
                 href="/universities"
                 className="text-sm font-bold text-white/80 transition hover:text-white"
