@@ -1,7 +1,43 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
+import JsonLd from "@/components/seo/JsonLd";
 import CoursesExplorer from "@/components/home/courses/CoursesExplorer";
 
 const CANONICAL = "https://www.europeandreamss.com/courses";
+
+const PAGE_TITLE = "Courses in Italy for International Students";
+const PAGE_DESCRIPTION =
+  "Explore courses in Italy for international and Indian students. Compare Bachelor\u2019s, Master\u2019s and PhD programmes, universities, study levels and admission options.";
+
+const breadcrumbItems = [
+  { name: "Home", href: "https://www.europeandreamss.com/" },
+  { name: "Courses in Italy", href: CANONICAL },
+];
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "@id": `${CANONICAL}#breadcrumb`,
+  itemListElement: breadcrumbItems.map((item, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    name: item.name,
+    item: item.href,
+  })),
+};
+
+const collectionSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "@id": `${CANONICAL}#webpage`,
+  url: CANONICAL,
+  name: "Courses in Italy for International Students | European Dreams",
+  description: PAGE_DESCRIPTION,
+  isPartOf: { "@id": "https://www.europeandreamss.com/#website" },
+  breadcrumb: { "@id": `${CANONICAL}#breadcrumb` },
+  inLanguage: "en-IN",
+};
 
 function getFirst(value) {
   if (Array.isArray(value)) return value[0];
@@ -15,13 +51,29 @@ export async function generateMetadata({ searchParams }) {
   const country = String(getFirst(params?.country) ?? "").trim();
 
   const hasFilter = Boolean(search || degreeLevel || country);
+  const page = parsePage(getFirst(params?.page));
+
+  const canonical =
+    !hasFilter && page > 1 ? `${CANONICAL}?page=${page}` : CANONICAL;
 
   return {
-    title: "Courses in Europe | European Dreams",
-    description:
-      "Explore bachelor, master and postgraduate courses at leading European universities.",
+    title: PAGE_TITLE,
+    description: PAGE_DESCRIPTION,
     alternates: {
-      canonical: CANONICAL,
+      canonical,
+    },
+    openGraph: {
+      title: `${PAGE_TITLE} | European Dreams`,
+      description: PAGE_DESCRIPTION,
+      url: canonical,
+      siteName: "European Dreams",
+      type: "website",
+      locale: "en_IN",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${PAGE_TITLE} | European Dreams`,
+      description: PAGE_DESCRIPTION,
     },
     robots: hasFilter ? { index: false, follow: true } : { index: true, follow: true },
   };
@@ -78,17 +130,71 @@ export default async function CoursesPage({ searchParams }) {
 
   return (
     <>
+      <JsonLd data={breadcrumbSchema} />
+      <JsonLd data={collectionSchema} />
       <main className="min-h-screen bg-background">
         <section className="border-b border-border bg-card">
           <div className="mx-auto max-w-300 px-5 py-14 sm:px-6 lg:px-8 lg:py-20">
+            <div className="mb-6">
+              <Breadcrumbs items={breadcrumbItems} />
+            </div>
             <p className="text-sm font-bold uppercase tracking-[0.18em] text-secondary">
               Study programmes
             </p>
             <h1 className="mt-3 max-w-3xl font-display text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
-              Find the right course in Europe
+              Courses in Italy for International Students
             </h1>
             <p className="mt-5 max-w-2xl text-lg leading-8 text-muted">
-              Compare programmes, universities, destinations, eligibility and admission requirements.
+              Explore courses at Italian universities for international and
+              Indian students. Compare Bachelor&apos;s and Master&apos;s
+              courses, English-taught programmes, universities, admission
+              requirements, tuition fees and scholarships.
+            </p>
+          </div>
+        </section>
+        <section className="border-b border-border bg-card">
+          <div className="mx-auto max-w-300 px-5 py-10 sm:px-6 lg:px-8">
+            <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+              Explore Courses in Italy
+            </h2>
+            <p className="mt-3 max-w-3xl leading-7 text-muted">
+              Browse study programmes across Italy by university, degree
+              level, subject and country. Most international students focus
+              on English-taught Bachelor&apos;s and Master&apos;s courses —
+              shortlist a few options, then verify admission requirements,
+              language rules, deadlines and fees for each programme.
+            </p>
+            <p className="mt-3 max-w-3xl leading-7 text-muted">
+              Once you have a shortlist, the guides below explain what comes
+              next, from applications to visas.{" "}
+              <Link
+                href="/study-in-italy"
+                className="font-semibold text-primary hover:underline"
+              >
+                Study in Italy guide
+              </Link>
+              {", "}
+              <Link
+                href="/italy-university-admission"
+                className="font-semibold text-primary hover:underline"
+              >
+                Italy university admission guide
+              </Link>
+              {", "}
+              <Link
+                href="/universities"
+                className="font-semibold text-primary hover:underline"
+              >
+                Universities in Italy
+              </Link>
+              {" and "}
+              <Link
+                href="/visa-checklists"
+                className="font-semibold text-primary hover:underline"
+              >
+                Italy student visa checklists
+              </Link>
+              .
             </p>
           </div>
         </section>
