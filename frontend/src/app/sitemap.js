@@ -95,6 +95,7 @@ export default async function sitemap() {
     "/courses",
     "/visa-checklists",
     "/study-in-italy",
+    "/italy-student-visa",
     "/blogs",
     "/testimonials",
     "/privacy-policy",

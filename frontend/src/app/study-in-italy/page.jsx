@@ -771,6 +771,13 @@ export default function StudyInItalyPage() {
               >
                 official Universitaly guidance for foreign students
               </a>
+              . For the full process, see our{" "}
+              <Link
+                href="/italy-student-visa"
+                className="font-semibold text-[var(--primary)] hover:underline"
+              >
+                Italy student visa guide
+              </Link>
               .
             </p>
             <div className="mt-8 text-center">

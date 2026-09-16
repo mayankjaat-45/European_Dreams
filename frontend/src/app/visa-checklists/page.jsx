@@ -249,7 +249,15 @@ export default function VisaChecklistsPage() {
             >
               Study in Italy guide
             </Link>{" "}
-            for the complete journey from admission to arrival.
+            for the complete journey from admission to arrival. For visa
+            requirements in depth, see our{" "}
+            <Link
+              href="/italy-student-visa"
+              className="font-semibold underline underline-offset-2"
+            >
+              Italy student visa guide
+            </Link>
+            .
           </p>
 
           <Link
