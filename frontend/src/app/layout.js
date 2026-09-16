@@ -4,6 +4,7 @@ import { Toaster } from "sonner";
 
 import AppShell from "@/components/layout/AppShell";
 import Footer from "@/components/layout/Footer";
+import JsonLd from "@/components/seo/JsonLd";
 
 import "./globals.css";
 
@@ -73,6 +74,29 @@ export const metadata = {
   },
 };
 
+const organizationSchema = {
+  "@type": "Organization",
+  "@id": `${SITE_URL}/#organization`,
+  name: "European Dreams",
+  url: `${SITE_URL}/`,
+  logo: `${SITE_URL}/images/european-dreams-logo.png`,
+  image: `${SITE_URL}/images/hero.jpg`,
+};
+
+const websiteSchema = {
+  "@type": "WebSite",
+  "@id": `${SITE_URL}/#website`,
+  url: `${SITE_URL}/`,
+  name: "European Dreams",
+  publisher: { "@id": `${SITE_URL}/#organization` },
+  inLanguage: "en-IN",
+};
+
+const globalGraphSchema = {
+  "@context": "https://schema.org",
+  "@graph": [organizationSchema, websiteSchema],
+};
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
@@ -122,6 +146,8 @@ export default function RootLayout({ children }) {
             duration: 3500,
           }}
         />
+
+        <JsonLd data={globalGraphSchema} />
 
         {/* Google Analytics and Google Ads */}
         <Script
