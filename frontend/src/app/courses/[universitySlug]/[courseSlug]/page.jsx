@@ -64,22 +64,99 @@ function stripBrandSuffix(value) {
     .trim();
 }
 
+function getDegreeShortLabel(course = {}) {
+  const degreeType = course.degreeType?.trim() || "";
+  if (/bachelor/i.test(degreeType)) return "Bachelor's";
+  if (/single-cycle/i.test(degreeType)) return "Single-cycle Master's";
+  if (/master/i.test(degreeType)) return "Master's";
+  if (/phd/i.test(degreeType)) return "PhD";
+  if (course.degreeLevel?.trim()) return formatLabel(course.degreeLevel);
+  return "";
+}
+
+function getUniversityShortName(university = {}) {
+  const name = university?.name?.trim() || "";
+  const head = (name.split(" University")[0] || "").trim();
+  if (head && head.toLowerCase() !== "university") return head;
+  return name;
+}
+
+function getDurationYears(duration) {
+  const match = String(duration || "")
+    .trim()
+    .match(/^(\d+)\s*years?$/i);
+  return match ? match[1] : null;
+}
+
+function escapeRegExp(value) {
+  return String(value || "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
 function buildCourseTitle(course, university) {
-  if (course.seoTitle?.trim()) return stripBrandSuffix(course.seoTitle);
   const uniName = university?.name?.trim() || "";
-  if (uniName)
-    return `${course.name} at ${uniName} | Admission & Requirements`;
-  return `${course.name} | Admission & Requirements`;
+  const degreeShort = getDegreeShortLabel(course);
+  const core = uniName ? `${course.name} at ${uniName}` : `${course.name}`;
+  const stored = course.seoTitle?.trim()
+    ? stripBrandSuffix(course.seoTitle)
+    : "";
+  // Preserve existing architecture: stored seoTitle wins, legacy fallback otherwise.
+  if (!stored) {
+    if (degreeShort) return truncate(`${core} – ${degreeShort}`, 70);
+    if (uniName)
+      return `${course.name} at ${uniName} | Admission & Requirements`;
+    return `${course.name} | Admission & Requirements`;
+  }
+  // Append verified degree qualifier when missing (e.g. Bachelor's).
+  if (
+    degreeShort &&
+    !new RegExp(escapeRegExp(degreeShort), "i").test(stored) &&
+    !/admission & requirements/i.test(stored)
+  ) {
+    const withDegree = `${stored} – ${degreeShort}`;
+    // Title safety: never cut the core phrase.
+    if (withDegree.length <= 70) return withDegree;
+    if (core.length <= 70) return core;
+    return truncate(core, 70);
+  }
+  if (stored.length <= 70) return stored;
+  if (core.length <= 70) return core;
+  return truncate(core, 70);
 }
 
 function buildCourseDescription(course, university) {
+  const uniName = university?.name?.trim() || "";
+  const degreeShort = getDegreeShortLabel(course);
+  const years = getDurationYears(course.duration);
+  const englishTaught =
+    course.isEnglishTaught ||
+    /^english$/i.test(String(course.language || "").trim());
+  const place = [university?.city, university?.country]
+    .filter(Boolean)
+    .join(", ");
+  // Factual snippet built only from verified fields.
+  if (course.name && uniName) {
+    const qualifiers = [];
+    if (years) qualifiers.push(`${years}-year`);
+    if (englishTaught) qualifiers.push("English-taught");
+    if (degreeShort) qualifiers.push(degreeShort);
+    const qualifierText = qualifiers.length
+      ? ` – ${qualifiers.join(" ")}`
+      : "";
+    const placeText = place ? ` in ${place}` : "";
+    // Approved snippet budget is 160 chars so the exact verified copy
+    // (159 chars for this course) is never mid-word truncated.
+    return truncate(
+      `Study ${course.name} at ${uniName}${qualifierText}${placeText}. Admission requirements, eligibility and guidance.`,
+      160,
+    );
+  }
   if (course.metaDescription?.trim())
     return truncate(course.metaDescription, 155);
   if (course.shortDescription?.trim())
     return truncate(course.shortDescription, 155);
   if (course.overview?.trim())
     return truncate(stripMarkup(course.overview), 155);
-  const uniName = university?.name ? ` at ${university.name}` : "";
+  const uniSuffix = university?.name ? ` at ${university.name}` : "";
   const facts = [];
   if (course.degreeType?.trim()) facts.push(course.degreeType.trim());
   else if (course.degreeLevel?.trim())
@@ -89,7 +166,7 @@ function buildCourseDescription(course, university) {
   else if (course.isEnglishTaught) facts.push("taught in English");
   const factSuffix = facts.length ? ` (${facts.join(", ")})` : "";
   return truncate(
-    `Explore ${course.name}${uniName}${factSuffix}. Find eligibility, admission requirements and guidance for international students from European Dreams.`,
+    `Explore ${course.name}${uniSuffix}${factSuffix}. Find eligibility, admission requirements and guidance for international students from European Dreams.`,
     155,
   );
 }
@@ -98,34 +175,68 @@ function buildHeroIntro(course, university) {
   const base =
     course.shortDescription?.trim() ||
     `Study ${course.name} at ${university.name} in Italy.`;
-  const sentences = [];
   const degreeLabel = course.degreeType?.trim() || "";
   const duration = course.duration?.trim() || "";
   const language = course.language?.trim() || "";
-  if (degreeLabel && duration)
-    sentences.push(
-      `It is a ${degreeLabel} programme with a duration of ${duration}.`,
-    );
-  else if (degreeLabel) sentences.push(`It is a ${degreeLabel} programme.`);
-  else if (duration) sentences.push(`Its duration is ${duration}.`);
-  if (language) sentences.push(`It is taught in ${language}.`);
-  else if (course.isEnglishTaught)
-    sentences.push("It is taught in English.");
-  const mentionsUniversity = base.includes(university.name);
-  const mentionsItaly = /Italy/i.test(base);
+  const studyMode = course.studyMode?.trim() || "";
+  const fieldOfStudy = course.fieldOfStudy?.trim() || "";
   const place =
     [university.city, university.country].filter(Boolean).join(", ") ||
     "Italy";
-  if (!mentionsUniversity && !mentionsItaly)
-    sentences.push(`It is offered by ${university.name} in ${place}.`);
-  else if (!mentionsUniversity)
-    sentences.push(`It is offered by ${university.name}.`);
-  else if (!mentionsItaly)
-    sentences.push(`The university is located in ${place}.`);
+  const sentences = [];
+  if (degreeLabel && duration) {
+    let fragment = `It is a ${degreeLabel} programme with a duration of ${duration}`;
+    const languageText =
+      language || (course.isEnglishTaught ? "English" : "");
+    if (languageText) fragment += `, taught in ${languageText}`;
+    if (studyMode) fragment += ` ${studyMode}`;
+    fragment += ` in ${place}.`;
+    sentences.push(fragment);
+  } else if (degreeLabel) {
+    let fragment = `It is a ${degreeLabel} programme`;
+    const languageText =
+      language || (course.isEnglishTaught ? "English" : "");
+    if (languageText) fragment += ` taught in ${languageText}`;
+    if (studyMode) fragment += ` (${studyMode})`;
+    fragment += ` in ${place}.`;
+    sentences.push(fragment);
+  } else if (duration) {
+    sentences.push(`Its duration is ${duration}.`);
+    const languageText =
+      language || (course.isEnglishTaught ? "English" : "");
+    if (languageText) sentences.push(`It is taught in ${languageText}.`);
+    if (studyMode) sentences.push(`The study mode is ${studyMode}.`);
+    sentences.push(`It is offered in ${place}.`);
+  } else {
+    const languageText =
+      language || (course.isEnglishTaught ? "English" : "");
+    if (languageText) sentences.push(`It is taught in ${languageText}.`);
+    if (studyMode) sentences.push(`The study mode is ${studyMode}.`);
+    const mentionsUniversity = base.includes(university.name);
+    const mentionsItaly = /Italy/i.test(base);
+    if (!mentionsUniversity && !mentionsItaly)
+      sentences.push(`It is offered by ${university.name} in ${place}.`);
+    else if (!mentionsUniversity)
+      sentences.push(`It is offered by ${university.name}.`);
+    else if (!mentionsItaly)
+      sentences.push(`The university is located in ${place}.`);
+  }
+  if (fieldOfStudy) sentences.push(`The field of study is ${fieldOfStudy}.`);
   sentences.push(
     "Explore admission requirements, eligibility and application guidance for international students, including applicants from India.",
   );
   return `${base} ${sentences.join(" ")}`;
+}
+
+function buildCourseH1(course, university) {
+  const degreeShort = getDegreeShortLabel(course);
+  const englishTaught =
+    course.isEnglishTaught ||
+    /^english$/i.test(String(course.language || "").trim());
+  if (englishTaught && degreeShort)
+    return `${course.name} at ${university.name} – English-taught ${degreeShort} in Italy`;
+  if (degreeShort) return `${course.name} at ${university.name} – ${degreeShort} in Italy`;
+  return `${course.name} at ${university.name}, Italy`;
 }
 
 export async function generateMetadata({ params }) {
@@ -147,7 +258,12 @@ export async function generateMetadata({ params }) {
   const title = buildCourseTitle(course, university);
   const description = buildCourseDescription(course, university);
   const canonical = `${SITE_URL}/courses/${university?.slug || universitySlug}/${course.slug || courseSlug}`;
-  const ogImage = university?.heroImage || null;
+  // Use the established site-default OG asset when the university has no hero image.
+  // Do not invent or fetch a university image.
+  const DEFAULT_OG_IMAGE = `${SITE_URL}/images/hero.jpg`;
+  const ogImage = university?.heroImage || DEFAULT_OG_IMAGE;
+  // Page title carries no brand suffix here: root layout applies
+  // the `%s | European Dreams` template exactly once.
   const ogTitle = `${title} | European Dreams`;
 
   return {
@@ -230,6 +346,13 @@ export default async function CourseDetailsPage({ params }) {
 
   const canonical = `${SITE_URL}/courses/${university?.slug || universitySlug}/${course.slug || courseSlug}`;
   const universityCanonical = `${SITE_URL}/universities/${university?.slug || universitySlug}`;
+  const universityShortName = getUniversityShortName(university);
+  const degreeShortLabel = getDegreeShortLabel(course);
+  const overviewTitle = `${course.name} at ${universityShortName} – Course Overview`;
+  const requirementsTitle = `Admission Requirements for ${course.name} at ${universityShortName}`;
+  const relatedHeading = degreeShortLabel
+    ? `More ${degreeShortLabel} Courses at ${university.name}`
+    : `Related courses at ${university.name}`;
 
   const breadcrumbItems = [
     { name: "Home", href: `${SITE_URL}/` },
@@ -266,7 +389,7 @@ export default async function CourseDetailsPage({ params }) {
     };
 
     if (course.language?.trim()) {
-      schema.inLanguage = course.language.trim();
+      schema.inLanguage = "en";
     }
 
     if (course.degreeLevel?.trim()) {
@@ -274,9 +397,28 @@ export default async function CourseDetailsPage({ params }) {
     }
 
     const duration = course.duration?.trim();
-    if (duration && /^\d+\s+Years$/i.test(duration)) {
-      const years = duration.match(/^\d+/)[0];
-      schema.timeToComplete = `P${years}Y`;
+    const durationYears = getDurationYears(duration);
+    if (durationYears) {
+      schema.timeToComplete = `P${durationYears}Y`;
+    }
+
+    if (course.fieldOfStudy?.trim()) {
+      schema.about = {
+        "@type": "Thing",
+        name: course.fieldOfStudy.trim(),
+      };
+    }
+
+    // Only verified study-mode/duration data. No price, offers,
+    // startDate, deadline, rating, prerequisites or FAQPage.
+    const studyMode = course.studyMode?.trim() || "";
+    if (studyMode || durationYears) {
+      schema.hasCourseInstance = {
+        "@type": "CourseInstance",
+        ...(studyMode ? { courseMode: studyMode } : {}),
+        inLanguage: "en",
+        ...(durationYears ? { courseWorkload: `P${durationYears}Y` } : {}),
+      };
     }
 
     return schema;
@@ -334,7 +476,7 @@ export default async function CourseDetailsPage({ params }) {
               </p>
 
               <h1 className="max-w-4xl font-display text-4xl font-bold leading-tight text-foreground md:text-5xl lg:text-6xl">
-                {course.name} at {university.name}, Italy
+                {buildCourseH1(course, university)}
               </h1>
 
               <p className="mt-5 max-w-3xl text-lg leading-8 text-muted">
@@ -411,15 +553,45 @@ export default async function CourseDetailsPage({ params }) {
 
       <section className="container-custom mx-auto grid gap-8 px-4 pb-24 lg:grid-cols-[1fr_360px]">
         <div className="space-y-8">
-          <ContentSection id="overview" title="Course Overview" icon={BookOpen}>
+          <ContentSection id="overview" title={overviewTitle} icon={BookOpen}>
             <p className="leading-8 text-muted">
               {course.overview || course.shortDescription ||
                 "Contact our counsellors to receive complete programme information."}
             </p>
+            <p className="mt-4 leading-8 text-muted">
+              {course.name} is offered by{" "}
+              <Link
+                href={`/universities/${university.slug}`}
+                className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+              >
+                {university.name}
+              </Link>
+              . You can also{" "}
+              <Link
+                href="/courses"
+                className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+              >
+                browse all courses in Italy
+              </Link>{" "}
+              for comparable English-taught options.
+            </p>
+            {course.degreeLevel === "bachelor" && (
+              <p className="mt-4 leading-8 text-muted">
+                Looking for a Master&apos;s programme? Explore related
+                Master&apos;s options on the{" "}
+                <Link
+                  href={`/universities/${university.slug}`}
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  {university.name} page
+                </Link>
+                .
+              </p>
+            )}
           </ContentSection>
 
           {requirementItems.length > 0 && (
-            <ContentSection id="requirements" title="Admission Requirements" icon={CheckCircle2}>
+            <ContentSection id="requirements" title={requirementsTitle} icon={CheckCircle2}>
               <div className="grid gap-4 sm:grid-cols-2">
                 {requirementItems.map((item) => (
                   <div key={item.label} className="group rounded-2xl border border-border bg-background p-5 transition hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-md">
@@ -442,7 +614,7 @@ export default async function CourseDetailsPage({ params }) {
           )}
 
           {course.eligibility && (
-            <ContentSection id="eligibility" title="Eligibility" icon={GraduationCap}>
+            <ContentSection id="eligibility" title="Who Can Apply – Eligibility" icon={GraduationCap}>
               <p className="leading-8 text-muted">{course.eligibility}</p>
             </ContentSection>
           )}
@@ -535,7 +707,7 @@ export default async function CourseDetailsPage({ params }) {
           <div className="container-custom mx-auto px-4 py-16">
             <p className="font-semibold text-secondary">Explore more</p>
             <h2 className="mt-2 font-display text-3xl font-bold text-foreground">
-              Related courses at {university.name}
+              {relatedHeading}
             </h2>
 
             <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -543,6 +715,8 @@ export default async function CourseDetailsPage({ params }) {
                 <Link
                   key={relatedCourse._id}
                   href={`/courses/${university.slug}/${relatedCourse.slug}`}
+                  aria-label={`${relatedCourse.name} at ${university.name}`}
+                  title={`${relatedCourse.name} at ${university.name}`}
                   className="group rounded-[22px] border border-border bg-background p-6 transition duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-xl"
                 >
                   <p className="text-sm font-semibold text-primary">
