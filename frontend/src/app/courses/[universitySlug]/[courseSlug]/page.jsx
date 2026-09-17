@@ -367,6 +367,14 @@ export default async function CourseDetailsPage({ params }) {
     university?.slug === "sapienza-university-of-rome" &&
     course?.slug === "product-and-service-design";
 
+  // Programme-specific verified content (official University of Trento
+  // source) for one course page only. Slug-gated so no other course page
+  // is affected, and used solely for visible body content — never for
+  // title/meta/schema. Declared before quickLinks: referenced below.
+  const isHumanComputerInteractionTrento =
+    university?.slug === "university-of-trento" &&
+    course?.slug === "human-computer-interaction-hci";
+
   const requirementItems = [
     {
       label: "Academic requirement",
@@ -391,6 +399,9 @@ export default async function CourseDetailsPage({ params }) {
     ...(isProductServiceDesignSapienza
       ? [{ href: "#what-you-study", label: "What You'll Study" }]
       : []),
+    ...(isHumanComputerInteractionTrento
+      ? [{ href: "#what-you-study", label: "What You'll Study" }]
+      : []),
     ...(requirementItems.length
       ? [{ href: "#requirements", label: "Requirements" }]
       : []),
@@ -406,6 +417,14 @@ export default async function CourseDetailsPage({ params }) {
           },
         ]
       : []),
+    ...(isHumanComputerInteractionTrento
+      ? [
+          {
+            href: "#careers",
+            label: "Career Opportunities and Further Study",
+          },
+        ]
+      : []),
     ...(course.scholarships
       ? [{ href: "#scholarships", label: "Scholarships" }]
       : []),
@@ -413,6 +432,14 @@ export default async function CourseDetailsPage({ params }) {
       ? [{ href: "#study-plan", label: "Study Plan" }]
       : []),
     ...(isProductServiceDesignSapienza
+      ? [
+          {
+            href: "#access-and-international",
+            label: "Access, Study Plan and International Opportunities",
+          },
+        ]
+      : []),
+    ...(isHumanComputerInteractionTrento
       ? [
           {
             href: "#access-and-international",
@@ -765,6 +792,62 @@ export default async function CourseDetailsPage({ params }) {
             </ContentSection>
           )}
 
+          {isHumanComputerInteractionTrento && (
+            <ContentSection
+              id="what-you-study"
+              title="What You’ll Study in Human–Computer Interaction"
+              icon={School}
+            >
+              <p className="leading-8 text-muted">
+                This English-taught Master&apos;s programme investigates
+                people and their actions as a starting point for technology
+                design. It is jointly offered by the Department of
+                Psychology and Cognitive Science and the Department of
+                Information Engineering and Computer Science.
+              </p>
+              <ul className="mt-4 space-y-3">
+                {[
+                  "Social-cognitive area — brain/mind interaction, behaviour and cognition, and social processes",
+                  "Computer science area — user interfaces, user-centred and participatory design, HCI, prototyping, and affective computing",
+                  "Methodological area — experimental design, qualitative and quantitative methods, ethics and epistemology",
+                ].map((topic) => (
+                  <li key={topic} className="flex gap-3 leading-7 text-muted">
+                    <span className="font-bold text-success">✓</span>
+                    <span>{topic}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 leading-8 text-muted">
+                Mandatory basics span all three areas before advanced
+                electives. Learning outcomes cover simulative, observational
+                and experimental methods, modelling and redesign of
+                human-system interfaces, communication and decision theory,
+                quantitative and qualitative data methods, individual and
+                collective decision analysis, and independent basic and
+                applied research — with an internship in a university
+                laboratory or a private or public company forming an
+                integral part of the programme.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                See how this English-taught degree fits among{" "}
+                <Link
+                  href="/english-taught-courses-in-italy"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  English-taught courses in Italy
+                </Link>{" "}
+                and explore more options on the{" "}
+                <Link
+                  href={`/universities/${university.slug}`}
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  {university.name} page
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
           {requirementItems.length > 0 && (
             <ContentSection id="requirements" title={requirementsTitle} icon={CheckCircle2}>
               <div className="grid gap-4 sm:grid-cols-2">
@@ -842,6 +925,53 @@ export default async function CourseDetailsPage({ params }) {
                 </p>
               )}
 
+              {isHumanComputerInteractionTrento && (
+                <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      Access procedure
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      Programmed access with qualification assessment
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      Academic background
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      Bachelor&apos;s degree with Information Science and/or
+                      Psychology examinations
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      English prerequisite
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      B2 level with accepted proof at application
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      Selection elements
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      Academic curriculum, motivation letter, references and
+                      self-presentation video pitch
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {isHumanComputerInteractionTrento && (
+                <p className="mt-4 text-sm leading-6 text-muted">
+                  Admission calls, deadlines and application procedures can
+                  change. Students should verify the current University of
+                  Trento programme call before applying.
+                </p>
+              )}
+
               {admissionRequirements.notes && (
                 <details className="group mt-5 rounded-2xl border border-secondary/20 bg-secondary-light p-4 open:shadow-sm">
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-3 font-semibold text-foreground">
@@ -910,6 +1040,36 @@ export default async function CourseDetailsPage({ params }) {
                 international corporate research divisions — and graduates
                 can continue into doctoral research across design fields. For
                 broader planning, see our{" "}
+                <Link
+                  href="/study-in-italy"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Study in Italy guide
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
+          {isHumanComputerInteractionTrento && (
+            <ContentSection
+              id="careers"
+              title="Career Opportunities and Further Study"
+              icon={GraduationCap}
+            >
+              <p className="leading-8 text-muted">
+                According to the University of Trento&apos;s official
+                programme description, this Master&apos;s prepares
+                researchers and professionals with multidisciplinary HCI
+                skills for evolving technology domains — people able to
+                analyse the complexity of human cognition, behaviour and
+                emotion and embed that understanding in new computing
+                artefacts and technologies.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                The programme documents a pathway toward PhD study in
+                Human-Computer Interaction after the Master&apos;s degree.
+                For broader planning, see our{" "}
                 <Link
                   href="/study-in-italy"
                   className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
@@ -1002,6 +1162,65 @@ export default async function CourseDetailsPage({ params }) {
               <p className="mt-4 leading-8 text-muted">
                 Students applying from India should verify the current
                 Sapienza programme call, academic eligibility and
+                English-language documentation requirements before applying.
+                See the{" "}
+                <Link
+                  href="/italy-university-admission"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Italy university admission process
+                </Link>
+                ,{" "}
+                <Link
+                  href="/universitaly"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Universitaly guidance
+                </Link>{" "}
+                and{" "}
+                <Link
+                  href="/italy-student-visa"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Italy student visa guidance
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
+          {isHumanComputerInteractionTrento && (
+            <ContentSection
+              id="access-and-international"
+              title="Access, Study Plan and International Opportunities"
+              icon={Languages}
+            >
+              <p className="leading-8 text-muted">
+                This is a Master&apos;s degree programme with programmed
+                access, running over 2 years and 120 credits in English at
+                Rovereto. Admission requires a Bachelor&apos;s degree or
+                equivalent, with specific preparation in Information Science
+                and/or Psychology demonstrated through degree examinations,
+                plus B2-level English documented through an accepted proof —
+                mother tongue, university confirmation of an English-medium
+                degree, a transcript showing a B2 English exam, an accepted
+                certificate, or the UniTrento CLA test. Selection weighs
+                coherence with the programme alongside the academic
+                curriculum, motivation letter, references and a
+                self-presentation video pitch submitted online.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                Documented international opportunities include Erasmus+
+                study and traineeship mobility — the internship abroad runs
+                at least four months at a single location — while
+                national and international mobility periods can be
+                recognised through the Learning Agreement, and thesis work
+                abroad is supported. Confirm current options in the official
+                call before planning around them.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                Students applying from India should verify the current
+                Trento programme call, academic-background fit and
                 English-language documentation requirements before applying.
                 See the{" "}
                 <Link
