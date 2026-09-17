@@ -620,6 +620,17 @@ export default function ItalyUniversityAdmissionPage() {
                 </article>
               ))}
             </div>
+            <p className="mx-auto mt-8 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
+              For September and February intakes, the 2026/27 national dates
+              and verified university examples, see our{" "}
+              <Link
+                href="/italy-university-intakes"
+                className="font-semibold text-[var(--primary)] hover:underline"
+              >
+                Italy university intakes and deadlines guide
+              </Link>
+              .
+            </p>
           </div>
         </section>
 

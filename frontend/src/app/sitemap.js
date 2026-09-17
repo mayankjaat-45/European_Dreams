@@ -98,6 +98,7 @@ export default async function sitemap() {
     "/italy-scholarships",
     "/cost-of-studying-in-italy",
     "/universitaly",
+    "/italy-university-intakes",
     "/italy-student-visa",
     "/italy-university-admission",
     "/blogs",
