@@ -371,6 +371,9 @@ export default async function CourseDetailsPage({ params }) {
     ...(isAcsaiSapienza
       ? [{ href: "#what-you-study", label: "What You'll Study" }]
       : []),
+    ...(isProductServiceDesignSapienza
+      ? [{ href: "#what-you-study", label: "What You'll Study" }]
+      : []),
     ...(requirementItems.length
       ? [{ href: "#requirements", label: "Requirements" }]
       : []),
@@ -378,11 +381,27 @@ export default async function CourseDetailsPage({ params }) {
       ? [{ href: "#eligibility", label: "Eligibility" }]
       : []),
     ...(isAcsaiSapienza ? [{ href: "#careers", label: "Careers" }] : []),
+    ...(isProductServiceDesignSapienza
+      ? [
+          {
+            href: "#careers",
+            label: "Career Opportunities and Further Study",
+          },
+        ]
+      : []),
     ...(course.scholarships
       ? [{ href: "#scholarships", label: "Scholarships" }]
       : []),
     ...(isAcsaiSapienza
       ? [{ href: "#study-plan", label: "Study Plan" }]
+      : []),
+    ...(isProductServiceDesignSapienza
+      ? [
+          {
+            href: "#access-and-international",
+            label: "Access, Study Plan and International Opportunities",
+          },
+        ]
       : []),
   ];
 
@@ -404,6 +423,13 @@ export default async function CourseDetailsPage({ params }) {
       "sapienza-university-of-rome" &&
     (course?.slug || courseSlug) ===
       "applied-computer-science-and-artificial-intelligence";
+
+  // Programme-specific verified content (official Sapienza source) for one
+  // course page only. Slug-gated so no other course page is affected, and
+  // used solely for visible body content — never for title/meta/schema.
+  const isProductServiceDesignSapienza =
+    university?.slug === "sapienza-university-of-rome" &&
+    course?.slug === "product-and-service-design";
 
   const breadcrumbItems = [
     { name: "Home", href: `${SITE_URL}/` },
@@ -689,6 +715,55 @@ export default async function CourseDetailsPage({ params }) {
             </ContentSection>
           )}
 
+          {isProductServiceDesignSapienza && (
+            <ContentSection
+              id="what-you-study"
+              title="What You’ll Study in Product and Service Design"
+              icon={School}
+            >
+              <p className="leading-8 text-muted">
+                This English-taught Master&apos;s programme (LM-12) trains
+                designers for the advanced production of innovative products
+                and services, with strategic skills for post-industrial
+                processes shaped by digital and ecological transitions. It is
+                run jointly across Sapienza&apos;s Faculty of Architecture
+                and the Faculty of Information Engineering, Computer Science
+                and Statistics, through the Department of Planning, Design
+                and Technology of Architecture.
+              </p>
+              <ul className="mt-4 space-y-3">
+                {[
+                  "Semester 1 — design languages and methods with graphic and technical foundations",
+                  "Semester 2 — new technologies, processes and materials",
+                  "Semester 3 — sustainable production and consumption",
+                  "Semester 4 — electives, internship and thesis, including 12 elective CFU and company or R&D placements",
+                ].map((topic) => (
+                  <li key={topic} className="flex gap-3 leading-7 text-muted">
+                    <span className="font-bold text-success">✓</span>
+                    <span>{topic}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 leading-8 text-muted">
+                See how this English-taught degree fits among{" "}
+                <Link
+                  href="/english-taught-courses-in-italy"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  English-taught courses in Italy
+                </Link>{" "}
+                and explore more options on the{" "}
+                <Link
+                  href={`/universities/${university.slug}`}
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  {university.name} page
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
           {requirementItems.length > 0 && (
             <ContentSection id="requirements" title={requirementsTitle} icon={CheckCircle2}>
               <div className="grid gap-4 sm:grid-cols-2">
@@ -719,6 +794,51 @@ export default async function CourseDetailsPage({ params }) {
                     </p>
                   </div>
                 </div>
+              )}
+
+              {isProductServiceDesignSapienza && (
+                <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      Access procedure
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      Restricted access with comparative qualification
+                      assessment and admission test
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      Programme code
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      33433
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      Admission test code
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      16249
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      English prerequisite
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      B2 with certificate at application
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {isProductServiceDesignSapienza && (
+                <p className="mt-4 text-sm leading-6 text-muted">
+                  Access follows the annual official Sapienza call — verify
+                  the current call before applying.
+                </p>
               )}
 
               {admissionRequirements.notes && (
@@ -765,6 +885,41 @@ export default async function CourseDetailsPage({ params }) {
             </ContentSection>
           )}
 
+          {isProductServiceDesignSapienza && (
+            <ContentSection
+              id="careers"
+              title="Career Opportunities and Further Study"
+              icon={GraduationCap}
+            >
+              <p className="leading-8 text-muted">
+                According to Sapienza&apos;s official programme description,
+                two professional profiles are documented. The Design
+                Strategist designs high-innovation products and services and
+                can lead design-thinking processes across ideation,
+                production, communication and consumption — including Smart
+                Objects, IoT and Robotics, healthcare, emergency and
+                sustainability contexts, and sharing-economy innovation —
+                working freelance, in public or private institutions, in
+                design studios, or in small, medium and large firms.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                The Design Researcher carries out applied research in
+                design-driven innovation, including digital, fabrication and
+                sustainability fields, within applied research bodies and
+                international corporate research divisions — and graduates
+                can continue into doctoral research across design fields. For
+                broader planning, see our{" "}
+                <Link
+                  href="/study-in-italy"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Study in Italy guide
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
           {course.scholarships && (
             <ContentSection id="scholarships" title="Scholarships" icon={Sparkles}>
               <p className="leading-8 text-muted">{course.scholarships}</p>
@@ -791,6 +946,62 @@ export default async function CourseDetailsPage({ params }) {
                 Applicants from India should verify the programme&apos;s
                 current academic and admission requirements and follow
                 Sapienza&apos;s current international application process.
+                See the{" "}
+                <Link
+                  href="/italy-university-admission"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Italy university admission process
+                </Link>
+                ,{" "}
+                <Link
+                  href="/universitaly"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Universitaly guidance
+                </Link>{" "}
+                and{" "}
+                <Link
+                  href="/italy-student-visa"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Italy student visa guidance
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
+          {isProductServiceDesignSapienza && (
+            <ContentSection
+              id="access-and-international"
+              title="Access, Study Plan and International Opportunities"
+              icon={Languages}
+            >
+              <p className="leading-8 text-muted">
+                This is a restricted-access Master&apos;s programme (LM-12,
+                programme code 33433). Admission runs through comparative
+                assessment of prior qualifications plus an admission test
+                (test code 16249). Eligible backgrounds include Industrial
+                Design (L-4), Industrial, Civil and Information Engineering,
+                Architecture, and Economics &amp; Management — with B2-level
+                English certified at application. The degree runs over four
+                semesters with an official study plan, and mobility can take
+                place in the fourth semester alongside electives, internship
+                and thesis work.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                Documented international opportunities include Erasmus+
+                study and traineeship mobility, the CIVIS alliance, Overseas
+                placements, thesis-abroad grants, and the Design Carousel
+                workshop run with European design schools through Cumulus
+                membership — confirm current options in the official call
+                before planning around them.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                Students applying from India should verify the current
+                Sapienza programme call, academic eligibility and
+                English-language documentation requirements before applying.
                 See the{" "}
                 <Link
                   href="/italy-university-admission"
