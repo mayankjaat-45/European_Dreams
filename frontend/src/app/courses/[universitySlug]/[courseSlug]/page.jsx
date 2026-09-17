@@ -125,11 +125,14 @@ function buildCourseTitle(course, university) {
     // Preserve core course + university terms without mid-word truncation.
     if (shortCore.length <= 70) return shortCore;
     if (core.length <= 70) return core;
-    return truncate(core, 70);
+    // Last resort: keep the full course name plus degree when it fits.
+    const courseWithDegree = `${course.name} – ${degreeShort}`;
+    if (courseWithDegree.length <= 70) return courseWithDegree;
+    return truncateWords(core, 70);
   }
   if (stored.length <= 70) return stored;
   if (core.length <= 70) return core;
-  return truncate(core, 70);
+  return truncateWords(core, 70);
 }
 
 function truncateWords(value, maxLength) {
@@ -160,17 +163,26 @@ function buildCourseDescription(course, university) {
       ? ` – ${qualifiers.join(" ")}`
       : "";
     const placeText = place ? ` in ${place}` : "";
-    // SERP budget is 160 chars. Rebuild with the short university name when
-    // the full factual description exceeds it; never cut mid-word.
-    const buildFactual = (uniDisplayName) =>
-      `Study ${course.name} at ${uniDisplayName}${qualifierText}${placeText}. Admission requirements, eligibility and guidance.`;
-    const full = buildFactual(uniName);
+    // SERP budget is 160 chars. Cascade through shorter factual variants
+    // when the full description exceeds it; never cut mid-word.
+    const FULL_CLOSE = "Admission requirements, eligibility and guidance.";
+    const SHORT_CLOSE = "Admission requirements and guidance.";
+    const buildFactual = (uniDisplayName, includePlace, closing) =>
+      `Study ${course.name} at ${uniDisplayName}${qualifierText}${includePlace ? placeText : ""}. ${closing}`;
+    const buildCompact = (uniDisplayName, closing) =>
+      `Study ${course.name}${qualifierText} at ${uniDisplayName}. ${closing}`;
+    const full = buildFactual(uniName, true, FULL_CLOSE);
     if (full.length <= 160) return full;
     const shortUni = getUniversityShortName(university);
     if (shortUni && shortUni !== uniName) {
-      const shortened = buildFactual(shortUni);
+      const shortened = buildFactual(shortUni, true, FULL_CLOSE);
       if (shortened.length <= 160) return shortened;
     }
+    // Drop the place clause, then shorten the ending only as much as needed.
+    const compact = buildCompact(uniName, FULL_CLOSE);
+    if (compact.length <= 160) return compact;
+    const compactShort = buildCompact(uniName, SHORT_CLOSE);
+    if (compactShort.length <= 160) return compactShort;
     return truncateWords(full, 160);
   }
   if (course.metaDescription?.trim())
