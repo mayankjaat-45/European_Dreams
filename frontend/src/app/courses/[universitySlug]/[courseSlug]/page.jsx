@@ -350,6 +350,23 @@ export default async function CourseDetailsPage({ params }) {
     university._id || "",
   )}&course=${encodeURIComponent(course._id || "")}`;
 
+  // Programme-specific verified content (official Sapienza source) for one
+  // course page only. Slug-gated so no other course page is affected, and
+  // used solely for visible body content — never for title/meta/schema.
+  // Declared before quickLinks: both flags are referenced below.
+  const isAcsaiSapienza =
+    (university?.slug || universitySlug) ===
+      "sapienza-university-of-rome" &&
+    (course?.slug || courseSlug) ===
+      "applied-computer-science-and-artificial-intelligence";
+
+  // Programme-specific verified content (official Sapienza source) for one
+  // course page only. Slug-gated so no other course page is affected, and
+  // used solely for visible body content — never for title/meta/schema.
+  const isProductServiceDesignSapienza =
+    university?.slug === "sapienza-university-of-rome" &&
+    course?.slug === "product-and-service-design";
+
   const requirementItems = [
     {
       label: "Academic requirement",
@@ -414,22 +431,6 @@ export default async function CourseDetailsPage({ params }) {
   const relatedHeading = degreeShortLabel
     ? `More ${degreeShortLabel} Courses at ${university.name}`
     : `Related courses at ${university.name}`;
-
-  // Programme-specific verified content (official Sapienza source) for one
-  // course page only. Slug-gated so no other course page is affected, and
-  // used solely for visible body content — never for title/meta/schema.
-  const isAcsaiSapienza =
-    (university?.slug || universitySlug) ===
-      "sapienza-university-of-rome" &&
-    (course?.slug || courseSlug) ===
-      "applied-computer-science-and-artificial-intelligence";
-
-  // Programme-specific verified content (official Sapienza source) for one
-  // course page only. Slug-gated so no other course page is affected, and
-  // used solely for visible body content — never for title/meta/schema.
-  const isProductServiceDesignSapienza =
-    university?.slug === "sapienza-university-of-rome" &&
-    course?.slug === "product-and-service-design";
 
   const breadcrumbItems = [
     { name: "Home", href: `${SITE_URL}/` },
