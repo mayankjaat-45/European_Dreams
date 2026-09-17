@@ -524,7 +524,7 @@ export default function StudyInItalyPage() {
                 </li>
               ))}
             </ol>
-            <p className="mx-auto mt-8 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
+          <p className="mx-auto mt-8 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
               For the complete application flow, see our{" "}
               <Link
                 href="/italy-university-admission"
@@ -717,6 +717,18 @@ export default function StudyInItalyPage() {
             >
               European Commission country profile
             </a>
+            .
+          </p>
+          <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
+            For the full breakdown — DSU and regional scholarships, MAECI
+            government grants, university merit awards, documents and
+            deadlines — see our{" "}
+            <Link
+              href="/italy-scholarships"
+              className="font-semibold text-[var(--primary)] hover:underline"
+            >
+              Italy scholarships guide for Indian students
+            </Link>
             .
           </p>
           <p className="mx-auto mt-8 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
