@@ -161,8 +161,16 @@ export default async function CoursesPage({ searchParams }) {
               Browse study programmes across Italy by university, degree
               level, subject and country. Most international students focus
               on English-taught Bachelor&apos;s and Master&apos;s courses —
-              shortlist a few options, then verify admission requirements,
-              language rules, deadlines and fees for each programme.
+              see our{" "}
+              <Link
+                href="/english-taught-courses-in-italy"
+                className="font-semibold text-primary hover:underline"
+              >
+                English-taught courses in Italy guide
+              </Link>{" "}
+              for how to find and verify them. Shortlist a few options,
+              then verify admission requirements, language rules, deadlines
+              and fees for each programme.
             </p>
             <p className="mt-3 max-w-3xl leading-7 text-muted">
               Once you have a shortlist, the guides below explain what comes

@@ -99,6 +99,7 @@ export default async function sitemap() {
     "/cost-of-studying-in-italy",
     "/universitaly",
     "/italy-university-intakes",
+    "/english-taught-courses-in-italy",
     "/italy-student-visa",
     "/italy-university-admission",
     "/blogs",
