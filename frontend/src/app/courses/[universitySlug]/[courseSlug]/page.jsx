@@ -65,24 +65,67 @@ function stripBrandSuffix(value) {
 }
 
 function buildCourseTitle(course, university) {
-  if (course.seoTitle?.trim())
-    return truncate(stripBrandSuffix(course.seoTitle), 60);
-  const uniName = university?.name || "";
-  const base = uniName
-    ? `${course.name} – ${uniName} | Admission`
-    : course.name;
-  if (base.length <= 60) return base;
-  const fallback = uniName ? `${course.name} – ${uniName}` : course.name;
-  if (fallback.length <= 60) return fallback;
-  return truncate(fallback, 60);
+  if (course.seoTitle?.trim()) return stripBrandSuffix(course.seoTitle);
+  const uniName = university?.name?.trim() || "";
+  if (uniName)
+    return `${course.name} at ${uniName} | Admission & Requirements`;
+  return `${course.name} | Admission & Requirements`;
 }
 
 function buildCourseDescription(course, university) {
-  if (course.metaDescription?.trim()) return truncate(course.metaDescription, 155);
-  if (course.shortDescription?.trim()) return truncate(course.shortDescription, 155);
-  if (course.overview?.trim()) return truncate(stripMarkup(course.overview), 155);
+  if (course.metaDescription?.trim())
+    return truncate(course.metaDescription, 155);
+  if (course.shortDescription?.trim())
+    return truncate(course.shortDescription, 155);
+  if (course.overview?.trim())
+    return truncate(stripMarkup(course.overview), 155);
   const uniName = university?.name ? ` at ${university.name}` : "";
-  return `Explore ${course.name}${uniName}. Find eligibility, duration and admission guidance from European Dreams.`;
+  const facts = [];
+  if (course.degreeType?.trim()) facts.push(course.degreeType.trim());
+  else if (course.degreeLevel?.trim())
+    facts.push(formatLabel(course.degreeLevel));
+  if (course.duration?.trim()) facts.push(course.duration.trim());
+  if (course.language?.trim()) facts.push(`taught in ${course.language.trim()}`);
+  else if (course.isEnglishTaught) facts.push("taught in English");
+  const factSuffix = facts.length ? ` (${facts.join(", ")})` : "";
+  return truncate(
+    `Explore ${course.name}${uniName}${factSuffix}. Find eligibility, admission requirements and guidance for international students from European Dreams.`,
+    155,
+  );
+}
+
+function buildHeroIntro(course, university) {
+  const base =
+    course.shortDescription?.trim() ||
+    `Study ${course.name} at ${university.name} in Italy.`;
+  const sentences = [];
+  const degreeLabel = course.degreeType?.trim() || "";
+  const duration = course.duration?.trim() || "";
+  const language = course.language?.trim() || "";
+  if (degreeLabel && duration)
+    sentences.push(
+      `It is a ${degreeLabel} programme with a duration of ${duration}.`,
+    );
+  else if (degreeLabel) sentences.push(`It is a ${degreeLabel} programme.`);
+  else if (duration) sentences.push(`Its duration is ${duration}.`);
+  if (language) sentences.push(`It is taught in ${language}.`);
+  else if (course.isEnglishTaught)
+    sentences.push("It is taught in English.");
+  const mentionsUniversity = base.includes(university.name);
+  const mentionsItaly = /Italy/i.test(base);
+  const place =
+    [university.city, university.country].filter(Boolean).join(", ") ||
+    "Italy";
+  if (!mentionsUniversity && !mentionsItaly)
+    sentences.push(`It is offered by ${university.name} in ${place}.`);
+  else if (!mentionsUniversity)
+    sentences.push(`It is offered by ${university.name}.`);
+  else if (!mentionsItaly)
+    sentences.push(`The university is located in ${place}.`);
+  sentences.push(
+    "Explore admission requirements, eligibility and application guidance for international students, including applicants from India.",
+  );
+  return `${base} ${sentences.join(" ")}`;
 }
 
 export async function generateMetadata({ params }) {
@@ -112,6 +155,10 @@ export async function generateMetadata({ params }) {
     description,
     alternates: {
       canonical,
+    },
+    robots: {
+      index: true,
+      follow: true,
     },
     openGraph: {
       title: ogTitle,
@@ -186,7 +233,7 @@ export default async function CourseDetailsPage({ params }) {
 
   const breadcrumbItems = [
     { name: "Home", href: `${SITE_URL}/` },
-    { name: "Universities", href: `${SITE_URL}/universities` },
+    { name: "Universities in Italy", href: `${SITE_URL}/universities` },
     { name: university.name, href: universityCanonical },
     { name: course.name, href: canonical },
   ];
@@ -287,12 +334,11 @@ export default async function CourseDetailsPage({ params }) {
               </p>
 
               <h1 className="max-w-4xl font-display text-4xl font-bold leading-tight text-foreground md:text-5xl lg:text-6xl">
-                {course.name}
+                {course.name} at {university.name}, Italy
               </h1>
 
               <p className="mt-5 max-w-3xl text-lg leading-8 text-muted">
-                {course.shortDescription ||
-                  `Study ${course.name} at ${university.name} in Italy.`}
+                {buildHeroIntro(course, university)}
               </p>
 
               <div className="mt-8 flex flex-wrap gap-4">
@@ -438,6 +484,49 @@ export default async function CourseDetailsPage({ params }) {
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
+
+          <nav
+            aria-label="Study in Italy guidance"
+            className="rounded-3xl border border-border bg-card p-6 shadow-sm"
+          >
+            <h2 className="text-xl font-bold text-foreground">
+              Study in Italy guidance
+            </h2>
+            <ul className="mt-4 space-y-3 text-sm font-semibold">
+              <li>
+                <Link
+                  href="/courses"
+                  className="text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Browse all courses in Italy
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/study-in-italy"
+                  className="text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Study in Italy overview for international students
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/italy-university-admission"
+                  className="text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Italy university admission process
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/italy-student-visa"
+                  className="text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Italy student visa guidance
+                </Link>
+              </li>
+            </ul>
+          </nav>
         </aside>
       </section>
 
