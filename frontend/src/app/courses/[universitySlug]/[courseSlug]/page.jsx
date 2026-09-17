@@ -115,12 +115,29 @@ function buildCourseTitle(course, university) {
     const withDegree = `${stored} – ${degreeShort}`;
     // Title safety: never cut the core phrase.
     if (withDegree.length <= 70) return withDegree;
+    // Retry with the short university name (generic, no hardcoding).
+    const shortUni = getUniversityShortName(university);
+    const shortCore = shortUni
+      ? `${course.name} at ${shortUni}`
+      : `${course.name}`;
+    const shortWithDegree = `${shortCore} – ${degreeShort}`;
+    if (shortWithDegree.length <= 70) return shortWithDegree;
+    // Preserve core course + university terms without mid-word truncation.
+    if (shortCore.length <= 70) return shortCore;
     if (core.length <= 70) return core;
     return truncate(core, 70);
   }
   if (stored.length <= 70) return stored;
   if (core.length <= 70) return core;
   return truncate(core, 70);
+}
+
+function truncateWords(value, maxLength) {
+  const text = String(value || "").trim().replace(/\s+/g, " ");
+  if (!text || text.length <= maxLength) return text;
+  const cut = text.slice(0, maxLength - 1).trim();
+  const lastSpace = cut.lastIndexOf(" ");
+  return `${(lastSpace > 0 ? cut.slice(0, lastSpace) : cut).trim()}…`;
 }
 
 function buildCourseDescription(course, university) {
@@ -143,12 +160,18 @@ function buildCourseDescription(course, university) {
       ? ` – ${qualifiers.join(" ")}`
       : "";
     const placeText = place ? ` in ${place}` : "";
-    // Approved snippet budget is 160 chars so the exact verified copy
-    // (159 chars for this course) is never mid-word truncated.
-    return truncate(
-      `Study ${course.name} at ${uniName}${qualifierText}${placeText}. Admission requirements, eligibility and guidance.`,
-      160,
-    );
+    // SERP budget is 160 chars. Rebuild with the short university name when
+    // the full factual description exceeds it; never cut mid-word.
+    const buildFactual = (uniDisplayName) =>
+      `Study ${course.name} at ${uniDisplayName}${qualifierText}${placeText}. Admission requirements, eligibility and guidance.`;
+    const full = buildFactual(uniName);
+    if (full.length <= 160) return full;
+    const shortUni = getUniversityShortName(university);
+    if (shortUni && shortUni !== uniName) {
+      const shortened = buildFactual(shortUni);
+      if (shortened.length <= 160) return shortened;
+    }
+    return truncateWords(full, 160);
   }
   if (course.metaDescription?.trim())
     return truncate(course.metaDescription, 155);
