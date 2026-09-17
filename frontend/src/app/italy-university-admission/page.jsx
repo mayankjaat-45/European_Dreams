@@ -651,6 +651,13 @@ export default function ItalyUniversityAdmissionPage() {
                 className="font-semibold text-[var(--primary)] hover:underline"
               >
                 Explore English-taught courses
+              </Link>{" "}
+              or read our{" "}
+              <Link
+                href="/english-taught-courses-in-italy"
+                className="font-semibold text-[var(--primary)] hover:underline"
+              >
+                English-taught courses guide
               </Link>
               .
             </p>

@@ -917,6 +917,17 @@ export default function StudyInItalyPage() {
                 Explore English-taught courses
               </CtaButton>
             </div>
+            <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
+              For Bachelor&apos;s and Master&apos;s examples, language
+              requirements and verification steps, see our{" "}
+              <Link
+                href="/english-taught-courses-in-italy"
+                className="font-semibold text-[var(--primary)] hover:underline"
+              >
+                English-taught courses in Italy guide
+              </Link>
+              .
+            </p>
           </div>
         </section>
 
