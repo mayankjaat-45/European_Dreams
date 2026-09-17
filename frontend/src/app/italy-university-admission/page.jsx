@@ -669,6 +669,17 @@ export default function ItalyUniversityAdmissionPage() {
               </Link>{" "}
               — DSU, MAECI and university awards.
             </p>
+            <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
+              For tuition bands, living costs and how to verify your exact
+              fee, see our{" "}
+              <Link
+                href="/cost-of-studying-in-italy"
+                className="font-semibold text-[var(--primary)] hover:underline"
+              >
+                cost of studying in Italy guide
+              </Link>
+              .
+            </p>
           </div>
         </section>
 

@@ -650,6 +650,17 @@ export default function StudyInItalyPage() {
                 .
               </p>
             </div>
+            <p className="mx-auto mt-8 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
+              For a detailed breakdown of tuition, living costs and how to
+              verify your exact fee, see our{" "}
+              <Link
+                href="/cost-of-studying-in-italy"
+                className="font-semibold text-[var(--primary)] hover:underline"
+              >
+                cost of studying in Italy guide for Indian students
+              </Link>
+              .
+            </p>
           </div>
         </section>
 
