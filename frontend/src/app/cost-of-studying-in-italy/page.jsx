@@ -533,6 +533,17 @@ export default function CostOfStudyingInItalyPage() {
                 </p>
               </article>
             </div>
+            <p className="mx-auto mt-8 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
+              For housing searches, transport, healthcare and arrival
+              checklists, see our{" "}
+              <Link
+                href="/living-in-italy-for-students"
+                className="font-semibold text-[var(--primary)] hover:underline"
+              >
+                living in Italy for students guide
+              </Link>
+              .
+            </p>
           </div>
         </section>
 

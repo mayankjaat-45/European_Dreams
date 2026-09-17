@@ -618,6 +618,17 @@ export default function ItalyStudentVisaPage() {
                 unofficial sources.
               </p>
             </div>
+            <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
+              For housing, healthcare, transport and first-week checklists,
+              see our{" "}
+              <Link
+                href="/living-in-italy-for-students"
+                className="font-semibold text-[var(--primary)] hover:underline"
+              >
+                living in Italy for students guide
+              </Link>
+              .
+            </p>
           </div>
         </section>
 

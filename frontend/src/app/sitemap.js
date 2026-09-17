@@ -100,6 +100,7 @@ export default async function sitemap() {
     "/universitaly",
     "/italy-university-intakes",
     "/english-taught-courses-in-italy",
+    "/living-in-italy-for-students",
     "/italy-student-visa",
     "/italy-university-admission",
     "/blogs",
