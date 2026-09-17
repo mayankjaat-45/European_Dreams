@@ -484,7 +484,15 @@ export default async function UniversityDetailsPage({ params }) {
                           {course.name || course.title}
                         </h3>
                         <p className="mt-3 text-sm leading-6 text-muted">
-                          {[course.duration, course.tuitionFee]
+                          {[
+                            course.duration,
+                            course.tuitionFee,
+                            // Displayed language comes from the actual
+                            // course.language value; isEnglishTaught is only
+                            // supporting logic when language is missing.
+                            course.language ||
+                              (course.isEnglishTaught ? "English" : ""),
+                          ]
                             .filter(Boolean)
                             .join(" · ") ||
                             "View course details and requirements"}
