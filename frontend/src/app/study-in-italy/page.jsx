@@ -877,6 +877,17 @@ export default function StudyInItalyPage() {
             </a>
             .
           </p>
+          <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
+            For accommodation, living costs, transport, healthcare and
+            arrival checklists, see our{" "}
+            <Link
+              href="/living-in-italy-for-students"
+              className="font-semibold text-[var(--primary)] hover:underline"
+            >
+              living in Italy for students guide
+            </Link>
+            .
+          </p>
         </section>
 
         {/* 12. Intakes and deadlines */}
