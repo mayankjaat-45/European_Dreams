@@ -368,14 +368,21 @@ export default async function CourseDetailsPage({ params }) {
 
   const quickLinks = [
     { href: "#overview", label: "Overview" },
+    ...(isAcsaiSapienza
+      ? [{ href: "#what-you-study", label: "What You'll Study" }]
+      : []),
     ...(requirementItems.length
       ? [{ href: "#requirements", label: "Requirements" }]
       : []),
     ...(course.eligibility
       ? [{ href: "#eligibility", label: "Eligibility" }]
       : []),
+    ...(isAcsaiSapienza ? [{ href: "#careers", label: "Careers" }] : []),
     ...(course.scholarships
       ? [{ href: "#scholarships", label: "Scholarships" }]
+      : []),
+    ...(isAcsaiSapienza
+      ? [{ href: "#study-plan", label: "Study Plan" }]
       : []),
   ];
 
@@ -388,6 +395,15 @@ export default async function CourseDetailsPage({ params }) {
   const relatedHeading = degreeShortLabel
     ? `More ${degreeShortLabel} Courses at ${university.name}`
     : `Related courses at ${university.name}`;
+
+  // Programme-specific verified content (official Sapienza source) for one
+  // course page only. Slug-gated so no other course page is affected, and
+  // used solely for visible body content — never for title/meta/schema.
+  const isAcsaiSapienza =
+    (university?.slug || universitySlug) ===
+      "sapienza-university-of-rome" &&
+    (course?.slug || courseSlug) ===
+      "applied-computer-science-and-artificial-intelligence";
 
   const breadcrumbItems = [
     { name: "Home", href: `${SITE_URL}/` },
@@ -625,6 +641,54 @@ export default async function CourseDetailsPage({ params }) {
             )}
           </ContentSection>
 
+          {isAcsaiSapienza && (
+            <ContentSection
+              id="what-you-study"
+              title="What You’ll Study in Applied Computer Science and Artificial Intelligence"
+              icon={School}
+            >
+              <p className="leading-8 text-muted">
+                This Bachelor&apos;s programme combines computer science
+                foundations with artificial intelligence and applied
+                computing. It is offered by Sapienza&apos;s Faculty of
+                Information Engineering, Computer Science and Statistics
+                through the Department of Computer Science.
+              </p>
+              <ul className="mt-4 space-y-3">
+                {[
+                  "Programming languages",
+                  "Software design and development",
+                  "Algorithms and computational complexity",
+                  "Discrete structures and mathematical foundations",
+                  "Artificial intelligence techniques",
+                  "Big data and learning from data",
+                ].map((topic) => (
+                  <li key={topic} className="flex gap-3 leading-7 text-muted">
+                    <span className="font-bold text-success">✓</span>
+                    <span>{topic}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 leading-8 text-muted">
+                See how this English-taught degree fits among{" "}
+                <Link
+                  href="/english-taught-courses-in-italy"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  English-taught courses in Italy
+                </Link>{" "}
+                and explore more options on the{" "}
+                <Link
+                  href={`/universities/${university.slug}`}
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  {university.name} page
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
           {requirementItems.length > 0 && (
             <ContentSection id="requirements" title={requirementsTitle} icon={CheckCircle2}>
               <div className="grid gap-4 sm:grid-cols-2">
@@ -635,6 +699,27 @@ export default async function CourseDetailsPage({ params }) {
                   </div>
                 ))}
               </div>
+
+              {isAcsaiSapienza && (
+                <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      Access procedure
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      Admission test (test code 14824)
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      Programme code
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      33502
+                    </p>
+                  </div>
+                </div>
+              )}
 
               {admissionRequirements.notes && (
                 <details className="group mt-5 rounded-2xl border border-secondary/20 bg-secondary-light p-4 open:shadow-sm">
@@ -654,11 +739,80 @@ export default async function CourseDetailsPage({ params }) {
             </ContentSection>
           )}
 
+          {isAcsaiSapienza && (
+            <ContentSection
+              id="careers"
+              title="Career Opportunities and Further Study"
+              icon={GraduationCap}
+            >
+              <p className="leading-8 text-muted">
+                According to Sapienza&apos;s official programme description,
+                graduates can work with intelligent digital systems and
+                information systems, including parallel and distributed
+                computing and related security aspects.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                The degree also provides a pathway to Master&apos;s-level
+                study in Computer Science. For broader planning, see our{" "}
+                <Link
+                  href="/study-in-italy"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Study in Italy guide
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
           {course.scholarships && (
             <ContentSection id="scholarships" title="Scholarships" icon={Sparkles}>
               <p className="leading-8 text-muted">{course.scholarships}</p>
               <p className="mt-5 rounded-xl bg-secondary-light p-4 text-sm leading-6 text-muted">
                 Scholarship availability and awards depend on eligibility and official university or regional policies.
+              </p>
+            </ContentSection>
+          )}
+
+          {isAcsaiSapienza && (
+            <ContentSection
+              id="study-plan"
+              title="Study Plan and International Opportunities"
+              icon={Languages}
+            >
+              <p className="leading-8 text-muted">
+                The programme follows an official study plan published by
+                Sapienza (programme code 33502). Students can also pursue
+                international mobility opportunities documented by Sapienza,
+                including Erasmus+ exchanges — confirm current destinations
+                and calls on the official pages before planning around them.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                Applicants from India should verify the programme&apos;s
+                current academic and admission requirements and follow
+                Sapienza&apos;s current international application process.
+                See the{" "}
+                <Link
+                  href="/italy-university-admission"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Italy university admission process
+                </Link>
+                ,{" "}
+                <Link
+                  href="/universitaly"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Universitaly guidance
+                </Link>{" "}
+                and{" "}
+                <Link
+                  href="/italy-student-visa"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Italy student visa guidance
+                </Link>
+                .
               </p>
             </ContentSection>
           )}
