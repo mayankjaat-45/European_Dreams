@@ -711,6 +711,17 @@ export default function ItalyUniversityAdmissionPage() {
               </li>
             ))}
           </ol>
+          <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
+            The pre-enrolment stage has its own steps, documents and
+            deadlines — see our{" "}
+            <Link
+              href="/universitaly"
+              className="font-semibold text-[var(--primary)] hover:underline"
+            >
+              Universitaly pre-enrolment guide for Indian students
+            </Link>
+            .
+          </p>
           <div className="mt-8 text-center">
             <CtaButton href="/italy-student-visa">
               Continue to the student visa guide

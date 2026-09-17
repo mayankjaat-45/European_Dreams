@@ -421,6 +421,16 @@ export default function ItalyStudentVisaPage() {
                 </span>
               </OfficialLink>
             </div>
+            <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
+              New to the portal? Read our{" "}
+              <Link
+                href="/universitaly"
+                className="font-semibold text-[var(--primary)] hover:underline"
+              >
+                Universitaly pre-enrolment guide for Indian students
+              </Link>{" "}
+              — steps, documents and 2026/27 deadlines.
+            </p>
           </div>
         </section>
 

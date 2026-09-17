@@ -558,6 +558,17 @@ export default function StudyInItalyPage() {
             >
               Visit the official Universitaly portal
             </a>
+            <p className="mt-6 text-sm leading-6 text-[var(--muted-foreground)]">
+              Confused about how pre-enrolment fits around admission and the
+              visa? See our{" "}
+              <Link
+                href="/universitaly"
+                className="font-semibold text-[var(--primary)] hover:underline"
+              >
+                Universitaly pre-enrolment guide for Indian students
+              </Link>
+              .
+            </p>
           </div>
         </section>
 
