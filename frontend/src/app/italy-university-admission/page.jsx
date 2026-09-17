@@ -659,6 +659,16 @@ export default function ItalyUniversityAdmissionPage() {
                 Costs and scholarships in the Study in Italy guide
               </CtaButton>
             </div>
+            <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
+              Planning your funding too? See our dedicated{" "}
+              <Link
+                href="/italy-scholarships"
+                className="font-semibold text-[var(--primary)] hover:underline"
+              >
+                Italy scholarships guide for Indian students
+              </Link>{" "}
+              — DSU, MAECI and university awards.
+            </p>
           </div>
         </section>
 
