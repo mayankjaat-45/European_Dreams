@@ -37,7 +37,15 @@ function truncate(value, maxLength) {
 
 function buildUniversityDescription(university, courseCount) {
   if (university.metaDescription?.trim()) {
-    return truncate(university.metaDescription, 155);
+    const base = truncate(university.metaDescription, 155);
+    // Generic factual suffix from existing data; only when it fits.
+    const count = Number(courseCount);
+    const city = university.city?.trim();
+    if (count > 0 && city) {
+      const enriched = `${base} Explore ${count} English-taught courses in ${city}.`;
+      if (enriched.length <= 155) return enriched;
+    }
+    return base;
   }
   if (university.shortDescription?.trim()) {
     return truncate(university.shortDescription, 155);
@@ -96,7 +104,11 @@ export async function generateMetadata({ params }) {
   const title = buildUniversityTitle(university);
   const description = buildUniversityDescription(university, courseCount);
   const canonical = `${SITE_URL}/universities/${university.slug || slug}`;
-  const ogImage = university.heroImage || university.image || null;
+  // Site-default OG asset when the university has no hero image.
+  const ogImage =
+    university.heroImage ||
+    university.image ||
+    `${SITE_URL}/images/hero.jpg`;
   const ogTitle = `${title} | European Dreams`;
 
   return {
@@ -164,6 +176,34 @@ function formatList(value) {
   return Array.isArray(value) ? value.filter(Boolean).join(", ") : value;
 }
 
+const ADMISSION_FIELD_LABELS = [
+  ["academics", "Academics"],
+  ["ielts", "IELTS"],
+  ["pte", "PTE"],
+  ["centS", "CENT-S"],
+  ["sat", "SAT"],
+  ["imat", "IMAT"],
+  ["notes", "Notes"],
+];
+
+// Admission requirements arrive as an object ({ academics, ielts, ... }),
+// which has no `.length` — so the gate must be object-aware.
+function getAdmissionEntries(source) {
+  if (Array.isArray(source)) {
+    return source
+      .filter(Boolean)
+      .map((item) => ({ label: "", value: String(item) }));
+  }
+  if (source && typeof source === "object") {
+    return ADMISSION_FIELD_LABELS.map(([key, label]) => ({
+      label,
+      value: String(source[key] ?? "").trim(),
+    })).filter((entry) => entry.value);
+  }
+  if (source) return [{ label: "", value: String(source) }];
+  return [];
+}
+
 export default async function UniversityDetailsPage({ params }) {
   const { slug } = await params;
   const { university, courses, totals } = normalizeResult(
@@ -184,6 +224,7 @@ export default async function UniversityDetailsPage({ params }) {
   const facilities = university.facilities || [];
   const admissionRequirements =
     university.admissionRequirements || university.eligibility || [];
+  const admissionEntries = getAdmissionEntries(admissionRequirements);
 
   const canonical = `${SITE_URL}/universities/${university.slug || slug}`;
 
@@ -467,22 +508,26 @@ export default async function UniversityDetailsPage({ params }) {
                 )}
               </section>
 
-              {admissionRequirements.length > 0 && (
+              {admissionEntries.length > 0 && (
                 <Section title={`Admission requirements at ${university.name}`}>
-                  {Array.isArray(admissionRequirements) ? (
-                    <ul className="space-y-3">
-                      {admissionRequirements.map((requirement) => (
-                        <li key={requirement} className="flex gap-3">
-                          <span className="font-bold text-success">✓</span>
-                          <span>{requirement}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <p className="whitespace-pre-line">
-                      {admissionRequirements}
-                    </p>
-                  )}
+                  <ul className="space-y-3">
+                    {admissionEntries.map((entry) => (
+                      <li
+                        key={entry.label || entry.value}
+                        className="flex gap-3"
+                      >
+                        <span className="font-bold text-success">✓</span>
+                        <span>
+                          {entry.label ? (
+                            <span className="font-bold">
+                              {entry.label}:{" "}
+                            </span>
+                          ) : null}
+                          {entry.value}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
                   <p className="mt-5 text-sm leading-6 text-muted">
                     <Link
                       href="/italy-university-admission"
