@@ -77,6 +77,13 @@ const organizationSchema = {
   url: `${SITE_URL}/`,
   logo: `${SITE_URL}/images/european-dreams-logo.png`,
   image: `${SITE_URL}/images/hero.jpg`,
+  description:
+    "European Dreams provides guidance for studying in Italy, including university selection, English-taught courses, scholarships, applications and student visas.",
+  email: "foreigndreams660@gmail.com",
+  sameAs: [
+    "https://www.instagram.com/europeandreams.in/",
+    "https://www.youtube.com/@Europeandreams",
+  ],
 };
 
 const websiteSchema = {
