@@ -226,6 +226,54 @@ export default async function UniversityDetailsPage({ params }) {
     university.admissionRequirements || university.eligibility || [];
   const admissionEntries = getAdmissionEntries(admissionRequirements);
 
+  // Milan-only verified content (official unimi.it / apply.unimi.it sources).
+  // Slug-gated so no other university page is affected, and used solely for
+  // visible body content — never for title/meta/canonical/robots. Declared
+  // before every usage below.
+  const isUniversityOfMilan =
+    (university.slug || slug) === "university-of-milan";
+
+  // The data object supports establishedYear (Number) but the Milan record
+  // has none; fall back to the officially documented 1924 founding year for
+  // this page only. Ranking/tuitionFeeRange are intentionally left untouched.
+  const milanEstablishedYear =
+    university.establishedYear || (isUniversityOfMilan ? 1924 : null);
+
+  // Visible Milan FAQs. Each answer repeats only content already present in
+  // the gated sections above — no invented claims.
+  const milanFaqs = isUniversityOfMilan
+    ? [
+        {
+          question: "Is the University of Milan a public university?",
+          answer:
+            "Yes. The University of Milan, known as La Statale, is a public university in Milan, Italy, founded in 1924. Its statute defines it as a public institution for research and higher education.",
+        },
+        {
+          question:
+            "How many English-taught programmes does the University of Milan offer?",
+          answer:
+            "The university states it offers over 40 English-taught programmes across Bachelor's, Master's and PhD level, plus more than 20 double-degree programmes. This page lists the English-taught courses currently in our database below.",
+        },
+        {
+          question:
+            "How do international students from outside the EU apply?",
+          answer:
+            "Holders of non-Italian qualifications apply through the university's apply.unimi.it portal, and non-EU students residing abroad additionally submit a pre-enrolment application for one university and one programme on the Universitaly portal so they can request a study visa. Admission itself follows the programme's own path: open-admission programmes evaluate curricular requirements and personal preparation, while limited-enrolment programmes rank applicants by entrance examination.",
+        },
+        {
+          question:
+            "What do tuition fees and scholarships look like at the University of Milan?",
+          answer:
+            "Tuition is paid in two instalments: a fixed first instalment and a variable second instalment based on ISEE University or, for students whose household earns abroad, a fixed country-group amount. International students can access DSU regional scholarships, Excellence Scholarships for master's entrants, European Futures scholarships for EU students, and MAECI or MUR-CRUI opportunities where eligible. Amounts and country groups change yearly, so always verify the current official fees regulation and scholarship calls.",
+        },
+        {
+          question: "Where is the University of Milan located?",
+          answer:
+            "The university is in Milan, Lombardy, with its historic seat at Via Festa del Perdono 7 and scientific faculties in the Città Studi district. Teaching is organised by 31 departments across 8 Faculties and 2 Schools.",
+        },
+      ]
+    : [];
+
   const canonical = `${SITE_URL}/universities/${university.slug || slug}`;
 
   const breadcrumbItems = [
@@ -280,8 +328,8 @@ export default async function UniversityDetailsPage({ params }) {
       schema.address = address;
     }
 
-    if (university.establishedYear) {
-      schema.foundingDate = String(university.establishedYear);
+    if (milanEstablishedYear) {
+      schema.foundingDate = String(milanEstablishedYear);
     }
 
     const websiteUrl = (
@@ -293,6 +341,9 @@ export default async function UniversityDetailsPage({ params }) {
 
     return schema;
   })();
+
+  // No FAQPage schema: FAQs stay visible only, per task constraints.
+  // CollegeOrUniversity + BreadcrumbList remain the only schemas here.
 
   return (
     <>
@@ -394,7 +445,7 @@ export default async function UniversityDetailsPage({ params }) {
           <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <Fact label="Location" value={location} />
             <Fact label="University type" value={university.universityType} />
-            <Fact label="Established" value={university.establishedYear} />
+            <Fact label="Established" value={milanEstablishedYear} />
             <Fact label="World ranking" value={university.ranking} />
             <Fact label="Tuition fees" value={university.tuitionFeeRange} />
             <Fact
@@ -431,6 +482,119 @@ export default async function UniversityDetailsPage({ params }) {
                       </li>
                     ))}
                   </ul>
+                </Section>
+              )}
+
+              {isUniversityOfMilan && (
+                <Section title="About the University of Milan (La Statale)">
+                  <p>
+                    The University of Milan, known as La Statale, is a
+                    public university in Milan, Italy, founded in 1924 on
+                    the initiative of Luigi Mangiagalli. Its statute
+                    defines it as a public institution for research and
+                    higher education. The first four faculties were Law,
+                    Humanities, Medicine, and Mathematical, Physical and
+                    Natural Sciences, and the university has grown into a
+                    large multidisciplinary institution.
+                  </p>
+                  <p className="mt-4">
+                    The historic seat is at Via Festa del Perdono 7 in
+                    central Milan, while the scientific faculties are
+                    concentrated in the Città Studi district. The
+                    university describes itself as a member of
+                    international networks including the League of
+                    European Research Universities (LERU) and the 4EU+
+                    European University Alliance. For authoritative
+                    history and institutional detail, see the{" "}
+                    <a
+                      href="https://www.unimi.it/en/university/la-statale/our-heritage-our-future"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      university&apos;s official heritage page
+                    </a>
+                    .
+                  </p>
+                </Section>
+              )}
+
+              {isUniversityOfMilan && (
+                <Section title="Faculties, Schools and Departments">
+                  <p>
+                    Teaching at the University of Milan is organised by
+                    departments and coordinated by faculties, which
+                    promote courses across their disciplinary fields. The
+                    university counts 8 Faculties and 2 Schools alongside
+                    31 departments spanning the social sciences and
+                    humanities, the physical sciences and engineering,
+                    and the life sciences.
+                  </p>
+                  <p className="mt-4">
+                    The university lists its faculties and schools as
+                    Humanities; Exercise and Sports Science; Pharmacy;
+                    Medicine; Veterinary Medicine; Law; Political,
+                    Economic and Social Sciences; Agricultural and Food
+                    Sciences; Science and Technology; and Language
+                    Mediation and Intercultural Communication. Details
+                    are published on the{" "}
+                    <a
+                      href="https://www.unimi.it/en/education/faculties-and-schools"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      official faculties and schools page
+                    </a>{" "}
+                    and the{" "}
+                    <a
+                      href="https://www.unimi.it/en/university/offices-and-facilities/departments"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      official departments page
+                    </a>
+                    .
+                  </p>
+                </Section>
+              )}
+
+              {isUniversityOfMilan && (
+                <Section title="English-taught programmes at the University of Milan">
+                  <p>
+                    The university states it offers over 40
+                    English-taught programmes across Bachelor&apos;s,
+                    Master&apos;s and PhD level, alongside more than 20
+                    double-degree programmes run with international
+                    partner universities. This page lists{" "}
+                    {totals.courses ?? courses.length} English-taught
+                    courses currently in our database — spanning
+                    bachelor&apos;s degrees, single-cycle master&apos;s
+                    degrees such as Medicine and Surgery, and
+                    master&apos;s degrees across science, economics,
+                    humanities and social sciences.
+                  </p>
+                  <p className="mt-4">
+                    Browse the course cards below, or compare with other{" "}
+                    <Link
+                      href="/english-taught-courses-in-italy"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      English-taught courses in Italy
+                    </Link>
+                    . The full official catalogue, including programmes
+                    taught in Italian, is on the{" "}
+                    <a
+                      href="https://www.unimi.it/en/international/coming-abroad/enrol-programme/programmes-english"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      university&apos;s programmes-in-English page
+                    </a>
+                    .
+                  </p>
                 </Section>
               )}
 
@@ -544,6 +708,267 @@ export default async function UniversityDetailsPage({ params }) {
                       Full Italy university admission guide →
                     </Link>
                   </p>
+                </Section>
+              )}
+
+              {isUniversityOfMilan && (
+                <Section title="How to apply to the University of Milan">
+                  <h3 className="font-bold text-foreground">
+                    Where applications start
+                  </h3>
+                  <p className="mt-2">
+                    Students holding a qualification issued by a
+                    non-Italian institution apply through the
+                    university&apos;s international admissions portal at{" "}
+                    <a
+                      href="https://apply.unimi.it/"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      apply.unimi.it
+                    </a>
+                    , where candidates can apply for up to three degree
+                    programmes per academic year. Students with Italian
+                    qualifications instead follow the standard enrolment
+                    section of the university website.
+                  </p>
+                  <h3 className="mt-5 font-bold text-foreground">
+                    Open versus limited enrolment
+                  </h3>
+                  <p className="mt-2">
+                    Open-admission master&apos;s programmes evaluate an
+                    admission application against the programme&apos;s
+                    curricular requirements and the candidate&apos;s
+                    personal preparation — some also require B1 or B2
+                    English proficiency. Limited-enrolment programmes
+                    require an entrance examination, and the resulting
+                    ranking decides who may enrol. Bachelor&apos;s
+                    applicants likewise sit an admission test or skills
+                    assessment, whose rules are set in each
+                    programme&apos;s official call.
+                  </p>
+                  <h3 className="mt-5 font-bold text-foreground">
+                    EU versus non-EU applicants
+                  </h3>
+                  <p className="mt-2">
+                    Italian, EU and non-EU citizens holding an Italian
+                    residence permit apply directly to the university.
+                    Non-EU students residing abroad additionally submit a
+                    pre-enrolment application for one university and one
+                    programme on the Universitaly portal, compete for
+                    reserved places, and use it to request a study visa.
+                    The university publishes the full procedure on its{" "}
+                    <a
+                      href="https://www.unimi.it/en/international/coming-abroad/enrol-programme/international-enrolment-degree-programmes"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      international enrolment page
+                    </a>
+                    . Our{" "}
+                    <Link
+                      href="/italy-university-admission"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Italy university admission guide
+                    </Link>{" "}
+                    and{" "}
+                    <Link
+                      href="/universitaly"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Universitaly guidance
+                    </Link>{" "}
+                    explain the surrounding steps.
+                  </p>
+                  <h3 className="mt-5 font-bold text-foreground">
+                    Documents at a glance
+                  </h3>
+                  <p className="mt-2">
+                    Expect to provide academic transcripts and degree
+                    certificates with translations where required, plus a
+                    CIMEA statement of comparability and verification or
+                    a Declaration of Value for foreign qualifications —
+                    diplomas from European Higher Education Area
+                    universities may use the Diploma Supplement instead.
+                    Qualifications are accepted in English, French,
+                    German, Spanish or Italian unless a programme states
+                    otherwise, and an Italian tax code is needed to
+                    complete online enrolment. Calls, deadlines and
+                    document lists change every year, so always verify
+                    the current programme call on unimi.it before
+                    applying.
+                  </p>
+                </Section>
+              )}
+
+              {isUniversityOfMilan && (
+                <Section title="Tuition fees and scholarships">
+                  <p>
+                    Tuition is paid in two instalments: a fixed first
+                    instalment covering the regional tax and stamp duty,
+                    and a variable second instalment. Students whose
+                    household has income and assets in Italy are assessed
+                    through ISEE University; students whose household
+                    earns and holds assets abroad pay a fixed second
+                    instalment based on their country group and tuition
+                    area. Amounts and country groups are reset each
+                    academic year in the official fees regulation.
+                  </p>
+                  <p className="mt-4">
+                    International students can access the same
+                    need-and-merit benefits as Italian students,
+                    including DSU regional scholarships funded by the
+                    Lombardy Region and the Ministry of University and
+                    Research, which combine a grant with canteen access
+                    and exempt winners from the second instalment. The
+                    university also runs Excellence Scholarships for top
+                    international entrants to master&apos;s programmes,
+                    European Futures scholarships for EU students on
+                    master&apos;s programmes, and MAECI and MUR-CRUI
+                    opportunities for eligible groups. See our{" "}
+                    <Link
+                      href="/italy-scholarships"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Italy scholarships guidance
+                    </Link>{" "}
+                    and the university&apos;s{" "}
+                    <a
+                      href="https://www.unimi.it/en/international/coming-abroad/fees-scholarships-and-opportunities"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      official fees and scholarships page
+                    </a>
+                    .
+                  </p>
+                </Section>
+              )}
+
+              {isUniversityOfMilan && (
+                <Section title="International student essentials">
+                  <p>
+                    The Welcome Desk of the International Students Office
+                    supports newcomers with first arrival and with
+                    verifying foreign qualifications for enrolment. Plan
+                    for three practical essentials: obtain an Italian tax
+                    code before enrolling online, pay the first
+                    instalment to complete enrolment, and — for non-EU
+                    stays over three months — apply for a residence
+                    permit within eight days of entering Italy.
+                  </p>
+                  <p className="mt-4">
+                    The university offers free Italian language courses
+                    to international students. An Italian proficiency
+                    test applies only to Italian-taught paths, with
+                    exemptions including B2-level certification under the
+                    CLIQ system; English-taught programmes instead
+                    assess English proficiency. Our{" "}
+                    <Link
+                      href="/study-in-italy"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Study in Italy guide
+                    </Link>{" "}
+                    and{" "}
+                    <Link
+                      href="/italy-student-visa"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Italy student visa guidance
+                    </Link>{" "}
+                    cover these steps in more depth.
+                  </p>
+                </Section>
+              )}
+
+              {isUniversityOfMilan && (
+                <Section title="Applying to the University of Milan from India">
+                  <p>
+                    Applicants applying from India follow the non-EU
+                    resident-abroad pathway: an admission application on
+                    apply.unimi.it, a single-choice pre-enrolment
+                    application on the Universitaly portal, and a study
+                    visa request, competing for the reserved non-EU
+                    places in the chosen programme. Prepare foreign
+                    qualification documents with CIMEA comparability or a
+                    Declaration of Value, plus accepted proof of English
+                    proficiency for English-taught programmes.
+                  </p>
+                  <p className="mt-4">
+                    Admission calls, reserved-place counts, fee country
+                    groups and scholarship amounts change every academic
+                    year. Students applying from India should verify the
+                    current programme call on unimi.it, the Universitaly
+                    pre-enrolment window, and visa documentation before
+                    applying — see the{" "}
+                    <Link
+                      href="/study-in-italy"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Study in Italy guide
+                    </Link>
+                    ,{" "}
+                    <Link
+                      href="/italy-university-admission"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Italy university admission process
+                    </Link>
+                    ,{" "}
+                    <Link
+                      href="/universitaly"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Universitaly guidance
+                    </Link>
+                    ,{" "}
+                    <Link
+                      href="/italy-student-visa"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Italy student visa guidance
+                    </Link>
+                    ,{" "}
+                    <Link
+                      href="/italy-scholarships"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Italy scholarships guidance
+                    </Link>{" "}
+                    and{" "}
+                    <Link
+                      href="/english-taught-courses-in-italy"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      English-taught courses in Italy
+                    </Link>
+                    .
+                  </p>
+                </Section>
+              )}
+
+              {isUniversityOfMilan && milanFaqs.length > 0 && (
+                <Section title="Frequently asked questions about the University of Milan">
+                  <div className="space-y-3">
+                    {milanFaqs.map((faq) => (
+                      <details
+                        key={faq.question}
+                        className="rounded-xl border border-border bg-background p-5"
+                      >
+                        <summary className="cursor-pointer font-bold text-foreground">
+                          {faq.question}
+                        </summary>
+                        <p className="mt-3 whitespace-pre-line">
+                          {faq.answer}
+                        </p>
+                      </details>
+                    ))}
+                  </div>
                 </Section>
               )}
 
