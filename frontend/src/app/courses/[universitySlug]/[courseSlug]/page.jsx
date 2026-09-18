@@ -444,6 +444,32 @@ export default async function CourseDetailsPage({ params }) {
     (university?.slug || universitySlug) === "university-of-marche" &&
     (course?.slug || courseSlug) === "digital-economics-and-business";
 
+  // Programme-specific verified content (official University of Cagliari
+  // source) for one course page only. Slug-gated so no other course page
+  // is affected, and used solely for visible body content — never for
+  // title/meta/schema. Declared before quickLinks: referenced below.
+  const isCyberAiCagliari =
+    (university?.slug || universitySlug) === "university-of-cagliari" &&
+    (course?.slug || courseSlug) ===
+      "computer-engineering-cybersecurity-and-artificial-intelligence";
+
+  // Programme-specific verified content (official Sapienza source) for one
+  // course page only. Slug-gated so no other course page is affected, and
+  // used solely for visible body content — never for title/meta/schema.
+  // Declared before quickLinks: referenced below.
+  const isBioinfoSapienza =
+    (university?.slug || universitySlug) ===
+      "sapienza-university-of-rome" &&
+    (course?.slug || courseSlug) === "bioinformatics";
+
+  // Programme-specific verified content (official University of Perugia
+  // source) for one course page only. Slug-gated so no other course page
+  // is affected, and used solely for visible body content — never for
+  // title/meta/schema. Declared before quickLinks: referenced below.
+  const isEngMgmtPerugia =
+    (university?.slug || universitySlug) === "university-of-perugia" &&
+    (course?.slug || courseSlug) === "engineering-management-bsc";
+
   const requirementItems = [
     {
       label: "Academic requirement",
@@ -490,6 +516,15 @@ export default async function CourseDetailsPage({ params }) {
       ? [{ href: "#what-you-study", label: "What You'll Study" }]
       : []),
     ...(isDebMarche
+      ? [{ href: "#what-you-study", label: "What You'll Study" }]
+      : []),
+    ...(isCyberAiCagliari
+      ? [{ href: "#what-you-study", label: "What You'll Study" }]
+      : []),
+    ...(isBioinfoSapienza
+      ? [{ href: "#what-you-study", label: "What You'll Study" }]
+      : []),
+    ...(isEngMgmtPerugia
       ? [{ href: "#what-you-study", label: "What You'll Study" }]
       : []),
     ...(requirementItems.length
@@ -571,6 +606,30 @@ export default async function CourseDetailsPage({ params }) {
           },
         ]
       : []),
+    ...(isCyberAiCagliari
+      ? [
+          {
+            href: "#careers",
+            label: "Career Opportunities and Further Study",
+          },
+        ]
+      : []),
+    ...(isBioinfoSapienza
+      ? [
+          {
+            href: "#careers",
+            label: "Career Opportunities and Further Study",
+          },
+        ]
+      : []),
+    ...(isEngMgmtPerugia
+      ? [
+          {
+            href: "#careers",
+            label: "Career Opportunities and Further Study",
+          },
+        ]
+      : []),
     ...(course.scholarships
       ? [{ href: "#scholarships", label: "Scholarships" }]
       : []),
@@ -642,6 +701,30 @@ export default async function CourseDetailsPage({ params }) {
         ]
       : []),
     ...(isDebMarche
+      ? [
+          {
+            href: "#access-and-international",
+            label: "Access, Study Plan and International Opportunities",
+          },
+        ]
+      : []),
+    ...(isCyberAiCagliari
+      ? [
+          {
+            href: "#access-and-international",
+            label: "Access, Study Plan and International Opportunities",
+          },
+        ]
+      : []),
+    ...(isBioinfoSapienza
+      ? [
+          {
+            href: "#access-and-international",
+            label: "Access, Study Plan and International Opportunities",
+          },
+        ]
+      : []),
+    ...(isEngMgmtPerugia
       ? [
           {
             href: "#access-and-international",
@@ -1429,6 +1512,173 @@ export default async function CourseDetailsPage({ params }) {
             </ContentSection>
           )}
 
+          {isCyberAiCagliari && (
+            <ContentSection
+              id="what-you-study"
+              title="What You’ll Study in Computer Engineering, Cybersecurity and Artificial Intelligence"
+              icon={School}
+            >
+              <p className="leading-8 text-muted">
+                This Master&apos;s programme (LM-32) at the University of
+                Cagliari runs over 2 years and 120 ECTS in line with the
+                Bologna process, taught in English in Cagliari through the
+                Department of Electrical and Electronic Engineering (DIEE).
+                The curriculum is organised into four building blocks —
+                Computer Engineering, Systems Engineering, Cybersecurity
+                and Artificial Intelligence — with traineeship
+                opportunities in Sardinia, Italy and Europe, plus a
+                documented double-degree option and a final examination.
+              </p>
+              <ul className="mt-4 space-y-3">
+                {[
+                  "Computer Engineering block — core computer-engineering subjects",
+                  "Systems Engineering block — systems-level engineering subjects",
+                  "Cybersecurity block — security-focused subjects, within a programme listed in ENISA’s CyberHEAD higher-education database and the Cybersecurity National Lab’s Italian MSc database",
+                  "Artificial Intelligence block — AI-focused subjects, alongside DIEE research laboratories working on cybersecurity and artificial intelligence",
+                  "Traineeship opportunities in Sardinia, Italy and Europe, plus entrepreneurial projects through the University’s CREA innovation and entrepreneurship centre",
+                ].map((topic) => (
+                  <li key={topic} className="flex gap-3 leading-7 text-muted">
+                    <span className="font-bold text-success">✓</span>
+                    <span>{topic}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 text-sm leading-6 text-muted">
+                The blocks above summarise the official programme
+                presentation at a high level. Confirm the current module
+                list in the official study plan for your enrolment year.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                See how this English-taught degree fits among{" "}
+                <Link
+                  href="/english-taught-courses-in-italy"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  English-taught courses in Italy
+                </Link>{" "}
+                and explore more options on the{" "}
+                <Link
+                  href={`/universities/${university.slug}`}
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  {university.name} page
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
+          {isBioinfoSapienza && (
+            <ContentSection
+              id="what-you-study"
+              title="What You’ll Study in Bioinformatics"
+              icon={School}
+            >
+              <p className="leading-8 text-muted">
+                This Bachelor&apos;s programme (L-2, programme code 33455)
+                at Sapienza is a 3-year, English-taught, in-person
+                interfaculty degree spanning Pharmacy and Medicine,
+                Information Engineering, Computer Science and Statistics,
+                Medicine and Dentistry, and Mathematical, Physical and
+                Natural Sciences, with the Department of Molecular Medicine
+                as the reference department. It follows a single
+                curriculum combining biology, computer science,
+                mathematics and statistics.
+              </p>
+              <ul className="mt-4 space-y-3">
+                {[
+                  "Year 1 areas — principles of mathematics, organic and inorganic chemistry, computer science with Python programming, physics, biomedical statistics and cell biology",
+                  "Year 2 areas — genetics and computational genomics, algorithms, microbiology, molecular biology, biochemistry, immunology and molecular pathologies, pharmaceutical chemistry and Bioinformatics I with omics pipelines and structural bioinformatics",
+                  "Year 3 areas — Bioinformatics II with network medicine, bioethics, molecular biology and genomics, plus electives such as algorithms, biomolecular networks and AI laboratory topics",
+                  "Practical training with a traineeship, further linguistic and work-market skills, and a final thesis developed from the practical training",
+                ].map((topic) => (
+                  <li key={topic} className="flex gap-3 leading-7 text-muted">
+                    <span className="font-bold text-success">✓</span>
+                    <span>{topic}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 text-sm leading-6 text-muted">
+                The study-plan areas above summarise the official 2026
+                curriculum at a high level. Confirm the current module
+                list on the official catalogue pages for your enrolment
+                year.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                See how this English-taught degree fits among{" "}
+                <Link
+                  href="/english-taught-courses-in-italy"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  English-taught courses in Italy
+                </Link>{" "}
+                and explore more options on the{" "}
+                <Link
+                  href={`/universities/${university.slug}`}
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  {university.name} page
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
+          {isEngMgmtPerugia && (
+            <ContentSection
+              id="what-you-study"
+              title="What You’ll Study in Engineering Management"
+              icon={School}
+            >
+              <p className="leading-8 text-muted">
+                This Bachelor&apos;s programme (interclass L-8 and L-9) at
+                the University of Perugia is a 3-year degree taught in
+                English in Perugia through the Department of Engineering
+                in conventional mode — delivered mainly in person with the
+                option of attending live online if necessary. It trains a
+                management engineer for manufacturing and service
+                companies and public administration, combining industrial
+                and information engineering with economics and management.
+              </p>
+              <ul className="mt-4 space-y-3">
+                {[
+                  "Year 1 areas — Mathematics I and Geometry, Mathematics II and Statistics, Manufacturing Engineering and Technology, Fundamentals of Computer Science and Physics",
+                  "Year 2 areas — Systems Engineering, Engineering Economy, Strategic Business Management, Mathematical Methods, Energy Management, Facility Planning and Design, Control Systems and System Mechanics",
+                  "Year 3 areas — Product Design, Industrial Automation with Production Systems and Computer Integrated Manufacturing, Production Planning, Quality Management and Organisational and Work Sociology, plus a guided choice between data analysis and industrial economics",
+                  "Applied finish — free-choice modules, a curricular internship and a supervised final project (project work) summarising the knowledge acquired during the degree",
+                ].map((topic) => (
+                  <li key={topic} className="flex gap-3 leading-7 text-muted">
+                    <span className="font-bold text-success">✓</span>
+                    <span>{topic}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 text-sm leading-6 text-muted">
+                The study-plan areas above summarise the official teaching
+                regulations at a high level. Confirm the current module
+                list on the official department pages for your enrolment
+                year.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                See how this English-taught degree fits among{" "}
+                <Link
+                  href="/english-taught-courses-in-italy"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  English-taught courses in Italy
+                </Link>{" "}
+                and explore more options on the{" "}
+                <Link
+                  href={`/universities/${university.slug}`}
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  {university.name} page
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
           {requirementItems.length > 0 && (
             <ContentSection id="requirements" title={requirementsTitle} icon={CheckCircle2}>
               <div className="grid gap-4 sm:grid-cols-2">
@@ -1905,6 +2155,165 @@ export default async function CourseDetailsPage({ params }) {
                 </p>
               )}
 
+              {isCyberAiCagliari && (
+                <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      Access procedure
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      Free (open) access with curricular requirements and
+                      verification of personal preparation
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      Curricular requirement
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      At least 12 ECTS in mathematics and physics, plus at
+                      least 36 ECTS in computer science, computer
+                      engineering and ICT — including at least 18 ECTS in
+                      computer science and computer engineering
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      English prerequisite
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      B2-level English certification, waived where the
+                      prior degree was mainly delivered in English
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      Preparation check
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      Committee assessment on mathematics, physics and
+                      computer science topics, with an interview where the
+                      file alone is not conclusive
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {isCyberAiCagliari && (
+                <p className="mt-4 text-sm leading-6 text-muted">
+                  Foreign applicants go through an online pre-evaluation
+                  with a dedicated foreign-student quota noted on the
+                  official prospective-student page. Access follows the
+                  annual official Cagliari call — verify the current call
+                  before applying.
+                </p>
+              )}
+
+              {isBioinfoSapienza && (
+                <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      Access procedure
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      Restricted access with admission test (programme code
+                      33455, test code 12952)
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      Current admission route
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      CEnT-S examination with a total score over 18 under
+                      the 2026-2027 call
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      English prerequisite
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      B2-level English, as the CEnT-S route is conducted
+                      in English
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      International route
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      MoveIn pre-selection for non-EU applicants residing
+                      abroad, with a dedicated non-EU quota selection
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {isBioinfoSapienza && (
+                <p className="mt-4 text-sm leading-6 text-muted">
+                  The English TOLC-F route belonged to the previous
+                  admission year; the current 2026-2027 call uses CEnT-S.
+                  Access follows the annual official Sapienza call —
+                  verify the current call before applying.
+                </p>
+              )}
+
+              {isEngMgmtPerugia && (
+                <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      Access procedure
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      Free access with a sustainable capacity of 180
+                      students, including a 60-place visa-applicant quota
+                      under the 2026-2027 regulations
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      English prerequisite
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      B2-level English or equivalent — obtainable by the
+                      end of the first year, but required at visa
+                      application for visa applicants
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      Admission test routes
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      TOLC-I, CEnT-S, SAT or ACT under the current
+                      department rules — for example TOLC-I 14/50 with at
+                      least 7/20 in mathematics
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      Knowledge check
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      Mandatory mathematics, logic and verbal-comprehension
+                      check — below the threshold assigns an additional
+                      learning requirement (OFA) without blocking
+                      enrolment, except for visa applicants
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {isEngMgmtPerugia && (
+                <p className="mt-4 text-sm leading-6 text-muted">
+                  Missing the test entirely blocks registration for the
+                  first mathematics-area exam until it is taken. Access
+                  follows the annual official Perugia regulations —
+                  verify the current call before applying.
+                </p>
+              )}
+
               {admissionRequirements.notes && (
                 <details className="group mt-5 rounded-2xl border border-secondary/20 bg-secondary-light p-4 open:shadow-sm">
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-3 font-semibold text-foreground">
@@ -2223,6 +2632,104 @@ export default async function CourseDetailsPage({ params }) {
                 bodies and financial institutions, or continue to a
                 Master&apos;s degree consistent with the programme. For
                 broader planning, see our{" "}
+                <Link
+                  href="/study-in-italy"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Study in Italy guide
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
+          {isCyberAiCagliari && (
+            <ContentSection
+              id="careers"
+              title="Career Opportunities and Further Study"
+              icon={GraduationCap}
+            >
+              <p className="leading-8 text-muted">
+                According to the University of Cagliari&apos;s official
+                programme pages, this LM-32 Master&apos;s prepares
+                computer engineers for roles spanning cybersecurity and
+                artificial intelligence — within a programme listed in
+                ENISA&apos;s CyberHEAD higher-education database and the
+                Cybersecurity National Lab&apos;s Italian MSc database,
+                and connected to DIEE research laboratories in these
+                fields.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                Documented pathways include traineeships in Sardinia,
+                Italy and Europe, entrepreneurial projects through the
+                CREA centre, and a double-degree option. For broader
+                planning, see our{" "}
+                <Link
+                  href="/study-in-italy"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Study in Italy guide
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
+          {isBioinfoSapienza && (
+            <ContentSection
+              id="careers"
+              title="Career Opportunities and Further Study"
+              icon={GraduationCap}
+            >
+              <p className="leading-8 text-muted">
+                According to Sapienza&apos;s official catalogue, documented
+                profiles include Bioinformatician, Biological Data
+                analyst and modeller, Biological Data manager, Biological
+                Data Integration Professional and Tools Developer for
+                biological data — working with biomedical research
+                bodies, hospitals and healthcare structures, and the
+                biomedical, pharmaceutical, biotechnology and medical IT
+                industries.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                Graduates can also continue to Master&apos;s degrees in
+                areas such as biochemistry, molecular biology, genomic
+                biotechnology and data science. For broader planning, see
+                our{" "}
+                <Link
+                  href="/study-in-italy"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Study in Italy guide
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
+          {isEngMgmtPerugia && (
+            <ContentSection
+              id="careers"
+              title="Career Opportunities and Further Study"
+              icon={GraduationCap}
+            >
+              <p className="leading-8 text-muted">
+                According to the University of Perugia&apos;s official
+                department pages, the degree trains a management
+                engineer for manufacturing and service companies and
+                public administration — working with information and
+                communication systems, economics and business
+                organisation, decision modelling, marketing, production
+                processes and logistics, and safety and quality
+                management.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                Documented pathways include a curricular internship
+                through department company agreements, continuation to
+                the Engineering Management Master&apos;s degree, the
+                state examination for the engineering profession, and
+                Erasmus+ study and traineeship mobility. For broader
+                planning, see our{" "}
                 <Link
                   href="/study-in-italy"
                   className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
@@ -2758,6 +3265,165 @@ export default async function CourseDetailsPage({ params }) {
               <p className="mt-4 leading-8 text-muted">
                 Students applying from India should verify the current
                 Marche programme call, pre-evaluation steps,
+                English-language documentation and visa-related steps
+                before applying. See the{" "}
+                <Link
+                  href="/italy-university-admission"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Italy university admission process
+                </Link>
+                ,{" "}
+                <Link
+                  href="/universitaly"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Universitaly guidance
+                </Link>{" "}
+                and{" "}
+                <Link
+                  href="/italy-student-visa"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Italy student visa guidance
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
+          {isCyberAiCagliari && (
+            <ContentSection
+              id="access-and-international"
+              title="Access, Study Plan and International Opportunities"
+              icon={Languages}
+            >
+              <p className="leading-8 text-muted">
+                This is a free-access Master&apos;s programme (LM-32)
+                running over 2 years and 120 ECTS in English in Cagliari,
+                subject to the mathematics, physics and ICT curricular
+                requirements and B2 English above, plus a committee check
+                of personal preparation. Enrolment for the preparation
+                check runs through the Esse3 online services within the
+                General Manifesto deadlines, and upcoming graduates may
+                apply conditionally under the student-career rules.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                The programme documents traineeship mobility in Sardinia,
+                Italy and Europe alongside a double-degree option —
+                confirm current options on the official pages before
+                planning around them.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                Students applying from India should verify the current
+                Cagliari programme call, curricular eligibility,
+                English-language documentation and visa-related steps
+                before applying. See the{" "}
+                <Link
+                  href="/italy-university-admission"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Italy university admission process
+                </Link>
+                ,{" "}
+                <Link
+                  href="/universitaly"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Universitaly guidance
+                </Link>{" "}
+                and{" "}
+                <Link
+                  href="/italy-student-visa"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Italy student visa guidance
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
+          {isBioinfoSapienza && (
+            <ContentSection
+              id="access-and-international"
+              title="Access, Study Plan and International Opportunities"
+              icon={Languages}
+            >
+              <p className="leading-8 text-muted">
+                This is a restricted-access Bachelor&apos;s programme
+                (L-2, programme code 33455) with selection through the
+                CEnT-S examination (test code 12952) under the current
+                2026-2027 call, registered via Infostud. Teaching follows
+                conventional in-person delivery in English, and
+                international applicants follow Sapienza&apos;s
+                pre-selection process with foreign-qualification
+                documentation.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                The catalogue documents international experiences and
+                study-abroad options through Sapienza&apos;s
+                International Office — confirm current options in the
+                official call before planning around them.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                Students applying from India should verify the current
+                Sapienza programme call, academic eligibility and
+                English-language documentation requirements before
+                applying. See the{" "}
+                <Link
+                  href="/italy-university-admission"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Italy university admission process
+                </Link>
+                ,{" "}
+                <Link
+                  href="/universitaly"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Universitaly guidance
+                </Link>{" "}
+                and{" "}
+                <Link
+                  href="/italy-student-visa"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Italy student visa guidance
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
+          {isEngMgmtPerugia && (
+            <ContentSection
+              id="access-and-international"
+              title="Access, Study Plan and International Opportunities"
+              icon={Languages}
+            >
+              <p className="leading-8 text-muted">
+                This is a free-access Bachelor&apos;s programme
+                (interclass L-8 and L-9) taught in English in Perugia
+                over 3 years, within a 180-student sustainable capacity
+                that includes a 60-place visa-applicant quota under the
+                2026-2027 regulations. Admission combines the B2 English
+                rule with a mandatory TOLC-I, CEnT-S, SAT or ACT check
+                that is non-blocking except for visa applicants, and
+                teaching runs mainly in person with live-online
+                attendance possible where needed.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                The programme documents Erasmus+ study and traineeship
+                mobility, a curricular internship through extensive
+                company agreements, and continuation to the Engineering
+                Management Master&apos;s — confirm current options in
+                the official pages before planning around them.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                Students applying from India should verify the current
+                Perugia regulations, the dedicated 2026/2027
+                pre-enrolment procedure for visa applicants,
                 English-language documentation and visa-related steps
                 before applying. See the{" "}
                 <Link
