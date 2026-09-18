@@ -12,6 +12,28 @@ import WhyStudyItalySection from "@/components/home/WhyStudyItalySection";
 
 const SITE_URL = "https://www.europeandreamss.com";
 
+// Homepage stats are fetched server-side so the real values are present in
+// the initial HTML. Falls back to null (component-level fallbacks apply)
+// when the API is unreachable; never throws.
+async function getHomepageStats() {
+  const API_URL = (
+    process.env.NEXT_PUBLIC_API_URL || "https://api.europeandreamss.com"
+  ).replace(/\/+$/, "");
+
+  try {
+    const res = await fetch(`${API_URL}/api/settings`, {
+      signal: AbortSignal.timeout(5000),
+      next: { revalidate: 300 },
+    });
+    if (!res.ok) return null;
+    const json = await res.json();
+    return json?.data?.settings?.websiteStats ?? null;
+  } catch (error) {
+    console.warn("Unable to load homepage stats:", error?.message || error);
+    return null;
+  }
+}
+
 export const metadata = {
   title: "Study in Europe & Italy for Indian Students",
   description:
@@ -45,11 +67,13 @@ export const metadata = {
   },
 };
 
-export default function HomePage() {
+export default async function HomePage() {
+  const initialStats = await getHomepageStats();
+
   return (
     <main className="min-h-screen bg-background">
       <Hero />
-      <StatsSection />
+      <StatsSection initialStats={initialStats} />
       <AboutSection />
       <WhyStudyItalySection />
       <UniversitiesSection />
