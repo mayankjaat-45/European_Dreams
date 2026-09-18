@@ -12,11 +12,21 @@ const fallbackStats = {
 };
 
 function AnimatedNumber({ value, suffix = "" }) {
-  const [displayValue, setDisplayValue] = useState(0);
+  // Initialized from the target value so the server-rendered HTML already
+  // contains the real stat. The count-up animation resets to 0 and runs in
+  // the IntersectionObserver effect after hydration.
+  const [displayValue, setDisplayValue] = useState(() => Number(value || 0));
   const numberRef = useRef(null);
   const hasAnimated = useRef(false);
 
   useEffect(() => {
+    // Keep the displayed number in sync if the value updates after the
+    // animation has already completed (e.g. client-side settings refresh).
+    if (hasAnimated.current) {
+      setDisplayValue(Number(value || 0));
+      return;
+    }
+
     const element = numberRef.current;
 
     if (!element) return;
@@ -30,6 +40,8 @@ function AnimatedNumber({ value, suffix = "" }) {
         const targetValue = Number(value || 0);
         const duration = 1400;
         const startTime = performance.now();
+
+        setDisplayValue(0);
 
         const updateNumber = (currentTime) => {
           const elapsed = currentTime - startTime;
@@ -68,8 +80,14 @@ function AnimatedNumber({ value, suffix = "" }) {
   );
 }
 
-export default function StatsSection() {
-  const [websiteStats, setWebsiteStats] = useState(fallbackStats);
+export default function StatsSection({ initialStats = null }) {
+  // Seeded server-side (see HomePage) so the first render — including SSR —
+  // already carries the real values. The client-side refresh below only
+  // merges newer API data over the same shape.
+  const [websiteStats, setWebsiteStats] = useState(() => ({
+    ...fallbackStats,
+    ...(initialStats ?? {}),
+  }));
 
   useEffect(() => {
     let isMounted = true;
