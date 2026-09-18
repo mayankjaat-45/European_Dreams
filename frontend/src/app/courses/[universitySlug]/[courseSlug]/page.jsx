@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { cache } from "react";
 
 import {
   ArrowLeft,
@@ -21,6 +22,8 @@ import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import JsonLd from "@/components/seo/JsonLd";
 import { getCourseBySlug } from "@/services/courses.service";
 
+const getCachedCourse = cache(getCourseBySlug);
+
 const formatLabel = (value = "") =>
   String(value)
     .replaceAll("-", " ")
@@ -30,7 +33,7 @@ const SITE_URL = "https://www.europeandreamss.com";
 
 const getCourseData = async (universitySlug, courseSlug) => {
   try {
-    return await getCourseBySlug(universitySlug, courseSlug);
+    return await getCachedCourse(universitySlug, courseSlug);
   } catch (error) {
     if (
       error.message === "Course not found" ||

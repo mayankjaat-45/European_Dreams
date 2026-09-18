@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { cache } from "react";
 
 import {
   ArrowLeft,
@@ -14,6 +15,8 @@ import {
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import JsonLd from "@/components/seo/JsonLd";
 import { getBlogBySlug, getRelatedBlogs } from "@/services/blogs.service";
+
+const getCachedBlog = cache(getBlogBySlug);
 
 
 function formatDate(date) {
@@ -30,7 +33,7 @@ const SITE_URL = "https://www.europeandreamss.com";
 
 const getBlogData = async (slug) => {
   try {
-    return await getBlogBySlug(slug);
+    return await getCachedBlog(slug);
   } catch (error) {
     if (
       error?.response?.status === 404 ||
