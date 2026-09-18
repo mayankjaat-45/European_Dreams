@@ -375,6 +375,16 @@ export default async function CourseDetailsPage({ params }) {
     university?.slug === "university-of-trento" &&
     course?.slug === "human-computer-interaction-hci";
 
+  // Programme-specific verified content (official Ca' Foscari source) for
+  // one course page only. Slugs verified against the live API
+  // (ca-foscari-university-of-venice / global-accounting-and-finance).
+  // Slug-gated so no other course page is affected, and used solely for
+  // visible body content — never for title/meta/schema. Declared before
+  // quickLinks: referenced below.
+  const isGlobalAccountingFinanceCaFoscari =
+    university?.slug === "ca-foscari-university-of-venice" &&
+    course?.slug === "global-accounting-and-finance";
+
   const requirementItems = [
     {
       label: "Academic requirement",
@@ -402,6 +412,9 @@ export default async function CourseDetailsPage({ params }) {
     ...(isHumanComputerInteractionTrento
       ? [{ href: "#what-you-study", label: "What You'll Study" }]
       : []),
+    ...(isGlobalAccountingFinanceCaFoscari
+      ? [{ href: "#what-you-study", label: "What You'll Study" }]
+      : []),
     ...(requirementItems.length
       ? [{ href: "#requirements", label: "Requirements" }]
       : []),
@@ -425,6 +438,14 @@ export default async function CourseDetailsPage({ params }) {
           },
         ]
       : []),
+    ...(isGlobalAccountingFinanceCaFoscari
+      ? [
+          {
+            href: "#careers",
+            label: "Career Opportunities and Further Study",
+          },
+        ]
+      : []),
     ...(course.scholarships
       ? [{ href: "#scholarships", label: "Scholarships" }]
       : []),
@@ -440,6 +461,14 @@ export default async function CourseDetailsPage({ params }) {
         ]
       : []),
     ...(isHumanComputerInteractionTrento
+      ? [
+          {
+            href: "#access-and-international",
+            label: "Access, Study Plan and International Opportunities",
+          },
+        ]
+      : []),
+    ...(isGlobalAccountingFinanceCaFoscari
       ? [
           {
             href: "#access-and-international",
@@ -848,6 +877,52 @@ export default async function CourseDetailsPage({ params }) {
             </ContentSection>
           )}
 
+          {isGlobalAccountingFinanceCaFoscari && (
+            <ContentSection
+              id="what-you-study"
+              title="What You’ll Study in Global Accounting and Finance"
+              icon={School}
+            >
+              <p className="leading-8 text-muted">
+                This English-taught Master&apos;s programme (LM-77 R) at
+                the Venice School of Management runs over 2 years and 120
+                ECTS in Venice. Its accounting and finance curriculum is
+                documented through Ca&apos; Foscari&apos;s official study
+                plan and teaching pages.
+              </p>
+              <ul className="mt-4 space-y-3">
+                {[
+                  "Accounting and finance curriculum areas for global business contexts",
+                  "Business Economics within a 20-credit Business block",
+                  "Economics, Law, and Mathematics and Statistics foundations",
+                  "Official study plan and teaching documentation published by Ca’ Foscari",
+                ].map((topic) => (
+                  <li key={topic} className="flex gap-3 leading-7 text-muted">
+                    <span className="font-bold text-success">✓</span>
+                    <span>{topic}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 leading-8 text-muted">
+                See how this English-taught degree fits among{" "}
+                <Link
+                  href="/english-taught-courses-in-italy"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  English-taught courses in Italy
+                </Link>{" "}
+                and explore more options on the{" "}
+                <Link
+                  href={`/universities/${university.slug}`}
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  {university.name} page
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
           {requirementItems.length > 0 && (
             <ContentSection id="requirements" title={requirementsTitle} icon={CheckCircle2}>
               <div className="grid gap-4 sm:grid-cols-2">
@@ -972,6 +1047,55 @@ export default async function CourseDetailsPage({ params }) {
                 </p>
               )}
 
+              {isGlobalAccountingFinanceCaFoscari && (
+                <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      Access procedure
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      Limited access with online written entry test and
+                      ranking-based selection
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      Curricular requirement
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      60 out of 180 ECTS — 20 in Business including Business
+                      Economics, plus 40 across Economics, Law and
+                      Mathematics-Statistics
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      Academic threshold
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      Minimum 70% CGPA with transcript, CV and motivation
+                      letter evaluation
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      English prerequisite
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      B2 level with accepted certification or exemption
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {isGlobalAccountingFinanceCaFoscari && (
+                <p className="mt-4 text-sm leading-6 text-muted">
+                  Admission calls, deadlines, fees and application
+                  procedures can change. Students should verify the current
+                  Ca&apos; Foscari programme call before applying.
+                </p>
+              )}
+
               {admissionRequirements.notes && (
                 <details className="group mt-5 rounded-2xl border border-secondary/20 bg-secondary-light p-4 open:shadow-sm">
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-3 font-semibold text-foreground">
@@ -1069,6 +1193,32 @@ export default async function CourseDetailsPage({ params }) {
               <p className="mt-4 leading-8 text-muted">
                 The programme documents a pathway toward PhD study in
                 Human-Computer Interaction after the Master&apos;s degree.
+                For broader planning, see our{" "}
+                <Link
+                  href="/study-in-italy"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Study in Italy guide
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
+          {isGlobalAccountingFinanceCaFoscari && (
+            <ContentSection
+              id="careers"
+              title="Career Opportunities and Further Study"
+              icon={GraduationCap}
+            >
+              <p className="leading-8 text-muted">
+                According to Ca&apos; Foscari&apos;s official programme
+                description, this Master&apos;s provides professional
+                preparation in accounting and finance for global business
+                contexts, assessed through transcript, CV and motivation
+                letter review alongside the entry test.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
                 For broader planning, see our{" "}
                 <Link
                   href="/study-in-italy"
@@ -1223,6 +1373,61 @@ export default async function CourseDetailsPage({ params }) {
                 Trento programme call, academic-background fit and
                 English-language documentation requirements before applying.
                 See the{" "}
+                <Link
+                  href="/italy-university-admission"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Italy university admission process
+                </Link>
+                ,{" "}
+                <Link
+                  href="/universitaly"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Universitaly guidance
+                </Link>{" "}
+                and{" "}
+                <Link
+                  href="/italy-student-visa"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Italy student visa guidance
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
+          {isGlobalAccountingFinanceCaFoscari && (
+            <ContentSection
+              id="access-and-international"
+              title="Access, Study Plan and International Opportunities"
+              icon={Languages}
+            >
+              <p className="leading-8 text-muted">
+                This is a limited-access Master&apos;s programme (LM-77 R)
+                at the Venice School of Management, running over 2 years
+                and 120 ECTS in English at Venice. Admission runs through
+                an online written entry test with ranking-based selection
+                across two selection rounds. Eligible candidates hold a
+                Bachelor&apos;s degree or equivalent and meet a 60-out-of-180
+                ECTS curricular bar — 20 credits in Business including
+                Business Economics, plus 40 credits across Economics, Law
+                and Mathematics-Statistics — alongside a minimum 70% CGPA,
+                with transcript, CV and motivation letter reviewed by the
+                Teaching Committee. B2-level English is mandatory for
+                enrolment through accepted certifications or exemptions.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                The programme documents double-degree options and
+                international mobility opportunities — confirm current
+                options in the official call before planning around them.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                Students applying from India should verify the current
+                Ca&apos; Foscari programme call, curricular eligibility,
+                English-language documentation and application requirements
+                before applying. See the{" "}
                 <Link
                   href="/italy-university-admission"
                   className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
