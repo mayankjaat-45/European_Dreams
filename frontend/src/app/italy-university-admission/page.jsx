@@ -166,6 +166,19 @@ const faqs = [
   },
 ];
 
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer,
+    },
+  })),
+};
+
 function SectionHeading({ eyebrow, title, intro }) {
   return (
     <div className="mx-auto max-w-3xl text-center">
@@ -217,6 +230,7 @@ export default function ItalyUniversityAdmissionPage() {
     <>
       <JsonLd data={breadcrumbSchema} />
       <JsonLd data={webPageSchema} />
+      <JsonLd data={faqSchema} />
       <main className="min-h-screen bg-[var(--background)]">
         {/* Hero */}
         <section className="relative overflow-hidden border-b border-[var(--border)] bg-[var(--hero-gradient)]">
