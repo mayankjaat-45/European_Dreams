@@ -233,11 +233,20 @@ export default async function UniversityDetailsPage({ params }) {
   const isUniversityOfMilan =
     (university.slug || slug) === "university-of-milan";
 
-  // The data object supports establishedYear (Number) but the Milan record
-  // has none; fall back to the officially documented 1924 founding year for
-  // this page only. Ranking/tuitionFeeRange are intentionally left untouched.
-  const milanEstablishedYear =
-    university.establishedYear || (isUniversityOfMilan ? 1924 : null);
+  // Sapienza-only gate. The verified slug is "sapienza-university-of-rome"
+  // (live route + API record); every Sapienza section below uses this flag
+  // so no other university page is affected.
+  const isSapienza =
+    (university.slug || slug) === "sapienza-university-of-rome";
+
+  // The data object supports establishedYear (Number) but the Milan and
+  // Sapienza records have none; fall back to the officially documented
+  // founding years for these pages only. Ranking/tuitionFeeRange are
+  // intentionally left untouched.
+  const displayEstablishedYear =
+    university.establishedYear ||
+    (isUniversityOfMilan ? 1924 : null) ||
+    (isSapienza ? 1303 : null);
 
   // Visible Milan FAQs. Each answer repeats only content already present in
   // the gated sections above — no invented claims.
@@ -270,6 +279,40 @@ export default async function UniversityDetailsPage({ params }) {
           question: "Where is the University of Milan located?",
           answer:
             "The university is in Milan, Lombardy, with its historic seat at Via Festa del Perdono 7 and scientific faculties in the Città Studi district. Teaching is organised by 31 departments across 8 Faculties and 2 Schools.",
+        },
+      ]
+    : [];
+
+  // Visible Sapienza FAQs. Each answer repeats only content already present
+  // in the gated sections below — no invented claims.
+  const sapienzaFaqs = isSapienza
+    ? [
+        {
+          question: "Is Sapienza University of Rome a public university?",
+          answer:
+            "Yes. Sapienza University of Rome, also known as La Sapienza, is a public university in Rome, Italy, founded in 1303 by Pope Boniface VIII as the Studium Urbis.",
+        },
+        {
+          question: "When was Sapienza University of Rome founded?",
+          answer:
+            "Sapienza was founded in 1303, making it the oldest university in Rome and one of the oldest universities in the world. Its main campus is the Città Universitaria in Rome, with additional locations in Latina and Rieti.",
+        },
+        {
+          question: "How do non-EU students apply to Sapienza?",
+          answer:
+            "International applicants first complete a pre-selection application on the MoveIn platform where available, then follow the programme call on Infostud. Non-EU students residing abroad must additionally submit a pre-enrolment application on the Universitaly portal and use it to request a study visa, competing for reserved quota places where applicable.",
+        },
+        {
+          question:
+            "Does Sapienza offer English-taught programmes?",
+          answer:
+            "Yes. Sapienza states that over 70 of its 311 degree programmes are taught in English. This page lists the English-taught courses currently in our database below.",
+        },
+        {
+          question:
+            "What should international students do after arriving in Italy?",
+          answer:
+            "Plan for the essentials: get an Italian tax code, complete enrolment on Infostud, and — for non-EU stays over three months — apply for a residence permit within eight days of entering Italy. The Hello/Ciao offices and the International Student Office support newcomers, including with Italian language learning.",
         },
       ]
     : [];
@@ -328,8 +371,8 @@ export default async function UniversityDetailsPage({ params }) {
       schema.address = address;
     }
 
-    if (milanEstablishedYear) {
-      schema.foundingDate = String(milanEstablishedYear);
+    if (displayEstablishedYear) {
+      schema.foundingDate = String(displayEstablishedYear);
     }
 
     const websiteUrl = (
@@ -445,7 +488,7 @@ export default async function UniversityDetailsPage({ params }) {
           <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <Fact label="Location" value={location} />
             <Fact label="University type" value={university.universityType} />
-            <Fact label="Established" value={milanEstablishedYear} />
+            <Fact label="Established" value={displayEstablishedYear} />
             <Fact label="World ranking" value={university.ranking} />
             <Fact label="Tuition fees" value={university.tuitionFeeRange} />
             <Fact
@@ -598,6 +641,115 @@ export default async function UniversityDetailsPage({ params }) {
                 </Section>
               )}
 
+              {isSapienza && (
+                <Section title="About Sapienza University of Rome (La Sapienza)">
+                  <p>
+                    Sapienza University of Rome, also known as La
+                    Sapienza, is a public university in Rome, Italy,
+                    founded in 1303 by Pope Boniface VIII as the Studium
+                    Urbis. It is the oldest university in Rome and one
+                    of the oldest universities in the world, with a
+                    history closely tied to the city across more than
+                    seven centuries.
+                  </p>
+                  <p className="mt-4">
+                    The main campus is the Città Universitaria in the
+                    heart of Rome, a short distance from Termini central
+                    station, with additional locations including Latina
+                    and Rieti. For authoritative history and
+                    institutional detail, see the{" "}
+                    <a
+                      href="https://www.uniroma1.it/en/pagina/our-history"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      university&apos;s official history page
+                    </a>{" "}
+                    and the{" "}
+                    <a
+                      href="https://www.uniroma1.it/en/pagina/about-us"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      official about page
+                    </a>
+                    .
+                  </p>
+                </Section>
+              )}
+
+              {isSapienza && (
+                <Section title="Faculties, Schools and Departments">
+                  <p>
+                    Sapienza is organised into 11 faculties alongside a
+                    School for Advanced Studies and 58 departments, as
+                    established by the university statute. Teaching and
+                    research activities are organised by the departments
+                    and coordinated by the faculties across every major
+                    academic area.
+                  </p>
+                  <p className="mt-4">
+                    The current faculty and department organisation is
+                    published on the{" "}
+                    <a
+                      href="https://www.uniroma1.it/en/pagina/faculties"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      official faculties page
+                    </a>{" "}
+                    and the{" "}
+                    <a
+                      href="https://www.uniroma1.it/en/pagina/structures"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      official structures page
+                    </a>
+                    .
+                  </p>
+                </Section>
+              )}
+
+              {isSapienza && (
+                <Section title="English-taught programmes at Sapienza">
+                  <p>
+                    Sapienza states that over 70 of its 311 degree
+                    programmes are taught in English, spanning
+                    Bachelor&apos;s and Master&apos;s level. This page
+                    lists {totals.courses ?? courses.length}{" "}
+                    English-taught courses currently in our database —
+                    spanning bachelor&apos;s degrees, master&apos;s
+                    degrees across engineering, science, economics,
+                    humanities and social sciences, and single-cycle
+                    master&apos;s paths.
+                  </p>
+                  <p className="mt-4">
+                    Browse the course cards below, or compare with other{" "}
+                    <Link
+                      href="/english-taught-courses-in-italy"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      English-taught courses in Italy
+                    </Link>
+                    . The full official offer is described on the{" "}
+                    <a
+                      href="https://www.uniroma1.it/en/admissions"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      university&apos;s international admissions page
+                    </a>
+                    .
+                  </p>
+                </Section>
+              )}
+
               <section
                 id="courses"
                 className="scroll-mt-24 rounded-[1.75rem] border border-border bg-card p-6 shadow-sm sm:p-8"
@@ -708,6 +860,264 @@ export default async function UniversityDetailsPage({ params }) {
                       Full Italy university admission guide →
                     </Link>
                   </p>
+                </Section>
+              )}
+
+              {isSapienza && (
+                <Section title="How to apply to Sapienza">
+                  <h3 className="font-bold text-foreground">
+                    Sapienza pre-selection and MoveIn
+                  </h3>
+                  <p className="mt-2">
+                    International applicants first complete a
+                    pre-selection application on the MoveIn platform
+                    where available for their programme, so Sapienza can
+                    assess eligibility before the official call is
+                    published. Where pre-selection applies, each student
+                    can apply for a maximum of two programmes per
+                    academic year. Always check the programme&apos;s
+                    admission requirements and accepted qualifications
+                    before applying.
+                  </p>
+                  <h3 className="mt-5 font-bold text-foreground">
+                    Infostud and programme calls
+                  </h3>
+                  <p className="mt-2">
+                    Enrolment itself runs through Infostud,
+                    Sapienza&apos;s student services portal, following
+                    the instructions in the programme&apos;s official
+                    call for applications in the course catalogue. Calls
+                    are published during the admission cycle, so the
+                    current call is the only authoritative source for
+                    steps and dates.
+                  </p>
+                  <h3 className="mt-5 font-bold text-foreground">
+                    EU versus non-EU applicants
+                  </h3>
+                  <p className="mt-2">
+                    Admission procedures vary by citizenship and
+                    residency: EU citizens and non-EU citizens legally
+                    residing in Italy follow one track, while non-EU
+                    students residing abroad follow another. Non-EU
+                    students residing abroad must complete mandatory
+                    pre-enrolment on the Universitaly portal and use it
+                    to request a study visa, competing for reserved
+                    quota places where the programme sets them. Our{" "}
+                    <Link
+                      href="/italy-university-admission"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Italy university admission guide
+                    </Link>
+                    ,{" "}
+                    <Link
+                      href="/universitaly"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Universitaly guidance
+                    </Link>{" "}
+                    and{" "}
+                    <Link
+                      href="/italy-student-visa"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Italy student visa guidance
+                    </Link>{" "}
+                    explain the surrounding steps.
+                  </p>
+                  <h3 className="mt-5 font-bold text-foreground">
+                    Documents and language at a glance
+                  </h3>
+                  <p className="mt-2">
+                    Expect to provide a passport, diplomas, transcripts
+                    and a language certificate, plus recognised proof of
+                    foreign qualifications such as CIMEA comparability
+                    or a Declaration of Value where relevant. Non-EU
+                    applicants to Italian-taught programmes generally
+                    face a B2-level Italian language test, while
+                    applicants to programmes taught entirely in English
+                    are exempt from the Italian test. Requirements,
+                    quotas and deadlines change every year, so always
+                    verify the current programme call and the{" "}
+                    <a
+                      href="https://www.uniroma1.it/en/pagina/international-student-office"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      International Student Office page
+                    </a>{" "}
+                    before applying.
+                  </p>
+                </Section>
+              )}
+
+              {isSapienza && (
+                <Section title="Tuition fees and scholarships">
+                  <p>
+                    Sapienza tuition is paid in three instalments —
+                    roughly a 30/35/35 split — with the amount based on
+                    ISEE for the right to university study for students
+                    assessed in Italy. Enrolment also includes the
+                    regional tax and stamp duty, and Sapienza provides
+                    exemptions and benefits for eligible groups, such as
+                    full exemption at lower ISEE levels and reductions
+                    above them.
+                  </p>
+                  <p className="mt-4">
+                    International students can access regional Disco —
+                    LazioDiSCo scholarships for university degree
+                    programmes alongside other Sapienza benefits, as
+                    well as MAECI government scholarship opportunities
+                    where eligible. Amounts, thresholds and calls change
+                    every academic year, so always verify the current
+                    regulation. See our{" "}
+                    <Link
+                      href="/italy-scholarships"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Italy scholarships guidance
+                    </Link>
+                    , the university&apos;s{" "}
+                    <a
+                      href="https://www.uniroma1.it/en/node/24520"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      official tuition fees and benefits page
+                    </a>{" "}
+                    and the{" "}
+                    <a
+                      href="https://www.uniroma1.it/en/pagina/exemptions-and-benefits"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      official exemptions and benefits page
+                    </a>
+                    .
+                  </p>
+                </Section>
+              )}
+
+              {isSapienza && (
+                <Section title="International student essentials">
+                  <p>
+                    Sapienza supports newcomers through the Hello and
+                    Ciao orientation offices and the International
+                    Student Office. Plan for three practical essentials:
+                    obtain an Italian tax code, complete enrolment steps
+                    on Infostud, and — for non-EU stays over three
+                    months — apply for a residence permit within eight
+                    days of entering Italy.
+                  </p>
+                  <p className="mt-4">
+                    The university also supports Italian language
+                    learning for international students. Our{" "}
+                    <Link
+                      href="/study-in-italy"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Study in Italy guide
+                    </Link>{" "}
+                    and{" "}
+                    <Link
+                      href="/italy-student-visa"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Italy student visa guidance
+                    </Link>{" "}
+                    cover these steps in more depth.
+                  </p>
+                </Section>
+              )}
+
+              {isSapienza && (
+                <Section title="Applying to Sapienza from India">
+                  <p>
+                    Applicants applying from India follow the non-EU
+                    resident-abroad pathway: a pre-selection application
+                    on MoveIn where available for the programme,
+                    enrolment steps on Infostud under the current
+                    programme call, a pre-enrolment application on the
+                    Universitaly portal, and a study visa request,
+                    competing for reserved quota places where
+                    applicable. Prepare foreign qualification documents
+                    with CIMEA comparability or a Declaration of Value
+                    where relevant, plus accepted proof of English
+                    proficiency for English-taught programmes.
+                  </p>
+                  <p className="mt-4">
+                    Admission calls, quotas, fee rules and scholarship
+                    calls change every academic year. Students applying
+                    from India should verify the current programme call
+                    on uniroma1.it, the Universitaly pre-enrolment
+                    window, and visa documentation before applying — see
+                    the{" "}
+                    <Link
+                      href="/study-in-italy"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Study in Italy guide
+                    </Link>
+                    ,{" "}
+                    <Link
+                      href="/italy-university-admission"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Italy university admission process
+                    </Link>
+                    ,{" "}
+                    <Link
+                      href="/universitaly"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Universitaly guidance
+                    </Link>
+                    ,{" "}
+                    <Link
+                      href="/italy-student-visa"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Italy student visa guidance
+                    </Link>
+                    ,{" "}
+                    <Link
+                      href="/italy-scholarships"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Italy scholarships guidance
+                    </Link>{" "}
+                    and{" "}
+                    <Link
+                      href="/english-taught-courses-in-italy"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      English-taught courses in Italy
+                    </Link>
+                    .
+                  </p>
+                </Section>
+              )}
+
+              {isSapienza && sapienzaFaqs.length > 0 && (
+                <Section title="Frequently asked questions about Sapienza">
+                  <div className="space-y-3">
+                    {sapienzaFaqs.map((faq) => (
+                      <details
+                        key={faq.question}
+                        className="rounded-xl border border-border bg-background p-5"
+                      >
+                        <summary className="cursor-pointer font-bold text-foreground">
+                          {faq.question}
+                        </summary>
+                        <p className="mt-3 whitespace-pre-line">
+                          {faq.answer}
+                        </p>
+                      </details>
+                    ))}
+                  </div>
                 </Section>
               )}
 
