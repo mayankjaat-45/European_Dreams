@@ -117,7 +117,7 @@ export default async function sitemap() {
     .filter((item) => item.slug)
     .map((item) => ({
       url: `${WEBSITE_URL}/universities/${item.slug}`,
-      lastModified: item.updatedAt ? new Date(item.updatedAt) : new Date(),
+      lastModified: item.updatedAt ? new Date(item.updatedAt) : undefined,
       changeFrequency: "weekly",
       priority: 0.8,
     }));
@@ -139,7 +139,7 @@ export default async function sitemap() {
         url: `${WEBSITE_URL}/courses/${universitySlug}/${course.slug}`,
         lastModified: course.updatedAt
           ? new Date(course.updatedAt)
-          : new Date(),
+          : undefined,
         changeFrequency: "weekly",
         priority: 0.7,
       };
@@ -167,7 +167,7 @@ export default async function sitemap() {
             url: canonical,
             lastModified: item.updatedAt
               ? new Date(item.updatedAt)
-              : new Date(),
+              : undefined,
             changeFrequency: "monthly",
             priority: 0.7,
           };
@@ -178,7 +178,7 @@ export default async function sitemap() {
               url: `${WEBSITE_URL}${canonical}`,
               lastModified: item.updatedAt
                 ? new Date(item.updatedAt)
-                : new Date(),
+                : undefined,
               changeFrequency: "monthly",
               priority: 0.7,
             };
@@ -189,7 +189,7 @@ export default async function sitemap() {
 
       return {
         url: `${WEBSITE_URL}/blogs/${item.slug}`,
-        lastModified: item.updatedAt ? new Date(item.updatedAt) : new Date(),
+        lastModified: item.updatedAt ? new Date(item.updatedAt) : undefined,
         changeFrequency: "monthly",
         priority: 0.7,
       };
