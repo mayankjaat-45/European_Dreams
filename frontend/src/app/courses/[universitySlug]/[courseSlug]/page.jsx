@@ -388,6 +388,62 @@ export default async function CourseDetailsPage({ params }) {
     university?.slug === "ca-foscari-university-of-venice" &&
     course?.slug === "global-accounting-and-finance";
 
+  // Programme-specific verified content (official Sapienza source) for one
+  // course page only. Slug-gated so no other course page is affected, and
+  // used solely for visible body content — never for title/meta/schema.
+  // Declared before quickLinks: referenced below.
+  const isEconFinanceSapienza =
+    (university?.slug || universitySlug) ===
+      "sapienza-university-of-rome" &&
+    (course?.slug || courseSlug) === "economics-and-finance";
+
+  // Programme-specific verified content (official Sapienza source) for one
+  // course page only. Slug-gated so no other course page is affected, and
+  // used solely for visible body content — never for title/meta/schema.
+  // Declared before quickLinks: referenced below.
+  const isBamSapienza =
+    (university?.slug || universitySlug) ===
+      "sapienza-university-of-rome" &&
+    (course?.slug || courseSlug) ===
+      "business-administration-and-management";
+
+  // Programme-specific verified content (official University of Ferrara
+  // source) for one course page only. Slug-gated so no other course page
+  // is affected, and used solely for visible body content — never for
+  // title/meta/schema. Declared before quickLinks: referenced below.
+  const isSbmFerrara =
+    (university?.slug || universitySlug) === "university-of-ferrara" &&
+    (course?.slug || courseSlug) ===
+      "small-business-management-in-international-markets";
+
+  // Programme-specific verified content (official University of Milan
+  // source) for one course page only. Slug-gated so no other course page
+  // is affected, and used solely for visible body content — never for
+  // title/meta/schema. Declared before quickLinks: referenced below.
+  // Milan only: do not mix Turin-variant information into this page.
+  const isCosmisMilan =
+    (university?.slug || universitySlug) === "university-of-milan" &&
+    (course?.slug || courseSlug) === "cosmetic-industrial-science";
+
+  // Programme-specific verified content (official Polytechnic University
+  // of Marche source) for one course page only. Slug-gated so no other
+  // course page is affected, and used solely for visible body content —
+  // never for title/meta/schema. Declared before quickLinks: referenced
+  // below.
+  const isEscpMarche =
+    (university?.slug || universitySlug) === "university-of-marche" &&
+    (course?.slug || courseSlug) ===
+      "environmental-sciences-and-civil-protection";
+
+  // Programme-specific verified content (official Polytechnic University
+  // of Marche source) for one course page only. Slug-gated so no other
+  // course page is affected, and used solely for visible body content —
+  // never for title/meta/schema. Declared before quickLinks: referenced
+  // below.
+  const isDebMarche =
+    (university?.slug || universitySlug) === "university-of-marche" &&
+    (course?.slug || courseSlug) === "digital-economics-and-business";
+
   const requirementItems = [
     {
       label: "Academic requirement",
@@ -416,6 +472,24 @@ export default async function CourseDetailsPage({ params }) {
       ? [{ href: "#what-you-study", label: "What You'll Study" }]
       : []),
     ...(isGlobalAccountingFinanceCaFoscari
+      ? [{ href: "#what-you-study", label: "What You'll Study" }]
+      : []),
+    ...(isEconFinanceSapienza
+      ? [{ href: "#what-you-study", label: "What You'll Study" }]
+      : []),
+    ...(isBamSapienza
+      ? [{ href: "#what-you-study", label: "What You'll Study" }]
+      : []),
+    ...(isSbmFerrara
+      ? [{ href: "#what-you-study", label: "What You'll Study" }]
+      : []),
+    ...(isCosmisMilan
+      ? [{ href: "#what-you-study", label: "What You'll Study" }]
+      : []),
+    ...(isEscpMarche
+      ? [{ href: "#what-you-study", label: "What You'll Study" }]
+      : []),
+    ...(isDebMarche
       ? [{ href: "#what-you-study", label: "What You'll Study" }]
       : []),
     ...(requirementItems.length
@@ -449,6 +523,54 @@ export default async function CourseDetailsPage({ params }) {
           },
         ]
       : []),
+    ...(isEconFinanceSapienza
+      ? [
+          {
+            href: "#careers",
+            label: "Career Opportunities and Further Study",
+          },
+        ]
+      : []),
+    ...(isBamSapienza
+      ? [
+          {
+            href: "#careers",
+            label: "Career Opportunities and Further Study",
+          },
+        ]
+      : []),
+    ...(isSbmFerrara
+      ? [
+          {
+            href: "#careers",
+            label: "Career Opportunities and Further Study",
+          },
+        ]
+      : []),
+    ...(isCosmisMilan
+      ? [
+          {
+            href: "#careers",
+            label: "Career Opportunities and Further Study",
+          },
+        ]
+      : []),
+    ...(isEscpMarche
+      ? [
+          {
+            href: "#careers",
+            label: "Career Opportunities and Further Study",
+          },
+        ]
+      : []),
+    ...(isDebMarche
+      ? [
+          {
+            href: "#careers",
+            label: "Career Opportunities and Further Study",
+          },
+        ]
+      : []),
     ...(course.scholarships
       ? [{ href: "#scholarships", label: "Scholarships" }]
       : []),
@@ -472,6 +594,54 @@ export default async function CourseDetailsPage({ params }) {
         ]
       : []),
     ...(isGlobalAccountingFinanceCaFoscari
+      ? [
+          {
+            href: "#access-and-international",
+            label: "Access, Study Plan and International Opportunities",
+          },
+        ]
+      : []),
+    ...(isEconFinanceSapienza
+      ? [
+          {
+            href: "#access-and-international",
+            label: "Access, Study Plan and International Opportunities",
+          },
+        ]
+      : []),
+    ...(isBamSapienza
+      ? [
+          {
+            href: "#access-and-international",
+            label: "Access, Study Plan and International Opportunities",
+          },
+        ]
+      : []),
+    ...(isSbmFerrara
+      ? [
+          {
+            href: "#access-and-international",
+            label: "Access, Study Plan and International Opportunities",
+          },
+        ]
+      : []),
+    ...(isCosmisMilan
+      ? [
+          {
+            href: "#access-and-international",
+            label: "Access, Study Plan and International Opportunities",
+          },
+        ]
+      : []),
+    ...(isEscpMarche
+      ? [
+          {
+            href: "#access-and-international",
+            label: "Access, Study Plan and International Opportunities",
+          },
+        ]
+      : []),
+    ...(isDebMarche
       ? [
           {
             href: "#access-and-international",
@@ -926,6 +1096,339 @@ export default async function CourseDetailsPage({ params }) {
             </ContentSection>
           )}
 
+          {isEconFinanceSapienza && (
+            <ContentSection
+              id="what-you-study"
+              title="What You’ll Study in Economics and Finance"
+              icon={School}
+            >
+              <p className="leading-8 text-muted">
+                This Bachelor&apos;s programme (L-33) is offered by
+                Sapienza&apos;s Faculty of Economics through the Department
+                of Economics and Law. The catalogue lists the programme in
+                Italian and English, with a taught-in-English pathway
+                confirmed through the official admission call and
+                English-track teaching schedules.
+              </p>
+              <ul className="mt-4 space-y-3">
+                {[
+                  "First-year foundations — political economy, business economics, law, and quantitative methods",
+                  "Second-year areas — intermediate political economy, econometrics, financial intermediaries, statistics, and economic policy",
+                  "Third-year areas — financial economics, financial mathematics, monetary economics and policy, electives and final essay work",
+                  "Optional-group areas — banking, international economy, economic policy, applied financial economics, environmental and development economics",
+                ].map((topic) => (
+                  <li key={topic} className="flex gap-3 leading-7 text-muted">
+                    <span className="font-bold text-success">✓</span>
+                    <span>{topic}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 text-sm leading-6 text-muted">
+                Study-plan areas above summarise the official catalogue at
+                a high level. Confirm the current English-track module list
+                in Sapienza&apos;s official study plan before planning
+                around individual subjects.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                See how this English-taught degree fits among{" "}
+                <Link
+                  href="/english-taught-courses-in-italy"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  English-taught courses in Italy
+                </Link>{" "}
+                and explore more options on the{" "}
+                <Link
+                  href={`/universities/${university.slug}`}
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  {university.name} page
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
+          {isBamSapienza && (
+            <ContentSection
+              id="what-you-study"
+              title="What You’ll Study in Business Administration and Management"
+              icon={School}
+            >
+              <p className="leading-8 text-muted">
+                This Bachelor&apos;s programme (L-18) is offered by
+                Sapienza&apos;s Faculty of Economics through the Department
+                of Management. The catalogue lists the programme in Italian
+                and English, with a taught-in-English pathway confirmed
+                through the official admission call and English-track
+                teaching schedules.
+              </p>
+              <ul className="mt-4 space-y-3">
+                {[
+                  "First-year foundations — business administration, law, mathematics, and political economy",
+                  "Second-year areas — business and management, economic policy, statistics, commercial law, and financial intermediaries",
+                  "Third-year areas — planning and management control, auditing, banking, securities markets, and corporate finance",
+                  "Cross-cutting themes — sustainability and responsibility, international sensitivity, and operational management skills",
+                ].map((topic) => (
+                  <li key={topic} className="flex gap-3 leading-7 text-muted">
+                    <span className="font-bold text-success">✓</span>
+                    <span>{topic}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 text-sm leading-6 text-muted">
+                Study-plan areas above summarise the official catalogue at
+                a high level. Confirm the current English-track module list
+                in Sapienza&apos;s official study plan before planning
+                around individual subjects.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                See how this English-taught degree fits among{" "}
+                <Link
+                  href="/english-taught-courses-in-italy"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  English-taught courses in Italy
+                </Link>{" "}
+                and explore more options on the{" "}
+                <Link
+                  href={`/universities/${university.slug}`}
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  {university.name} page
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
+          {isSbmFerrara && (
+            <ContentSection
+              id="what-you-study"
+              title="What You’ll Study in Small Business Management in International Markets"
+              icon={School}
+            >
+              <p className="leading-8 text-muted">
+                This Master&apos;s programme (LM-77) at the University of
+                Ferrara&apos;s Department of Economics and Management runs
+                over 2 years and 120 ECTS, taught entirely in English. It
+                focuses on the management of small businesses operating in
+                international markets, combining industrial economics with
+                business administration.
+              </p>
+              <ul className="mt-4 space-y-3">
+                {[
+                  "Advanced industrial economics and business administration for SME internationalisation",
+                  "Global-market dynamics, economic development, and corporate structures",
+                  "Quantitative and legal tools for business decisions, including scenario analysis",
+                  "International marketing, operations and logistics, organisation and innovation",
+                  "Interactive small-group teaching with projects, workshops, and case studies",
+                  "Thesis work that can be combined with an internship or company project",
+                ].map((topic) => (
+                  <li key={topic} className="flex gap-3 leading-7 text-muted">
+                    <span className="font-bold text-success">✓</span>
+                    <span>{topic}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 text-sm leading-6 text-muted">
+                The programme follows a two-curriculum structure documented
+                on Ferrara&apos;s official pages. Confirm the current
+                per-year study plan on the official training-path page for
+                your enrolment year.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                See how this English-taught degree fits among{" "}
+                <Link
+                  href="/english-taught-courses-in-italy"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  English-taught courses in Italy
+                </Link>{" "}
+                and explore more options on the{" "}
+                <Link
+                  href={`/universities/${university.slug}`}
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  {university.name} page
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
+          {isCosmisMilan && (
+            <ContentSection
+              id="what-you-study"
+              title="What You’ll Study in Cosmetic Industrial Science"
+              icon={School}
+            >
+              <p className="leading-8 text-muted">
+                This Master&apos;s programme (LM-71 R) at the University of
+                Milan runs over 2 years and 120 ECTS, taught in English in
+                Milan through the Department of Pharmaceutical Sciences. It
+                trains graduates in the research, development, industrial
+                production, quality control and marketing of cosmetic
+                products, combining theoretical lectures — most complemented
+                by laboratory activities — with a compulsory internship of
+                at least 34 credits in the last semester, carried out in a
+                university laboratory or a company in Italy or abroad. The
+                programme uses a blended study mode.
+              </p>
+              <ul className="mt-4 space-y-3">
+                {[
+                  "Skin and formulation sciences — physiology and biochemistry of skin and annexes, microbiological contamination and controls",
+                  "Cosmetic ingredients — inorganic, organic, polymeric and functional ingredients",
+                  "Product development — skincare, hygiene, perfume and make-up preparations, including decorative cosmetics",
+                  "Manufacturing and packaging technologies, materials and processes",
+                  "Regulation and market placement of new cosmetic products under European guidelines",
+                  "Toxicology, microbiological risk assessment and alternative toxicological protocols",
+                  "Quality assessment, stability monitoring and analysis of cosmetic ingredients and products",
+                  "Marketing and communication, business plan and project financial evaluation",
+                  "Internship project developed into an English-language thesis discussed at the final examination",
+                ].map((topic) => (
+                  <li key={topic} className="flex gap-3 leading-7 text-muted">
+                    <span className="font-bold text-success">✓</span>
+                    <span>{topic}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 text-sm leading-6 text-muted">
+                The study-plan areas above summarise the official programme
+                description at a high level. Confirm the current module list
+                and internship rules on the official programme pages for
+                your enrolment year.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                See how this English-taught degree fits among{" "}
+                <Link
+                  href="/english-taught-courses-in-italy"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  English-taught courses in Italy
+                </Link>{" "}
+                and explore more options on the{" "}
+                <Link
+                  href={`/universities/${university.slug}`}
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  {university.name} page
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
+          {isEscpMarche && (
+            <ContentSection
+              id="what-you-study"
+              title="What You’ll Study in Environmental Sciences and Civil Protection"
+              icon={School}
+            >
+              <p className="leading-8 text-muted">
+                This 3-year Bachelor&apos;s programme (L-32) at the
+                Polytechnic University of Marche is taught in
+                English in Ancona through the Department of Life and
+                Environmental Sciences. It integrates basic-science
+                foundations with environmental monitoring and remediation
+                skills, plus specialised civil-protection training in
+                forecasting, prevention and emergency management.
+              </p>
+              <ul className="mt-4 space-y-3">
+                {[
+                  "Basic sciences — mathematics and statistics, physics and chemistry",
+                  "Biological foundations — biology and ecology",
+                  "Earth sciences — geology, oceanography, meteorology and climatology",
+                  "Environmental monitoring and remediation — ecotoxicology, energy, environmental monitoring, environmental analysis, remediation and environmental legislation",
+                  "Civil-protection and risk topics — geography of risk and disasters, IT and telecommunication tools, civil-protection statute and emergency management",
+                  "Laboratory and field activities alongside lectures, plus an internship in external institutions or university laboratories",
+                ].map((topic) => (
+                  <li key={topic} className="flex gap-3 leading-7 text-muted">
+                    <span className="font-bold text-success">✓</span>
+                    <span>{topic}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 text-sm leading-6 text-muted">
+                The study-plan areas above summarise the official programme
+                description at a high level. Confirm the current module list
+                on the official programme pages for your enrolment year.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                See how this English-taught degree fits among{" "}
+                <Link
+                  href="/english-taught-courses-in-italy"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  English-taught courses in Italy
+                </Link>{" "}
+                and explore more options on the{" "}
+                <Link
+                  href={`/universities/${university.slug}`}
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  {university.name} page
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
+          {isDebMarche && (
+            <ContentSection
+              id="what-you-study"
+              title="What You’ll Study in Digital Economics and Business"
+              icon={School}
+            >
+              <p className="leading-8 text-muted">
+                This 3-year Bachelor&apos;s programme (interclass L-33 and
+                L-18, 180 ECTS) at the Polytechnic University of Marche is
+                taught entirely in English in Ancona through the Faculty of
+                Economics &ldquo;Giorgio Fu&agrave;&rdquo;. It combines
+                business, economics and IT-based data analytics so graduates
+                can apply a data-driven approach to decision-making. The
+                first two years are largely shared, with third-year choices
+                shaping an economic-financial or economic-business emphasis.
+              </p>
+              <ul className="mt-4 space-y-3">
+                {[
+                  "Year 1 areas — mathematics, principles of economics, business economics and accounting, IT law, computing fundamentals, economic history of technological change and advanced English",
+                  "Year 2 areas — statistics, business management and digital applications, business information systems, industrial economics and digital transformation, with financial statement analysis or corporate finance options",
+                  "Year 3 areas — international trade and finance, data analytics, marketing and digital applications, plus guided choices across financial economics, machine learning and financial mathematics, planning and control or finance and fintech",
+                  "Laboratory and project work with real data across the three years, plus elective internship options and a final project",
+                ].map((topic) => (
+                  <li key={topic} className="flex gap-3 leading-7 text-muted">
+                    <span className="font-bold text-success">✓</span>
+                    <span>{topic}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 text-sm leading-6 text-muted">
+                The study-plan areas above summarise the official study plan
+                at a high level. Confirm the current module list and
+                third-year choice rules on the official programme pages for
+                your enrolment year.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                See how this English-taught degree fits among{" "}
+                <Link
+                  href="/english-taught-courses-in-italy"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  English-taught courses in Italy
+                </Link>{" "}
+                and explore more options on the{" "}
+                <Link
+                  href={`/universities/${university.slug}`}
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  {university.name} page
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
           {requirementItems.length > 0 && (
             <ContentSection id="requirements" title={requirementsTitle} icon={CheckCircle2}>
               <div className="grid gap-4 sm:grid-cols-2">
@@ -1099,6 +1602,309 @@ export default async function CourseDetailsPage({ params }) {
                 </p>
               )}
 
+              {isEconFinanceSapienza && (
+                <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      Access procedure
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      Entrance test to verify knowledge (test code 14613)
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      Programme code
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      34177 (L-33)
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      Admission test route
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      TOLC-E or CEnT-S; CEnT-S or SAT for the
+                      English-language curriculum
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      Academic requirement
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      Upper secondary diploma, obtained or to be obtained
+                      in the admission year
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {isEconFinanceSapienza && (
+                <p className="mt-4 text-sm leading-6 text-muted">
+                  Additional learning requirements (OFA) apply below the
+                  official test thresholds and are completed in the first
+                  year. Access follows the annual official Sapienza call
+                  — verify the current call before applying.
+                </p>
+              )}
+
+              {isBamSapienza && (
+                <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      Access procedure
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      Entrance test to verify knowledge (test code 14613)
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      Programme code
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      34175 (L-18)
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      Admission test route
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      TOLC-E or CEnT-S; CEnT-S or SAT for the
+                      English-language curriculum
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      Academic requirement
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      Upper secondary diploma, obtained or to be obtained
+                      in the admission year
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {isBamSapienza && (
+                <p className="mt-4 text-sm leading-6 text-muted">
+                  Additional learning requirements (OFA) apply below the
+                  official test thresholds and are completed in the first
+                  year. Access follows the annual official Sapienza call
+                  — verify the current call before applying.
+                </p>
+              )}
+
+              {isSbmFerrara && (
+                <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      Access procedure
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      Open access with assessment of personal competencies
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      Curricular requirement
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      Bachelor&apos;s degree with at least 50 credits —
+                      30 in business, 10 in economics, 5 in
+                      mathematics-statistics and 5 in law
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      Competence-assessment waiver
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      Waived for final grades of 85/110 or above
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      English prerequisite
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      B2 level, via accepted certification or commission
+                      interview
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {isSbmFerrara && (
+                <p className="mt-4 text-sm leading-6 text-muted">
+                  Direct admission applies to matching
+                  Economics/Management backgrounds (including L-18 and
+                  L-33 classes). Admission calls, places and application
+                  procedures can change. Students should verify the
+                  current University of Ferrara programme call before
+                  applying.
+                </p>
+              )}
+
+              {isCosmisMilan && (
+                <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      Access procedure
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      Open access subject to entry requirements, with a
+                      compulsory entry test
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      Curricular requirement
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      L-27 or L-29 degree, or at least 35 ECTS across
+                      maths, physics, chemistry and biology — including
+                      at least 25 ECTS in chemistry and biology, with at
+                      least 15 ECTS in chemistry
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      English prerequisite
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      B2 level, verified through the University Language
+                      Centre (SLAM)
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      Entry assessment
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      Compulsory test in biology and chemistry principles,
+                      passed at 50% correct answers
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {isCosmisMilan && (
+                <p className="mt-4 text-sm leading-6 text-muted">
+                  For 2026, the official admission notice schedules two
+                  test sessions — 12 May 2026 and 9 September 2026 — with
+                  candidates applying for a student visa participating in
+                  the first session. Admission requirements must be met by
+                  31 December 2026. Access follows the annual official
+                  Milan call — verify the current call before applying.
+                </p>
+              )}
+
+              {isEscpMarche && (
+                <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      Access procedure
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      Free and open access, with a non-selective,
+                      non-binding knowledge check
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      Academic requirement
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      Upper secondary diploma or recognised equivalent
+                      foreign qualification
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      English prerequisite
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      B2 level for the English-taught programme
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      Expected background
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      Foundations in biology, chemistry, physics and
+                      mathematics with an interest in environmental and
+                      civil-protection themes
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {isEscpMarche && (
+                <p className="mt-4 text-sm leading-6 text-muted">
+                  No selective admission test applies — the knowledge
+                  check does not affect enrolment. Access follows the
+                  annual official Marche call — verify the current call
+                  before applying.
+                </p>
+              )}
+
+              {isDebMarche && (
+                <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      Access procedure
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      Free and open access, with pre-evaluation for
+                      international qualifications
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      English prerequisite
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      B2 level for the English-taught programme
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      Knowledge check
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      Non-selective OFA test in mathematics and logic —
+                      20 questions, passed with at least 8 correct
+                      answers including one per subject area
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      Exemption route
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      TOLC-E, TOLC-I or CEnT recognised for exemption at
+                      40% in mathematics and logic, alongside SAT and
+                      prior-university routes
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {isDebMarche && (
+                <p className="mt-4 text-sm leading-6 text-muted">
+                  Missing the OFA threshold does not block enrolment but
+                  assigns an additional learning requirement (OFA) to be
+                  cleared in the first year. Access follows the annual
+                  official Marche call — verify the current call before
+                  applying.
+                </p>
+              )}
+
               {admissionRequirements.notes && (
                 <details className="group mt-5 rounded-2xl border border-secondary/20 bg-secondary-light p-4 open:shadow-sm">
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-3 font-semibold text-foreground">
@@ -1223,6 +2029,200 @@ export default async function CourseDetailsPage({ params }) {
               </p>
               <p className="mt-4 leading-8 text-muted">
                 For broader planning, see our{" "}
+                <Link
+                  href="/study-in-italy"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Study in Italy guide
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
+          {isEconFinanceSapienza && (
+            <ContentSection
+              id="careers"
+              title="Career Opportunities and Further Study"
+              icon={GraduationCap}
+            >
+              <p className="leading-8 text-muted">
+                According to Sapienza&apos;s official programme
+                description, graduates combine economic knowledge with
+                theoretical and quantitative tools for administrative and
+                managerial careers in private and public enterprises,
+                European and international organisations, and national and
+                international research institutions — including finance,
+                international cooperation, and sustainable-resource
+                management roles.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                Documented professional profiles include international
+                economic analyst, environmental-economic analyst, and
+                economic and financial analyst. The degree also provides
+                preparation for Master&apos;s-level study in economics and
+                finance. For broader planning, see our{" "}
+                <Link
+                  href="/study-in-italy"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Study in Italy guide
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
+          {isBamSapienza && (
+            <ContentSection
+              id="careers"
+              title="Career Opportunities and Further Study"
+              icon={GraduationCap}
+            >
+              <p className="leading-8 text-muted">
+                According to Sapienza&apos;s official programme
+                description, documented profiles cover business consulting,
+                banking, insurance and financial consulting, management
+                consulting, and management-assistance roles — across
+                planning, budgeting, auditing, strategy, credit and
+                finance, organisation, production, marketing, logistics,
+                and accounting functions.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                Graduates work in industrial, commercial and service firms,
+                banks and financial institutions, public administration,
+                non-profit organisations, and professional studios. The
+                programme also documents a pathway toward the regulated
+                professions of esperto contabile and revisore legale after
+                traineeship and the state examination, and continuation to
+                Master&apos;s-level study. For broader planning, see our{" "}
+                <Link
+                  href="/study-in-italy"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Study in Italy guide
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
+          {isSbmFerrara && (
+            <ContentSection
+              id="careers"
+              title="Career Opportunities and Further Study"
+              icon={GraduationCap}
+            >
+              <p className="leading-8 text-muted">
+                According to the University of Ferrara&apos;s official
+                programme description, graduates are prepared for
+                management or consultancy positions in small businesses
+                operating in international markets — including management
+                consultancy, general management, marketing, and human
+                resources roles, as well as business start-ups and family
+                business succession.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                Documented outlets also include public research institutes
+                and venture-capital firms and banks, with a pathway toward
+                PhD research in entrepreneurship and related fields. For
+                broader planning, see our{" "}
+                <Link
+                  href="/study-in-italy"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Study in Italy guide
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
+          {isCosmisMilan && (
+            <ContentSection
+              id="careers"
+              title="Career Opportunities and Further Study"
+              icon={GraduationCap}
+            >
+              <p className="leading-8 text-muted">
+                According to the University of Milan&apos;s official
+                programme description, graduates are prepared for qualified
+                positions at different levels within cosmetic companies —
+                covering research and development, industrial production,
+                quality control, regulatory work for placing new products
+                on the market, and marketing-related roles. The internship
+                project feeds directly into the English-language thesis.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                The Master&apos;s degree also documents a pathway toward
+                doctoral (PhD) study and further research training. For
+                broader planning, see our{" "}
+                <Link
+                  href="/study-in-italy"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Study in Italy guide
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
+          {isEscpMarche && (
+            <ContentSection
+              id="careers"
+              title="Career Opportunities and Further Study"
+              icon={GraduationCap}
+            >
+              <p className="leading-8 text-muted">
+                According to the Polytechnic University of Marche&apos;s
+                official programme description, graduates take on
+                technical-operational roles in public and private
+                organisations — spanning environmental monitoring,
+                environmental remediation and civil-protection work, from
+                field sampling and laboratory analysis through emergency
+                planning and emergency cooperation.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                Graduates can apply to Section B of the junior
+                professional registers — junior biologist, junior planner,
+                graduate agricultural technician and graduate land
+                surveyor — and can continue toward second-level study in
+                the LM-75 class, including the Marche Master&apos;s in
+                environmental risk and civil protection. For broader
+                planning, see our{" "}
+                <Link
+                  href="/study-in-italy"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Study in Italy guide
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
+          {isDebMarche && (
+            <ContentSection
+              id="careers"
+              title="Career Opportunities and Further Study"
+              icon={GraduationCap}
+            >
+              <p className="leading-8 text-muted">
+                According to the Polytechnic University of Marche&apos;s
+                official programme description, the degree trains three
+                professional directions: the data-driven economic and
+                financial analyst, the data-driven business analyst, and
+                the data analyst for economics and business — producing
+                relevant information from corporate, real-market and
+                financial-market data to guide company and institutional
+                decision-making.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                Graduates work with companies, consultancies, public
+                bodies and financial institutions, or continue to a
+                Master&apos;s degree consistent with the programme. For
+                broader planning, see our{" "}
                 <Link
                   href="/study-in-italy"
                   className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
@@ -1430,6 +2430,335 @@ export default async function CourseDetailsPage({ params }) {
                 Students applying from India should verify the current
                 Ca&apos; Foscari programme call, curricular eligibility,
                 English-language documentation and application requirements
+                before applying. See the{" "}
+                <Link
+                  href="/italy-university-admission"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Italy university admission process
+                </Link>
+                ,{" "}
+                <Link
+                  href="/universitaly"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Universitaly guidance
+                </Link>{" "}
+                and{" "}
+                <Link
+                  href="/italy-student-visa"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Italy student visa guidance
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
+          {isEconFinanceSapienza && (
+            <ContentSection
+              id="access-and-international"
+              title="Access, Study Plan and International Opportunities"
+              icon={Languages}
+            >
+              <p className="leading-8 text-muted">
+                This is a Bachelor&apos;s programme (L-33, programme code
+                34177) with an entrance test to verify knowledge (test code
+                14613). The English-language curriculum is accessed through
+                CEnT-S or SAT, while the broader admission regime also
+                recognises TOLC-E. Teaching follows conventional in-person
+                delivery, with English-track schedules published alongside
+                the official call.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                International applicants follow Sapienza&apos;s
+                pre-selection process with the admission-call procedures,
+                including foreign-qualification documentation. Confirm
+                current test sessions, enrolment steps and mobility options
+                in the official call before planning around them.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                Students applying from India should verify the current
+                Sapienza programme call, academic eligibility and
+                English-language documentation requirements before
+                applying. See the{" "}
+                <Link
+                  href="/italy-university-admission"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Italy university admission process
+                </Link>
+                ,{" "}
+                <Link
+                  href="/universitaly"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Universitaly guidance
+                </Link>{" "}
+                and{" "}
+                <Link
+                  href="/italy-student-visa"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Italy student visa guidance
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
+          {isBamSapienza && (
+            <ContentSection
+              id="access-and-international"
+              title="Access, Study Plan and International Opportunities"
+              icon={Languages}
+            >
+              <p className="leading-8 text-muted">
+                This is a Bachelor&apos;s programme (L-18, programme code
+                34175) with an entrance test to verify knowledge (test code
+                14613). The English-language curriculum is accessed through
+                CEnT-S or SAT, while the broader admission regime also
+                recognises TOLC-E. Teaching follows conventional in-person
+                delivery, with a taught-in-English pathway structured
+                alongside the general programme.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                International applicants follow Sapienza&apos;s
+                pre-selection process with the admission-call procedures,
+                including foreign-qualification documentation. Confirm
+                current test sessions, enrolment steps and mobility options
+                in the official call before planning around them.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                Students applying from India should verify the current
+                Sapienza programme call, academic eligibility and
+                English-language documentation requirements before
+                applying. See the{" "}
+                <Link
+                  href="/italy-university-admission"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Italy university admission process
+                </Link>
+                ,{" "}
+                <Link
+                  href="/universitaly"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Universitaly guidance
+                </Link>{" "}
+                and{" "}
+                <Link
+                  href="/italy-student-visa"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Italy student visa guidance
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
+          {isSbmFerrara && (
+            <ContentSection
+              id="access-and-international"
+              title="Access, Study Plan and International Opportunities"
+              icon={Languages}
+            >
+              <p className="leading-8 text-muted">
+                This is an open-access Master&apos;s programme (LM-77)
+                running over 2 years and 120 ECTS in English at Ferrara,
+                with an assessment of personal competencies. Teaching is
+                face-to-face, and attendance is not mandatory but is highly
+                recommended. Documented double-degree options include
+                partner universities in Sweden, Germany and Spain —
+                confirm current options in the official call before
+                planning around them.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                Ferrara&apos;s official application portal describes a
+                €20 one-time application fee and an annual fee range of
+                about €156 to €2,250 calculated on family income and
+                credits obtained. Teaching follows a multi-method,
+                interactive format with Erasmus+ and study-abroad options
+                alongside thesis-linked internships.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                Students applying from India should verify the current
+                Ferrara programme call, curricular eligibility,
+                English-language documentation and visa-related steps
+                before applying. See the{" "}
+                <Link
+                  href="/italy-university-admission"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Italy university admission process
+                </Link>
+                ,{" "}
+                <Link
+                  href="/universitaly"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Universitaly guidance
+                </Link>{" "}
+                and{" "}
+                <Link
+                  href="/italy-student-visa"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Italy student visa guidance
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
+          {isCosmisMilan && (
+            <ContentSection
+              id="access-and-international"
+              title="Access, Study Plan and International Opportunities"
+              icon={Languages}
+            >
+              <p className="leading-8 text-muted">
+                This is an open-access Master&apos;s programme (LM-71 R)
+                subject to entry requirements, running over 2 years and
+                120 ECTS in English in Milan with a blended study mode.
+                Admission requires an L-27 or L-29 background, or at least
+                35 ECTS across maths, physics, chemistry and biology with
+                the official chemistry/biology distribution, alongside B2
+                English verified through SLAM and a compulsory
+                biology-and-chemistry entry test. The final semester
+                centres on the compulsory internship and the
+                English-language thesis.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                For 2026, the official admission notice accepts online
+                applications from 22 January to 25 August 2026, with
+                non-EU applicants applying for a visa applying from 22
+                January to 30 April 2026. Entry tests run on 12 May 2026
+                and 9 September 2026 — visa applicants sit the first
+                session — and admitted candidates enrol from 5 May 2026
+                until 15 January 2027. Confirm current dates and steps in
+                the official call before planning around them.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                Students applying from India should verify the current
+                Milan programme call, curricular eligibility,
+                English-language documentation and visa-related steps
+                before applying. See the{" "}
+                <Link
+                  href="/italy-university-admission"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Italy university admission process
+                </Link>
+                ,{" "}
+                <Link
+                  href="/universitaly"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Universitaly guidance
+                </Link>{" "}
+                and{" "}
+                <Link
+                  href="/italy-student-visa"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Italy student visa guidance
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
+          {isEscpMarche && (
+            <ContentSection
+              id="access-and-international"
+              title="Access, Study Plan and International Opportunities"
+              icon={Languages}
+            >
+              <p className="leading-8 text-muted">
+                This is a free, open-access Bachelor&apos;s programme
+                (L-32) taught in English in Ancona over 3 years.
+                Enrolment requires an upper secondary diploma or
+                recognised equivalent, B2-level English and the
+                scientific foundations above; the knowledge check is
+                non-selective and non-binding. Teaching combines lectures
+                with laboratory and field activities, an internship in
+                external institutions or university laboratories, and
+                professionalising electives such as data analysis,
+                contaminant analysis, GIS applications and workplace
+                safety.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                The programme documents international exchange
+                opportunities alongside partnerships with regional and
+                national authorities, research bodies and companies —
+                confirm current options in the official call before
+                planning around them.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                Students applying from India should verify the current
+                Marche programme call, academic eligibility,
+                English-language documentation and visa-related steps
+                before applying. See the{" "}
+                <Link
+                  href="/italy-university-admission"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Italy university admission process
+                </Link>
+                ,{" "}
+                <Link
+                  href="/universitaly"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Universitaly guidance
+                </Link>{" "}
+                and{" "}
+                <Link
+                  href="/italy-student-visa"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Italy student visa guidance
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
+          {isDebMarche && (
+            <ContentSection
+              id="access-and-international"
+              title="Access, Study Plan and International Opportunities"
+              icon={Languages}
+            >
+              <p className="leading-8 text-muted">
+                This is a free, open-access Bachelor&apos;s programme
+                (interclass L-33 and L-18, 180 ECTS) taught entirely in
+                English in Ancona over 3 years. International applicants
+                with foreign qualifications go through a pre-evaluation of
+                curricular background, B2 English and personal preparation
+                by a dedicated commission. Before enrolment, candidates
+                sit an English-language logic-and-mathematics check that
+                is non-selective: it supports self-assessment and, below
+                the threshold, assigns an additional learning requirement
+                (OFA) cleared in the first year. TOLC-E, TOLC-I or CEnT
+                results are recognised as an exemption route under the
+                official wording.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                The programme documents Erasmus+ and Campus World
+                exchanges plus agreements with foreign universities, with
+                laboratory and project work running across the three years
+                — confirm current options in the official pages before
+                planning around them.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                Students applying from India should verify the current
+                Marche programme call, pre-evaluation steps,
+                English-language documentation and visa-related steps
                 before applying. See the{" "}
                 <Link
                   href="/italy-university-admission"
