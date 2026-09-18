@@ -244,15 +244,21 @@ export default async function UniversityDetailsPage({ params }) {
   // so no other university page is affected.
   const isGenoa = (university.slug || slug) === "university-of-genoa";
 
+  // Turin-only gate. The verified slug is "university-of-turin"
+  // (live route + API record); every Turin section below uses this flag
+  // so no other university page is affected.
+  const isTurin = (university.slug || slug) === "university-of-turin";
+
   // The data object supports establishedYear (Number) but the Milan,
-  // Sapienza and Genoa records have none; fall back to the officially
-  // documented founding years for these pages only. Ranking/tuitionFeeRange
-  // are intentionally left untouched.
+  // Sapienza, Genoa and Turin records have none; fall back to the
+  // officially documented founding years for these pages only.
+  // Ranking/tuitionFeeRange are intentionally left untouched.
   const displayEstablishedYear =
     university.establishedYear ||
     (isUniversityOfMilan ? 1924 : null) ||
     (isSapienza ? 1303 : null) ||
-    (isGenoa ? 1481 : null);
+    (isGenoa ? 1481 : null) ||
+    (isTurin ? 1404 : null);
 
   // Visible Milan FAQs. Each answer repeats only content already present in
   // the gated sections above — no invented claims.
@@ -357,6 +363,40 @@ export default async function UniversityDetailsPage({ params }) {
       ]
     : [];
 
+  // Visible Turin FAQs. Each answer repeats only content already present in
+  // the gated sections below — no invented claims.
+  const turinFaqs = isTurin
+    ? [
+        {
+          question: "Is the University of Turin a public university?",
+          answer:
+            "Yes. The University of Turin (Università degli Studi di Torino, UniTo) is a public university in Turin, Italy. Its main seat is at Via Verdi 8 in Turin, with locations across the city and Piedmont.",
+        },
+        {
+          question: "When was the University of Turin founded?",
+          answer:
+            "The university states it was founded in 1404, making it one of the most ancient universities in Italy. See the About section above and the university's official history page for detail.",
+        },
+        {
+          question:
+            "What English-taught options does the University of Turin offer?",
+          answer:
+            "For 2026-27 the university lists 3 undergraduate programmes, 13 postgraduate programmes and 5 curricula taught in English, plus the 6-year Medicine and Surgery programme. Our course database currently lists 33 Turin course records — not the university's official total. Browse the course cards or the official English catalogue linked in the English-taught programmes section.",
+        },
+        {
+          question: "How do international and non-EU students apply?",
+          answer:
+            "Students with non-Italian qualifications apply through Apply@UniTo for assessment. Non-EU students residing abroad who need a visa additionally complete pre-enrolment on the Universitaly portal. See How to apply below and the linked admission, Universitaly and visa guides.",
+        },
+        {
+          question:
+            "How are tuition fees and scholarships structured at the University of Turin?",
+          answer:
+            "Tuition is paid in four instalments: a fixed first payment covering stamp duty and regional tax, plus an ISEE-based or, for residents abroad, GDP-PPP country-band contribution with a simulator and EDISU treatment per the current regulation. EDISU regional grants alongside Talent 4 UniTo and, where eligible, Students at Risk/UNICORE or MAECI opportunities may apply. Amounts and eligibility change yearly, so verify the current fees page and scholarship calls.",
+        },
+      ]
+    : [];
+
   const canonical = `${SITE_URL}/universities/${university.slug || slug}`;
 
   const breadcrumbItems = [
@@ -418,7 +458,8 @@ export default async function UniversityDetailsPage({ params }) {
     const websiteUrl = (
       university.officialWebsite ||
       university.website ||
-      (isGenoa ? "https://unige.it" : "")
+      (isGenoa ? "https://unige.it" : "") ||
+      (isTurin ? "https://www.unito.it" : "")
     ).trim();
     if (websiteUrl) {
       schema.sameAs = websiteUrl;
@@ -926,6 +967,150 @@ export default async function UniversityDetailsPage({ params }) {
                       catalogue
                     </a>
                     .
+                  </p>
+                </Section>
+              )}
+
+              {isTurin && (
+                <Section title="About the University of Turin (UniTo)">
+                  <p>
+                    The University of Turin (Università degli Studi di
+                    Torino, commonly called UniTo) is a public
+                    university in Turin, Italy, founded in 1404. Its
+                    main seat is at Via Verdi 8 in Turin.
+                  </p>
+                  <p className="mt-4">
+                    The university states it hosts around 83,000
+                    students across about 170 degree programmes, with
+                    27 Departments, 6 Schools and 22 Libraries, and
+                    around 4,200 international students. For
+                    authoritative history and institutional detail, see
+                    the{" "}
+                    <a
+                      href="https://en.unito.it/university/about-us/short-history"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      university&apos;s official history page
+                    </a>{" "}
+                    and the{" "}
+                    <a
+                      href="https://en.unito.it/university/about-us"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      official about page
+                    </a>
+                    .
+                  </p>
+                </Section>
+              )}
+
+              {isTurin && (
+                <Section title="Schools, Departments and Campuses">
+                  <p>
+                    Teaching and research at UniTo are organised through
+                    27 Departments grouped into 6 Schools: Agriculture
+                    and Veterinary Medicine; Human Sciences; Law,
+                    Politics and Social-Economic Sciences; Management
+                    and Economics; Medicine; and Science of Nature.
+                  </p>
+                  <p className="mt-4">
+                    The university describes itself as a
+                    city-within-a-city, with around 120 buildings
+                    including the historic Rettorato in Via Verdi,
+                    Palazzo Nuovo, the Campus Luigi Einaudi, the
+                    Molinette medicine pole, the Grugliasco campus and
+                    the Savigliano location alongside extra-metropolitan
+                    seats. Details are published on the{" "}
+                    <a
+                      href="https://en.unito.it/university/organization-and-locations/schools"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      official schools page
+                    </a>{" "}
+                    and the{" "}
+                    <a
+                      href="https://en.unito.it/university/organization-and-locations/departments"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      official departments page
+                    </a>
+                    .
+                  </p>
+                </Section>
+              )}
+
+              {isTurin && (
+                <Section title="English-taught programmes at the University of Turin">
+                  <p>
+                    For 2026-27 the university lists 3 undergraduate
+                    programmes, 13 postgraduate programmes and 5
+                    curricula taught in English, alongside the 6-year
+                    Medicine and Surgery programme taught in English.
+                    Our course database currently lists 33 Turin course
+                    records; this should not be interpreted as the
+                    university&apos;s official total of English-taught
+                    programmes.
+                  </p>
+                  <p className="mt-4">
+                    Browse the course cards below, compare with other{" "}
+                    <Link
+                      href="/english-taught-courses-in-italy"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      English-taught courses in Italy
+                    </Link>{" "}
+                    or{" "}
+                    <Link
+                      href="/courses"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      browse all courses in Italy
+                    </Link>
+                    . The full official offer, including programmes
+                    taught in Italian, is on the{" "}
+                    <a
+                      href="https://en.unito.it/studying-unito/programs/degree-programs/degree-programs-english"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      university&apos;s official English programme
+                      catalogue
+                    </a>
+                    .
+                  </p>
+                </Section>
+              )}
+
+              {isTurin && (
+                <Section title="Bachelor's and Master's study options">
+                  <p>
+                    Undergraduate paths at UniTo include the three
+                    English-taught bachelor&apos;s degrees alongside a
+                    wide Italian-taught offer with free or programmed
+                    access. Admission to free-admission undergraduate
+                    courses runs through the TOLC orientation test,
+                    which UniTo delivers remotely as TOLC@CASA, while
+                    Business &amp; Management additionally uses the SAT
+                    before enrolment.
+                  </p>
+                  <p className="mt-4">
+                    Postgraduate paths span the English-taught
+                    master&apos;s degrees and the 6-year Medicine and
+                    Surgery programme. Master&apos;s admission is based
+                    on curricular requirements and, where the programme
+                    sets one, an assessment or interview, with B2-level
+                    English proof or a medium-of-instruction document
+                    depending on the programme. Always verify the
+                    current programme call before applying.
                   </p>
                 </Section>
               )}
@@ -1525,6 +1710,303 @@ export default async function UniversityDetailsPage({ params }) {
                 <Section title="Frequently asked questions about the University of Genoa">
                   <div className="space-y-3">
                     {genoaFaqs.map((faq) => (
+                      <details
+                        key={faq.question}
+                        className="rounded-xl border border-border bg-background p-5"
+                      >
+                        <summary className="cursor-pointer font-bold text-foreground">
+                          {faq.question}
+                        </summary>
+                        <p className="mt-3 whitespace-pre-line">
+                          {faq.answer}
+                        </p>
+                      </details>
+                    ))}
+                  </div>
+                </Section>
+              )}
+
+              {isTurin && (
+                <Section title="How to apply to the University of Turin">
+                  <h3 className="font-bold text-foreground">
+                    Who needs Apply@UniTo
+                  </h3>
+                  <p className="mt-2">
+                    All students who access UniTo with a non-Italian
+                    qualification submit their application on
+                    Apply@UniTo, the university&apos;s international
+                    applications portal. The application carries a €60
+                    fee and lets each candidate choose up to two
+                    programmes, subject to the exemptions the
+                    university publishes.
+                  </p>
+                  <h3 className="mt-5 font-bold text-foreground">
+                    Undergraduate application
+                  </h3>
+                  <p className="mt-2">
+                    Free-admission undergraduate courses verify minimum
+                    preparation through the TOLC test, which UniTo
+                    delivers remotely as TOLC@CASA and which can also
+                    be sat at other universities. Business &amp;
+                    Management additionally requires the SAT before
+                    enrolment, while programmed-access courses run
+                    their own entrance tests and rankings.
+                  </p>
+                  <h3 className="mt-5 font-bold text-foreground">
+                    Postgraduate application
+                  </h3>
+                  <p className="mt-2">
+                    Postgraduate applications on Apply@UniTo are
+                    assessed against curricular requirements and, where
+                    the programme sets one, an interview or assessment.
+                    Calls are published per intake with separate tracks
+                    for visa applicants and for residents, so the
+                    current call is the only authoritative source for
+                    steps and dates. Our{" "}
+                    <Link
+                      href="/italy-university-admission"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Italy university admission guide
+                    </Link>{" "}
+                    and{" "}
+                    <Link
+                      href="/universitaly"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Universitaly guidance
+                    </Link>{" "}
+                    explain the surrounding steps.
+                  </p>
+                  <h3 className="mt-5 font-bold text-foreground">
+                    Enrolment after admission
+                  </h3>
+                  <p className="mt-2">
+                    Admitted students complete enrolment through
+                    MyUniTo, creating a prospective-student account and
+                    following the procedure for their course type. The
+                    International Students Office checks foreign
+                    qualifications before releasing payment
+                    instructions, so verify the current enrolment page,
+                    the{" "}
+                    <a
+                      href="https://apply.unito.it"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      official Apply@UniTo portal
+                    </a>{" "}
+                    and the{" "}
+                    <a
+                      href="https://en.unito.it/studying-unito/international-degree-seeking-students/application-international-students"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      official international application page
+                    </a>{" "}
+                    before applying.
+                  </p>
+                </Section>
+              )}
+
+              {isTurin && (
+                <Section title="International and non-EU admission">
+                  <p>
+                    Non-EU students residing abroad who need a study
+                    visa additionally submit a pre-enrolment
+                    application on the Universitaly portal — one
+                    programme only — so the university can validate it
+                    towards the visa request. University admission and
+                    the visa process are separate procedures with
+                    separate requirements.
+                  </p>
+                  <p className="mt-4">
+                    After entry, plan for arrival formalities: an
+                    official Italian tax code, enrolment completion,
+                    and a residence permit request with the
+                    documentation the university lists. Documents on the
+                    foreign qualification may need recognised proof
+                    such as CIMEA comparability or a Declaration of
+                    Value depending on the qualification and programme
+                    — neither is universally mandatory. The B2 Italian
+                    certificate applies to the relevant Italian-taught
+                    free-admission routes, not as a blanket requirement
+                    for English-taught programmes. See our{" "}
+                    <Link
+                      href="/universitaly"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Universitaly guidance
+                    </Link>{" "}
+                    and{" "}
+                    <Link
+                      href="/italy-student-visa"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Italy student visa guidance
+                    </Link>
+                    .
+                  </p>
+                </Section>
+              )}
+
+              {isTurin && (
+                <Section title="Tuition fees and scholarships">
+                  <p>
+                    Tuition is paid in four instalments. The first
+                    payment, due at matriculation or enrolment, covers
+                    the €16 stamp duty and the €140 regional tax for
+                    the right to university study. The remaining
+                    university contribution depends on ISEE University
+                    for eligible students or, for students resident
+                    abroad, on the GDP-PPP country-band mechanism, with
+                    a simulator and EDISU treatment set by the current
+                    regulation.
+                  </p>
+                  <p className="mt-4">
+                    Support includes EDISU Piemonte regional grants
+                    alongside Talent 4 UniTo scholarships for English
+                    open-access postgraduate entrants and, where
+                    eligible, UniTo for Students at Risk, UNICORE or
+                    MAECI opportunities. Regulations, eligibility and
+                    calls change every academic year, so always verify
+                    the current official pages. See our{" "}
+                    <Link
+                      href="/italy-scholarships"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Italy scholarships guidance
+                    </Link>
+                    , our{" "}
+                    <Link
+                      href="/cost-of-studying-in-italy"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      cost of studying in Italy guidance
+                    </Link>{" "}
+                    and the university&apos;s{" "}
+                    <a
+                      href="https://en.unito.it/studying-unito/tuition-fees"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      official tuition fees page
+                    </a>
+                    .
+                  </p>
+                </Section>
+              )}
+
+              {isTurin && (
+                <Section title="International student essentials">
+                  <p>
+                    The International Students Office and the Welcome
+                    Office support international students with tax code
+                    requests, residence permit assistance, the Buddy
+                    Project and accommodation orientation through Cerco
+                    Alloggio, plus counselling via Passi@UniTo. The
+                    university also supports Italian language learning
+                    for foreign enrolled students.
+                  </p>
+                  <p className="mt-4">
+                    UniTo coordinates the UNITA European university
+                    alliance and runs over 1,700 Erasmus+ mobility
+                    agreements alongside 40-plus double or joint degree
+                    programmes. Our{" "}
+                    <Link
+                      href="/study-in-italy"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Study in Italy guide
+                    </Link>{" "}
+                    and{" "}
+                    <Link
+                      href="/italy-student-visa"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Italy student visa guidance
+                    </Link>{" "}
+                    cover these steps in more depth.
+                  </p>
+                </Section>
+              )}
+
+              {isTurin && (
+                <Section title="Applying to the University of Turin from India">
+                  <p>
+                    Applicants applying from India follow the non-EU
+                    resident-abroad pathway where a visa applies:
+                    choose a verified programme, complete assessment on
+                    Apply@UniTo, pass the programme-specific selection
+                    such as TOLC, SAT or interview steps, secure
+                    admission, then complete pre-enrolment on the
+                    Universitaly portal where applicable and proceed
+                    with the visa process and arrival and residence
+                    formalities.
+                  </p>
+                  <p className="mt-4">
+                    Prepare identity documents, title documents on the
+                    foreign qualification, and accepted proof of English
+                    proficiency where the programme requires it —
+                    requirements depend on the programme. CIMEA
+                    comparability or a Declaration of Value may apply
+                    depending on the qualification and programme.
+                    Admission and visa outcomes are not guaranteed.
+                    Verify the current programme call and official
+                    enrolment pages before applying — see the{" "}
+                    <Link
+                      href="/study-in-italy"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Study in Italy guide
+                    </Link>
+                    ,{" "}
+                    <Link
+                      href="/italy-university-admission"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Italy university admission process
+                    </Link>
+                    ,{" "}
+                    <Link
+                      href="/universitaly"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Universitaly guidance
+                    </Link>
+                    ,{" "}
+                    <Link
+                      href="/italy-student-visa"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Italy student visa guidance
+                    </Link>
+                    ,{" "}
+                    <Link
+                      href="/italy-scholarships"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Italy scholarships guidance
+                    </Link>{" "}
+                    and{" "}
+                    <Link
+                      href="/english-taught-courses-in-italy"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      English-taught courses in Italy
+                    </Link>
+                    .
+                  </p>
+                </Section>
+              )}
+
+              {isTurin && turinFaqs.length > 0 && (
+                <Section title="Frequently asked questions about the University of Turin">
+                  <div className="space-y-3">
+                    {turinFaqs.map((faq) => (
                       <details
                         key={faq.question}
                         className="rounded-xl border border-border bg-background p-5"
