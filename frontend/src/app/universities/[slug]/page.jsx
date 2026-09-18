@@ -239,14 +239,20 @@ export default async function UniversityDetailsPage({ params }) {
   const isSapienza =
     (university.slug || slug) === "sapienza-university-of-rome";
 
-  // The data object supports establishedYear (Number) but the Milan and
-  // Sapienza records have none; fall back to the officially documented
-  // founding years for these pages only. Ranking/tuitionFeeRange are
-  // intentionally left untouched.
+  // Genoa-only gate. The verified slug is "university-of-genoa"
+  // (live route + API record); every Genoa section below uses this flag
+  // so no other university page is affected.
+  const isGenoa = (university.slug || slug) === "university-of-genoa";
+
+  // The data object supports establishedYear (Number) but the Milan,
+  // Sapienza and Genoa records have none; fall back to the officially
+  // documented founding years for these pages only. Ranking/tuitionFeeRange
+  // are intentionally left untouched.
   const displayEstablishedYear =
     university.establishedYear ||
     (isUniversityOfMilan ? 1924 : null) ||
-    (isSapienza ? 1303 : null);
+    (isSapienza ? 1303 : null) ||
+    (isGenoa ? 1481 : null);
 
   // Visible Milan FAQs. Each answer repeats only content already present in
   // the gated sections above — no invented claims.
@@ -317,6 +323,40 @@ export default async function UniversityDetailsPage({ params }) {
       ]
     : [];
 
+  // Visible Genoa FAQs. Each answer repeats only content already present in
+  // the gated sections below — no invented claims.
+  const genoaFaqs = isGenoa
+    ? [
+        {
+          question: "Is the University of Genoa a public university?",
+          answer:
+            "Yes. The University of Genoa (Università degli Studi di Genova, UniGe) is a public university in Genoa, Italy. Its main seat is at Via Balbi 5 in Genoa, with additional campuses in Imperia, Savona and La Spezia.",
+        },
+        {
+          question: "When was the University of Genoa founded?",
+          answer:
+            "The university states it was founded in 1481, giving it more than six centuries of academic tradition. See the About section above and the university's official history pages for detail.",
+        },
+        {
+          question:
+            "How many English-taught courses are available at the University of Genoa?",
+          answer:
+            "UniGe states it offers 15 degree courses in English among more than 130 degree courses. This page lists the 17 English-taught courses currently in our database below — not the university's official total. Browse the course cards or the official English catalogue linked in the English-taught programmes section.",
+        },
+        {
+          question: "How do non-EU students apply to the University of Genoa?",
+          answer:
+            "Students with non-Italian qualifications start with UniGeApply for qualification assessment. Non-EU students residing abroad who need a visa additionally complete pre-enrolment on the Universitaly portal. See How to apply below and the linked admission, Universitaly and visa guides.",
+        },
+        {
+          question:
+            "How are tuition fees and scholarships structured at the University of Genoa?",
+          answer:
+            "The student contribution consists of stamp duty, regional tax and an ISEE-U-based university contribution, paid in three instalments via pagoPA. ALISEO regional grants alongside UniGe incentives and, where eligible, MAECI or Invest Your Talent in Italy opportunities may apply. Amounts and eligibility change yearly, so verify the current fees page and scholarship calls.",
+        },
+      ]
+    : [];
+
   const canonical = `${SITE_URL}/universities/${university.slug || slug}`;
 
   const breadcrumbItems = [
@@ -376,7 +416,9 @@ export default async function UniversityDetailsPage({ params }) {
     }
 
     const websiteUrl = (
-      university.officialWebsite || university.website || ""
+      university.officialWebsite ||
+      university.website ||
+      (isGenoa ? "https://unige.it" : "")
     ).trim();
     if (websiteUrl) {
       schema.sameAs = websiteUrl;
@@ -750,6 +792,144 @@ export default async function UniversityDetailsPage({ params }) {
                 </Section>
               )}
 
+              {isGenoa && (
+                <Section title="About the University of Genoa (UniGe)">
+                  <p>
+                    The University of Genoa (Università degli Studi di
+                    Genova, commonly called UniGe) is a public university
+                    in Genoa, Italy, founded in 1481. Its main seat is at
+                    Via Balbi 5 in the historic centre of Genoa.
+                  </p>
+                  <p className="mt-4">
+                    The university states it has 5 Schools, 22 Departments
+                    and 15 Libraries, with more than 36,000 students
+                    including more than 3,000 international students of
+                    110 nationalities. It describes four campuses across
+                    Liguria: Genoa, Imperia, Savona and La Spezia. For
+                    authoritative history and institutional detail, see
+                    the{" "}
+                    <a
+                      href="https://unige.it/en/unige"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      university&apos;s official about page
+                    </a>{" "}
+                    and the{" "}
+                    <a
+                      href="https://unige.it/en/welcome/perche-studiare-in-unige"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      official why-study-at-UniGe page
+                    </a>
+                    .
+                  </p>
+                </Section>
+              )}
+
+              {isGenoa && (
+                <Section title="Schools, Departments and Campuses">
+                  <p>
+                    Teaching, research and technology transfer at UniGe
+                    are organised through 5 Schools and 22 Departments
+                    across 11 subject areas, supported by research,
+                    service and strategic centres and the University
+                    Library System.
+                  </p>
+                  <p className="mt-4">
+                    The main and historic seat is Genoa. The university
+                    describes Imperia as a decentralised seat, alongside
+                    the Savona University Campus and the La Spezia
+                    university pole, extending its presence across
+                    Liguria. Details are published on the{" "}
+                    <a
+                      href="https://rubrica.unige.it/strutture/scuole-dipartimenti"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      official schools and departments directory
+                    </a>
+                    , the{" "}
+                    <a
+                      href="https://unige.it/en/poli/imperia"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      official Imperia campus page
+                    </a>
+                    , the{" "}
+                    <a
+                      href="https://unige.it/en/poli/savona"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      official Savona campus page
+                    </a>{" "}
+                    and the{" "}
+                    <a
+                      href="https://unige.it/en/poli/laspezia"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      official La Spezia campus page
+                    </a>
+                    .
+                  </p>
+                </Section>
+              )}
+
+              {isGenoa && (
+                <Section title="English-taught programmes at the University of Genoa">
+                  <p>
+                    UniGe states it offers 15 degree courses in English
+                    among more than 130 degree courses. This page lists{" "}
+                    {totals.courses ?? courses.length} English-taught
+                    courses currently in our database — 2
+                    Bachelor&apos;s degrees and 15 Master&apos;s degrees
+                    — spanning engineering and robotics, maritime science
+                    and yacht design, biotechnology and materials
+                    science, architecture and design, and economics and
+                    data science. This count reflects our database, not
+                    the university&apos;s official total.
+                  </p>
+                  <p className="mt-4">
+                    Browse the course cards below, compare with other{" "}
+                    <Link
+                      href="/english-taught-courses-in-italy"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      English-taught courses in Italy
+                    </Link>{" "}
+                    or{" "}
+                    <Link
+                      href="/courses"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      browse all courses in Italy
+                    </Link>
+                    . The full official offer, including programmes
+                    taught in Italian, is on the{" "}
+                    <a
+                      href="https://corsi.unige.it/en/corsi/lingua/en"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      university&apos;s official English-language course
+                      catalogue
+                    </a>
+                    .
+                  </p>
+                </Section>
+              )}
+
               <section
                 id="courses"
                 className="scroll-mt-24 rounded-[1.75rem] border border-border bg-card p-6 shadow-sm sm:p-8"
@@ -1098,6 +1278,266 @@ export default async function UniversityDetailsPage({ params }) {
                     </Link>
                     .
                   </p>
+                </Section>
+              )}
+
+              {isGenoa && (
+                <Section title="How to apply to the University of Genoa">
+                  <h3 className="font-bold text-foreground">
+                    Who must use UniGeApply
+                  </h3>
+                  <p className="mt-2">
+                    Students who access UniGe with a non-Italian
+                    qualification start with UniGeApply, the
+                    university&apos;s international admissions portal
+                    for qualification assessment. This covers foreign
+                    titles obtained abroad or in Italy, as well as
+                    Italian diplomas obtained abroad, with limited
+                    exemptions published by the university.
+                  </p>
+                  <h3 className="mt-5 font-bold text-foreground">
+                    Fall versus spring selections
+                  </h3>
+                  <p className="mt-2">
+                    UniGe runs two selections per academic year: a fall
+                    session reserved for students who need a visa, and a
+                    spring session for Italian, EU and non-EU students
+                    already regularly resident in Italy. Programmes with
+                    scheduled access may set their own earlier closures
+                    linked to entrance-test registration, so always
+                    check the current UniGeApply call.
+                  </p>
+                  <h3 className="mt-5 font-bold text-foreground">
+                    Universitaly pre-enrolment for visa applicants
+                  </h3>
+                  <p className="mt-2">
+                    Non-EU students residing abroad who need a study
+                    visa additionally complete pre-enrolment on the
+                    Universitaly portal after UniGeApply assessment, and
+                    use it for the visa request. Our{" "}
+                    <Link
+                      href="/italy-university-admission"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Italy university admission guide
+                    </Link>
+                    ,{" "}
+                    <Link
+                      href="/universitaly"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Universitaly guidance
+                    </Link>{" "}
+                    and{" "}
+                    <Link
+                      href="/italy-student-visa"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Italy student visa guidance
+                    </Link>{" "}
+                    explain the surrounding steps.
+                  </p>
+                  <h3 className="mt-5 font-bold text-foreground">
+                    Documents and language at a glance
+                  </h3>
+                  <p className="mt-2">
+                    Documents are handled in phases across UniGeApply,
+                    Universitaly where applicable, and final enrolment:
+                    identity and stay documents plus title documents on
+                    the foreign qualification. Depending on the
+                    qualification and programme, recognised proof such
+                    as CIMEA comparability or a Declaration of Value
+                    may apply — neither is universally mandatory for
+                    every applicant. UniGe guidance states that
+                    knowledge of Italian is not required for courses
+                    taught in English. Verify the current programme
+                    call, the{" "}
+                    <a
+                      href="https://unige.it/en/international-enrolment"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      official international enrolment page
+                    </a>{" "}
+                    and the{" "}
+                    <a
+                      href="https://unige.it/en/internazionale/iscrizioni-internazionali/unigeapply"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      official UniGeApply page
+                    </a>{" "}
+                    before applying.
+                  </p>
+                </Section>
+              )}
+
+              {isGenoa && (
+                <Section title="Tuition fees and scholarships">
+                  <p>
+                    The student contribution consists of stamp duty
+                    (€16), regional tax (minimum €120) and a university
+                    contribution based on ISEE-U for university
+                    benefits. It is paid in three instalments via
+                    pagoPA. Students whose household lives abroad or
+                    holds assets abroad use ISEE-U Parificato. Students
+                    who apply for an ALISEO regional study grant follow
+                    the university&apos;s specific initial-payment
+                    treatment for grant applicants.
+                  </p>
+                  <p className="mt-4">
+                    Support includes ALISEO regional study grants
+                    alongside UniGe scholarships, incentives and awards,
+                    as well as MAECI government opportunities and
+                    Invest Your Talent in Italy where eligible. Calls,
+                    eligibility and amounts change every academic year,
+                    so always verify the current regulation. See our{" "}
+                    <Link
+                      href="/italy-scholarships"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Italy scholarships guidance
+                    </Link>
+                    , our{" "}
+                    <Link
+                      href="/cost-of-studying-in-italy"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      cost of studying in Italy guidance
+                    </Link>{" "}
+                    and the university&apos;s{" "}
+                    <a
+                      href="https://unige.it/en/fees-and-benefits"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      official tuition fees and benefits page
+                    </a>
+                    .
+                  </p>
+                </Section>
+              )}
+
+              {isGenoa && (
+                <Section title="International student essentials">
+                  <p>
+                    The Welcome Office supports international students
+                    with accommodation search, residence permit and tax
+                    code assistance, and information on health care,
+                    bank accounts, bus passes and university canteens.
+                    The university organises Italian language courses
+                    for foreign enrolled students and supports incoming
+                    Erasmus+ and other mobility periods.
+                  </p>
+                  <p className="mt-4">
+                    UniGe is also a partner in the Ulysseus European
+                    University alliance. Our{" "}
+                    <Link
+                      href="/study-in-italy"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Study in Italy guide
+                    </Link>{" "}
+                    and{" "}
+                    <Link
+                      href="/italy-student-visa"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Italy student visa guidance
+                    </Link>{" "}
+                    cover these steps in more depth.
+                  </p>
+                </Section>
+              )}
+
+              {isGenoa && (
+                <Section title="Applying to the University of Genoa from India">
+                  <p>
+                    Applicants applying from India follow the non-EU
+                    resident-abroad pathway where a visa applies: check
+                    the English-taught programme and its requirements,
+                    complete qualification assessment on UniGeApply
+                    where required, follow the university selection and
+                    admission steps, then complete pre-enrolment on the
+                    Universitaly portal where applicable and proceed
+                    with the visa process and arrival formalities.
+                  </p>
+                  <p className="mt-4">
+                    Prepare identity documents, title documents on the
+                    foreign qualification, and accepted proof of English
+                    proficiency for English-taught programmes. CIMEA
+                    comparability or a Declaration of Value may apply
+                    depending on the qualification and programme — not
+                    for every applicant. Admission and visa outcomes
+                    are never guaranteed. Verify the current programme
+                    call and official enrolment pages before applying —
+                    see the{" "}
+                    <Link
+                      href="/study-in-italy"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Study in Italy guide
+                    </Link>
+                    ,{" "}
+                    <Link
+                      href="/italy-university-admission"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Italy university admission process
+                    </Link>
+                    ,{" "}
+                    <Link
+                      href="/universitaly"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Universitaly guidance
+                    </Link>
+                    ,{" "}
+                    <Link
+                      href="/italy-student-visa"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Italy student visa guidance
+                    </Link>
+                    ,{" "}
+                    <Link
+                      href="/italy-scholarships"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Italy scholarships guidance
+                    </Link>{" "}
+                    and{" "}
+                    <Link
+                      href="/english-taught-courses-in-italy"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      English-taught courses in Italy
+                    </Link>
+                    .
+                  </p>
+                </Section>
+              )}
+
+              {isGenoa && genoaFaqs.length > 0 && (
+                <Section title="Frequently asked questions about the University of Genoa">
+                  <div className="space-y-3">
+                    {genoaFaqs.map((faq) => (
+                      <details
+                        key={faq.question}
+                        className="rounded-xl border border-border bg-background p-5"
+                      >
+                        <summary className="cursor-pointer font-bold text-foreground">
+                          {faq.question}
+                        </summary>
+                        <p className="mt-3 whitespace-pre-line">
+                          {faq.answer}
+                        </p>
+                      </details>
+                    ))}
+                  </div>
                 </Section>
               )}
 
