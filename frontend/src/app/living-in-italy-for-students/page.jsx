@@ -164,6 +164,19 @@ const faqs = [
   },
 ];
 
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer,
+    },
+  })),
+};
+
 const plannerLinks = [
   {
     href: "/study-in-italy",
@@ -222,6 +235,7 @@ export default function LivingInItalyPage() {
     <>
       <JsonLd data={breadcrumbSchema} />
       <JsonLd data={webPageSchema} />
+      <JsonLd data={faqSchema} />
       <main className="min-h-screen bg-[var(--background)]">
         {/* 1. Hero */}
         <section className="relative overflow-hidden border-b border-[var(--border)] bg-[var(--hero-gradient)]">
