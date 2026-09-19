@@ -488,6 +488,15 @@ export default async function CourseDetailsPage({ params }) {
       "university-of-modena-and-reggio-emilia" &&
     (course?.slug || courseSlug) === "energy-engineering";
 
+  // Programme-specific verified content (official University of Bergamo
+  // source) for one course page only. Slug-gated so no other course page is
+  // affected, and used solely for visible body content — never for
+  // title/meta/schema. Declared before quickLinks: referenced below.
+  const isBergamoIMM =
+    (university?.slug || universitySlug) === "university-of-bergamo" &&
+    (course?.slug || courseSlug) ===
+      "international-management-and-marketing";
+
   const requirementItems = [
     {
       label: "Academic requirement",
@@ -549,6 +558,9 @@ export default async function CourseDetailsPage({ params }) {
       ? [{ href: "#what-you-study", label: "What You'll Study" }]
       : []),
     ...(isEnergyUnimore
+      ? [{ href: "#what-you-study", label: "What You'll Study" }]
+      : []),
+    ...(isBergamoIMM
       ? [{ href: "#what-you-study", label: "What You'll Study" }]
       : []),
     ...(requirementItems.length
@@ -670,6 +682,9 @@ export default async function CourseDetailsPage({ params }) {
           },
         ]
       : []),
+    ...(isBergamoIMM
+      ? [{ href: "#careers", label: "Career Opportunities" }]
+      : []),
     ...(course.scholarships
       ? [{ href: "#scholarships", label: "Scholarships" }]
       : []),
@@ -788,6 +803,14 @@ export default async function CourseDetailsPage({ params }) {
           {
             href: "#access-and-international",
             label: "Access, Study Plan and International Opportunities",
+          },
+        ]
+      : []),
+    ...(isBergamoIMM
+      ? [
+          {
+            href: "#access-and-international",
+            label: "Access & International",
           },
         ]
       : []),
@@ -1826,6 +1849,80 @@ export default async function CourseDetailsPage({ params }) {
                   className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
                 >
                   Study in Italy guide
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
+          {isBergamoIMM && (
+            <ContentSection
+              id="what-you-study"
+              title="What You’ll Study in International Management and Marketing"
+              icon={School}
+            >
+              <p className="leading-8 text-muted">
+                This 2-year Master&apos;s degree (LM-77, 120 ECTS) is
+                delivered entirely in English through the Department of
+                Management at the University of Bergamo, in conventional
+                mode at the Campus of Economics and Law (Via dei Caniana 2,
+                Bergamo). It is the programme &quot;International Management
+                and Marketing&quot; (IMM), class LM-77 Scienze
+                economico-aziendali, taught in English as documented in the
+                official University of Bergamo course catalogue.
+              </p>
+              <ul className="mt-4 space-y-3">
+                {[
+                  "Two curricula from the first year — International Management and Marketing",
+                  "International management area — business models, projects and digital processes in international economic and social contexts, entrepreneurial ideas for new ventures and existing firms, market diagnostics and business intelligence platforms",
+                  "Marketing area — strategic and operational marketing, digital marketing management and new consumption models",
+                  "Core business foundations — economic-business, statistical, digital and legal subjects that support the international manager and marketing specialist profile within an international and intercultural perspective",
+                  "Experiential learning — case studies, field projects with national and international firms, simulations and group or individual operational work, with access to European and extra-European internships and thematic teaching programmes",
+                ].map((topic) => (
+                  <li key={topic} className="flex gap-3 leading-7 text-muted">
+                    <span className="font-bold text-success">✓</span>
+                    <span>{topic}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 text-sm leading-6 text-muted">
+                The areas above summarise the official University of Bergamo
+                programme description at a high level. Confirm the current
+                module list and curriculum structure on the official programme
+                pages for your enrolment year.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                See the{" "}
+                <a
+                  href="https://ls-imm.unibg.it/en"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  official IMM programme site (ls-imm.unibg.it)
+                </a>{" "}
+                and the{" "}
+                <a
+                  href="https://www.unibg.it/studiare/corsi/offertaformativa/international-management-and-marketing"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  official University of Bergamo course catalogue page
+                </a>
+                . See how this English-taught degree fits among{" "}
+                <Link
+                  href="/english-taught-courses-in-italy"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  English-taught courses in Italy
+                </Link>{" "}
+                and explore more options on the{" "}
+                <Link
+                  href={`/universities/${university.slug}`}
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  {university.name} page
                 </Link>
                 .
               </p>
@@ -2953,6 +3050,40 @@ export default async function CourseDetailsPage({ params }) {
             </ContentSection>
           )}
 
+          {isBergamoIMM && (
+            <ContentSection
+              id="careers"
+              title="Career Opportunities and Further Study"
+              icon={GraduationCap}
+            >
+              <p className="leading-8 text-muted">
+                According to the University of Bergamo&apos;s official
+                programme description, this Master&apos;s forms two main
+                professional profiles — the international manager and the
+                marketing manager — able to work in highly dynamic national
+                and international contexts focused on innovation and the
+                digitalisation of services and products, where competition
+                is global and contexts are multicultural.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                The course documents outlets across entrepreneurship and
+                business development for new and existing firms, digital
+                project management, international management and export
+                management, digital business advisory, innovation strategy,
+                global leadership, multicultural management and business
+                internacional areas supported by business intelligence
+                platforms and field projects. For broader planning, see our{" "}
+                <Link
+                  href="/study-in-italy"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Study in Italy guide
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
           {course.scholarships && (
             <ContentSection id="scholarships" title="Scholarships" icon={Sparkles}>
               <p className="leading-8 text-muted">{course.scholarships}</p>
@@ -3699,6 +3830,75 @@ export default async function CourseDetailsPage({ params }) {
                   Study in Italy guide
                 </Link>
                 , the{" "}
+                <Link
+                  href="/italy-university-admission"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Italy university admission process
+                </Link>
+                ,{" "}
+                <Link
+                  href="/universitaly"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Universitaly guidance
+                </Link>{" "}
+                and{" "}
+                <Link
+                  href="/italy-student-visa"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Italy student visa guidance
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
+          {isBergamoIMM && (
+            <ContentSection
+              id="access-and-international"
+              title="Access, Study Plan and International Opportunities"
+              icon={Languages}
+            >
+              <p className="leading-8 text-muted">
+                This is a 2-year Master&apos;s degree (LM-77) delivered
+                entirely in English at the University of Bergamo in
+                conventional mode, as documented in the official ordinance
+                for 2025/2026. Admission is subject to verification of
+                curricular requirements and adequate preparation; the
+                official call describes a candidate evaluation process for
+                Italian and foreign qualification holders.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                The programme documents two curricula (International
+                Management and Marketing) from the first year, a study plan
+                organised over two years for 120 ECTS, and an international
+                and multicultural learning experience with experiential
+                methods — case studies, field projects, simulations and work
+                in groups or individually — and visiting professors and
+                international students.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                Documented international opportunities include a Double
+                Degree with the University of Stuttgart (Germany), agreements
+                such as the Double Degree with Krems and the Joint Degree
+                MERCURI, the Global Business Internship project with
+                international companies, and a broader portfolio of mobility
+                supported by cooperation agreements including Johannes Kepler
+                Universität Linz (Austria) and Erasmus+ where published.
+                Teaching includes business intelligence platform practice
+                and thematic teaching programmes, with European and
+                extra-European internships. Confirm current double-degree,
+                mobility and internship options in the official call before
+                planning around them.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                Access follows the annual official University of Bergamo
+                call — verify the current call for eligibility, documents
+                and procedures before applying. International applicants
+                should also check the applicable non-EU and Universitaly
+                steps and visa process. See the{" "}
                 <Link
                   href="/italy-university-admission"
                   className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
