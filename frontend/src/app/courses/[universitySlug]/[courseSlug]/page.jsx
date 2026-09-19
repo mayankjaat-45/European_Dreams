@@ -497,6 +497,14 @@ export default async function CourseDetailsPage({ params }) {
     (course?.slug || courseSlug) ===
       "international-management-and-marketing";
 
+  // Programme-specific verified content (official University of Genoa
+  // source) for one course page only. Slug-gated so no other course page is
+  // affected, and used solely for visible body content — never for
+  // title/meta/schema. Declared before quickLinks: referenced below.
+  const isGenoaImperia =
+    (university?.slug || universitySlug) === "university-of-genoa" &&
+    (course?.slug || courseSlug) === "computer-engineering-imperia-campus";
+
   const requirementItems = [
     {
       label: "Academic requirement",
@@ -561,6 +569,9 @@ export default async function CourseDetailsPage({ params }) {
       ? [{ href: "#what-you-study", label: "What You'll Study" }]
       : []),
     ...(isBergamoIMM
+      ? [{ href: "#what-you-study", label: "What You'll Study" }]
+      : []),
+    ...(isGenoaImperia
       ? [{ href: "#what-you-study", label: "What You'll Study" }]
       : []),
     ...(requirementItems.length
@@ -684,6 +695,14 @@ export default async function CourseDetailsPage({ params }) {
       : []),
     ...(isBergamoIMM
       ? [{ href: "#careers", label: "Career Opportunities" }]
+      : []),
+    ...(isGenoaImperia
+      ? [
+          {
+            href: "#careers",
+            label: "Career Opportunities and Further Study",
+          },
+        ]
       : []),
     ...(course.scholarships
       ? [{ href: "#scholarships", label: "Scholarships" }]
@@ -811,6 +830,14 @@ export default async function CourseDetailsPage({ params }) {
           {
             href: "#access-and-international",
             label: "Access & International",
+          },
+        ]
+      : []),
+    ...(isGenoaImperia
+      ? [
+          {
+            href: "#access-and-international",
+            label: "Access, Study Plan and International Opportunities",
           },
         ]
       : []),
@@ -1909,6 +1936,91 @@ export default async function CourseDetailsPage({ params }) {
                   className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
                 >
                   official University of Bergamo course catalogue page
+                </a>
+                . See how this English-taught degree fits among{" "}
+                <Link
+                  href="/english-taught-courses-in-italy"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  English-taught courses in Italy
+                </Link>{" "}
+                and explore more options on the{" "}
+                <Link
+                  href={`/universities/${university.slug}`}
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  {university.name} page
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
+          {isGenoaImperia && (
+            <ContentSection
+              id="what-you-study"
+              title="What You'll Study in Computer Engineering (Imperia Campus)"
+              icon={School}
+            >
+              <p className="leading-8 text-muted">
+                This 3-year Bachelor&apos;s Degree (L-8 Information Engineering,
+                180 CFU) is delivered entirely in English at the University of
+                Genoa&apos;s Imperia campus through the Department of
+                Informatics, Bioengineering, Robotics and Systems Engineering
+                (DIBRIS) — Interscuola Politecnica. The programme is listed in
+                the official University of Genoa catalogue as Computer
+                Engineering at Imperia (course code 12133, class L-8 R), with
+                teaching in Imperia and free (open) access subject to an initial
+                preparation check.
+              </p>
+              <ul className="mt-4 space-y-3">
+                {[
+                  "Foundations — mathematical analysis, algebra and geometry, general physics, and probability for engineering",
+                  "Computing and computation — algorithms, automata and computability, programming languages and software design",
+                  "Systems and architectures — electronic computers and operating systems, computer networks and communication protocols",
+                  "Data and intelligence — databases, artificial intelligence fundamentals and data-driven applications",
+                  "Engineering breadth — electronics, telecommunications and control systems alongside management-engineering elements",
+                  "Laboratory and project work alongside lectures, with practical activities that complement theory",
+                ].map((topic) => (
+                  <li key={topic} className="flex gap-3 leading-7 text-muted">
+                    <span className="font-bold text-success">✓</span>
+                    <span>{topic}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 text-sm leading-6 text-muted">
+                The areas above summarise the official University of Genoa
+                programme description at a high level. Confirm the current
+                module list and teaching regulations on the official programme
+                pages for your enrolment year.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                See the{" "}
+                <a
+                  href="https://corsi.unige.it/en/corsi/12133"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  official UniGe course page for Computer Engineering at Imperia (corsi.unige.it/corsi/12133)
+                </a>{" "}
+                and the{" "}
+                <a
+                  href="https://www.unige.it/en/campus-details/imperia"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  official Imperia campus page (unige.it — Imperia)
+                </a>{" "}
+                and also{" "}
+                <a
+                  href="https://corsi.unige.it/corsi/12133"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  corsi.unige.it/corsi/12133 (Italian catalogue)
                 </a>
                 . See how this English-taught degree fits among{" "}
                 <Link
@@ -3084,6 +3196,40 @@ export default async function CourseDetailsPage({ params }) {
             </ContentSection>
           )}
 
+          {isGenoaImperia && (
+            <ContentSection
+              id="careers"
+              title="Career Opportunities and Further Study"
+              icon={GraduationCap}
+            >
+              <p className="leading-8 text-muted">
+                According to the University of Genoa&apos;s official programme
+                description, Computer Engineering at Imperia trains a Bachelor-
+                level computer engineer able to design, develop and manage
+                information systems and computer networks. Graduates combine
+                scientific foundations in mathematics and physics with core
+                informatics and engineering skills applicable across IT and
+                engineering sectors.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                Documented outlets include IT industries operating in hardware
+                and software production, automation and robotics industries,
+                companies operating in information systems and computer
+                networks, service companies and public-administration IT
+                services. The three-year Bachelor&apos;s also provides a pathway
+                to Master&apos;s-level study in Computer Engineering and related
+                LM-32 / LM-18 programmes. For broader planning, see our{" "}
+                <Link
+                  href="/study-in-italy"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Study in Italy guide
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
           {course.scholarships && (
             <ContentSection id="scholarships" title="Scholarships" icon={Sparkles}>
               <p className="leading-8 text-muted">{course.scholarships}</p>
@@ -3918,6 +4064,120 @@ export default async function CourseDetailsPage({ params }) {
                   className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
                 >
                   Italy student visa guidance
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
+          {isGenoaImperia && (
+            <ContentSection
+              id="access-and-international"
+              title="Access, Study Plan and International Opportunities"
+              icon={Languages}
+            >
+              <p className="leading-8 text-muted">
+                This is a free-access Bachelor&apos;s Degree (L-8 Information
+                Engineering, 180 CFU) delivered in English at the Imperia
+                campus over 3 years. Enrolment requires an upper secondary
+                diploma (or recognised equivalent) and a verification of initial
+                preparation as documented on the official course page (course
+                code 12133). The verification follows the modalities published
+                for the Imperia location — confirm dates and procedures on the
+                official page before planning around them.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                The study plan follows the 3-year, 180-CFU structure for class
+                L-8 R through DIBRIS — Interscuola Politecnica — with teaching
+                at Imperia. Laboratory and project activities complement
+                lectures. Documents such as the manifesto degli studi, didattica
+                programmata and regolamento for 2026/2027 are published on the
+                official course site.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                International opportunities documented by UniGe include Erasmus+
+                study and traineeship mobility and department partnerships.
+                Foreign qualification holders follow the dedicated international
+                enrolments information indicated for the Imperia location, with
+                Italian-language proof waived where the course is taught in
+                English — verify the current UniGe portal and official call
+                before applying.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                Access follows the annual official University of Genoa call —
+                verify the current call for eligibility, documents and
+                procedures before applying. International applicants should also
+                check the applicable non-EU and Universitaly steps and visa
+                process. See the{" "}
+                <a
+                  href="https://corsi.unige.it/en/corsi/12133"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  official UniGe course page (corsi.unige.it/en/corsi/12133)
+                </a>
+                ,{" "}
+                <a
+                  href="https://corsi.unige.it/corsi/12133"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  corsi.unige.it/corsi/12133
+                </a>
+                ,{" "}
+                <a
+                  href="https://www.unige.it/en/campus-details/imperia"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  official Imperia campus page (unige.it — Imperia)
+                </a>{" "}
+                and{" "}
+                <a
+                  href="https://unige.it/en/poli/imperia"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  unige.it/en/poli/imperia
+                </a>
+                . For application guidance see the{" "}
+                <Link
+                  href="/italy-university-admission"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Italy university admission process
+                </Link>
+                ,{" "}
+                <Link
+                  href="/universitaly"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Universitaly guidance
+                </Link>{" "}
+                and{" "}
+                <Link
+                  href="/italy-student-visa"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Italy student visa guidance
+                </Link>
+                . See also{" "}
+                <Link
+                  href="/english-taught-courses-in-italy"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  English-taught courses in Italy
+                </Link>{" "}
+                and the{" "}
+                <Link
+                  href={`/universities/${university.slug}`}
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  {university.name} page
                 </Link>
                 .
               </p>
