@@ -479,6 +479,15 @@ export default async function CourseDetailsPage({ params }) {
     (course?.slug || courseSlug) ===
       "biology-of-human-and-environmental-health";
 
+  // Programme-specific verified content (official UNIMORE source) for one
+  // course page only. Slug-gated so no other course page is affected, and
+  // used solely for visible body content — never for title/meta/schema.
+  // Declared before quickLinks: referenced below.
+  const isEnergyUnimore =
+    (university?.slug || universitySlug) ===
+      "university-of-modena-and-reggio-emilia" &&
+    (course?.slug || courseSlug) === "energy-engineering";
+
   const requirementItems = [
     {
       label: "Academic requirement",
@@ -537,6 +546,9 @@ export default async function CourseDetailsPage({ params }) {
       ? [{ href: "#what-you-study", label: "What You'll Study" }]
       : []),
     ...(isBioHealthBologna
+      ? [{ href: "#what-you-study", label: "What You'll Study" }]
+      : []),
+    ...(isEnergyUnimore
       ? [{ href: "#what-you-study", label: "What You'll Study" }]
       : []),
     ...(requirementItems.length
@@ -650,6 +662,14 @@ export default async function CourseDetailsPage({ params }) {
           },
         ]
       : []),
+    ...(isEnergyUnimore
+      ? [
+          {
+            href: "#careers",
+            label: "Career Opportunities and Further Study",
+          },
+        ]
+      : []),
     ...(course.scholarships
       ? [{ href: "#scholarships", label: "Scholarships" }]
       : []),
@@ -756,6 +776,14 @@ export default async function CourseDetailsPage({ params }) {
       ? [{ href: "#skills", label: "Health and Research Skills" }]
       : []),
     ...(isBioHealthBologna
+      ? [
+          {
+            href: "#access-and-international",
+            label: "Access, Study Plan and International Opportunities",
+          },
+        ]
+      : []),
+    ...(isEnergyUnimore
       ? [
           {
             href: "#access-and-international",
@@ -3690,6 +3718,224 @@ export default async function CourseDetailsPage({ params }) {
                   className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
                 >
                   Italy student visa guidance
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
+          {isEnergyUnimore && (
+            <ContentSection
+              id="what-you-study"
+              title="What You’ll Study in Energy Engineering"
+              icon={School}
+            >
+              <p className="leading-8 text-muted">
+                This is a Master&apos;s degree in Energy Engineering (LM-30
+                Energy and Nuclear Engineering) running over 2 years in
+                English in Reggio Emilia through the Department of Sciences
+                and Methods for Engineering (DISMI). The programme focuses
+                on energy transition and electrification across energy
+                systems and processes.
+              </p>
+              <ul className="mt-4 space-y-3">
+                {[
+                  "Energy Systems and Processes area — energy systems and processes, renewable energy and energy efficiency",
+                  "Power Generation and Conversion area — power generation and conversion with electricity and hydrogen as energy sources and carriers",
+                  "Energy transition and electrification focus across both areas",
+                  "Applied finish — work experience and a final examination",
+                ].map((topic) => (
+                  <li key={topic} className="flex gap-3 leading-7 text-muted">
+                    <span className="font-bold text-success">✓</span>
+                    <span>{topic}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 text-sm leading-6 text-muted">
+                The areas above summarise the official UNIMORE programme
+                description at a high level. Confirm the current teaching
+                plan on the official programme pages for your enrolment
+                year.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                See the{" "}
+                <a
+                  href="https://www.unimore.it/en/education/degree-programmes/energy-engineering"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  official UNIMORE degree-programme page
+                </a>{" "}
+                and the{" "}
+                <a
+                  href="https://dismi.unimore.it/en/education/masters-degree-programmes/energy-engineering"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  official DISMI masters-programme page
+                </a>
+                . See how this English-taught degree fits among{" "}
+                <Link
+                  href="/english-taught-courses-in-italy"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  English-taught courses in Italy
+                </Link>{" "}
+                and explore more options on the{" "}
+                <Link
+                  href={`/universities/${university.slug}`}
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  {university.name} page
+                </Link>{" "}
+                or by{" "}
+                <Link
+                  href="/courses"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  browsing all courses in Italy
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
+          {isEnergyUnimore && (
+            <ContentSection
+              id="access-and-international"
+              title="Access, Study Plan and International Opportunities"
+              icon={Languages}
+            >
+              <p className="leading-8 text-muted">
+                This is a free-access Master&apos;s programme delivered
+                entirely in English in blended mode. The department
+                describes delivery as approximately 50% face-to-face and
+                50% online. Admission requires English at B2 level alongside
+                prior university credits: a minimum of 33 credits in
+                specified mathematics, physics and chemistry areas and a
+                minimum of 12 credits in specified engineering-energy
+                areas. Verify the exact credit tables on the current
+                official admission pages before applying.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                Official 2026/27 calls exist for this programme. Treat any
+                dates, places and procedures drawn from those calls as
+                2026/27 call-specific rather than evergreen, and always
+                verify the current programme call. Extra-EU applicants
+                should verify the current programme call and the applicable
+                Universitaly and embassy process. See the{" "}
+                <a
+                  href="https://dismi.unimore.it/en/services/future-student/admission-procedures-masters-degree-programmes"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  official DISMI admission-procedures page
+                </a>{" "}
+                and the{" "}
+                <a
+                  href="https://www.unimore.it/en/university/calls/call-application-and-results-energy-engineering-reserved-extra-ue-students"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  official 2026/27 extra-EU call page
+                </a>
+                .
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                For students applying from India: verify the current
+                programme admission requirements, verify academic-credit
+                eligibility against the 33-credit and 12-credit rules,
+                prepare foreign-qualification documentation, follow the
+                applicable non-EU and Universitaly process where required,
+                and check the current programme call before applying. See
+                the{" "}
+                <Link
+                  href="/italy-university-admission"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Italy university admission process
+                </Link>
+                ,{" "}
+                <Link
+                  href="/universitaly"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Universitaly guidance
+                </Link>
+                ,{" "}
+                <Link
+                  href="/italy-student-visa"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Italy student visa guidance
+                </Link>
+                , the{" "}
+                <Link
+                  href="/study-in-italy"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Study in Italy guide
+                </Link>
+                ,{" "}
+                <Link
+                  href="/italy-scholarships"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Italy scholarships guidance
+                </Link>
+                ,{" "}
+                <Link
+                  href="/english-taught-courses-in-italy"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  English-taught courses in Italy
+                </Link>
+                , the{" "}
+                <Link
+                  href={`/universities/${university.slug}`}
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  {university.name} page
+                </Link>{" "}
+                and{" "}
+                <Link
+                  href="/courses"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  all courses in Italy
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
+          {isEnergyUnimore && (
+            <ContentSection
+              id="careers"
+              title="Career Opportunities and Further Study"
+              icon={GraduationCap}
+            >
+              <p className="leading-8 text-muted">
+                According to UNIMORE&apos;s official programme pages, the
+                degree develops knowledge relevant to energy systems and
+                processes, power generation and conversion, renewable
+                energy, energy efficiency, and electrification and energy
+                transition, including electricity and hydrogen as energy
+                sources and carriers.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                Further study can include doctoral and other postgraduate
+                pathways where admission requirements are met. For broader
+                planning, see our{" "}
+                <Link
+                  href="/study-in-italy"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Study in Italy guide
                 </Link>
                 .
               </p>
