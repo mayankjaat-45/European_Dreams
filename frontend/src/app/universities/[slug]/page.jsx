@@ -249,6 +249,13 @@ export default async function UniversityDetailsPage({ params }) {
   // so no other university page is affected.
   const isTurin = (university.slug || slug) === "university-of-turin";
 
+  // Eastern-Piedmont-only gate. The verified slug is
+  // "university-of-eastern-piedmont" (live route + API record); every
+  // Eastern Piedmont section below uses this flag so no other
+  // university page is affected. Declared before every usage below.
+  const isEasternPiedmont =
+    (university.slug || slug) === "university-of-eastern-piedmont";
+
   // The data object supports establishedYear (Number) but the Milan,
   // Sapienza, Genoa and Turin records have none; fall back to the
   // officially documented founding years for these pages only.
@@ -258,7 +265,8 @@ export default async function UniversityDetailsPage({ params }) {
     (isUniversityOfMilan ? 1924 : null) ||
     (isSapienza ? 1303 : null) ||
     (isGenoa ? 1481 : null) ||
-    (isTurin ? 1404 : null);
+    (isTurin ? 1404 : null) ||
+    (isEasternPiedmont ? 1998 : null);
 
   // Visible Milan FAQs. Each answer repeats only content already present in
   // the gated sections above — no invented claims.
@@ -397,6 +405,40 @@ export default async function UniversityDetailsPage({ params }) {
       ]
     : [];
 
+  // Visible Eastern Piedmont FAQs. Each answer repeats only content
+  // already present in the gated sections below — no invented claims.
+  // Visible only; no FAQPage schema is added anywhere on this page.
+  const easternPiedmontFaqs = isEasternPiedmont
+    ? [
+        {
+          question: "What is the University of Eastern Piedmont?",
+          answer:
+            "The University of Eastern Piedmont, officially the Università degli Studi del Piemonte Orientale “Amedeo Avogadro” (UPO), is a public university founded on 30 July 1998. It is named after the Piedmontese scientist Amedeo Avogadro and follows a polycentric model across Alessandria, Novara and Vercelli.",
+        },
+        {
+          question: "Where is UPO located?",
+          answer:
+            "UPO is rooted in three city-campuses — Alessandria, Novara and Vercelli — with the Rectorate in Vercelli, alongside additional teaching sites elsewhere in Piedmont. See the About and Departments sections above and the university's official where-we-are page for detail.",
+        },
+        {
+          question: "Does UPO offer English-taught programmes?",
+          answer:
+            "Yes. Verified entirely-in-English options include the Management for Sustainability bachelor's degree and master's degrees in Food, Health and Environment, Medical Biotechnologies, Management and Finance, and Disaster and Health Crisis Management. This page lists the English-taught courses currently in our database below — not the university's complete official catalogue.",
+        },
+        {
+          question: "How do non-EU students apply to UPO?",
+          answer:
+            "Non-EU students residing abroad who need a visa complete pre-enrolment on the Universitaly portal, which UPO validates before it goes to the embassy or consulate. Master's programmes also set their own programme-level procedures, so always verify the current programme page. See How to apply below and the linked admission, Universitaly and visa guides.",
+        },
+        {
+          question:
+            "How are tuition fees and scholarships handled at UPO?",
+          answer:
+            "UPO charges an annual all-inclusive fee in instalments, calculated with ISEE or, for households with income abroad, ISEE Parificato, with a No-Tax Area and a fee simulator. Scholarships, accommodation and canteens run through EDISU Piemonte via a separate application. Amounts and calls change yearly, so verify the current fees pages and EDISU calls.",
+        },
+      ]
+    : [];
+
   const canonical = `${SITE_URL}/universities/${university.slug || slug}`;
 
   const breadcrumbItems = [
@@ -459,7 +501,8 @@ export default async function UniversityDetailsPage({ params }) {
       university.officialWebsite ||
       university.website ||
       (isGenoa ? "https://unige.it" : "") ||
-      (isTurin ? "https://www.unito.it" : "")
+      (isTurin ? "https://www.unito.it" : "") ||
+      (isEasternPiedmont ? "https://www.uniupo.it" : "")
     ).trim();
     if (websiteUrl) {
       schema.sameAs = websiteUrl;
@@ -1111,6 +1154,161 @@ export default async function UniversityDetailsPage({ params }) {
                     English proof or a medium-of-instruction document
                     depending on the programme. Always verify the
                     current programme call before applying.
+                  </p>
+                </Section>
+              )}
+
+              {isEasternPiedmont && (
+                <Section title="About the University of Eastern Piedmont (UPO)">
+                  <p>
+                    The University of Eastern Piedmont, officially the
+                    Università degli Studi del Piemonte Orientale
+                    “Amedeo Avogadro” (UPO), is a public university
+                    founded on 30 July 1998 after its separation from
+                    the University of Turin. It is named in honour of
+                    the Piedmontese scientist Amedeo Avogadro, who
+                    taught in Vercelli.
+                  </p>
+                  <p className="mt-4">
+                    UPO was founded with a polycentric vision: instead
+                    of a single concentrated seat, it is spread across
+                    three city-campuses — Alessandria, Novara and
+                    Vercelli — with additional teaching sites elsewhere
+                    in Piedmont. For authoritative history and
+                    institutional detail, see the{" "}
+                    <a
+                      href="https://www.uniupo.it/en/about-upo/about-us"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      university&apos;s official about page
+                    </a>
+                    .
+                  </p>
+                </Section>
+              )}
+
+              {isEasternPiedmont && (
+                <Section title="Departments and Campuses">
+                  <p>
+                    Teaching and research at UPO are organised through
+                    its departments: Law and Political, Economic and
+                    Social Sciences (DIGSPES); Science and Technological
+                    Innovation (DISIT); Pharmaceutical Sciences (DSF);
+                    Studies for Economics and Business (DISEI);
+                    Translational Medicine (DIMET) and Health Sciences
+                    (DISS), whose teaching activities are coordinated by
+                    the School of Medicine; Humanities (DISUM); and
+                    Sustainable Development and Ecological Transition
+                    (DISSTE).
+                  </p>
+                  <p className="mt-4">
+                    The three main city-campuses are Alessandria,
+                    Novara — the largest — and Vercelli, which hosts
+                    the Rectorate, with further teaching activities in
+                    cities including Alba, Asti, Fossano, Biella and
+                    Verbania. Details are published on the{" "}
+                    <a
+                      href="https://www.uniupo.it/en/about-upo/our-structure/departments"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      official departments page
+                    </a>{" "}
+                    and the{" "}
+                    <a
+                      href="https://www.uniupo.it/en/about-upo/where-we-are"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      official where-we-are page
+                    </a>
+                    .
+                  </p>
+                </Section>
+              )}
+
+              {isEasternPiedmont && (
+                <Section title="English-taught programmes at UPO">
+                  <p>
+                    UPO&apos;s verified entirely-in-English offering
+                    covers both undergraduate and postgraduate level.
+                    At bachelor&apos;s level, Management for
+                    Sustainability is a 3-year L-18 degree taught in
+                    English in blended mode, with open admission
+                    subject to a non-selective initial assessment and
+                    B2-level English. At master&apos;s level, Food,
+                    Health and Environment (Vercelli), Medical
+                    Biotechnologies (Novara), Management and Finance
+                    (Novara), and Disaster and Health Crisis Management
+                    (LM-81, Vercelli, blended with on-campus sessions
+                    and B2-level English) are delivered entirely in
+                    English.
+                  </p>
+                  <p className="mt-4">
+                    A note on names: UPO&apos;s official source calls
+                    the bachelor&apos;s programme “Management for
+                    Sustainability”. Where our course card below reads
+                    “Management for One Sustainability”, treat it as
+                    the same English-taught management-and-sustainability
+                    pathway and confirm the exact official title on the
+                    programme page before applying.
+                  </p>
+                  <p className="mt-4">
+                    The university&apos;s official overview reports a
+                    broader English-taught offer beyond any single
+                    page, so the {totals.courses ?? courses.length}{" "}
+                    course cards below reflect the English-taught
+                    courses currently in our database — not the
+                    university&apos;s complete official catalogue.
+                    Browse the cards, compare with other{" "}
+                    <Link
+                      href="/english-taught-courses-in-italy"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      English-taught courses in Italy
+                    </Link>{" "}
+                    or{" "}
+                    <Link
+                      href="/courses"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      browse all courses in Italy
+                    </Link>
+                    . The full official offer is on the{" "}
+                    <a
+                      href="https://www.uniupo.it/en/international/students/you-want-come-upo/what-you-can-study/what-you-can-study-upo"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      university&apos;s official what-you-can-study page
+                    </a>
+                    .
+                  </p>
+                </Section>
+              )}
+
+              {isEasternPiedmont && (
+                <Section title="Bachelor's and Master's study options">
+                  <p>
+                    UPO&apos;s bachelor&apos;s degrees are mainly
+                    taught in Italian, with some units delivered in
+                    English, while its master&apos;s degrees are also
+                    mainly taught in Italian with some English units —
+                    alongside the fully English-taught paths described
+                    above. Single-cycle master&apos;s degrees follow
+                    the same mainly-Italian pattern.
+                  </p>
+                  <p className="mt-4">
+                    If you are targeting an English-taught path, start
+                    from the English-taught programmes section and the
+                    course cards below, then verify the teaching
+                    language and admission rules on the current
+                    official programme page before applying.
                   </p>
                 </Section>
               )}
@@ -2003,10 +2201,240 @@ export default async function UniversityDetailsPage({ params }) {
                 </Section>
               )}
 
+              {isEasternPiedmont && (
+                <Section title="How to apply to UPO">
+                  <h3 className="font-bold text-foreground">
+                    EU versus non-EU applicants
+                  </h3>
+                  <p className="mt-2">
+                    Admission procedures vary by citizenship and
+                    residency. Non-EU students residing abroad who need
+                    a study visa complete pre-enrolment on the
+                    Universitaly portal: UPO reviews and validates the
+                    application then forwards it, with admission
+                    information, to the embassy or consulate the student
+                    selected for the visa request. University admission
+                    and the visa decision remain separate procedures.
+                  </p>
+                  <h3 className="mt-5 font-bold text-foreground">
+                    Programme-level procedures always apply
+                  </h3>
+                  <p className="mt-2">
+                    Master&apos;s programmes set additional procedures
+                    beyond Universitaly, published on each programme
+                    page. Any application that does not follow the
+                    programme&apos;s stated procedure cannot be
+                    considered, so the current programme page is the
+                    only authoritative source for steps and
+                    requirements. Our{" "}
+                    <Link
+                      href="/italy-university-admission"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Italy university admission guide
+                    </Link>{" "}
+                    and{" "}
+                    <Link
+                      href="/universitaly"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Universitaly guidance
+                    </Link>{" "}
+                    explain the surrounding steps.
+                  </p>
+                  <h3 className="mt-5 font-bold text-foreground">
+                    Documents and language at a glance
+                  </h3>
+                  <p className="mt-2">
+                    Depending on the qualification and programme,
+                    foreign-title documents may require a Declaration
+                    of Value or, alternatively, CIMEA comparability and
+                    verification certificates, plus certified
+                    translation and any academic-eligibility document
+                    required in the country of origin. Language proof
+                    at B2 level follows the programme&apos;s teaching
+                    language — English certification or
+                    medium-of-instruction evidence for English-taught
+                    paths. UPO charges no additional fee for
+                    qualification evaluation. Verify the current
+                    programme page, the{" "}
+                    <a
+                      href="https://www.uniupo.it/en/international/degree-seeking"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      official degree-seeking page
+                    </a>{" "}
+                    and the{" "}
+                    <a
+                      href="https://www.uniupo.it/en/international/degree-seeking/you-want-come-upo/how-enrol-upo/enrol-universitaly"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      official enrol-via-Universitaly page
+                    </a>{" "}
+                    before applying.
+                  </p>
+                </Section>
+              )}
+
+              {isEasternPiedmont && (
+                <Section title="Tuition fees and scholarships">
+                  <p>
+                    UPO charges an annual all-inclusive fee (COA) paid
+                    in instalments. The amount depends on the
+                    department, the full-time or part-time study regime,
+                    merit from the second year onward, and the
+                    household&apos;s economic position measured through
+                    ISEE for the right to higher education — or ISEE
+                    Parificato, issued via an authorised CAF, for
+                    students whose income or household sits abroad. A
+                    No-Tax Area exemption and a fee simulator are
+                    provided under the current rules.
+                  </p>
+                  <p className="mt-4">
+                    Scholarships, accommodation places and canteens are
+                    managed by the regional agency EDISU Piemonte and
+                    need a separate application. Amounts, thresholds
+                    and calls change every academic year, so always
+                    verify the current regulation. See our{" "}
+                    <Link
+                      href="/italy-scholarships"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Italy scholarships guidance
+                    </Link>
+                    , our{" "}
+                    <Link
+                      href="/cost-of-studying-in-italy"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      cost of studying in Italy guidance
+                    </Link>{" "}
+                    and the university&apos;s{" "}
+                    <a
+                      href="https://www.uniupo.it/en/studentinfo/fees-and-taxes"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      official fees and taxes page
+                    </a>
+                    .
+                  </p>
+                </Section>
+              )}
+
+              {isEasternPiedmont && (
+                <Section title="International student essentials">
+                  <p>
+                    UPO supports international students through its
+                    International Students Office, the CLUPO university
+                    language centre for foreign-language learning and
+                    certification support, EDISU services for
+                    accommodation and canteens, and Erasmus+
+                    international mobility alongside programme-level
+                    internships and thesis projects abroad.
+                  </p>
+                  <p className="mt-4">
+                    Plan for the standard essentials: validated
+                    admission, Universitaly pre-enrolment and the visa
+                    request where applicable, an Italian tax code, and
+                    enrolment completion with verified foreign-title
+                    documents. Our{" "}
+                    <Link
+                      href="/study-in-italy"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Study in Italy guide
+                    </Link>{" "}
+                    and{" "}
+                    <Link
+                      href="/italy-student-visa"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Italy student visa guidance
+                    </Link>{" "}
+                    cover these steps in more depth.
+                  </p>
+                </Section>
+              )}
+
+              {isEasternPiedmont && (
+                <Section title="Applying to UPO from India">
+                  <p>
+                    Applicants applying from India follow the non-EU
+                    resident-abroad pathway where a visa applies:
+                    identify the degree programme and its teaching
+                    language, check the programme-specific admission
+                    requirements, prepare foreign-qualification
+                    documents with recognised proof where the programme
+                    requires it, and use the UPO plus Universitaly
+                    process for validation toward the visa request.
+                  </p>
+                  <p className="mt-4">
+                    UPO sets no India-specific admission rules — the
+                    same programme requirements apply. Verify the
+                    current programme page and official enrolment pages
+                    before applying — see the{" "}
+                    <Link
+                      href="/study-in-italy"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Study in Italy guide
+                    </Link>
+                    ,{" "}
+                    <Link
+                      href="/italy-university-admission"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Italy university admission process
+                    </Link>
+                    ,{" "}
+                    <Link
+                      href="/universitaly"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Universitaly guidance
+                    </Link>{" "}
+                    and{" "}
+                    <Link
+                      href="/italy-student-visa"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Italy student visa guidance
+                    </Link>
+                    .
+                  </p>
+                </Section>
+              )}
+
               {isTurin && turinFaqs.length > 0 && (
                 <Section title="Frequently asked questions about the University of Turin">
                   <div className="space-y-3">
                     {turinFaqs.map((faq) => (
+                      <details
+                        key={faq.question}
+                        className="rounded-xl border border-border bg-background p-5"
+                      >
+                        <summary className="cursor-pointer font-bold text-foreground">
+                          {faq.question}
+                        </summary>
+                        <p className="mt-3 whitespace-pre-line">
+                          {faq.answer}
+                        </p>
+                      </details>
+                    ))}
+                  </div>
+                </Section>
+              )}
+
+              {isEasternPiedmont && easternPiedmontFaqs.length > 0 && (
+                <Section title="Frequently asked questions about the University of Eastern Piedmont">
+                  <div className="space-y-3">
+                    {easternPiedmontFaqs.map((faq) => (
                       <details
                         key={faq.question}
                         className="rounded-xl border border-border bg-background p-5"
