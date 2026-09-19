@@ -470,6 +470,15 @@ export default async function CourseDetailsPage({ params }) {
     (university?.slug || universitySlug) === "university-of-perugia" &&
     (course?.slug || courseSlug) === "engineering-management-bsc";
 
+  // Programme-specific verified content (official University of Bologna
+  // source) for one course page only. Slug-gated so no other course page
+  // is affected, and used solely for visible body content — never for
+  // title/meta/schema. Declared before quickLinks: referenced below.
+  const isBioHealthBologna =
+    (university?.slug || universitySlug) === "university-of-bologna" &&
+    (course?.slug || courseSlug) ===
+      "biology-of-human-and-environmental-health";
+
   const requirementItems = [
     {
       label: "Academic requirement",
@@ -525,6 +534,9 @@ export default async function CourseDetailsPage({ params }) {
       ? [{ href: "#what-you-study", label: "What You'll Study" }]
       : []),
     ...(isEngMgmtPerugia
+      ? [{ href: "#what-you-study", label: "What You'll Study" }]
+      : []),
+    ...(isBioHealthBologna
       ? [{ href: "#what-you-study", label: "What You'll Study" }]
       : []),
     ...(requirementItems.length
@@ -630,6 +642,14 @@ export default async function CourseDetailsPage({ params }) {
           },
         ]
       : []),
+    ...(isBioHealthBologna
+      ? [
+          {
+            href: "#careers",
+            label: "Career Opportunities and Further Study",
+          },
+        ]
+      : []),
     ...(course.scholarships
       ? [{ href: "#scholarships", label: "Scholarships" }]
       : []),
@@ -725,6 +745,17 @@ export default async function CourseDetailsPage({ params }) {
         ]
       : []),
     ...(isEngMgmtPerugia
+      ? [
+          {
+            href: "#access-and-international",
+            label: "Access, Study Plan and International Opportunities",
+          },
+        ]
+      : []),
+    ...(isBioHealthBologna
+      ? [{ href: "#skills", label: "Health and Research Skills" }]
+      : []),
+    ...(isBioHealthBologna
       ? [
           {
             href: "#access-and-international",
@@ -1679,6 +1710,100 @@ export default async function CourseDetailsPage({ params }) {
             </ContentSection>
           )}
 
+          {isBioHealthBologna && (
+            <ContentSection
+              id="what-you-study"
+              title="What You’ll Study in Biology of Human and Environmental Health"
+              icon={School}
+            >
+              <p className="leading-8 text-muted">
+                This 3-year First Cycle Degree (L-13 Biology, 180 ECTS) is
+                delivered entirely in English through the Department of
+                Biological, Geological, and Environmental Sciences (BiGeA)
+                as a joint international programme with the University of
+                Padua, with teaching locations in Padova and Bologna. The
+                programme examines the biological bases of disease alongside
+                human-environment interactions.
+              </p>
+              <ul className="mt-4 space-y-3">
+                {[
+                  "First-two-year foundation — cellular biology, genetics, bioinformatics, biostatistics and physiology areas",
+                  "Third-year focus — biological bases of diseases or environmental influences on human health",
+                  "Practical activities included alongside theoretical and methodological training",
+                  "Theoretical and methodological approaches to human health and environmental influences",
+                ].map((topic) => (
+                  <li key={topic} className="flex gap-3 leading-7 text-muted">
+                    <span className="font-bold text-success">✓</span>
+                    <span>{topic}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 text-sm leading-6 text-muted">
+                The areas above summarise the official programme description
+                at a high level. Confirm the current module list on the
+                official Bologna programme pages for your enrolment year.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                See how this English-taught degree fits among{" "}
+                <Link
+                  href="/english-taught-courses-in-italy"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  English-taught courses in Italy
+                </Link>{" "}
+                and explore more options on the{" "}
+                <Link
+                  href={`/universities/${university.slug}`}
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  {university.name} page
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
+          {isBioHealthBologna && (
+            <ContentSection
+              id="skills"
+              title="Human Health, Environmental Health and Research Skills"
+              icon={BookOpen}
+            >
+              <p className="leading-8 text-muted">
+                The programme builds understanding of the biological bases
+                of disease together with the ways environmental factors
+                affect human health. Training combines theoretical study
+                with methodological approaches used in human and
+                environmental health.
+              </p>
+              <ul className="mt-4 space-y-3">
+                {[
+                  "Disease biology — biological bases underlying human disease",
+                  "Human-environment interactions — how environmental influences relate to human health",
+                  "Biomarker identification skills for human and environmental health",
+                  "Data-analysis and research methods for human and environmental health",
+                ].map((topic) => (
+                  <li key={topic} className="flex gap-3 leading-7 text-muted">
+                    <span className="font-bold text-success">✓</span>
+                    <span>{topic}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 leading-8 text-muted">
+                Practical activities support this skills training. For
+                broader context on preparing for science degrees in Italy,
+                see our{" "}
+                <Link
+                  href="/study-in-italy"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Study in Italy guide
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
           {requirementItems.length > 0 && (
             <ContentSection id="requirements" title={requirementsTitle} icon={CheckCircle2}>
               <div className="grid gap-4 sm:grid-cols-2">
@@ -2314,6 +2439,37 @@ export default async function CourseDetailsPage({ params }) {
                 </p>
               )}
 
+              {isBioHealthBologna && (
+                <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      Access procedure
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      Restricted access — check the official admission page
+                      for the current procedure
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-border bg-background p-5">
+                    <p className="text-sm font-medium text-muted">
+                      Teaching language
+                    </p>
+                    <p className="mt-2 font-semibold leading-6 text-foreground">
+                      Delivered entirely in English
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {isBioHealthBologna && (
+                <p className="mt-4 text-sm leading-6 text-muted">
+                  The programme is a 3-year First Cycle Degree (L-13
+                  Biology, 180 ECTS) run jointly with the University of
+                  Padua. Access follows the annual official Bologna call
+                  — verify the current admission page before applying.
+                </p>
+              )}
+
               {admissionRequirements.notes && (
                 <details className="group mt-5 rounded-2xl border border-secondary/20 bg-secondary-light p-4 open:shadow-sm">
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-3 font-semibold text-foreground">
@@ -2730,6 +2886,34 @@ export default async function CourseDetailsPage({ params }) {
                 state examination for the engineering profession, and
                 Erasmus+ study and traineeship mobility. For broader
                 planning, see our{" "}
+                <Link
+                  href="/study-in-italy"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Study in Italy guide
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
+          {isBioHealthBologna && (
+            <ContentSection
+              id="careers"
+              title="Career Opportunities and Further Study"
+              icon={GraduationCap}
+            >
+              <p className="leading-8 text-muted">
+                According to the University of Bologna&apos;s official
+                course pages, the programme describes guidance, internships
+                and support for students moving into further study or
+                work. Graduates may, after the relevant State examination,
+                enrol in the professional register as junior Biologist.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                Further study can include second-cycle degrees and
+                first-level university master&apos;s programmes. For
+                broader planning, see our{" "}
                 <Link
                   href="/study-in-italy"
                   className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
@@ -3426,6 +3610,67 @@ export default async function CourseDetailsPage({ params }) {
                 pre-enrolment procedure for visa applicants,
                 English-language documentation and visa-related steps
                 before applying. See the{" "}
+                <Link
+                  href="/italy-university-admission"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Italy university admission process
+                </Link>
+                ,{" "}
+                <Link
+                  href="/universitaly"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Universitaly guidance
+                </Link>{" "}
+                and{" "}
+                <Link
+                  href="/italy-student-visa"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Italy student visa guidance
+                </Link>
+                .
+              </p>
+            </ContentSection>
+          )}
+
+          {isBioHealthBologna && (
+            <ContentSection
+              id="access-and-international"
+              title="Access, Study Plan and International Opportunities"
+              icon={Languages}
+            >
+              <p className="leading-8 text-muted">
+                This is a restricted-access, 3-year First Cycle Degree
+                (L-13 Biology, 180 ECTS) delivered entirely in English as
+                a joint degree with the University of Padua, with teaching
+                locations in Padova and Bologna through the Department of
+                Biological, Geological, and Environmental Sciences
+                (BiGeA). Admission details sit alongside the existing
+                admission requirements above — always verify the current
+                official Bologna admission page for the applicable
+                procedure.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                International opportunities documented on the official
+                pages include internships in international organisations
+                and exchange programmes, alongside practical activities
+                during the degree. Confirm current options on the official
+                programme pages before planning around them.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                Students applying from India should use this English-taught
+                biology pathway as a starting point and then verify the
+                current Bologna programme call, academic eligibility and
+                admission steps before applying. See our{" "}
+                <Link
+                  href="/study-in-italy"
+                  className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                >
+                  Study in Italy guide
+                </Link>
+                , the{" "}
                 <Link
                   href="/italy-university-admission"
                   className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
