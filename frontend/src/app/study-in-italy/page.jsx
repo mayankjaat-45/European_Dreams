@@ -1772,10 +1772,10 @@ export default function StudyInItalyPage() {
             For the full timeline, all verified examples and applicant-category
             caveats, see our{" "}
             <Link
-              href="/italy-university-intakes"
+              href="/italy-university-intakes#deadlines"
               className="font-semibold text-[var(--primary)] hover:underline"
             >
-              See the Italy university intakes and deadlines guide
+              Italy university application deadlines and Universitaly tracker
             </Link>{" "}
             and{" "}
             <Link
