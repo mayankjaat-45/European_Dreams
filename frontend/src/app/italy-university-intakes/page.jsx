@@ -8,7 +8,7 @@ const CANONICAL = `${SITE_URL}/italy-university-intakes`;
 
 const PAGE_TITLE = "Italy University Intakes & Deadlines 2026/27 | Indian Students";
 const PAGE_DESCRIPTION =
-  "Check Italy university intakes and 2026/27 deadlines for Indian students, including September, February, admission, Universitaly and visa timelines.";
+  "Verified Italy university application and Universitaly pre-enrolment deadlines for 2026/27 and 2027/28, by university, programme route and applicant type. Official sources only.";
 
 export const metadata = {
   title: PAGE_TITLE,
@@ -565,106 +565,382 @@ export default function ItalyUniversityIntakesPage() {
           </div>
         </section>
 
-        {/* 9. University examples */}
-        <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+        {/* 9. University examples — verified tracker */}
+        <section
+          id="deadlines"
+          className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20"
+        >
           <SectionHeading
-            eyebrow="Proof, not rules"
-            title="University Deadline Examples 2026/27"
-            intro="Four verified official examples showing how different the windows really are. Each row is one institution's 2026/27 position — never an Italy-wide rule."
+            eyebrow="Verified tracker"
+            title="Verified Application & Universitaly Deadline Tracker — 2026/27"
+            intro="Official sources only. Dates vary by university, programme route, degree level and applicant type. Each row separates the application window from Universitaly and national visa timing where relevant."
           />
-          <div className="mx-auto mt-10 max-w-5xl overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)]">
-            <table className="w-full text-left text-sm">
-              <thead>
-                <tr className="border-b border-[var(--border)] bg-[var(--background)]">
-                  <th scope="col" className="px-5 py-4 font-bold text-[var(--foreground)]">
-                    University
-                  </th>
-                  <th scope="col" className="px-5 py-4 font-bold text-[var(--foreground)]">
-                    Programme and intake context
-                  </th>
-                  <th scope="col" className="px-5 py-4 font-bold text-[var(--foreground)]">
-                    Official deadline example
-                  </th>
-                  <th scope="col" className="px-5 py-4 font-bold text-[var(--foreground)]">
-                    Important caveat
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-[var(--border)]">
-                <tr>
-                  <th scope="row" className="px-5 py-4 font-semibold text-[var(--foreground)]">
-                    Politecnico di Milano
-                  </th>
-                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                    Master&apos;s, foreign qualification; September 2026 and February 2027 Engineering intakes
-                  </td>
-                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                    Sept intake calls 1 Oct–1 Dec 2025 and 13 Jan–26 Feb 2026; Feb 2027 Engineering call 18 May–18 Jun 2026.{" "}
-                    <OfficialLink href="https://www.polimi.it/en/prospective-students/how-to-apply/admission-to-laurea-magistrale/foreign-qualification/deadlines">
-                      Official dates
-                    </OfficialLink>
-                  </td>
-                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                    Second semester Engineering only, with named programme exclusions
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row" className="px-5 py-4 font-semibold text-[var(--foreground)]">
-                    University of Padua
-                  </th>
-                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                    English-taught degrees; unlimited vs limited-place programmes
-                  </td>
-                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                    Unlimited places: Call One 2 Nov 2025–2 Feb 2026, Call Two 2 Mar–2 May 2026; limited places, non-EU abroad: 7 Jan–7 Mar 2026.{" "}
-                    <OfficialLink href="https://www.unipd.it/en/studiare-inglese-come-fare-domanda">
-                      Official dates
-                    </OfficialLink>
-                  </td>
-                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                    Later calls restricted to EU and Italy-resident applicants
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row" className="px-5 py-4 font-semibold text-[var(--foreground)]">
-                    Sapienza University of Rome
-                  </th>
-                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                    English-taught programmes, pre-selection then call
-                  </td>
-                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                    Non-EU visa-seeking pre-selection 22 Dec 2025–15 May 2026; Universitaly by 30 Jun 2026; EU/equivalent to 31 Jul 2026.{" "}
-                    <OfficialLink href="https://www.uniroma1.it/en/en/admissions">
-                      Official dates
-                    </OfficialLink>
-                  </td>
-                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                    Pre-selection alone does not enrol; the programme call completes admission
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row" className="px-5 py-4 font-semibold text-[var(--foreground)]">
-                    University of Turin
-                  </th>
-                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                    Separate undergraduate and postgraduate application windows
-                  </td>
-                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                    Postgraduate 25 Nov 2025–29 Jan 2026; undergraduate and 5–6 year programmes 19 Feb–15 Apr 2026.{" "}
-                    <OfficialLink href="https://www.en.unito.it/studying-unito/international-degree-seeking-students/application-international-students">
-                      Official dates
-                    </OfficialLink>
-                  </td>
-                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                    Later 2026 calls reserved to Italians, EU and Italy residents
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          <div className="mx-auto mt-10 max-w-6xl overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)]">
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[980px] text-left text-sm">
+                <thead>
+                  <tr className="border-b border-[var(--border)] bg-[var(--background)]">
+                    <th scope="col" className="px-4 py-4 font-bold text-[var(--foreground)]">
+                      University
+                    </th>
+                    <th scope="col" className="px-4 py-4 font-bold text-[var(--foreground)]">
+                      Degree / Route
+                    </th>
+                    <th scope="col" className="px-4 py-4 font-bold text-[var(--foreground)]">
+                      Applicant Type
+                    </th>
+                    <th scope="col" className="px-4 py-4 font-bold text-[var(--foreground)]">
+                      Intake
+                    </th>
+                    <th scope="col" className="px-4 py-4 font-bold text-[var(--foreground)]">
+                      Application Window
+                    </th>
+                    <th scope="col" className="px-4 py-4 font-bold text-[var(--foreground)]">
+                      Universitaly Deadline
+                    </th>
+                    <th scope="col" className="px-4 py-4 font-bold text-[var(--foreground)]">
+                      Visa Ceiling
+                    </th>
+                    <th scope="col" className="px-4 py-4 font-bold text-[var(--foreground)]">
+                      Official Source
+                    </th>
+                    <th scope="col" className="px-4 py-4 font-bold text-[var(--foreground)]">
+                      Last Verified
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-[var(--border)]">
+                  <tr>
+                    <th scope="row" className="px-4 py-4 font-semibold text-[var(--foreground)]">
+                      Politecnico di Milano
+                    </th>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      Master&apos;s / foreign qualification — Engineering
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      Non-EU / visa-seeking where applicable
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      Fall 2026 and Spring 2027 Engineering
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      1 Oct–1 Dec 2025 and 13 Jan–26 Feb 2026 (Fall 2026);
+                      18 May–18 Jun 2026 for Feb 2027 Engineering. Second
+                      semester Engineering only, with named programme exclusions.
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      Per call; national ceiling 30 Nov 2026 applies
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      30 Nov 2026 (national ceiling, not university deadline)
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      <OfficialLink href="https://www.polimi.it/en/prospective-students/how-to-apply/admission-to-laurea-magistrale/foreign-qualification/deadlines">
+                        Official dates
+                      </OfficialLink>
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      Verified Sep 2026
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row" className="px-4 py-4 font-semibold text-[var(--foreground)]">
+                      University of Padua
+                    </th>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      English-taught — unlimited vs limited-place
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      Non-EU abroad (limited); All where unlimited
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      Fall 2026
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      Unlimited Call One 2 Nov 2025–2 Feb 2026; Call Two 2 Mar–2
+                      May 2026; limited, non-EU abroad 7 Jan–7 Mar 2026. Later
+                      calls EU/Italy-resident only.
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      Per call; national ceiling 30 Nov 2026
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      30 Nov 2026 (national ceiling)
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      <OfficialLink href="https://www.unipd.it/en/studiare-inglese-come-fare-domanda">
+                        Official dates
+                      </OfficialLink>
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      Verified Sep 2026
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row" className="px-4 py-4 font-semibold text-[var(--foreground)]">
+                      Sapienza University of Rome
+                    </th>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      English-taught — pre-selection then call
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      Non-EU visa-seeking; EU/equivalent separate
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      Fall 2026
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      Non-EU pre-selection 22 Dec 2025–15 May 2026.
+                      Pre-selection alone does not enrol; programme call completes
+                      admission.
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      By 30 Jun 2026 (non-EU); by 31 Jul 2026 (EU/equivalent)
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      30 Nov 2026 (national ceiling)
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      <OfficialLink href="https://www.uniroma1.it/en/en/admissions">
+                        Official dates
+                      </OfficialLink>
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      Verified Sep 2026
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row" className="px-4 py-4 font-semibold text-[var(--foreground)]">
+                      University of Turin — Postgraduate
+                    </th>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      Postgraduate (Master&apos;s)
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      All; later calls Italians/EU/residents only
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      Fall 2026
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      25 Nov 2025–29 Jan 2026
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      By 15 Jul 2026
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      30 Nov 2026 (national ceiling)
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      <OfficialLink href="https://www.en.unito.it/studying-unito/international-degree-seeking-students/application-international-students">
+                        Official dates
+                      </OfficialLink>
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      Verified Sep 2026
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row" className="px-4 py-4 font-semibold text-[var(--foreground)]">
+                      University of Turin — Undergraduate / 5–6 year
+                    </th>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      Undergraduate / 5–6 year single-cycle
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      All; later calls Italians/EU/residents only
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      Fall 2026
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      19 Feb–15 Apr 2026
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      By 15 Jul 2026
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      30 Nov 2026 (national ceiling)
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      <OfficialLink href="https://www.en.unito.it/studying-unito/international-degree-seeking-students/application-international-students">
+                        Official dates
+                      </OfficialLink>
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      Verified Sep 2026
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row" className="px-4 py-4 font-semibold text-[var(--foreground)]">
+                      University of Genoa
+                    </th>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      Multiple degree levels (as per official deadlines page)
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      Non-EU visa-seeking: 26 Nov 2025–20 Mar 2026 pre-evaluation;
+                      Resident: 9 Apr–28 Aug / 25 Sep 2026
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      Fall 2026
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      Pre-evaluation 26 Nov 2025–20 Mar 2026 (visa); 9 Apr–28
+                      Aug / 25 Sep 2026 (resident, level-dependent)
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      Visa request 4 May–19 Jun 2026; integration response by
+                      31 Jul 2026
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      30 Nov 2026 (national ceiling); arrival by 25 Jan 2027
+                      per call
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      <OfficialLink href="https://unige.it/en/internazionale/iscrizioni-internazionali/scadenze">
+                        Official dates
+                      </OfficialLink>
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      Verified Sep 2026
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row" className="px-4 py-4 font-semibold text-[var(--foreground)]">
+                      University of Pisa
+                    </th>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      Multiple degree levels
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      Non-EU visa applicants
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      Fall 2026
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      Per call; limited-access may be earlier
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      By 30 Sep 2026
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      Visas only issued by 30 Nov 2026 per Pisa page
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      <OfficialLink href="https://www.unipi.it/en/education/registration/enrolment-and-registration/enrolment-for-international-students/pre-registration-on-universitaly">
+                        Official dates
+                      </OfficialLink>
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      Verified Sep 2026
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row" className="px-4 py-4 font-semibold text-[var(--foreground)]">
+                      University of Macerata
+                    </th>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      Multiple degree levels
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      Non-EU visa-seeking
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      Fall 2026
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      Per call
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      Pre-enrol 29 Jul 2026 extended; integration 31 Aug 2026
+                      where applicable
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      30 Nov 2026 (national ceiling)
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      <OfficialLink href="https://apply.unimc.it/en_GB/news/new/93-pre-enrolment-procedure-visa-seeking-students-now-open-ay-20262027-extended-deadline-july-29-2026">
+                        Official dates
+                      </OfficialLink>
+                    </td>
+                    <td className="px-4 py-4 text-[var(--muted-foreground)]">
+                      Verified Sep 2026
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
             <p className="border-t border-[var(--border)] px-5 py-4 text-xs leading-5 text-[var(--muted-foreground)]">
-              All examples are 2026/27 editions verified on the linked
-              official pages. Your course, level and applicant category can
-              carry different dates — always read the current call.
+              All rows are 2026/27 examples verified on the linked official
+              pages. The national date of 30 Nov 2026 is a visa-related ceiling
+              for 2026/27 ordinary courses, not a university application
+              deadline. Your course, level and applicant category can carry
+              different dates — always read the current call.
+            </p>
+          </div>
+          <div className="mx-auto mt-8 max-w-3xl rounded-2xl border border-[var(--border)] bg-[var(--background)] p-6">
+            <h3 className="font-bold text-[var(--foreground)]">
+              How to read this tracker
+            </h3>
+            <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-6 text-[var(--muted-foreground)]">
+              <li>
+                <span className="font-semibold text-[var(--foreground)]">
+                  Application deadline ≠ Universitaly deadline
+                </span>{" "}
+                — the university call defines each separately.
+              </li>
+              <li>
+                <span className="font-semibold text-[var(--foreground)]">
+                  Universitaly deadline ≠ visa issuance guarantee
+                </span>{" "}
+                — validation allows you to apply for the visa; issuance is by
+                the consulate.
+              </li>
+              <li>
+                EU / Italy-resident / non-EU visa applicants can have different
+                windows — later calls are often EU/resident only, as shown above.
+              </li>
+              <li>
+                Degree and programme route change the deadline — free-access vs
+                programmed-access (limited places) and Bachelor vs Master vs
+                single-cycle matter.
+              </li>
+              <li>
+                Limited-access programmes can have earlier or test-linked
+                deadlines — always check the call, not this tracker.
+              </li>
+              <li>
+                Always verify the linked official call before applying — dates
+                can change.
+              </li>
+            </ul>
+          </div>
+          <div className="mx-auto mt-6 max-w-3xl rounded-2xl border border-[var(--border)] bg-[var(--background)] p-6">
+            <h3 className="font-bold text-[var(--foreground)]">
+              Universitaly Deadlines for Non-EU Students
+            </h3>
+            <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
+              These verified examples show why the national visa ceiling should
+              not be treated as a university-specific Universitaly deadline:
+            </p>
+            <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-6 text-[var(--muted-foreground)]">
+              <li>Turin: by 15 Jul 2026</li>
+              <li>Milan: by 31 Jul 2026</li>
+              <li>Macerata: 29 Jul 2026 extended (integration 31 Aug where applicable)</li>
+              <li>Roma Tre: by 15 Sep 2026</li>
+              <li>Pisa: by 30 Sep 2026; visas only issued by 30 Nov 2026</li>
+            </ul>
+            <p className="mt-3 text-sm leading-6 text-[var(--muted-foreground)]">
+              For the full pre-enrolment steps, see our{" "}
+              <Link
+                href="/universitaly"
+                className="font-semibold text-[var(--primary)] hover:underline"
+              >
+                Universitaly pre-enrolment guide
+              </Link>
+              .
             </p>
           </div>
         </section>
