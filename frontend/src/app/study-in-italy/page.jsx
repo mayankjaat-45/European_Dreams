@@ -366,6 +366,25 @@ export default function StudyInItalyPage() {
               </p>
             </article>
           </div>
+          <div className="mx-auto mt-8 max-w-3xl rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5">
+            <h3 className="font-bold text-[var(--foreground)]">
+              Why Indian students consider Italy
+            </h3>
+            <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
+              For many Indian students, Italy is considered because public
+              universities set tuition per institution and programme — often
+              with income-based assessment that can mean two students on the
+              same course pay different amounts — and because need-based
+              regional (DSU), university merit and government (MAECI) support
+              routes exist where you meet the specific call. Many
+              Bachelor&apos;s and Master&apos;s programmes are offered in
+              English, so you can study without Italian as the language of
+              instruction where the programme confirms it. The overall process
+              is structured — university admission, then Universitaly
+              pre-enrolment, then the student visa — and living costs vary
+              significantly by city rather than being fixed nationally.
+            </p>
+          </div>
         </section>
 
         {/* 3. Journey from India */}
@@ -398,6 +417,13 @@ export default function StudyInItalyPage() {
                 </li>
               ))}
             </ol>
+            <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
+              Typical flow at a glance: Research → Check eligibility → Choose
+              programme → Apply → Admission → Scholarship / ISEE Parificato
+              (where applicable) → Universitaly pre-enrolment → Student visa →
+              Travel → Residence formalities (permesso di soggiorno) after
+              arrival.
+            </p>
           </div>
         </section>
 
@@ -506,6 +532,127 @@ export default function StudyInItalyPage() {
               </p>
             </article>
           </div>
+          <div className="mx-auto mt-10 grid max-w-5xl gap-6 sm:grid-cols-2">
+            <article className="rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5">
+              <h3 className="font-bold text-[var(--foreground)]">
+                Bachelor&apos;s in Italy — what to check
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
+                Bachelor&apos;s (Laurea) programmes generally admit students
+                completing Class 12 or equivalent — but subject expectations,
+                grade thresholds and language rules are set per programme, so
+                there is no single universal eligibility rule. Check whether
+                your stream covers the programme&apos;s expected subjects, and
+                whether the course is open-access or limited / programmed-access
+                — selection routes differ. Always confirm requirements on the
+                official programme page.
+              </p>
+            </article>
+            <article className="rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5">
+              <h3 className="font-bold text-[var(--foreground)]">
+                Master&apos;s in Italy — what to check
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
+                Master&apos;s (Laurea Magistrale) admission centres on the
+                relevance of your Bachelor&apos;s background plus
+                programme-specific prerequisites. Programmes expect a
+                Bachelor&apos;s in a related field, sometimes with minimum
+                credits in specific subjects. Many universities pre-evaluate
+                transcripts before the formal application — use pre-evaluation
+                where the university offers it. Always confirm prerequisites on
+                the official programme call.
+              </p>
+            </article>
+          </div>
+          <div className="mx-auto mt-8 max-w-3xl rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6">
+            <h3 className="font-bold text-[var(--foreground)]">
+              Do I need an entrance test?
+            </h3>
+            <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
+              Requirements vary by programme and year. Entrance tests assess
+              readiness and rank you for that programme&apos;s places;
+              qualification recognition (CIMEA / Declaration of Value) is a
+              separate process — you may need one, both or neither. Check the
+              official programme call (bando) for your exact course.
+            </p>
+            <ul className="mt-4 space-y-3 text-sm leading-6 text-[var(--muted-foreground)]">
+              <li className="rounded-xl border border-[var(--border)] bg-[var(--background)] p-3">
+                <span className="font-semibold text-[var(--foreground)]">
+                  Medicine &amp; regulated programmes:
+                </span>{" "}
+                Programme-specific entrance requirements and testing may apply
+                where the programme lists them — nationally regulated or
+                limited-access courses such as Medicine and Architecture may use
+                national or university-run entrance examinations.
+              </li>
+              <li className="rounded-xl border border-[var(--border)] bg-[var(--background)] p-3">
+                <span className="font-semibold text-[var(--foreground)]">
+                  Engineering / Economics &amp; similar:
+                </span>{" "}
+                CISIA TOLC where the programme requires it, or CEnT-S where the
+                university has adopted it for specific scientific areas — only
+                where listed in the call. Depending on the programme, a TOLC may
+                be mandatory, optional for ranking, or not required at all.
+              </li>
+              <li className="rounded-xl border border-[var(--border)] bg-[var(--background)] p-3">
+                <span className="font-semibold text-[var(--foreground)]">
+                  Design / Architecture:
+                </span>{" "}
+                Portfolio, interview or other programme-specific selection
+                methods may apply where the course specifies them.
+              </li>
+              <li className="rounded-xl border border-[var(--border)] bg-[var(--background)] p-3">
+                <span className="font-semibold text-[var(--foreground)]">
+                  Other programmes:
+                </span>{" "}
+                Many courses select on documents alone. Always verify whether a
+                test applies — and which one — on the official call; there is
+                no single national entrance score that applies to every Italian
+                course.
+              </li>
+            </ul>
+            <p className="mt-3 text-xs leading-5 text-[var(--muted-foreground)]">
+              Sources:{" "}
+              <a
+                href="https://www.cisiaonline.it/en/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-[var(--primary)] hover:underline"
+              >
+                CISIA (official TOLC / CEnT-S information)
+              </a>
+              {" · "}
+              <a
+                href="https://www.cimea.it/EN/pagina-attestati-di-comparabilita-e-verifica"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-[var(--primary)] hover:underline"
+              >
+                CIMEA comparability services
+              </a>
+              . For the detailed comparison of entrance tests vs qualification
+              recognition, see{" "}
+              <Link
+                href="/italy-university-admission#entrance-tests-qualification-recognition"
+                className="font-semibold text-[var(--primary)] hover:underline"
+              >
+                entrance tests and qualification recognition
+              </Link>
+              .
+            </p>
+          </div>
+          <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
+            Requirements are not universal — every programme sets its own
+            criteria. For the complete requirements and step-by-step process,
+            see{" "}
+            <Link
+              href="/italy-university-admission"
+              className="font-semibold text-[var(--primary)] hover:underline"
+            >
+              Italy university admission requirements and process
+            </Link>
+            .
+          </p>
         </section>
 
         {/* 7. How to apply */}
@@ -630,8 +777,30 @@ export default function StudyInItalyPage() {
               <table className="w-full text-left text-sm">
                 <caption className="px-5 pb-3 pt-5 text-left font-bold text-[var(--foreground)]">
                   Indicative ranges (European Commission country profile for
-                  Italy)
+                  Italy) — INR at approx. €1 ≈ ₹93, rates change
                 </caption>
+                <thead>
+                  <tr className="border-b border-[var(--border)] bg-[var(--background)]">
+                    <th
+                      scope="col"
+                      className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
+                    >
+                      Category
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
+                    >
+                      EC indicative range
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
+                    >
+                      Approx. INR
+                    </th>
+                  </tr>
+                </thead>
                 <tbody className="divide-y divide-[var(--border)]">
                   <tr>
                     <th
@@ -643,6 +812,9 @@ export default function StudyInItalyPage() {
                     <td className="px-5 py-4 text-[var(--muted-foreground)]">
                       Approximately €900–€4,000 per year
                     </td>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      ≈ ₹84k–₹3.72L per year
+                    </td>
                   </tr>
                   <tr>
                     <th
@@ -653,6 +825,9 @@ export default function StudyInItalyPage() {
                     </th>
                     <td className="px-5 py-4 text-[var(--muted-foreground)]">
                       Approximately €6,000–€20,000+ per year
+                    </td>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      ≈ ₹5.58L–₹18.6L+ per year
                     </td>
                   </tr>
                   <tr>
@@ -666,13 +841,20 @@ export default function StudyInItalyPage() {
                       Approximately €700–€1,100 per month, depending on the
                       city
                     </td>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      ≈ ₹65k–₹1.02L per month
+                    </td>
                   </tr>
                 </tbody>
               </table>
               <p className="border-t border-[var(--border)] px-5 py-4 text-xs leading-5 text-[var(--muted-foreground)]">
                 These are indicative ranges only — actual costs vary by
                 university, programme, city and individual circumstances, and
-                fees may depend on declared family income. Source:{" "}
+                fees may depend on declared family income. Indicative INR
+                conversions only; actual university fees depend on programme,
+                income-based assessment, university rules and applicable
+                reductions. INR at approx. €1 ≈ ₹93 — exchange rates change;
+                verify the rate when budgeting. Source:{" "}
                 <a
                   href="https://education.ec.europa.eu/study-in-europe/country-profiles/italy"
                   target="_blank"
@@ -682,6 +864,25 @@ export default function StudyInItalyPage() {
                   European Commission — Study in Italy country profile
                 </a>
                 .
+              </p>
+            </div>
+            <div className="mx-auto mt-6 max-w-3xl rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5">
+              <h3 className="font-bold text-[var(--foreground)]">
+                Why two students can pay different fees: ISEE &amp; ISEE
+                Parificato
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
+                Fees commonly depend on declared family income, so two
+                students on the same course can pay different amounts. Read
+                your university&apos;s income-band rules carefully. For
+                families whose income and assets are outside Italy, universities
+                use an equivalent indicator (ISEE Parificato / ISEE University
+                Equivalent) instead of the standard ISEE. As a labelled
+                example, the DSU Toscana 2026/27 call set thresholds of ISEE
+                €27,000 and ISPE €60,000 — other regions and universities set
+                their own. Many universities also offer reductions or full
+                exemptions on merit or income grounds through separate calls
+                with their own deadlines.
               </p>
             </div>
             <p className="mx-auto mt-8 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
@@ -747,6 +948,99 @@ export default function StudyInItalyPage() {
                 .
               </p>
             </article>
+          </div>
+          <div className="mx-auto mt-8 max-w-3xl overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--background)]">
+            <div className="bg-[var(--card)] px-5 py-4">
+              <h3 className="font-bold text-[var(--foreground)]">
+                2026/27 scholarship snapshot — verified examples
+              </h3>
+              <p className="mt-1 text-xs leading-5 text-[var(--muted-foreground)]">
+                Examples only — every scheme publishes its own annual call.
+                Scholarship rules, eligible countries and deadlines vary by
+                scheme and university.
+              </p>
+            </div>
+            <table className="w-full text-left text-sm">
+              <thead>
+                <tr className="border-y border-[var(--border)] bg-[var(--background)]">
+                  <th
+                    scope="col"
+                    className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
+                  >
+                    Scheme
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
+                  >
+                    2026/27 example
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
+                  >
+                    What it offered
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-[var(--border)]">
+                <tr>
+                  <th
+                    scope="row"
+                    className="px-5 py-4 font-semibold text-[var(--foreground)]"
+                  >
+                    MAECI government grants
+                  </th>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    Applications closed at 14:00 Italian time on 26 March 2026
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    €10,800 total (9 months) per the official 2026-2027 call;
+                    paid in instalments conditional on presence, enrolment and
+                    academic progress
+                  </td>
+                </tr>
+                <tr>
+                  <th
+                    scope="row"
+                    className="px-5 py-4 font-semibold text-[var(--foreground)]"
+                  >
+                    DSU Toscana (regional)
+                  </th>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    20 July–7 September 2026 for degree courses
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    ISEE €27,000 and ISPE €60,000 thresholds (this region/year
+                    only); need- and merit-based benefits vary by region and
+                    year
+                  </td>
+                </tr>
+                <tr>
+                  <th
+                    scope="row"
+                    className="px-5 py-4 font-semibold text-[var(--foreground)]"
+                  >
+                    University of Padua
+                  </th>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    International Excellence Scholarships 2026/27
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    Up to 69 scholarships — one per English-taught programme —
+                    each with a tuition fee-waiver and an €8,000 annual
+                    allowance; eligible students considered automatically
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <p className="border-t border-[var(--border)] px-5 py-4 text-xs leading-5 text-[var(--muted-foreground)]">
+              These are verified 2026/27 examples, not guarantees — India
+              featured on the official MAECI 2026-2027 eligible-countries list,
+              but eligibility is reset each year. Scholarship amounts, thresholds
+              and deadlines are set anew in each annual call. No scholarship
+              can be promised in advance.
+            </p>
           </div>
           <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
             Students from India should also check Invest Your Talent in Italy,
@@ -847,6 +1141,65 @@ export default function StudyInItalyPage() {
               </Link>
               .
             </p>
+            <div className="mx-auto mt-6 max-w-3xl rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5 text-left">
+              <h3 className="font-bold text-[var(--foreground)]">
+                India-specific visa &amp; document context
+              </h3>
+              <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-6 text-[var(--muted-foreground)]">
+                <li>
+                  <span className="font-semibold text-[var(--foreground)]">
+                    Jurisdiction &amp; checklists:
+                  </span>{" "}
+                  Visa and document procedures depend on the competent Italian
+                  mission for your jurisdiction. Always prepare from the current
+                  checklist of that mission. See our{" "}
+                  <Link
+                    href="/italy-student-visa"
+                    className="font-semibold text-[var(--primary)] hover:underline"
+                  >
+                    Italy student visa guide for Indian students
+                  </Link>{" "}
+                  and{" "}
+                  <Link
+                    href="/visa-checklists"
+                    className="font-semibold text-[var(--primary)] hover:underline"
+                  >
+                    jurisdiction-wise visa document checklists
+                  </Link>
+                  .
+                </li>
+                <li>
+                  <span className="font-semibold text-[var(--foreground)]">
+                    CIMEA vs Declaration of Value (DOV):
+                  </span>{" "}
+                  Qualification-recognition requirements are programme and
+                  university dependent — not every Indian student needs a CIMEA
+                  Statement and not every student needs a DOV. Depending on the
+                  university and course, some institutions accept a CIMEA
+                  Statement of Comparability or Verification, others request a
+                  Declaration of Value from the competent Italian mission, and
+                  some require neither. Confirm what your specific university
+                  requires — see{" "}
+                  <Link
+                    href="/italy-university-admission#entrance-tests-qualification-recognition"
+                    className="font-semibold text-[var(--primary)] hover:underline"
+                  >
+                    entrance tests &amp; qualification recognition
+                  </Link>
+                  .
+                </li>
+                <li>
+                  <span className="font-semibold text-[var(--foreground)]">
+                    Medicine / MBBS programmes:
+                  </span>{" "}
+                  Medicine and other regulated programmes have
+                  programme-specific requirements and entrance testing — for
+                  example, nationally regulated or university entrance
+                  examinations where applicable. Requirements vary by programme
+                  and year; always check the official programme call.
+                </li>
+              </ul>
+            </div>
             <div className="mt-8 text-center">
               <CtaButton href="/visa-checklists">
                 View visa document checklists
@@ -920,14 +1273,207 @@ export default function StudyInItalyPage() {
             title="Intakes and Application Deadlines"
             intro="Deadlines vary by university, programme and intake. There is no universal Italian application deadline — check each programme page and apply early, since visa timelines add extra weeks."
           />
+          <div className="mx-auto mt-10 max-w-5xl overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)]">
+            <div className="bg-[var(--card)] px-5 py-4">
+              <h3 className="font-bold text-[var(--foreground)]">
+                Deadlines at a glance — 2026/27 verified examples
+              </h3>
+              <p className="mt-1 text-xs leading-5 text-[var(--muted-foreground)]">
+                Each row is one institution&apos;s 2026/27 position — never an
+                Italy-wide rule. Your course, level and applicant category can
+                carry different dates — always read the current call.
+              </p>
+            </div>
+            <table className="w-full text-left text-sm">
+              <thead>
+                <tr className="border-y border-[var(--border)] bg-[var(--background)]">
+                  <th
+                    scope="col"
+                    className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
+                  >
+                    University
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
+                  >
+                    Programme &amp; intake context
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
+                  >
+                    Official deadline example
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
+                  >
+                    Important caveat
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-[var(--border)]">
+                <tr>
+                  <th
+                    scope="row"
+                    className="px-5 py-4 font-semibold text-[var(--foreground)]"
+                  >
+                    Politecnico di Milano
+                  </th>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    Master&apos;s, foreign qualification; September 2026 and
+                    February 2027 Engineering intakes
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    Sept intake calls 1 Oct–1 Dec 2025 and 13 Jan–26 Feb 2026;
+                    Feb 2027 Engineering call 18 May–18 Jun 2026.{" "}
+                    <a
+                      href="https://www.polimi.it/en/prospective-students/how-to-apply/admission-to-laurea-magistrale/foreign-qualification/deadlines"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-semibold text-[var(--primary)] hover:underline"
+                    >
+                      Official dates
+                    </a>
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    Second semester Engineering only, with named programme
+                    exclusions
+                  </td>
+                </tr>
+                <tr>
+                  <th
+                    scope="row"
+                    className="px-5 py-4 font-semibold text-[var(--foreground)]"
+                  >
+                    University of Padua
+                  </th>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    English-taught degrees; unlimited vs limited-place
+                    programmes
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    Unlimited places: Call One 2 Nov 2025–2 Feb 2026, Call Two 2
+                    Mar–2 May 2026; limited places, non-EU abroad: 7 Jan–7 Mar
+                    2026.{" "}
+                    <a
+                      href="https://www.unipd.it/en/studiare-inglese-come-fare-domanda"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-semibold text-[var(--primary)] hover:underline"
+                    >
+                      Official dates
+                    </a>
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    Later calls restricted to EU and Italy-resident applicants
+                  </td>
+                </tr>
+                <tr>
+                  <th
+                    scope="row"
+                    className="px-5 py-4 font-semibold text-[var(--foreground)]"
+                  >
+                    Sapienza University of Rome
+                  </th>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    English-taught programmes, pre-selection then call
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    Non-EU visa-seeking pre-selection 22 Dec 2025–15 May 2026;
+                    Universitaly by 30 Jun 2026; EU/equivalent to 31 Jul 2026.{" "}
+                    <a
+                      href="https://www.uniroma1.it/en/en/admissions"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-semibold text-[var(--primary)] hover:underline"
+                    >
+                      Official dates
+                    </a>
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    Pre-selection alone does not enrol; the programme call
+                    completes admission
+                  </td>
+                </tr>
+                <tr>
+                  <th
+                    scope="row"
+                    className="px-5 py-4 font-semibold text-[var(--foreground)]"
+                  >
+                    University of Turin
+                  </th>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    Separate undergraduate and postgraduate application windows
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    Postgraduate 25 Nov 2025–29 Jan 2026; undergraduate and 5–6
+                    year programmes 19 Feb–15 Apr 2026.{" "}
+                    <a
+                      href="https://www.en.unito.it/studying-unito/international-degree-seeking-students/application-international-students"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-semibold text-[var(--primary)] hover:underline"
+                    >
+                      Official dates
+                    </a>
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    Later 2026 calls reserved to Italians, EU and Italy
+                    residents
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <p className="border-t border-[var(--border)] px-5 py-4 text-xs leading-5 text-[var(--muted-foreground)]">
+              All examples are 2026/27 editions verified on the linked official
+              pages. Your course, level and applicant category can carry
+              different dates — always read the current call.
+            </p>
+          </div>
+          <div className="mx-auto mt-6 max-w-3xl rounded-2xl border border-amber-200 bg-amber-50 p-5 dark:border-amber-900/30 dark:bg-amber-950/20">
+            <h3 className="font-bold text-[var(--foreground)]">
+              Understand the three different deadlines
+            </h3>
+            <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-6 text-[var(--muted-foreground)]">
+              <li>
+                <span className="font-semibold text-[var(--foreground)]">
+                  University / programme deadline
+                </span>{" "}
+                — the date your chosen university sets for its own application
+                call (examples in the table above). This is the binding date
+                for admission.
+              </li>
+              <li>
+                <span className="font-semibold text-[var(--foreground)]">
+                  Universitaly / pre-enrolment timing
+                </span>{" "}
+                — the window the university defines for validating your
+                pre-enrolment on the official portal after admission.
+              </li>
+              <li>
+                <span className="font-semibold text-[var(--foreground)]">
+                  Visa-related national backstop: 30 November 2026
+                </span>{" "}
+                — the latest date by which visa applications for 2026/27
+                ordinary degree courses (Bachelor&apos;s, Master&apos;s,
+                single-cycle) may be submitted under the current national
+                procedure. This is a final ceiling, not a university application
+                deadline. Institutions may require far earlier dates, and this
+                date does not create extra time beyond the university&apos;s
+                own deadline.
+              </li>
+            </ul>
+          </div>
           <div className="mt-8 text-center">
             <CtaButton href="/universities">
               Check universities and deadlines
             </CtaButton>
           </div>
           <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
-            For September and February intakes, the 2026/27 timeline and
-            verified university examples, see our{" "}
+            For September and February intakes, the full 2026/27 timeline and
+            all verified university examples, see our{" "}
             <Link
               href="/italy-university-intakes"
               className="font-semibold text-[var(--primary)] hover:underline"
@@ -951,14 +1497,39 @@ export default function StudyInItalyPage() {
                 Explore English-taught courses
               </CtaButton>
             </div>
+            <div className="mx-auto mt-6 max-w-3xl rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5 text-left">
+              <h3 className="font-bold text-[var(--foreground)]">
+                What Indian students should know about English requirements
+              </h3>
+              <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-6 text-[var(--muted-foreground)]">
+                <li>
+                  English proof is programme-specific — only where the
+                  programme&apos;s call names a test (IELTS, TOEFL, Cambridge
+                  or others) is that evidence required. No single IELTS score
+                  applies across Italy.
+                </li>
+                <li>
+                  Required levels can differ by programme, including B1 vs B2
+                  cases. Padua&apos;s 2026/27 guidance, for example, assigns B1
+                  or B2 depending on the programme and call — always check your
+                  exact call.
+                </li>
+                <li>
+                  A previous degree taught entirely in English may sometimes be
+                  accepted under programme-specific conditions — for example,
+                  where documentation explicitly shows the language of
+                  instruction. Whether this is accepted depends on the call.
+                </li>
+              </ul>
+            </div>
             <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
-              For Bachelor&apos;s and Master&apos;s examples, language
-              requirements and verification steps, see our{" "}
+              For Bachelor&apos;s and Master&apos;s examples, how to verify the
+              language of instruction and the full requirement table, see our{" "}
               <Link
                 href="/english-taught-courses-in-italy"
                 className="font-semibold text-[var(--primary)] hover:underline"
               >
-                English-taught courses in Italy guide
+                English-taught courses in Italy guide for Indian students
               </Link>
               .
             </p>
