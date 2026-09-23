@@ -164,6 +164,16 @@ const faqs = [
     answer:
       "Accept the offer per the university's instructions, complete Universitaly pre-enrolment where required, prepare the visa application, arrange accommodation and travel, and complete arrival formalities in Italy.",
   },
+  {
+    question: "Do all Italian universities require TOLC or CEnT-S for admission?",
+    answer:
+      "No. Some programmes use CISIA TOLC for selection or self-evaluation and, in specific fields, CEnT-S where the university has adopted it, while other programmes use a university-specific entrance test, interview or no test at all. Depending on the university and programme, requirements vary — always check the official programme call.",
+  },
+  {
+    question: "Do Indian students always need a CIMEA Statement or Declaration of Value?",
+    answer:
+      "Not for every application. Depending on the university and course, some institutions accept a CIMEA Statement of Comparability or Verification for foreign qualifications, others request a Declaration of Value from the competent Italian mission, and some require neither. Confirm what your specific university requires; for detailed DOV and CIMEA guidance see the Italy student visa guide.",
+  },
 ];
 
 const faqSchema = {
@@ -556,6 +566,181 @@ export default function ItalyUniversityAdmissionPage() {
                 </li>
               ))}
             </ol>
+          </div>
+        </section>
+
+        {/* Entrance Tests and Qualification Recognition */}
+        <section
+          id="entrance-tests-qualification-recognition"
+          className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20"
+        >
+          <SectionHeading
+            eyebrow="Tests & recognition"
+            title="Entrance Tests and Qualification Recognition"
+            intro="Entrance tests decide whether you are selected for a specific programme; qualification recognition describes how your previous Indian qualification compares to the Italian system. They are separate processes — whether either applies depends on the university and programme, and requirements vary by course."
+          />
+          <div className="mx-auto mt-10 max-w-5xl space-y-6">
+            <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6">
+              <h3 className="text-lg font-bold text-[var(--foreground)]">
+                Entrance tests — programme-dependent, not universal
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
+                Some programmes use a test for selection or self-evaluation;
+                many do not. There is no single national entrance score that
+                applies to every Italian course. Always check the official call
+                (bando) of the exact programme you are applying to.
+              </p>
+              <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                <article className="rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5">
+                  <h4 className="font-bold text-[var(--foreground)]">
+                    CISIA TOLC
+                  </h4>
+                  <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
+                    Some universities use CISIA TOLC for admission,
+                    placement or self-assessment in fields such as
+                    engineering, economics, humanities and sciences.
+                    Depending on the programme, a TOLC may be mandatory,
+                    optional for ranking, or not required at all.{" "}
+                    <OfficialLink href="https://www.cisiaonline.it/en/">
+                      CISIA official information on TOLC
+                    </OfficialLink>
+                    .
+                  </p>
+                </article>
+                <article className="rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5">
+                  <h4 className="font-bold text-[var(--foreground)]">
+                    CEnT-S where adopted
+                  </h4>
+                  <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
+                    In specific scientific and technical areas, some
+                    universities have adopted CISIA CEnT-S (Test CISIA
+                    for Science). Where a programme lists CEnT-S, it
+                    applies only to that programme and intake — other
+                    programmes may not use it.{" "}
+                    <OfficialLink href="https://www.cisiaonline.it/en/">
+                      CISIA official information on CEnT-S
+                    </OfficialLink>
+                    .
+                  </p>
+                </article>
+                <article className="rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5">
+                  <h4 className="font-bold text-[var(--foreground)]">
+                    Programme / university-specific tests
+                  </h4>
+                  <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
+                    Some courses — notably nationally regulated or
+                    limited-access programmes such as Medicine and
+                    Architecture — use national or university-run entrance
+                    examinations, interviews or portfolio reviews. Other
+                    open-access programmes select on documents alone.
+                    Requirements vary by programme and year.
+                  </p>
+                </article>
+                <article className="rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5">
+                  <h4 className="font-bold text-[var(--foreground)]">
+                    No universal test or score
+                  </h4>
+                  <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
+                    Do not assume a single cutoff or test applies
+                    everywhere. Some programmes publish a minimum TOLC
+                    or entrance-test score, others rank applicants
+                    without a fixed threshold, and others do not use a
+                    test at all. Verify the exact rule for each
+                    programme.
+                  </p>
+                </article>
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6">
+              <h3 className="text-lg font-bold text-[var(--foreground)]">
+                Qualification recognition — CIMEA and Declaration of Value
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
+                Qualification recognition compares your Indian qualification
+                (e.g., Class 12, Bachelor&apos;s) to the Italian levels.
+                Whether you need a specific recognition document depends
+                on the university and, where relevant, the competent
+                Italian mission — not every Indian student needs every
+                document.
+              </p>
+              <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                <article className="rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5">
+                  <h4 className="font-bold text-[var(--foreground)]">
+                    CIMEA Statement of Comparability
+                  </h4>
+                  <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
+                    Some universities accept a CIMEA Statement of
+                    Comparability and/or Verification for foreign
+                    qualifications instead of, or alongside, other
+                    recognition documents. Whether CIMEA is accepted or
+                    required is decided by the specific university.{" "}
+                    <OfficialLink href="https://www.cimea.it/EN/pagina-attestati-di-comparabilita-e-verifica">
+                      CIMEA official information on comparability
+                    </OfficialLink>
+                    .
+                  </p>
+                </article>
+                <article className="rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5">
+                  <h4 className="font-bold text-[var(--foreground)]">
+                    Declaration of Value (Dichiarazione di Valore)
+                  </h4>
+                  <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
+                    Where a university or course requests it, a
+                    Declaration of Value is issued by the territorially
+                    competent Italian mission based on where the
+                    qualification was issued. Not every programme
+                    requires a DOV. For detailed, mission-specific
+                    procedures and how DOV relates to CIMEA, see our{" "}
+                    <Link
+                      href="/italy-student-visa"
+                      className="font-semibold text-[var(--primary)] hover:underline"
+                    >
+                      Italy student visa guide
+                    </Link>
+                    .
+                  </p>
+                </article>
+              </div>
+              <div className="mt-6 rounded-xl border border-[var(--border)] bg-[var(--background)] p-5">
+                <h4 className="font-bold text-[var(--foreground)]">
+                  Key distinction
+                </h4>
+                <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
+                  Entrance tests assess your readiness and rank you for a
+                  specific programme&apos;s limited places; qualification
+                  recognition confirms the level and comparability of your
+                  previous qualification. You may need one, both or
+                  neither depending on the university and programme —
+                  they are not interchangeable, and documentation
+                  requirements vary by course and intake.
+                </p>
+              </div>
+              <p className="mt-4 text-xs leading-5 text-[var(--muted-foreground)]">
+                Sources:{" "}
+                <a
+                  href="https://www.cisiaonline.it/en/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-[var(--primary)] hover:underline"
+                >
+                  CISIA (Consorzio Interuniversitario Sistemi Integrati per
+                  l&apos;Accesso)
+                </a>
+                {" · "}
+                <a
+                  href="https://www.cimea.it/EN/pagina-attestati-di-comparabilita-e-verifica"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-[var(--primary)] hover:underline"
+                >
+                  CIMEA comparability services
+                </a>
+                {" · "}
+                Always confirm the exact entrance and recognition
+                requirements on the official programme call.
+              </p>
+            </div>
           </div>
         </section>
 

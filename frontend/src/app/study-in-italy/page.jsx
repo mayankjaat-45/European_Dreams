@@ -546,6 +546,15 @@ export default function StudyInItalyPage() {
               >
                 Italy university admission guide
               </Link>
+              . For programme-specific entrance requirements and how
+              qualification recognition differs from entrance tests, see{" "}
+              <Link
+                href="/italy-university-admission#entrance-tests-qualification-recognition"
+                className="font-semibold text-[var(--primary)] hover:underline"
+              >
+                Italy university admission, entrance tests and qualification
+                recognition
+              </Link>
               .
             </p>
           </div>
@@ -1017,6 +1026,57 @@ export default function StudyInItalyPage() {
               <CtaButton href="/blogs" variant="secondary">
                 Read study guides
               </CtaButton>
+            </div>
+          </div>
+        </section>
+
+        {/* 15b. Common Mistakes */}
+        <section className="border-y border-[var(--border)] bg-[var(--card)]">
+          <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+            <SectionHeading
+              eyebrow="Avoidable errors"
+              title="Common Mistakes Indian Students Make When Planning to Study in Italy"
+              intro="Small planning errors cause most avoidable delays. Verify every detail on official university and government sources — not on generic lists."
+            />
+            <div className="mx-auto mt-10 grid max-w-5xl gap-4 sm:grid-cols-2">
+              {[
+                {
+                  title: "Relying on generic deadlines",
+                  text: "Deadlines are programme and intake-specific. A date that applied to another university or intake does not apply to yours — always check the official call of the exact programme.",
+                },
+                {
+                  title: "Confusing admission with visa approval",
+                  text: "University admission is decided by the university; the study visa is decided by the competent Italian authorities. Admission does not guarantee a visa — each stage has its own decision-maker.",
+                },
+                {
+                  title: "Starting Universitaly and visa preparation too late",
+                  text: "Universitaly pre-enrolment windows and visa appointments run on tight, non-extendable calendars. Start document collection well before admission arrives.",
+                },
+                {
+                  title: "Ignoring programme-specific entrance tests",
+                  text: "Some programmes require CISIA TOLC, CEnT-S where adopted, or a university-specific test or interview. Whether a test applies — and which one — varies by programme, so check the official call.",
+                },
+                {
+                  title: "Delaying qualification and document checks",
+                  text: "Whether a CIMEA Statement, Declaration of Value or other recognition document is needed depends on the university and course. Confirm early and allow time for issuing authorities.",
+                },
+                {
+                  title: "Relying on unofficial information",
+                  text: "Generic blogs and social posts often misstate fees, deadlines and document rules. Trust official university pages, Universitaly, CIMEA, CISIA and the competent Italian mission — verify before you act.",
+                },
+              ].map((item) => (
+                <article
+                  key={item.title}
+                  className="rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5"
+                >
+                  <h3 className="font-bold text-[var(--foreground)]">
+                    {item.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
+                    {item.text}
+                  </p>
+                </article>
+              ))}
             </div>
           </div>
         </section>
