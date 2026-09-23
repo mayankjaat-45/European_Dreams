@@ -655,6 +655,86 @@ export default function StudyInItalyPage() {
           </p>
         </section>
 
+        {/* 6b. Medicine in Italy */}
+        <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+          <SectionHeading
+            eyebrow="Medicine"
+            title="Medicine in Italy: IMAT, NEET and Programme-Specific Requirements"
+            intro="Medicine is a regulated, limited-access area — every requirement is programme-specific. Always verify the current official programme call before relying on any test or eligibility rule."
+          />
+          <div className="mx-auto mt-8 max-w-3xl rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6">
+            <p className="text-sm leading-6 text-[var(--muted-foreground)]">
+              Medicine and Surgery admission is governed by the individual
+              university&apos;s call (bando) for that intake. Whether IMAT or
+              another selection route is used depends on the programme&apos;s
+              current admission route — where the programme is English-taught,
+              IMAT may be relevant where the current route uses it. The call
+              also defines academic prerequisites, language requirements,
+              available places, rankings and deadlines for that year, so no
+              score or cutoff is universal.
+            </p>
+            <p className="mt-3 text-sm leading-6 text-[var(--muted-foreground)]">
+              For Indian students, additional NEET-related requirements may
+              apply depending on the programme and applicable Indian rules.
+              Italian university admission requirements and Indian
+              regulatory/eligibility requirements are separate — a university
+              admission does not replace any Indian eligibility check, and an
+              Indian eligibility check does not replace the Italian
+              university&apos;s call. Verify both sides with the current
+              official sources before planning around Medicine.
+            </p>
+            <div className="mt-5 rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5">
+              <h3 className="font-bold text-[var(--foreground)]">
+                Practical checks before you apply to Medicine
+              </h3>
+              <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-6 text-[var(--muted-foreground)]">
+                <li>Confirm whether the programme is English-taught.</li>
+                <li>Check the current official admission call for that intake.</li>
+                <li>
+                  Check whether IMAT or another selection route is required
+                  where the call lists it.
+                </li>
+                <li>
+                  Check programme-specific academic prerequisites for Medicine.
+                </li>
+                <li>
+                  Check applicable NEET and related Indian eligibility
+                  requirements with the relevant official authority.
+                </li>
+                <li>
+                  Check application, Universitaly pre-enrolment and student visa
+                  steps separately — each has its own timeline.
+                </li>
+              </ul>
+            </div>
+            <p className="mt-4 text-xs leading-5 text-[var(--muted-foreground)]">
+              Medicine places and selection methods are set per call, so no
+              universal seat count or cutoff is stated here. For current
+              procedures, see the official portal at{" "}
+              <a
+                href="https://www.universitaly.it"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-[var(--primary)] hover:underline"
+              >
+                Universitaly
+              </a>{" "}
+              and the specific university&apos;s programme page and call.
+            </p>
+          </div>
+          <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
+            For the detailed admission and qualification-recognition context,
+            see{" "}
+            <Link
+              href="/italy-university-admission"
+              className="font-semibold text-[var(--primary)] hover:underline"
+            >
+              See the Italy university admission guide
+            </Link>
+            .
+          </p>
+        </section>
+
         {/* 7. How to apply */}
         <section className="border-y border-[var(--border)] bg-[var(--card)]">
           <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
