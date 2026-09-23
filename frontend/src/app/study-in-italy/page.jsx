@@ -885,7 +885,16 @@ export default function StudyInItalyPage() {
                 with their own deadlines.
               </p>
             </div>
-            <p className="mx-auto mt-8 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
+            <p className="mx-auto mt-4 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
+              <Link
+                href="/cost-of-studying-in-italy#location-matters"
+                className="font-semibold text-[var(--primary)] hover:underline"
+              >
+                See our city cost guide for a practical comparison of living-cost
+                tiers across Italian student cities.
+              </Link>
+            </p>
+            <p className="mx-auto mt-4 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
               For a detailed breakdown of tuition, living costs and how to
               verify your exact fee, see our{" "}
               <Link

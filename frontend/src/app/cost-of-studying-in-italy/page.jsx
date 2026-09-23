@@ -562,13 +562,98 @@ export default function CostOfStudyingInItalyPage() {
         </section>
 
         {/* 8. City differences */}
-        <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+        <section
+          id="location-matters"
+          className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20"
+        >
           <SectionHeading
             eyebrow="Location matters"
             title="Milan and Rome vs Other University Cities"
-            intro="No verified city-by-city price table is published here — instead, how to think about the difference."
+            intro="Living costs sit inside the official Italy-wide range of approximately €700–€1,100 per month — where a city falls within that range varies. The tiers below are directional, not price bands."
           />
-          <div className="mx-auto mt-10 max-w-3xl space-y-4 text-sm leading-6 text-[var(--muted-foreground)]">
+          <div className="mx-auto mt-10 max-w-3xl overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)]">
+            <table className="w-full text-left text-sm">
+              <thead>
+                <tr className="border-b border-[var(--border)] bg-[var(--background)]">
+                  <th
+                    scope="col"
+                    className="px-5 py-4 font-bold text-[var(--foreground)]"
+                  >
+                    Living-cost tier
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-5 py-4 font-bold text-[var(--foreground)]"
+                  >
+                    Example cities
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-5 py-4 font-bold text-[var(--foreground)]"
+                  >
+                    How to read it
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-[var(--border)]">
+                <tr>
+                  <th
+                    scope="row"
+                    className="px-5 py-4 font-semibold text-[var(--foreground)]"
+                  >
+                    Higher-cost examples
+                  </th>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    Milan, Rome
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    Often toward the top of the national range, driven mainly
+                    by competitive accommodation markets
+                  </td>
+                </tr>
+                <tr>
+                  <th
+                    scope="row"
+                    className="px-5 py-4 font-semibold text-[var(--foreground)]"
+                  >
+                    Mid-range examples
+                  </th>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    Bologna, Florence
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    Often around the middle of the national range, with
+                    variation by neighbourhood and housing type
+                  </td>
+                </tr>
+                <tr>
+                  <th
+                    scope="row"
+                    className="px-5 py-4 font-semibold text-[var(--foreground)]"
+                  >
+                    Often-lower-cost examples
+                  </th>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    Padua, Turin, Pisa
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    Often toward the lower part of the national range, but
+                    still varies by accommodation and lifestyle
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <p className="border-t border-[var(--border)] px-5 py-4 text-xs leading-5 text-[var(--muted-foreground)]">
+              These tiers are directional, not fixed price bands. The official
+              Italy-wide indicative range of approximately €700–€1,100 per month
+              (European Commission country profile for Italy) still applies;
+              actual costs vary by accommodation, neighbourhood, lifestyle,
+              transport and intake year. No city is labelled cheapest or most
+              expensive — budget from actual listings for your intake year and
+              verify housing early.
+            </p>
+          </div>
+          <div className="mx-auto mt-6 max-w-3xl space-y-4 text-sm leading-6 text-[var(--muted-foreground)]">
             <p className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5">
               Larger, high-demand cities such as Milan and Rome generally sit
               toward the top of the national living-cost range, driven mainly
