@@ -332,6 +332,17 @@ export default function ItalyUniversityAdmissionPage() {
               title="Italy University Admission Requirements"
               intro="Requirements vary by university and programme. Treat the categories below as a checklist of what to verify — never as a universal rule."
             />
+            <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
+              See{" "}
+              <Link
+                href="/study-in-italy"
+                className="font-semibold text-[var(--primary)] hover:underline"
+              >
+                the full Study in Italy journey for Indian students
+              </Link>{" "}
+              for how each requirement fits into the journey from India to
+              arrival.
+            </p>
             <div className="mx-auto mt-10 grid max-w-5xl gap-4 sm:grid-cols-2">
               {[
                 {

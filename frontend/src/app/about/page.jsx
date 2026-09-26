@@ -244,10 +244,16 @@ export default function AboutPage() {
 
             <p className="mt-4 leading-8 text-muted">
               We combine educational content, personalised counselling and
-              practical application assistance. Students receive guidance for
-              profile evaluation, university selection, applications,
-              pre-enrolment, scholarships, student visas and preparation for
-              life in Italy.
+              practical application assistance. Students receive{" "}
+              <Link
+                href="/study-in-italy"
+                className="font-semibold text-primary hover:underline"
+              >
+                study in Italy guidance for Indian students
+              </Link>
+              , covering profile evaluation, university selection,
+              applications, pre-enrolment, scholarships, student visas and
+              preparation for life in Italy.
             </p>
 
             <div className="mt-7 space-y-4">
