@@ -14,6 +14,20 @@ const MUMBAI_DOV_URL =
   "https://consmumbai.esteri.it/en/servizi-consolari-e-visti/servizi-per-il-cittadino-straniero/dichiarazione-di-valore-dov/";
 const EC_ITALY_PROFILE_URL =
   "https://education.ec.europa.eu/study-in-europe/country-profiles/italy";
+const DELHI_CHECKLIST_PDF_URL =
+  "https://assets.ctfassets.net/xxg4p8gt3sg6/1ZYRulWbCqUIuOwoUJxnqK/585138aa7caa983f43ea2a35e2af188d/checklist_studio__2026_2027_2028_Italy_in_INDIA._Rev_India_16.06.pdf";
+const KOLKATA_CHECKLIST_PDF_URL =
+  "https://conscalcutta.esteri.it/wp-content/uploads/2026/06/checklist-studio-2026-2027-2028-INDIA.pdf";
+const VFS_MUMBAI_URL =
+  "https://visa.vfsglobal.com/one-pager/italy/india/mumbai/english";
+const VFS_DELHI_URL =
+  "https://visa.vfsglobal.com/one-pager/italy/india/new-delhi/english";
+const VFS_LEGALISATIONS_URL =
+  "https://visa.vfsglobal.com/ind/en/ita/Legalizations";
+const VFS_BOOKING_URL =
+  "https://visa.vfsglobal.com/ind/en/ita/book-an-appointment";
+const BANGALORE_STUDY_URL =
+  "https://consbangalore.esteri.it/en/servizi-consolari-e-visti/servizi-per-il-cittadino-straniero/study-in-italy";
 
 export const metadata = {
   title: "Italy Student Visa for Indian Students | Requirements & Process",
@@ -142,7 +156,7 @@ const faqs = [
   {
     question: "How much financial proof is required?",
     answer:
-      "There is no single universal figure published here: the mission defines the required means and accepted evidence. Prepare verifiable documents such as bank statements and sponsorship proof exactly as your mission's current checklist describes.",
+      "Current mission checklists for 2026/27 require proof of means of not less than €10,179.85 for one year (about €848.32 per month of stay), shown through bank statements, sponsorship and income documents. Confirm the exact figure and accepted evidence with your competent mission before applying.",
   },
   {
     question: "Is a Declaration of Value (DOV) required?",
@@ -380,7 +394,7 @@ export default function ItalyStudentVisaPage() {
               },
               {
                 title: "Financial evidence",
-                text: "Verifiable proof of adequate means as defined by the mission. No universal minimum is published here.",
+                text: "Verifiable proof of the means your mission requires — see the funds section below for the current checklist figure and accepted documents.",
               },
               {
                 title: "Accommodation evidence",
@@ -469,24 +483,228 @@ export default function ItalyStudentVisaPage() {
           </div>
         </section>
 
+        {/* Mission and VFS jurisdiction */}
+        <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+          <SectionHeading
+            eyebrow="Where to apply"
+            title="Where Should Indian Students Apply for an Italy Student Visa?"
+            intro="Apply according to where you reside — your residence decides the mission and VFS centre, not the location of your university. Confirm your mapping with the mission before booking."
+          />
+          <div className="mx-auto mt-8 max-w-5xl overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)]">
+            <table className="w-full text-left text-sm">
+              <thead>
+                <tr className="border-b border-[var(--border)] bg-[var(--background)]">
+                  <th
+                    scope="col"
+                    className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
+                  >
+                    Residence
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
+                  >
+                    Mission
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
+                  >
+                    VFS centre(s)
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
+                  >
+                    Important note
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-[var(--border)]">
+                <tr>
+                  <th
+                    scope="row"
+                    className="px-5 py-4 font-semibold text-[var(--foreground)]"
+                  >
+                    Gujarat, Maharashtra, Chhattisgarh, Madhya Pradesh, Goa,
+                    Kerala
+                  </th>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    Consulate General of Italy in Mumbai
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    Mumbai (Mahalaxmi) and Cochin
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    Book with your own email ID and contact number. If your
+                    degree was issued in Karnataka, Tamil Nadu, Andhra Pradesh
+                    or Telangana, obtain the DOV from Bengaluru first.
+                  </td>
+                </tr>
+                <tr>
+                  <th
+                    scope="row"
+                    className="px-5 py-4 font-semibold text-[var(--foreground)]"
+                  >
+                    North India
+                  </th>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    Embassy of Italy in New Delhi
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    New Delhi, Chandigarh and Jalandhar
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    The Embassy discourages agent involvement — schedule with
+                    your own personal email ID and contact number.
+                  </td>
+                </tr>
+                <tr>
+                  <th
+                    scope="row"
+                    className="px-5 py-4 font-semibold text-[var(--foreground)]"
+                  >
+                    Karnataka, Tamil Nadu, Andhra Pradesh, Telangana
+                  </th>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    Consulate General of Italy in Bengaluru
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    Bengaluru, Hyderabad and Chennai
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    Published Bengaluru guidance describes a mandatory video
+                    interview at submission for its jurisdiction.
+                  </td>
+                </tr>
+                <tr>
+                  <th
+                    scope="row"
+                    className="px-5 py-4 font-semibold text-[var(--foreground)]"
+                  >
+                    East India
+                  </th>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    Kolkata mission
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    Confirm the submission centre with the mission
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    Follow the Kolkata 2026-2027 / 2027-2028 checklist;
+                    routing, including north-eastern states, requires
+                    verification with the mission before booking.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <p className="border-t border-[var(--border)] px-5 py-4 text-xs leading-5 text-[var(--muted-foreground)]">
+              Jurisdiction mappings change — always re-check with your mission
+              and VFS before applying. Sources:{" "}
+              <OfficialLink href={VFS_MUMBAI_URL}>
+                VFS Mumbai Italy visa information
+              </OfficialLink>
+              {" · "}
+              <OfficialLink href={VFS_DELHI_URL}>
+                VFS New Delhi Italy visa information
+              </OfficialLink>
+              {" · "}
+              <OfficialLink href={VFS_LEGALISATIONS_URL}>
+                VFS legalisations and DOV procedures
+              </OfficialLink>
+              {" · "}
+              <OfficialLink href={BANGALORE_STUDY_URL}>
+                Bengaluru consulate study guidance
+              </OfficialLink>
+              .
+            </p>
+          </div>
+          <div className="mx-auto mt-6 max-w-3xl rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5">
+            <h3 className="font-bold text-[var(--foreground)]">
+              Visa jurisdiction is not DOV jurisdiction
+            </h3>
+            <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
+              The study visa application follows the mission of your residence,
+              while DOV and legalisation applications follow the mission of
+              the state where the degree or school certificate was issued.
+              These are two separate routings — do not merge them.
+            </p>
+          </div>
+        </section>
+
         {/* Financial proof */}
         <section className="border-y border-[var(--border)] bg-[var(--card)]">
           <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
             <SectionHeading
               eyebrow="Funds"
-              title="Financial Proof for Italy Student Visa"
-              intro="You must show adequate, verifiable financial means for tuition and stay — but the definition of adequate comes from the mission, not from any fixed figure on this page."
+              title="How Much Proof of Funds Do Indian Students Need for an Italy Student Visa?"
+              intro="Current mission checklists for 2026/27 require proof of means of not less than €10,179.85 for one year — about €848.32 for each month of stay. Show it with verifiable bank, sponsorship and income documents exactly as your mission's checklist describes."
             />
-            <div className="mx-auto mt-8 max-w-3xl rounded-2xl border border-[var(--border)] bg-[var(--background)] p-6">
-              <p className="text-sm leading-6 text-[var(--muted-foreground)]">
-                Prepare bank statements, sponsorship documents and income
-                evidence exactly as the current checklist describes, ensuring
-                payments and balances are visible and consistent. Sponsorship
-                generally needs verifiable support documents. Because required
-                amounts and evidence rules can change, verify them with the
-                competent mission before applying.
+            <div className="mx-auto mt-8 max-w-3xl overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--background)]">
+              <table className="w-full text-left text-sm">
+                <tbody className="divide-y divide-[var(--border)]">
+                  {[
+                    [
+                      "Required means",
+                      "Not less than €10,179.85 for one year, or €848.32 for each month of the entire intended stay, per the current mission checklists.",
+                    ],
+                    [
+                      "Bank statements",
+                      "Original statements stamped and signed by the branch manager — the Kolkata checklist specifies 6 months of the applicant's statements.",
+                    ],
+                    [
+                      "Sponsor and family support",
+                      "Sponsor ID proof with a sponsorship letter, plus documents proving the sponsor's source of income such as employment or business activity, ITR for the last 3 years, a family income certificate, or an education loan.",
+                    ],
+                    [
+                      "Scholarship holders",
+                      "Original proof of an Italian government scholarship where applicable, as the checklist specifies.",
+                    ],
+                    [
+                      "Flight and accommodation top-ups",
+                      "Confirmed one-way ticket reservations plus sufficient funds on top of the minimum means, and adequate boarding and lodging evidence as listed.",
+                    ],
+                  ].map(([item, note]) => (
+                    <tr key={item}>
+                      <th
+                        scope="row"
+                        className="px-5 py-4 font-semibold text-[var(--foreground)]"
+                      >
+                        {item}
+                      </th>
+                      <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                        {note}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <p className="border-t border-[var(--border)] px-5 py-4 text-xs leading-5 text-[var(--muted-foreground)]">
+                Figures and document rules come from the current checklists and
+                can change — older references citing lower thresholds do not
+                apply. Verify the exact amount with your competent mission
+                before applying. Sources:{" "}
+                <OfficialLink href={DELHI_CHECKLIST_PDF_URL}>
+                  Embassy of Italy New Delhi study visa checklist 2026-2027 /
+                  2027-2028 (PDF)
+                </OfficialLink>
+                {" · "}
+                <OfficialLink href={KOLKATA_CHECKLIST_PDF_URL}>
+                  Kolkata study visa checklist 2026-2027 / 2027-2028 (PDF)
+                </OfficialLink>
+                .
               </p>
             </div>
+            <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
+              Budgeting tuition alongside these means? See our{" "}
+              <Link
+                href="/cost-of-studying-in-italy"
+                className="font-semibold text-[var(--primary)] hover:underline"
+              >
+                cost of studying in Italy guide
+              </Link>
+              .
+            </p>
           </div>
         </section>
 
@@ -560,13 +778,28 @@ export default function ItalyStudentVisaPage() {
           />
           <div className="mx-auto mt-8 max-w-3xl rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6">
             <p className="text-sm leading-6 text-[var(--muted-foreground)]">
-              Published consulate guidance notes that long-stay decisions can
+              Book your submission through the VFS portal for your
+              jurisdiction using your own personal email ID and contact
+              number — the Embassy discourages agent involvement, and the
+              Mumbai guidance sets the same own-email rule.{" "}
+              <OfficialLink href={VFS_BOOKING_URL}>
+                VFS appointment booking for Italy in India
+              </OfficialLink>
+              . Published consulate guidance notes that long-stay decisions can
               take up to 90 days from receipt under applicable law — longer if
               additional documents are requested. Processing also varies by
-              season and workload. Apply as early as your mission allows and
-              never book non-refundable travel around an assumed date.{" "}
+              season and workload. For 2026/27 Bachelor&apos;s and
+              Master&apos;s enrolment, the New Delhi checklist states
+              applications will not be accepted after 30 November 2026 — a
+              visa-submission ceiling, not a university deadline. Apply as
+              early as your mission allows and never book non-refundable
+              travel around an assumed date.{" "}
               <OfficialLink href={MUMBAI_STUDY_URL}>
                 Mumbai consulate study guidance
+              </OfficialLink>{" "}
+              ·{" "}
+              <OfficialLink href={DELHI_CHECKLIST_PDF_URL}>
+                New Delhi 2026-2027 / 2027-2028 checklist (PDF)
               </OfficialLink>
               .
             </p>
