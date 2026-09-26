@@ -494,6 +494,337 @@ export default function CostOfStudyingInItalyPage() {
           </div>
         </section>
 
+        {/* 6b. Verified university fee examples */}
+        <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+          <SectionHeading
+            eyebrow="Verified examples"
+            title="Verified University Fee Examples — 2026/27"
+            intro="Official university-published examples for 2026/27. They are not universal fees for all Indian students — tuition can depend on programme, ISEE/ISEEU Parificato, country classification, citizenship/residence, study status and other university rules. The European Commission range above remains the broad reference point."
+          />
+          <div className="mx-auto mt-10 max-w-6xl overflow-x-auto rounded-2xl border border-[var(--border)] bg-[var(--card)]">
+            <table className="w-full min-w-[1080px] text-left text-sm">
+              <thead>
+                <tr className="border-b border-[var(--border)] bg-[var(--background)]">
+                  {[
+                    "University",
+                    "2026/27 published fee structure",
+                    "International / India condition",
+                    "ISEE / Parificato route",
+                    "Regional tax + stamp",
+                    "Important caveat",
+                    "Official source",
+                    "Verified",
+                  ].map((heading) => (
+                    <th
+                      key={heading}
+                      scope="col"
+                      className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
+                    >
+                      {heading}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-[var(--border)]">
+                <tr>
+                  <th
+                    scope="row"
+                    className="px-5 py-4 font-semibold text-[var(--foreground)]"
+                  >
+                    Politecnico di Milano
+                  </th>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    First instalment €880.04; second contribution €0–€3,003.
+                    Standard plan (46–74 ECTS) with ISEE ≤€22,000 can be
+                    €157.04; maximum published contribution €3,943.04.
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    Non-EU Master&apos;s rule applies; exact amount depends on
+                    the applicable fee/benefit conditions.
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    ISEE ≤€30,000 waiver condition as documented; ISEEU
+                    Parificato accepted.
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    Lombardy regional tax €130/€160/€190 by bracket, plus
+                    stamp duty.
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    Relevant non-EU Master&apos;s without benefits pays the
+                    full contribution. Never read as one flat annual fee.
+                  </td>
+                  <td className="px-5 py-4">
+                    <OfficialLink href="https://www.polimi.it/en/students/tuition-fees-scholarships-and-financial-aid/tuition-fees">
+                      Tuition fees
+                    </OfficialLink>
+                    {" · "}
+                    <OfficialLink href="https://www.polimi.it/en/prospective-students/how-much-does-it-cost/laurea-laurea-magistrale-and-single-cycle-programmes">
+                      How much does it cost
+                    </OfficialLink>
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    September 2026
+                  </td>
+                </tr>
+                <tr>
+                  <th
+                    scope="row"
+                    className="px-5 py-4 font-semibold text-[var(--foreground)]"
+                  >
+                    University of Milan
+                  </th>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    First instalment €146 (€130 regional tax + €16 stamp).
+                    Second instalment varies by ISEE, course and seniority.
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    Country-group and programme rules apply; check the current
+                    university table for the applicant&apos;s classification.
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    No-tax area at ISEE ≤€30,000 under stated conditions.
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    Included in the €146 first instalment as stated.
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    No India-specific second instalment is published here.
+                  </td>
+                  <td className="px-5 py-4">
+                    <OfficialLink href="https://www.unimi.it/en/study/bachelor-and-master-study/fees-and-how-pay-them/fees-current-year">
+                      Current-year fees
+                    </OfficialLink>
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    September 2026
+                  </td>
+                </tr>
+                <tr>
+                  <th
+                    scope="row"
+                    className="px-5 py-4 font-semibold text-[var(--foreground)]"
+                  >
+                    University of Padua
+                  </th>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    Overall approximately €0–€3,000. First instalment €208.
+                    Extra-EU non-resident fixed bands: A1 €2,790, A2 €930, B1
+                    €2,990, B2 €996.66.
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    A1/B1 apply by extra-EU non-resident criteria. A2/B2 are
+                    restricted to the MUR DM 166/2025 low-HDI list — India is
+                    not treated as a low-HDI country for this route, so Indian
+                    applicants should not assume those reduced bands apply.
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    ISEE Parificato route exists for internationals abroad.
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    Regional tax and stamp duty apply per the call; 100 full
+                    waivers exist for English-taught international students.
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    Band depends on programme group and citizen/residence
+                    status — confirm both.
+                  </td>
+                  <td className="px-5 py-4">
+                    <OfficialLink href="https://www.unipd.it/en/contribuzione-studentesca">
+                      Student fees
+                    </OfficialLink>
+                    {" · "}
+                    <OfficialLink href="https://wwwassets.unipd.it/sites/default/files/2026-07/Guide_ISEE_ApplicationForBenefits_2026_ENG.pdf">
+                      Benefits guide (PDF)
+                    </OfficialLink>
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    September 2026
+                  </td>
+                </tr>
+                <tr>
+                  <th
+                    scope="row"
+                    className="px-5 py-4 font-semibold text-[var(--foreground)]"
+                  >
+                    University of Turin
+                  </th>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    First instalment €156 (€140 + €16). GDP-PPP banded
+                    reduction structure for international students; published
+                    top bands €1,000–€1,650.
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    India-specific band assignment requires checking the
+                    university&apos;s current Annex A country table.
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    ISEE routes per the fees regulation; ISEE maximum above
+                    €85,000 pays the maximum.
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    Included in the €156 first instalment as stated.
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    Reduction requests carry 2026/27 deadlines (20 Nov 2026 /
+                    26 Feb 2027) with a published €150 penalty context.
+                  </td>
+                  <td className="px-5 py-4">
+                    <OfficialLink href="https://www.en.unito.it/studying-unito/tuition-fees">
+                      Tuition fees
+                    </OfficialLink>
+                    {" · "}
+                    <OfficialLink href="https://www.en.unito.it/studying-unito/tuition-fees/tuition-fees-international-students">
+                      International students
+                    </OfficialLink>
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    September 2026
+                  </td>
+                </tr>
+                <tr>
+                  <th
+                    scope="row"
+                    className="px-5 py-4 font-semibold text-[var(--foreground)]"
+                  >
+                    University of Pisa
+                  </th>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    Maximum published tuition €2,900 with World Bank
+                    income-coefficient bands: low €290, lower-middle €580,
+                    upper-middle €1,160, high €2,900.
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    India&apos;s exact university-country classification must
+                    be confirmed against Pisa&apos;s current country table.
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    ISEEU Parificato alternative exists.
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    Regional tax €140 plus €16 stamp, separate from tuition.
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    Coefficients apply to the maximum — a band is not a flat
+                    fee for every student.
+                  </td>
+                  <td className="px-5 py-4">
+                    <OfficialLink href="https://www.unipi.it/en/education/registration/enrolment-and-registration/enrolment-for-international-students/university-fees-and-scholarships">
+                      International fees
+                    </OfficialLink>
+                    {" · "}
+                    <OfficialLink href="https://www.unipi.it/en/education/registration/enrolment-and-registration/enrolment-for-international-students/reduction-of-tuition-fees">
+                      Reduction rules
+                    </OfficialLink>
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    September 2026
+                  </td>
+                </tr>
+                <tr>
+                  <th
+                    scope="row"
+                    className="px-5 py-4 font-semibold text-[var(--foreground)]"
+                  >
+                    University of Brescia
+                  </th>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    2026/27 no-tax area at ISEE ≤€28,000. Study-visa holders
+                    follow country-based bands.
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    India-specific band requires confirmation from the
+                    university&apos;s current country table.
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    Lower-middle-income route can use ISEE Parificato where
+                    the published rules allow it; ISEE reduction deadline 15
+                    Nov 2026 for ISEE under €70,000.
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    Regional tax categories €130/€160 by income band, plus
+                    stamp duty.
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    No-tax and band outcomes depend on ISEE and deadlines —
+                    late submission carries penalties.
+                  </td>
+                  <td className="px-5 py-4">
+                    <OfficialLink href="https://www.unibs.it/en/fees-and-contributions-2026-2027">
+                      2026/27 fees
+                    </OfficialLink>
+                  </td>
+                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                    September 2026
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div className="mx-auto mt-8 max-w-3xl space-y-4">
+            <h3 className="text-center text-lg font-bold text-[var(--foreground)]">
+              How Indian Students Should Read These Fee Figures
+            </h3>
+            <ul className="space-y-3 text-sm leading-6 text-[var(--muted-foreground)]">
+              {[
+                "A first instalment is not always the total annual tuition — later instalments complete the yearly amount.",
+                "ISEE or ISEEU Parificato can materially change the amount where the university allows it, so two students can pay different fees for the same course.",
+                "Country-group or income-coefficient systems are university-specific — a band at one university never transfers to another.",
+                "Regional tax and stamp duty can sit outside tuition — add them separately instead of merging every cost into one number.",
+                "Never compare one university's maximum fee directly with another university's fixed band without checking the conditions behind each figure.",
+              ].map((point) => (
+                <li
+                  key={point}
+                  className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5"
+                >
+                  {point}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="mx-auto mt-8 max-w-3xl rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6">
+            <h3 className="font-bold text-[var(--foreground)]">
+              India-Specific Fee Classification: What Is Verified?
+            </h3>
+            <div className="mt-4 space-y-4 text-sm leading-6 text-[var(--muted-foreground)]">
+              <div>
+                <p className="font-bold text-[var(--foreground)]">
+                  Directly verifiable
+                </p>
+                <p className="mt-1">
+                  Padua A1/B1 structure applies to extra-EU non-residents by
+                  the published criteria. The Polimi non-EU Master&apos;s
+                  full-contribution rule applies where its conditions are met.
+                  Brescia&apos;s study-visa country-band structure exists, but
+                  the India band still needs table confirmation.
+                </p>
+              </div>
+              <div>
+                <p className="font-bold text-[var(--foreground)]">
+                  Requires university country-table check
+                </p>
+                <p className="mt-1">
+                  Pisa, Brescia and Turin — confirm India&apos;s row in each
+                  university&apos;s current country table before budgeting
+                  around a band.
+                </p>
+              </div>
+              <div>
+                <p className="font-bold text-[var(--foreground)]">
+                  Do not assume
+                </p>
+                <p className="mt-1">
+                  Padua A2/B2 low-HDI reduced bands for India, or any generic
+                  &ldquo;Indian students pay €X&rdquo; figure. Bologna is not
+                  listed here because its 2026/27 fee amounts were not
+                  verified in this research — no amount is published from
+                  memory.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* 7. Cost of living */}
         <section className="border-y border-[var(--border)] bg-[var(--card)]">
           <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
@@ -782,6 +1113,180 @@ export default function CostOfStudyingInItalyPage() {
                 — DSU, MAECI, university awards, documents and deadlines.
               </p>
             </article>
+          </div>
+        </section>
+
+        {/* 10b. DSU and MAECI compatibility */}
+        <section className="border-y border-[var(--border)] bg-[var(--card)]">
+          <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+            <SectionHeading
+              eyebrow="Compatibility"
+              title="Can Indian Students Combine DSU and MAECI Scholarships?"
+              intro="You can apply for DSU/regional aid and MAECI separately, but you cannot hold or accept both at the same time: the MAECI 2026/27 call bars combining it with any Italian government or public-institution scholarship, including regional DSU grants. Each regional call then runs its own incompatibility procedure."
+            />
+            <div className="mx-auto mt-10 grid max-w-5xl gap-6">
+              <article className="rounded-3xl border border-[var(--border)] bg-[var(--background)] p-6">
+                <h3 className="text-lg font-bold text-[var(--foreground)]">
+                  What the MAECI Call Says
+                </h3>
+                <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
+                  The MAECI 2026/27 national rule is absolute on holding
+                  awards: the scholarship is incompatible with any other
+                  scholarship granted by the Italian Government or by Italian
+                  public institutions, including regional grants for the
+                  Right to Education (DSU). The call instead lists compatible
+                  categories only — internships abroad, Erasmus/Erasmus+ and
+                  programmes funded by international institutions.{" "}
+                  <OfficialLink href="https://www.unipi.it/en/education/registration/enrolment-and-registration/enrolment-for-international-students/maeci-scholarships">
+                    University of Pisa MAECI 2026/27 page
+                  </OfficialLink>
+                  .
+                </p>
+              </article>
+              <article className="rounded-3xl border border-[var(--border)] bg-[var(--background)] p-6">
+                <h3 className="text-lg font-bold text-[var(--foreground)]">
+                  What the Regional Call Says
+                </h3>
+                <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
+                  Regional scholarship calls carry their own detailed
+                  incompatibility procedures and must be read region by
+                  region. For Toscana, the DSU Toscana 2026/27 call ran 20
+                  July–7 September 2026 for degree-course students (ISEE
+                  €27,000 / ISPE €60,000) with its own renunciation
+                  (&ldquo;rinuncia&rdquo;) procedure — a call-specific
+                  mechanism, not an Italy-wide rule.{" "}
+                  <OfficialLink href="https://www.dsu.toscana.it/documents/d/ardsu/bando-borsa-alloggio-26-27">
+                    DSU Toscana 2026/27 call
+                  </OfficialLink>
+                  .
+                </p>
+                <p className="mt-3 text-sm leading-6 text-[var(--muted-foreground)]">
+                  Sicilia works differently: the ERSU Messina 2026/27 call
+                  (Delibera 36, 29/06/2026) sets its own Art. 5
+                  incompatibility with other public or private grants and
+                  university collaborations, operated through a
+                  &ldquo;conguaglio&rdquo; equalization mechanism. That is an
+                  ERSU Messina-specific mechanism, not a national DSU rule.
+                </p>
+              </article>
+              <article className="rounded-3xl border border-[var(--border)] bg-[var(--background)] p-6">
+                <h3 className="text-lg font-bold text-[var(--foreground)]">
+                  If You Are Awarded Both
+                </h3>
+                <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
+                  The MAECI-side incompatibility means you cannot
+                  simultaneously hold or accept both awards. Exact handling
+                  after a dual award is call-specific — ERSU Messina provides
+                  a conguaglio mechanism in its call, while Toscana operates
+                  a rinuncia procedure — so there is no universal
+                  &ldquo;keep X and cancel Y&rdquo; rule. Read both calls
+                  before accepting either award.
+                </p>
+              </article>
+              <article className="rounded-3xl border border-[var(--border)] bg-[var(--background)] p-6">
+                <h3 className="text-lg font-bold text-[var(--foreground)]">
+                  2026/27 Status: What&apos;s Still Open
+                </h3>
+                <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
+                  As of 26 September 2026: the MAECI 2026/27 deadline (26
+                  March 2026) is closed, and DSU Toscana degree-course
+                  applications (20 July–7 September 2026) are closed. The DSU
+                  Toscana PhD/specialisation window (25 September–16 November
+                  2026) is open, and Padua&apos;s regional-scholarship
+                  benefits deadline is 30 September 2026 — a regional date,
+                  not a universal DSU deadline.
+                </p>
+              </article>
+            </div>
+            <div className="mx-auto mt-8 max-w-5xl overflow-x-auto rounded-2xl border border-[var(--border)] bg-[var(--background)]">
+              <table className="w-full min-w-[720px] text-left text-sm">
+                <thead>
+                  <tr className="border-b border-[var(--border)]">
+                    {[
+                      "Programme / benefit",
+                      "2026/27 status",
+                      "Verified date",
+                      "Scope",
+                    ].map((heading) => (
+                      <th
+                        key={heading}
+                        scope="col"
+                        className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
+                      >
+                        {heading}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-[var(--border)]">
+                  {[
+                    [
+                      "MAECI 2026/27 applications",
+                      "Closed — deadline 26 March 2026",
+                      "September 2026",
+                      "National",
+                    ],
+                    [
+                      "DSU Toscana degree courses",
+                      "Closed — window 20 July–7 September 2026",
+                      "September 2026",
+                      "Toscana",
+                    ],
+                    [
+                      "DSU Toscana PhD / specialisation",
+                      "Open — window 25 September–16 November 2026",
+                      "September 2026",
+                      "Toscana",
+                    ],
+                    [
+                      "Padua regional-scholarship benefits",
+                      "Deadline 30 September 2026 — regional date, not universal",
+                      "September 2026",
+                      "Veneto / Padua",
+                    ],
+                  ].map(([programme, status, verified, scope]) => (
+                    <tr key={programme}>
+                      <th
+                        scope="row"
+                        className="px-5 py-4 font-semibold text-[var(--foreground)]"
+                      >
+                        {programme}
+                      </th>
+                      <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                        {status}
+                      </td>
+                      <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                        {verified}
+                      </td>
+                      <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                        {scope}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div className="mx-auto mt-6 max-w-3xl rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5">
+              <h3 className="font-bold text-[var(--foreground)]">Warning</h3>
+              <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
+                DSU is regional: deadlines and incompatibility procedures can
+                differ by region. Do not apply one region&apos;s rule to
+                another region without checking that region&apos;s current
+                call. Sources:{" "}
+                <OfficialLink href="https://studyinitaly.esteri.it/ListaBandi">
+                  MAECI calls listing
+                </OfficialLink>
+                {" · "}
+                <OfficialLink href="https://www.unipi.it/avvisi/borsa-di-studio-e-posto-alloggio-per-lanno-accademico-2026-2027">
+                  DSU Toscana dates notice
+                </OfficialLink>
+                {" · "}
+                <OfficialLink href="https://wwwassets.unipd.it/sites/default/files/2026-07/Guide_ISEE_ApplicationForBenefits_2026_ENG.pdf">
+                  Padua benefits guide (PDF)
+                </OfficialLink>
+                .
+              </p>
+            </div>
           </div>
         </section>
 
