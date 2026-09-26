@@ -851,6 +851,312 @@ export default function EnglishTaughtCoursesPage() {
                 </p>
               </article>
             ))}
+            </div>
+        </section>
+
+        {/* 15b. Without IELTS */}
+        <section className="border-y border-[var(--border)] bg-[var(--card)]">
+          <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+            <SectionHeading
+              eyebrow="Without IELTS"
+              title="Can Indian Students Study in Italy Without IELTS?"
+              intro="What ΓÇ£study in Italy without IELTSΓÇ¥ really means for Indian students ΓÇö documented routes, not blanket exemptions."
+            />
+            <div className="mx-auto mt-8 max-w-3xl rounded-2xl border border-[var(--border)] bg-[var(--background)] p-6">
+              <p className="text-sm leading-6 text-[var(--muted-foreground)]">
+                There is no universal Italy-wide rule that lets Indian
+                students skip IELTS. Each university and programme sets its
+                own English-language proof: some documented routes accept a
+                qualifying English-medium degree instead of a test, while
+                others require a recognized certificate regardless of previous
+                study. An MOI letter is not automatically accepted everywhere,
+                and university admission rules are separate from student-visa
+                documentation.
+              </p>
+            </div>
+            <div className="mx-auto mt-10 grid max-w-5xl gap-6">
+              <article className="rounded-3xl border border-[var(--border)] bg-[var(--background)] p-6">
+                <h3 className="text-lg font-bold text-[var(--foreground)]">
+                  When Can an English-Medium Degree Replace IELTS?
+                </h3>
+                <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
+                  The strongest documented example is Politecnico di Milano.
+                  For its relevant Master&apos;s foreign-qualification route,
+                  a Bachelor&apos;s degree taught in English for at least 3
+                  years can qualify for exemption from English certification
+                  ΓÇö but a certified university document is required, and it
+                  must confirm that at least 75% of the courses were taught
+                  in English. IELTS ΓëÑ6 is otherwise one accepted
+                  certification route for that Master&apos;s admission
+                  context.{" "}
+                  <OfficialLink href="https://www.polimi.it/en/prospective-students/how-to-apply/admission-to-laurea-magistrale/foreign-qualification/application/list-of-documents-required-by-the-admissions-office">
+                    Polimi admissions-office documents list
+                  </OfficialLink>
+                  .
+                </p>
+                <p className="mt-3 text-sm leading-6 text-[var(--muted-foreground)]">
+                  Bologna and Turin also have programme-dependent
+                  English-medium routes where their official sources
+                  explicitly support them ΓÇö Bologna&apos;s DHDK Master&apos;s
+                  page lists a Bachelor&apos;s or Master&apos;s with English
+                  as medium of instruction as one way to meet B2, and Turin
+                  states some programmes accept a university certificate
+                  attesting bachelor studies in English. These are documented
+                  examples, not an Italy-wide rule.{" "}
+                  <OfficialLink href="https://corsi.unibo.it/2cycle/DigitalHumanitiesKnowledge/english-language-requirement-for-admission">
+                    Bologna DHDK English requirement
+                  </OfficialLink>
+                  {" ┬╖ "}
+                  <OfficialLink href="https://en.unito.it/studying-unito/international-degree-seeking-students/faqs/language-requirements">
+                    Turin language-requirements FAQ
+                  </OfficialLink>
+                  .
+                </p>
+              </article>
+              <article className="rounded-3xl border border-[var(--border)] bg-[var(--background)] p-6">
+                <h3 className="text-lg font-bold text-[var(--foreground)]">
+                  MOI vs IELTS: What Indian Students Should Check
+                </h3>
+                <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
+                  MOI means proof from the previous institution that the
+                  relevant education was delivered in English ΓÇö but acceptance
+                  depends on the specific university and programme. Check
+                  whether your call requires a particular certificate, a
+                  certified institutional document, a percentage of coursework
+                  in English, transcript evidence, or another form of proof. A
+                  simple generic MOI letter is not sufficient everywhere.
+                </p>
+                <p className="mt-3 text-sm leading-6 text-[var(--muted-foreground)]">
+                  Sapienza&apos;s documented waiver list is a good cautionary
+                  example: it covers specific qualifications and
+                  MOI-country nationalities (UK, US, Canada, Ireland,
+                  Australia, New Zealand) ΓÇö India is not on its listed
+                  MOI-country nationality waiver, so Indian applicants should
+                  not assume that waiver applies to them.{" "}
+                  <OfficialLink href="https://www.uniroma1.it/sites/default/files/field_file_allegati/language_requirements_sapienza_2026.pdf">
+                    Sapienza 2026 English language requirements (PDF)
+                  </OfficialLink>
+                  .
+                </p>
+              </article>
+              <article className="rounded-3xl border border-[var(--border)] bg-[var(--background)] p-6">
+                <h3 className="text-lg font-bold text-[var(--foreground)]">
+                  Bachelor&apos;s vs Master&apos;s: Requirements Can Differ
+                </h3>
+                <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
+                  Polimi shows why level matters: its English-taught
+                  Bachelor&apos;s routes include a qualification-in-English
+                  route, while its relevant Master&apos;s foreign-qualification
+                  route centres on certified English testing unless the
+                  documented 3-year/75% English-medium exemption applies.
+                  Treat this as one university&apos;s example ΓÇö always check
+                  the call for your exact level and programme.{" "}
+                  <OfficialLink href="https://www.polimi.it/en/students/language-requirements/students-of-an-english-language-laurea-study-programme">
+                    Polimi Bachelor&apos;s language requirements
+                  </OfficialLink>
+                  .
+                </p>
+              </article>
+            </div>
+            <div className="mx-auto mt-8 max-w-5xl">
+              <h3 className="text-center text-lg font-bold text-[var(--foreground)]">
+                University-Specific Examples
+              </h3>
+              <p className="mx-auto mt-2 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
+                How the IELTS requirement and English-medium options compare
+                across documented routes. There is no verified list of
+                &ldquo;Italy universities without IELTS&rdquo; ΓÇö check each
+                call.
+              </p>
+            </div>
+            <div className="mx-auto mt-6 max-w-5xl overflow-x-auto rounded-2xl border border-[var(--border)] bg-[var(--background)]">
+              <table className="w-full min-w-[720px] text-left text-sm">
+                <thead>
+                  <tr className="border-b border-[var(--border)]">
+                    <th
+                      scope="col"
+                      className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
+                    >
+                      University
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
+                    >
+                      Route
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
+                    >
+                      English test requirement
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
+                    >
+                      English-medium/MOI option
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
+                    >
+                      Official source
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-[var(--border)]">
+                  <tr>
+                    <th
+                      scope="row"
+                      className="px-5 py-4 font-semibold text-[var(--foreground)]"
+                    >
+                      Politecnico di Milano
+                    </th>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      Master&apos;s foreign-qualification route
+                    </td>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      Listed certificates including IELTS ΓëÑ6
+                    </td>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      Exempt with Bachelor&apos;s taught in English ΓëÑ3 years
+                      plus certified document confirming ΓëÑ75% courses in
+                      English
+                    </td>
+                    <td className="px-5 py-4">
+                      <OfficialLink href="https://www.polimi.it/en/prospective-students/how-to-apply/admission-to-laurea-magistrale/foreign-qualification/application/list-of-documents-required-by-the-admissions-office">
+                        Admissions-office documents
+                      </OfficialLink>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th
+                      scope="row"
+                      className="px-5 py-4 font-semibold text-[var(--foreground)]"
+                    >
+                      Sapienza University of Rome
+                    </th>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      English-taught programmes (B2 baseline)
+                    </td>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      Listed certificates named per programme call
+                    </td>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      Waivers only for listed cases; India is not on the
+                      MOI-country nationality waiver
+                    </td>
+                    <td className="px-5 py-4">
+                      <OfficialLink href="https://www.uniroma1.it/sites/default/files/field_file_allegati/language_requirements_sapienza_2026.pdf">
+                        2026 requirements (PDF)
+                      </OfficialLink>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th
+                      scope="row"
+                      className="px-5 py-4 font-semibold text-[var(--foreground)]"
+                    >
+                      University of Bologna ΓÇö DHDK Master&apos;s example
+                    </th>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      Programme example, not a university-wide rule
+                    </td>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      B2 via listed certificates per programme table
+                    </td>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      Bachelor&apos;s or Master&apos;s with English as medium
+                      of instruction listed as one route
+                    </td>
+                    <td className="px-5 py-4">
+                      <OfficialLink href="https://corsi.unibo.it/2cycle/DigitalHumanitiesKnowledge/english-language-requirement-for-admission">
+                        DHDK English requirement
+                      </OfficialLink>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th
+                      scope="row"
+                      className="px-5 py-4 font-semibold text-[var(--foreground)]"
+                    >
+                      University of Turin
+                    </th>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      Programme-dependent ΓÇö check Apply@UniTo
+                    </td>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      Listed certificates including IELTS where the programme
+                      requires them
+                    </td>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      Some programmes accept a university certificate of
+                      bachelor studies in English; Duolingo never accepted
+                    </td>
+                    <td className="px-5 py-4">
+                      <OfficialLink href="https://en.unito.it/studying-unito/international-degree-seeking-students/faqs/language-requirements">
+                        Language-requirements FAQ
+                      </OfficialLink>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th
+                      scope="row"
+                      className="px-5 py-4 font-semibold text-[var(--foreground)]"
+                    >
+                      University of Milan
+                    </th>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      Per-course B1/B2 with certificate-or-test model
+                    </td>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      Accepted certificates or SLAM placement/entry tests
+                    </td>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      Certificate-or-test model; no official MOI exemption
+                      identified in the reviewed sources
+                    </td>
+                    <td className="px-5 py-4">
+                      <OfficialLink href="https://www.unimi.it/en/study/language-proficiency/placement-tests-entry-tests-and-english-courses">
+                        Language-proficiency pages
+                      </OfficialLink>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div className="mx-auto mt-6 max-w-3xl rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5">
+              <h3 className="font-bold text-[var(--foreground)]">Warning</h3>
+              <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
+                Do not assume that an MOI letter is accepted by every Italian
+                university or programme. Always check the current admission
+                call or language-requirements page for your exact programme.
+              </p>
+            </div>
+            <div className="mx-auto mt-6 max-w-3xl rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5">
+              <h3 className="font-bold text-[var(--foreground)]">
+                MOI for University Admission vs Italy Student Visa
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
+                The Indian mission checklists treat language separately from
+                admission: for an English-taught course they provide for
+                B2-level English certification or an equivalent Medium of
+                Education (MOI) declaration from the previous Higher Education
+                Institution. So do not tell Indian students the visa
+                universally requires IELTS ΓÇö while remembering the
+                university&apos;s own call can still require IELTS or another
+                recognized certificate.{" "}
+                <OfficialLink href="https://conscalcutta.esteri.it/wp-content/uploads/2026/06/checklist-studio-2026-2027-2028-INDIA.pdf">
+                  Kolkata 2026-27/2027-28 checklist (PDF)
+                </OfficialLink>
+                {" ┬╖ "}
+                <OfficialLink href="https://assets.ctfassets.net/xxg4p8gt3sg6/1ZYRulWbCqUIuOwoUJxnqK/585138aa7caa983f43ea2a35e2af188d/checklist_studio__2026_2027_2028_Italy_in_INDIA._Rev_India_16.06.pdf">
+                  New Delhi 2026-27/2027-28 checklist (PDF)
+                </OfficialLink>
+                .
+              </p>
+            </div>
           </div>
         </section>
 
