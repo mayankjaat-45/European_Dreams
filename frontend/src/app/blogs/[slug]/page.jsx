@@ -633,6 +633,19 @@ export default async function BlogDetailPage({ params }) {
         </aside>
       </section>
 
+      {/* Pillar bridge */}
+
+      <p className="container-custom mx-auto px-4 pb-2 pt-10 text-center text-sm leading-6 text-[var(--muted)]">
+        New to planning your move? Start with our{" "}
+        <Link
+          href="/study-in-italy"
+          className="font-semibold text-[var(--primary)] hover:underline"
+        >
+          Study in Italy guide for Indian students
+        </Link>
+        .
+      </p>
+
       {/* Related blogs */}
 
       {relatedBlogs.length > 0 && (
