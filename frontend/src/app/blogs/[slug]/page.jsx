@@ -82,6 +82,27 @@ function buildBlogTitle(blog) {
   return truncate(base, 60);
 }
 
+function resolveBlogCanonicalUrl(blog, slug) {
+  const fallback = `${SITE_URL}/blogs/${blog.slug || slug}`;
+  const raw = blog.canonicalUrl?.trim();
+  if (!raw) return fallback;
+
+  try {
+    const parsed = new URL(raw);
+    const site = new URL(SITE_URL);
+    if (
+      parsed.hostname.toLowerCase() === site.hostname.toLowerCase()
+    ) {
+      return raw;
+    }
+    return fallback;
+  } catch {
+    // Relative CMS paths are internal ΓÇö resolve them against the site URL
+    if (raw.startsWith("/")) return `${SITE_URL}${raw}`;
+    return fallback;
+  }
+}
+
 export async function generateMetadata({ params }) {
   const { slug } = await params;
 
@@ -100,9 +121,7 @@ export async function generateMetadata({ params }) {
 
   const title = buildBlogTitle(blog);
   const description = buildBlogDescription(blog);
-  const canonicalUrl =
-    blog.canonicalUrl?.trim() ||
-    `${SITE_URL}/blogs/${blog.slug || slug}`;
+  const canonicalUrl = resolveBlogCanonicalUrl(blog, slug);
   const ogTitle = `${title} | European Dreams`;
   const ogDescription = description;
 
@@ -150,8 +169,7 @@ export default async function BlogDetailPage({ params }) {
     notFound();
   }
 
-  const canonicalUrl =
-    blog.canonicalUrl?.trim() || `${SITE_URL}/blogs/${blog.slug || slug}`;
+  const canonicalUrl = resolveBlogCanonicalUrl(blog, slug);
 
   const breadcrumbItems = [
     { name: "Home", href: `${SITE_URL}/` },
