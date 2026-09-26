@@ -174,12 +174,32 @@ const faqs = [
   {
     question: "How much does it cost to study in Italy?",
     answer:
-      "Tuition varies by institution, programme and student circumstances, and living costs vary by city. Public universities generally charge less than private institutions, but there is no single universal figure — always confirm the exact fees for your chosen programme.",
+      "Tuition varies by institution, programme and student circumstances, and living costs vary by city, so there is no single universal figure — always confirm the exact fees for your chosen programme. As indicative ranges from the European Commission country profile for Italy: public university tuition approximately €900–€4,000 per year, private institution tuition approximately €6,000–€20,000+ per year, and living costs approximately €700–€1,100 per month depending on the city (indicative INR at approx. €1 ≈ ₹93; exchange rates change).",
   },
   {
     question: "What documents are required to study in Italy?",
     answer:
       "Typical documents include previous qualification certificates and transcripts, a valid passport, language evidence where the programme requires it, and programme-specific items such as portfolios or entrance test results. Visa applications additionally require admission proof, pre-enrolment summary, financial evidence and other supporting documents specified by the mission.",
+  },
+  {
+    question: "Do Indian students need IELTS to study in Italy?",
+    answer:
+      "No, there is no single universal IELTS requirement for every Italian university or programme — each programme's call sets whether English-language proof is required and which tests and levels it accepts. Some programmes may accept alternatives such as TOEFL or Cambridge, or prior English-medium study where the programme rules explicitly allow it, so Indian students should verify the exact language rule for their chosen programme and intake.",
+  },
+  {
+    question: "Do Indian students need NEET for Medicine in Italy?",
+    answer:
+      "Italian university admission requirements and Indian eligibility requirements are separate. Whether a specific Italian medical programme uses an entrance route such as IMAT depends on its current official call, while any NEET-related eligibility is a separate Indian requirement — verify both the current programme call and the applicable Indian eligibility rules before applying.",
+  },
+  {
+    question: "What is DSU?",
+    answer:
+      "DSU (Diritto allo Studio Universitario) is Italy's regional right-to-study student-aid system. Regional DSU bodies can provide need- and merit-based support where you meet that region's rules, so benefits, eligibility and deadlines vary by region and year — check the applicable regional call.",
+  },
+  {
+    question: "What is IMAT?",
+    answer:
+      "IMAT (International Medical Admissions Test) is an admission test used for certain English-taught Medicine and Surgery routes in Italy when the relevant programme's call requires it. It is not a universal requirement for every Italian degree — always check whether your specific programme and intake uses IMAT or another selection route.",
   },
 ];
 
@@ -278,13 +298,19 @@ export default function StudyInItalyPage() {
               How to use this guide
             </h2>
             <p className="mt-2 max-w-3xl text-sm leading-6 text-[var(--muted-foreground)]">
-              European Dreams provides guidance and support for each step
-              below. University-specific admission requirements and deadlines
-              must be confirmed with the university itself, while visa
-              requirements and decisions are handled by the competent Italian
-              authorities. For current rules, always check official sources
-              such as Universitaly, the MAECI Study in Italy portal and the
-              relevant Italian consulate.
+              <Link
+                href="/about"
+                className="font-semibold text-[var(--primary)] hover:underline"
+              >
+                European Dreams
+              </Link>{" "}
+              provides guidance and support for each step below.
+              University-specific admission requirements and deadlines must be
+              confirmed with the university itself, while visa requirements
+              and decisions are handled by the competent Italian authorities.
+              For current rules, always check official sources such as
+              Universitaly, the MAECI Study in Italy portal and the relevant
+              Italian consulate.
             </p>
           </div>
         </section>
@@ -375,7 +401,7 @@ export default function StudyInItalyPage() {
               universities set tuition per institution and programme — often
               with income-based assessment that can mean two students on the
               same course pay different amounts — and because need-based
-              regional (DSU), university merit and government (MAECI) support
+              regional right-to-study student-aid system (DSU — Diritto allo Studio Universitario), university merit and government (MAECI) support
               routes exist where you meet the specific call. Many
               Bachelor&apos;s and Master&apos;s programmes are offered in
               English, so you can study without Italian as the language of
@@ -420,7 +446,8 @@ export default function StudyInItalyPage() {
             <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
               Typical flow at a glance: Research → Check eligibility → Choose
               programme → Apply → Admission → Scholarship / ISEE Parificato
-              (where applicable) → Universitaly pre-enrolment → Student visa →
+              (the equivalent indicator used where family income and assets
+              are outside Italy, where applicable) → Universitaly pre-enrolment → Student visa →
               Travel → Residence formalities (permesso di soggiorno) after
               arrival.
             </p>
@@ -589,7 +616,7 @@ export default function StudyInItalyPage() {
                 <span className="font-semibold text-[var(--foreground)]">
                   Engineering / Economics &amp; similar:
                 </span>{" "}
-                CISIA TOLC where the programme requires it, or CEnT-S where the
+                CISIA TOLC (CISIA&apos;s online admission test) where the programme requires it, or CEnT-S where the
                 university has adopted it for specific scientific areas — only
                 where listed in the call. Depending on the programme, a TOLC may
                 be mandatory, optional for ranking, or not required at all.
@@ -659,7 +686,7 @@ export default function StudyInItalyPage() {
         <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
           <SectionHeading
             eyebrow="Medicine"
-            title="Medicine in Italy: IMAT, NEET and Programme-Specific Requirements"
+            title="Medicine in Italy: IMAT (International Medical Admissions Test), NEET and Programme-Specific Requirements"
             intro="Medicine is a regulated, limited-access area — every requirement is programme-specific. Always verify the current official programme call before relying on any test or eligibility rule."
           />
           <div className="mx-auto mt-8 max-w-3xl rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6">
@@ -958,7 +985,16 @@ export default function StudyInItalyPage() {
                 families whose income and assets are outside Italy, universities
                 use an equivalent indicator (ISEE Parificato / ISEE University
                 Equivalent) instead of the standard ISEE. As a labelled
-                example, the DSU Toscana 2026/27 call set thresholds of ISEE
+                example, the{" "}
+                <a
+                  href="https://www.dsu.toscana.it/documents/d/ardsu/bando-borsa-alloggio-26-27"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-[var(--primary)] hover:underline"
+                >
+                  DSU Toscana 2026/27 call
+                </a>{" "}
+                set thresholds of ISEE
                 €27,000 and ISPE €60,000 — other regions and universities set
                 their own. Many universities also offer reductions or full
                 exemptions on merit or income grounds through separate calls
@@ -1084,8 +1120,16 @@ export default function StudyInItalyPage() {
                     Applications closed at 14:00 Italian time on 26 March 2026
                   </td>
                   <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                    €10,800 total (9 months) per the official 2026-2027 call;
-                    paid in instalments conditional on presence, enrolment and
+                    €10,800 total (9 months) per the{" "}
+                    <a
+                      href="https://studyinitaly.esteri.it/ListaBandi"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-semibold text-[var(--primary)] hover:underline"
+                    >
+                      official 2026-2027 call
+                    </a>
+                    ; paid in instalments conditional on presence, enrolment and
                     academic progress
                   </td>
                 </tr>
@@ -1125,8 +1169,16 @@ export default function StudyInItalyPage() {
             </table>
             <p className="border-t border-[var(--border)] px-5 py-4 text-xs leading-5 text-[var(--muted-foreground)]">
               These are verified 2026/27 examples, not guarantees — India
-              featured on the official MAECI 2026-2027 eligible-countries list,
-              but eligibility is reset each year. Scholarship amounts, thresholds
+              featured on the{" "}
+              <a
+                href="https://ambnewdelhi.esteri.it/en/news/dall_ambasciata/2026/07/final-ranking-maeci-scholarship-2026-2027"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-[var(--primary)] hover:underline"
+              >
+                official MAECI 2026-2027 eligible-countries list
+              </a>
+              , but eligibility is reset each year. Scholarship amounts, thresholds
               and deadlines are set anew in each annual call. No scholarship
               can be promised in advance.
             </p>
@@ -1543,7 +1595,15 @@ export default function StudyInItalyPage() {
               </li>
               <li>
                 <span className="font-semibold text-[var(--foreground)]">
-                  Visa-related national backstop: 30 November 2026
+                  Visa-related national backstop:{" "}
+                  <a
+                    href="https://consmelbourne.esteri.it/en/news/dal_consolato/2026/06/visa-procedures-for-international-students"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold text-[var(--primary)] hover:underline"
+                  >
+                    30 November 2026
+                  </a>
                 </span>{" "}
                 — the latest date by which visa applications for 2026/27
                 ordinary degree courses (Bachelor&apos;s, Master&apos;s,

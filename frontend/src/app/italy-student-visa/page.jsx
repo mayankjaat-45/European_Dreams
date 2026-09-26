@@ -643,6 +643,17 @@ export default function ItalyStudentVisaPage() {
               </Link>
               .
             </p>
+            <p className="mx-auto mt-4 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
+              See{" "}
+              <Link
+                href="/study-in-italy"
+                className="font-semibold text-[var(--primary)] hover:underline"
+              >
+                the complete Study in Italy journey from admission to arrival
+              </Link>{" "}
+              for how the visa stage connects admission, pre-enrolment and
+              arrival.
+            </p>
           </div>
         </section>
 
