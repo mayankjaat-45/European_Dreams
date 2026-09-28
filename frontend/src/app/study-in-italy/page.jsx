@@ -996,7 +996,14 @@ export default function StudyInItalyPage() {
             >
               Medicine in Italy for Indian Students
             </Link>{" "}
-            guide.
+            guide. For the Italian-taught route, see our{" "}
+            <Link
+              href="/open-semester-medicine-italy"
+              className="font-semibold text-[var(--primary)] hover:underline"
+            >
+              Italy Open Semester 2026/27 for Medicine
+            </Link>{" "}
+            guide to the open-semester exams, ranking and deadlines.
           </p>
         </section>
 

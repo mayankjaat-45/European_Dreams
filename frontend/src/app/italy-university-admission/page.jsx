@@ -644,7 +644,16 @@ export default function ItalyUniversityAdmissionPage() {
                     Architecture — use national or university-run entrance
                     examinations, interviews or portfolio reviews. Other
                     open-access programmes select on documents alone.
-                    Requirements vary by programme and year.
+                    Requirements vary by programme and year. Students
+                    considering Medicine can also see our{" "}
+                    <Link
+                      href="/medicine-in-italy"
+                      className="font-semibold text-[var(--primary)] hover:underline"
+                    >
+                      Medicine in Italy for Indian Students
+                    </Link>{" "}
+                    guide for 2026/27 IMAT, seat allocation and NEET/NMC
+                    requirements.
                   </p>
                 </article>
                 <article className="rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5">
