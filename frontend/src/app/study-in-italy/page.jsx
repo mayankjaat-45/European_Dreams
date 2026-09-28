@@ -220,15 +220,17 @@ function SectionHeading({ eyebrow, title, intro }) {
   return (
     <div className="mx-auto max-w-3xl text-center">
       {eyebrow && (
-        <p className="text-sm font-bold uppercase tracking-[0.18em] text-[var(--primary)]">
+        <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--primary)]">
           {eyebrow}
         </p>
       )}
-      <h2 className="mt-3 text-3xl font-bold tracking-tight text-[var(--foreground)] sm:text-4xl">
+      <h2 className="mt-2 text-2xl font-bold tracking-tight text-[var(--foreground)] sm:text-3xl">
         {title}
       </h2>
       {intro && (
-        <p className="mt-4 leading-7 text-[var(--muted-foreground)]">{intro}</p>
+        <p className="mt-3 text-sm leading-6 text-[var(--muted-foreground)] sm:text-base sm:leading-7">
+          {intro}
+        </p>
       )}
     </div>
   );
@@ -242,12 +244,63 @@ function CtaButton({ href, children, variant = "primary" }) {
   return (
     <Link
       href={href}
-      className={`inline-flex min-h-12 items-center justify-center rounded-xl px-7 py-3 font-bold transition ${styles}`}
+      className={`inline-flex min-h-12 items-center justify-center rounded-xl px-6 py-3 text-sm font-bold transition sm:text-base ${styles}`}
     >
       {children}
     </Link>
   );
 }
+
+const tocGroups = [
+  {
+    label: "Start here",
+    links: [
+      { label: "Why Italy", href: "#why-italy" },
+      { label: "Overall journey", href: "#journey" },
+    ],
+  },
+  {
+    label: "Choose",
+    links: [
+      { label: "Universities", href: "#universities" },
+      { label: "Courses", href: "#courses" },
+      { label: "English-taught", href: "#english-taught" },
+      { label: "Medicine", href: "#medicine" },
+    ],
+  },
+  {
+    label: "Apply",
+    links: [
+      { label: "Admission", href: "#admission" },
+      { label: "How to apply", href: "#how-to-apply" },
+      { label: "Universitaly", href: "#universitaly" },
+    ],
+  },
+  {
+    label: "Money",
+    links: [
+      { label: "Costs", href: "#costs" },
+      { label: "Scholarships", href: "#scholarships" },
+    ],
+  },
+  {
+    label: "Visa & arrival",
+    links: [
+      { label: "Student visa", href: "#visa" },
+      { label: "Intakes", href: "#intakes" },
+      { label: "Deadline tracker", href: "#deadlines" },
+      { label: "Work", href: "#work" },
+    ],
+  },
+  {
+    label: "Check",
+    links: [
+      { label: "Popular universities", href: "#popular-universities" },
+      { label: "Mistakes", href: "#mistakes" },
+      { label: "FAQs", href: "#faq" },
+    ],
+  },
+];
 
 export default function StudyInItalyPage() {
   return (
@@ -256,26 +309,28 @@ export default function StudyInItalyPage() {
       <JsonLd data={webPageSchema} />
       <JsonLd data={faqSchema} />
       <main className="min-h-screen bg-[var(--background)]">
-        {/* 1. Hero */}
-        <section className="relative overflow-hidden border-b border-[var(--border)] bg-[var(--hero-gradient)]">
-          <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[var(--primary)]/10 blur-3xl" />
-          <div className="pointer-events-none absolute -bottom-32 -left-24 h-72 w-72 rounded-full bg-[var(--primary)]/10 blur-3xl" />
-          <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+        {/* 1. Hero — compact, premium, fast */}
+        <section className="border-b border-[var(--border)] bg-[var(--hero-gradient)]">
+          <div className="mx-auto max-w-7xl px-4 pb-10 pt-8 sm:px-6 sm:pb-12 sm:pt-10 lg:px-8">
             <Breadcrumbs items={breadcrumbItems} />
-            <div className="mt-7 max-w-3xl">
-              <span className="mb-4 inline-flex rounded-full border border-[var(--primary)]/20 bg-[var(--primary)]/10 px-4 py-1.5 text-sm font-semibold text-[var(--primary)]">
+            <div className="mt-5 max-w-3xl">
+              <span className="mb-3 inline-flex rounded-full border border-[var(--primary)]/20 bg-[var(--primary)]/10 px-3 py-1 text-xs font-semibold text-[var(--primary)] sm:text-sm">
                 Guide for the 2026/27 and 2027 intakes
               </span>
-              <h1 className="text-4xl font-bold tracking-tight text-[var(--foreground)] sm:text-5xl lg:text-6xl">
+              <h1 className="text-3xl font-bold tracking-tight text-[var(--foreground)] sm:text-4xl lg:text-5xl">
                 Study in Italy for Indian Students
               </h1>
-              <p className="mt-5 max-w-2xl text-base leading-7 text-[var(--muted-foreground)] sm:text-lg">
+              <p className="mt-3 max-w-2xl text-sm leading-6 text-[var(--muted-foreground)] sm:text-base sm:leading-7">
                 Everything Indian students need to plan higher education in
                 Italy — universities, English-taught courses, admission
                 requirements, application steps, Universitaly pre-enrolment,
                 tuition costs, scholarships and the student visa process.
               </p>
-              <div className="mt-8 flex flex-wrap gap-4">
+              <p className="mt-3 max-w-2xl text-xs leading-5 text-[var(--muted-foreground)] sm:text-sm sm:leading-6">
+                Universities, admission, costs, scholarships, visa and 2026/27
+                planning — with official sources cited throughout.
+              </p>
+              <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <CtaButton href="/universities">Explore Universities</CtaButton>
                 <CtaButton href="/courses" variant="secondary">
                   Explore Courses
@@ -284,17 +339,47 @@ export default function StudyInItalyPage() {
                   Get Free Consultation
                 </CtaButton>
               </div>
+              <p className="mt-4 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--muted-foreground)]">
+                Last updated: September 2026
+              </p>
             </div>
           </div>
         </section>
 
+        {/* Sticky TOC — CSS only, no JS */}
+        <nav
+          aria-label="Table of contents"
+          className="sticky top-20 z-40 border-b border-[var(--border)] bg-[var(--background)]/95 backdrop-blur"
+        >
+          <div className="mx-auto max-w-7xl overflow-x-auto px-4 py-2.5 sm:px-6 lg:px-8">
+            <div className="flex min-w-max items-center gap-5 sm:flex-wrap sm:min-w-0">
+              {tocGroups.map((group) => (
+                <div key={group.label} className="flex items-center gap-2">
+                  <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-[var(--muted-foreground)]">
+                    {group.label}
+                  </span>
+                  <ul className="flex items-center gap-1.5">
+                    {group.links.map((link) => (
+                      <li key={link.href + link.label}>
+                        <a
+                          href={link.href}
+                          className="inline-flex whitespace-nowrap rounded-full border border-[var(--border)] bg-[var(--card)] px-3 py-1.5 text-xs font-semibold text-[var(--foreground)] transition hover:border-[var(--primary)] hover:text-[var(--primary)]"
+                        >
+                          {link.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        </nav>
+
         {/* How to use this guide */}
         <section className="border-b border-[var(--border)] bg-[var(--card)]">
           <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--muted-foreground)]">
-              Last updated: September 2026
-            </p>
-            <h2 className="mt-2 text-lg font-bold text-[var(--foreground)]">
+            <h2 className="text-lg font-bold text-[var(--foreground)]">
               How to use this guide
             </h2>
             <p className="mt-2 max-w-3xl text-sm leading-6 text-[var(--muted-foreground)]">
@@ -315,30 +400,139 @@ export default function StudyInItalyPage() {
           </div>
         </section>
 
-        {/* 2. Why study in Italy */}
-        <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+        {/* 2. At a glance — verified facts only */}
+        <section
+          aria-label="Study in Italy at a glance"
+          className="mx-auto max-w-7xl scroll-mt-[104px] px-4 py-10 sm:px-6 lg:px-8 lg:py-14"
+        >
+          <SectionHeading
+            eyebrow="At a glance"
+            title="Study in Italy at a Glance"
+            intro="Key facts for Indian students — all figures and rules below are repeated with full detail and sources in their respective sections."
+          />
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <article className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5">
+              <h3 className="font-bold text-[var(--foreground)]">Tuition</h3>
+              <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
+                Public universities approximately €900–€4,000 per year;
+                private institutions approximately €6,000–€20,000+ per year
+                (European Commission country profile for Italy, indicative).
+              </p>
+              <Link
+                href="/cost-of-studying-in-italy"
+                className="mt-3 inline-block text-sm font-bold text-[var(--primary)] hover:underline"
+              >
+                See full cost breakdown
+              </Link>
+            </article>
+            <article className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5">
+              <h3 className="font-bold text-[var(--foreground)]">
+                Living costs
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
+                Approximately €700–€1,100 per month depending on the city
+                (indicative; larger cities typically cost more than smaller
+                university towns).
+              </p>
+              <Link
+                href="/cost-of-studying-in-italy#location-matters"
+                className="mt-3 inline-block text-sm font-bold text-[var(--primary)] hover:underline"
+              >
+                Compare costs by city
+              </Link>
+            </article>
+            <article className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5">
+              <h3 className="font-bold text-[var(--foreground)]">
+                Scholarships
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
+                Regional DSU need-based aid, university merit reductions or
+                waivers, and MAECI government grants in selected years. None
+                can be promised in advance.
+              </p>
+              <Link
+                href="/italy-scholarships"
+                className="mt-3 inline-block text-sm font-bold text-[var(--primary)] hover:underline"
+              >
+                Explore scholarship routes
+              </Link>
+            </article>
+            <article className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5">
+              <h3 className="font-bold text-[var(--foreground)]">Visa</h3>
+              <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
+                After admission, complete Universitaly pre-enrolment, then
+                apply for a national study visa with supporting documents at
+                the competent mission.
+              </p>
+              <Link
+                href="/italy-student-visa"
+                className="mt-3 inline-block text-sm font-bold text-[var(--primary)] hover:underline"
+              >
+                Read the visa guide
+              </Link>
+            </article>
+            <article className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5">
+              <h3 className="font-bold text-[var(--foreground)]">
+                English requirements
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
+                Many Bachelor&apos;s and Master&apos;s programmes are taught
+                in English. Each programme&apos;s call sets whether proof is
+                required — there is no single universal IELTS rule.
+              </p>
+              <Link
+                href="/english-taught-courses-in-italy"
+                className="mt-3 inline-block text-sm font-bold text-[var(--primary)] hover:underline"
+              >
+                Find English-taught courses
+              </Link>
+            </article>
+            <article className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5">
+              <h3 className="font-bold text-[var(--foreground)]">
+                Application process
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
+                Each university sets its own requirements and deadlines.
+                Typical flow: programme choice → application → admission →
+                Universitaly → visa.
+              </p>
+              <Link
+                href="/italy-university-admission"
+                className="mt-3 inline-block text-sm font-bold text-[var(--primary)] hover:underline"
+              >
+                Read the admission guide
+              </Link>
+            </article>
+          </div>
+        </section>
+
+        {/* 3. Why study in Italy */}
+        <section
+          id="why-italy"
+          className="mx-auto max-w-7xl scroll-mt-[104px] px-4 py-10 sm:px-6 lg:px-8 lg:py-14"
+        >
           <SectionHeading
             eyebrow="Why Italy"
             title="Why Study in Italy?"
             intro="Italy combines historic public universities, growing English-taught provision and a welcoming environment for international students."
           />
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            <article className="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-6 shadow-sm">
-              <h3 className="text-xl font-bold text-[var(--foreground)]">
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <article className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5 sm:p-6">
+              <h3 className="text-lg font-bold text-[var(--foreground)]">
                 Public universities
               </h3>
-              <p className="mt-3 text-sm leading-6 text-[var(--muted-foreground)]">
+              <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
                 Italy has an extensive network of public universities across
                 its regions. Public institutions generally charge lower tuition
                 than private ones, with exact fees set per institution and
                 programme.
               </p>
             </article>
-            <article className="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-6 shadow-sm">
-              <h3 className="text-xl font-bold text-[var(--foreground)]">
+            <article className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5 sm:p-6">
+              <h3 className="text-lg font-bold text-[var(--foreground)]">
                 English-taught programmes
               </h3>
-              <p className="mt-3 text-sm leading-6 text-[var(--muted-foreground)]">
+              <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
                 Many Italian universities now offer Bachelor&apos;s and
                 Master&apos;s programmes taught in English.{" "}
                 <Link
@@ -350,49 +544,49 @@ export default function StudyInItalyPage() {
                 and confirm the language of instruction for each programme.
               </p>
             </article>
-            <article className="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-6 shadow-sm">
-              <h3 className="text-xl font-bold text-[var(--foreground)]">
+            <article className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5 sm:p-6">
+              <h3 className="text-lg font-bold text-[var(--foreground)]">
                 Scholarship routes
               </h3>
-              <p className="mt-3 text-sm leading-6 text-[var(--muted-foreground)]">
+              <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
                 Regional need-based scholarships, university merit measures and
                 Italian government grants support eligible international
                 students. Each scheme has its own criteria and deadlines.
               </p>
             </article>
-            <article className="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-6 shadow-sm">
-              <h3 className="text-xl font-bold text-[var(--foreground)]">
+            <article className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5 sm:p-6">
+              <h3 className="text-lg font-bold text-[var(--foreground)]">
                 Wide academic choice
               </h3>
-              <p className="mt-3 text-sm leading-6 text-[var(--muted-foreground)]">
+              <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
                 From engineering, architecture and design to medicine,
                 humanities, business and data science, Italian universities
                 cover most major fields at Bachelor&apos;s and Master&apos;s
                 level.
               </p>
             </article>
-            <article className="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-6 shadow-sm">
-              <h3 className="text-xl font-bold text-[var(--foreground)]">
+            <article className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5 sm:p-6">
+              <h3 className="text-lg font-bold text-[var(--foreground)]">
                 International student experience
               </h3>
-              <p className="mt-3 text-sm leading-6 text-[var(--muted-foreground)]">
+              <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
                 University cities across Italy host growing international
                 student communities, with support services, student housing
                 options and cultural life that help newcomers settle in.
               </p>
             </article>
-            <article className="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-6 shadow-sm">
-              <h3 className="text-xl font-bold text-[var(--foreground)]">
+            <article className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5 sm:p-6">
+              <h3 className="text-lg font-bold text-[var(--foreground)]">
                 A structured admission path
               </h3>
-              <p className="mt-3 text-sm leading-6 text-[var(--muted-foreground)]">
+              <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
                 The route from India is well defined: university admission,
                 Universitaly pre-enrolment and then the student visa
                 application. The steps below walk through each stage.
               </p>
             </article>
           </div>
-          <div className="mx-auto mt-8 max-w-3xl rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5">
+          <div className="mx-auto mt-6 max-w-3xl rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5">
             <h3 className="font-bold text-[var(--foreground)]">
               Why Indian students consider Italy
             </h3>
@@ -413,15 +607,18 @@ export default function StudyInItalyPage() {
           </div>
         </section>
 
-        {/* 3. Journey from India */}
-        <section className="border-y border-[var(--border)] bg-[var(--card)]">
-          <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+        {/* 4. Journey from India — timeline */}
+        <section
+          id="journey"
+          className="scroll-mt-[104px] border-y border-[var(--border)] bg-[var(--card)]"
+        >
+          <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
             <SectionHeading
               eyebrow="From India to Italy"
               title="Study in Italy from India: the Overall Journey"
               intro="Most Indian students follow the same broad path. Each stage has its own requirements, so start early and track every deadline."
             />
-            <ol className="mx-auto mt-10 grid max-w-5xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <ol className="mx-auto mt-8 grid max-w-5xl gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {[
                 "Profile and course selection",
                 "University application",
@@ -432,18 +629,18 @@ export default function StudyInItalyPage() {
               ].map((step, index) => (
                 <li
                   key={step}
-                  className="flex items-start gap-4 rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5"
+                  className="flex items-start gap-3 rounded-2xl border border-[var(--border)] bg-[var(--background)] p-4"
                 >
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--primary)] text-sm font-bold text-white">
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--primary)] text-sm font-bold text-white">
                     {index + 1}
                   </span>
-                  <span className="pt-1.5 font-semibold text-[var(--foreground)]">
+                  <span className="pt-1 text-sm font-semibold text-[var(--foreground)]">
                     {step}
                   </span>
                 </li>
               ))}
             </ol>
-            <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
+            <p className="mx-auto mt-5 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
               Typical flow at a glance: Research → Check eligibility → Choose
               programme → Apply → Admission → Scholarship / ISEE Parificato
               (the equivalent indicator used where family income and assets
@@ -451,33 +648,60 @@ export default function StudyInItalyPage() {
               Travel → Residence formalities (permesso di soggiorno) after
               arrival.
             </p>
+            <div className="mx-auto mt-5 flex max-w-3xl flex-wrap justify-center gap-2 text-sm">
+              <Link href="/universities" className="font-semibold text-[var(--primary)] hover:underline">
+                Compare universities
+              </Link>
+              <span aria-hidden="true" className="text-[var(--muted-foreground)]">·</span>
+              <Link href="/courses" className="font-semibold text-[var(--primary)] hover:underline">
+                Browse courses
+              </Link>
+              <span aria-hidden="true" className="text-[var(--muted-foreground)]">·</span>
+              <Link href="/italy-university-admission" className="font-semibold text-[var(--primary)] hover:underline">
+                Check admission steps
+              </Link>
+              <span aria-hidden="true" className="text-[var(--muted-foreground)]">·</span>
+              <Link href="/universitaly" className="font-semibold text-[var(--primary)] hover:underline">
+                Universitaly guide
+              </Link>
+              <span aria-hidden="true" className="text-[var(--muted-foreground)]">·</span>
+              <Link href="/italy-student-visa" className="font-semibold text-[var(--primary)] hover:underline">
+                Visa guide
+              </Link>
+            </div>
           </div>
         </section>
 
-        {/* 4. Universities */}
-        <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+        {/* Universities */}
+        <section
+          id="universities"
+          className="mx-auto max-w-7xl scroll-mt-[104px] px-4 py-10 sm:px-6 lg:px-8 lg:py-14"
+        >
           <SectionHeading
             eyebrow="Universities"
             title="Universities in Italy"
             intro="Compare universities by programme content, admission requirements, application deadlines and tuition fees before you apply."
           />
-          <div className="mt-8 text-center">
+          <div className="mt-6 text-center">
             <CtaButton href="/universities">
               Compare all universities in Italy
             </CtaButton>
           </div>
         </section>
 
-        {/* 5. Courses */}
-        <section className="border-y border-[var(--border)] bg-[var(--card)]">
-          <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+        {/* Courses */}
+        <section
+          id="courses"
+          className="scroll-mt-[104px] border-y border-[var(--border)] bg-[var(--card)]"
+        >
+          <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
             <SectionHeading
               eyebrow="Programmes"
               title="Courses to Study in Italy"
               intro="Italian universities generally offer three-year Bachelor's degrees (Laurea), two-year Master's degrees (Laurea Magistrale) and five- to six-year single-cycle programmes in fields such as Medicine and Architecture. Durations and structures vary by programme."
             />
-            <div className="mt-8 grid gap-6 sm:grid-cols-3">
-              <article className="rounded-3xl border border-[var(--border)] bg-[var(--background)] p-6">
+            <div className="mt-8 grid gap-4 sm:grid-cols-3">
+              <article className="rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5 sm:p-6">
                 <h3 className="text-lg font-bold text-[var(--foreground)]">
                   Bachelor&apos;s programmes
                 </h3>
@@ -486,7 +710,7 @@ export default function StudyInItalyPage() {
                   humanities and more, including English-taught choices.
                 </p>
               </article>
-              <article className="rounded-3xl border border-[var(--border)] bg-[var(--background)] p-6">
+              <article className="rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5 sm:p-6">
                 <h3 className="text-lg font-bold text-[var(--foreground)]">
                   Master&apos;s programmes
                 </h3>
@@ -495,7 +719,7 @@ export default function StudyInItalyPage() {
                   offering in many technical and management fields.
                 </p>
               </article>
-              <article className="rounded-3xl border border-[var(--border)] bg-[var(--background)] p-6">
+              <article className="rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5 sm:p-6">
                 <h3 className="text-lg font-bold text-[var(--foreground)]">
                   Single-cycle programmes
                 </h3>
@@ -506,21 +730,24 @@ export default function StudyInItalyPage() {
                 </p>
               </article>
             </div>
-            <div className="mt-8 text-center">
+            <div className="mt-6 text-center">
               <CtaButton href="/courses">Find your course in Italy</CtaButton>
             </div>
           </div>
         </section>
 
-        {/* 6. Admission requirements */}
-        <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+        {/* Admission requirements */}
+        <section
+          id="admission"
+          className="mx-auto max-w-7xl scroll-mt-[104px] px-4 py-10 sm:px-6 lg:px-8 lg:py-14"
+        >
           <SectionHeading
             eyebrow="Eligibility"
             title="Study in Italy Admission Requirements"
             intro="Requirements vary by university and programme. There is no single universal percentage or language score — always check the official page of your chosen programme."
           />
-          <div className="mx-auto mt-10 grid max-w-5xl gap-6 sm:grid-cols-2">
-            <article className="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-6">
+          <div className="mx-auto mt-8 grid max-w-5xl gap-4 sm:grid-cols-2">
+            <article className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5 sm:p-6">
               <h3 className="text-lg font-bold text-[var(--foreground)]">
                 Previous qualification
               </h3>
@@ -530,7 +757,7 @@ export default function StudyInItalyPage() {
                 programme where required.
               </p>
             </article>
-            <article className="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-6">
+            <article className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5 sm:p-6">
               <h3 className="text-lg font-bold text-[var(--foreground)]">
                 Academic transcripts
               </h3>
@@ -539,7 +766,7 @@ export default function StudyInItalyPage() {
                 credential evaluation, as specified by the university.
               </p>
             </article>
-            <article className="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-6">
+            <article className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5 sm:p-6">
               <h3 className="text-lg font-bold text-[var(--foreground)]">
                 Language requirements
               </h3>
@@ -549,7 +776,7 @@ export default function StudyInItalyPage() {
                 minimum levels differ per programme.
               </p>
             </article>
-            <article className="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-6">
+            <article className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5 sm:p-6">
               <h3 className="text-lg font-bold text-[var(--foreground)]">
                 Passport and programme-specific items
               </h3>
@@ -559,7 +786,7 @@ export default function StudyInItalyPage() {
               </p>
             </article>
           </div>
-          <div className="mx-auto mt-10 grid max-w-5xl gap-6 sm:grid-cols-2">
+          <div className="mx-auto mt-6 grid max-w-5xl gap-4 sm:grid-cols-2">
             <article className="rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5">
               <h3 className="font-bold text-[var(--foreground)]">
                 Bachelor&apos;s in Italy — what to check
@@ -591,7 +818,7 @@ export default function StudyInItalyPage() {
               </p>
             </article>
           </div>
-          <div className="mx-auto mt-8 max-w-3xl rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6">
+          <div className="mx-auto mt-6 max-w-3xl rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5 sm:p-6">
             <h3 className="font-bold text-[var(--foreground)]">
               Do I need an entrance test?
             </h3>
@@ -668,7 +895,7 @@ export default function StudyInItalyPage() {
               .
             </p>
           </div>
-          <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
+          <p className="mx-auto mt-5 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
             Requirements are not universal — every programme sets its own
             criteria. For the complete requirements and step-by-step process,
             see{" "}
@@ -682,14 +909,17 @@ export default function StudyInItalyPage() {
           </p>
         </section>
 
-        {/* 6b. Medicine in Italy */}
-        <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+        {/* Medicine in Italy */}
+        <section
+          id="medicine"
+          className="mx-auto max-w-7xl scroll-mt-[104px] px-4 py-10 sm:px-6 lg:px-8 lg:py-14"
+        >
           <SectionHeading
             eyebrow="Medicine"
             title="Medicine in Italy: IMAT (International Medical Admissions Test), NEET and Programme-Specific Requirements"
             intro="Medicine is a regulated, limited-access area — every requirement is programme-specific. Always verify the current official programme call before relying on any test or eligibility rule."
           />
-          <div className="mx-auto mt-8 max-w-3xl rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6">
+          <div className="mx-auto mt-6 max-w-3xl rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5 sm:p-6">
             <p className="text-sm leading-6 text-[var(--muted-foreground)]">
               Medicine and Surgery admission is governed by the individual
               university&apos;s call (bando) for that intake. Whether IMAT or
@@ -710,7 +940,7 @@ export default function StudyInItalyPage() {
               university&apos;s call. Verify both sides with the current
               official sources before planning around Medicine.
             </p>
-            <div className="mt-5 rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5">
+            <div className="mt-4 rounded-2xl border border-[var(--border)] bg-[var(--background)] p-4 sm:p-5">
               <h3 className="font-bold text-[var(--foreground)]">
                 Practical checks before you apply to Medicine
               </h3>
@@ -749,7 +979,7 @@ export default function StudyInItalyPage() {
               and the specific university&apos;s programme page and call.
             </p>
           </div>
-          <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
+          <p className="mx-auto mt-5 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
             For the detailed admission and qualification-recognition context,
             see{" "}
             <Link
@@ -762,15 +992,18 @@ export default function StudyInItalyPage() {
           </p>
         </section>
 
-        {/* 7. How to apply */}
-        <section className="border-y border-[var(--border)] bg-[var(--card)]">
-          <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+        {/* How to apply */}
+        <section
+          id="how-to-apply"
+          className="scroll-mt-[104px] border-y border-[var(--border)] bg-[var(--card)]"
+        >
+          <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
             <SectionHeading
               eyebrow="Application process"
               title="How to Apply to Italian Universities"
               intro="Individual universities set their own requirements and deadlines. The steps below describe the typical process."
             />
-            <ol className="mx-auto mt-10 max-w-3xl space-y-4">
+            <ol className="mx-auto mt-8 max-w-3xl space-y-3">
               {[
                 "Shortlist programmes and verify eligibility, language requirements and deadlines on each university website.",
                 "Prepare documents: transcripts, certificates, passport, language evidence and programme-specific items.",
@@ -781,18 +1014,18 @@ export default function StudyInItalyPage() {
               ].map((step, index) => (
                 <li
                   key={step}
-                  className="flex items-start gap-4 rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5"
+                  className="flex items-start gap-3 rounded-2xl border border-[var(--border)] bg-[var(--background)] p-4 sm:p-5"
                 >
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--primary)] text-sm font-bold text-white">
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--primary)] text-sm font-bold text-white">
                     {index + 1}
                   </span>
-                  <span className="pt-1.5 leading-6 text-[var(--foreground)]">
+                  <span className="pt-1 text-sm leading-6 text-[var(--foreground)]">
                     {step}
                   </span>
                 </li>
               ))}
             </ol>
-          <p className="mx-auto mt-8 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
+            <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
               For the complete application flow, see our{" "}
               <Link
                 href="/italy-university-admission"
@@ -814,15 +1047,18 @@ export default function StudyInItalyPage() {
           </div>
         </section>
 
-        {/* 8. Universitaly */}
-        <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+        {/* Universitaly */}
+        <section
+          id="universitaly"
+          className="mx-auto max-w-7xl scroll-mt-[104px] px-4 py-10 sm:px-6 lg:px-8 lg:py-14"
+        >
           <SectionHeading
             eyebrow="Pre-enrolment"
             title="Universitaly Pre-Enrolment"
             intro="After admission, international students who require a visa for Italy generally submit a pre-enrolment application on the official Universitaly portal. The university validates it, and the validated summary supports the visa application."
           />
-          <div className="mx-auto mt-8 max-w-3xl rounded-3xl border border-[var(--border)] bg-[var(--card)] p-6 text-center sm:p-8">
-            <p className="leading-7 text-[var(--muted-foreground)]">
+          <div className="mx-auto mt-6 max-w-3xl rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5 text-center sm:p-8">
+            <p className="text-sm leading-6 text-[var(--muted-foreground)] sm:text-base sm:leading-7">
               Pre-enrolment windows and procedures are announced for each
               academic year. Use the official portal and follow your
               university&apos;s instructions exactly.
@@ -831,11 +1067,11 @@ export default function StudyInItalyPage() {
               href="https://www.universitaly.it"
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-5 inline-flex min-h-12 items-center justify-center rounded-xl border border-[var(--border)] bg-[var(--background)] px-7 py-3 font-bold text-[var(--foreground)] transition hover:border-[var(--primary)]"
+              className="mt-4 inline-flex min-h-12 items-center justify-center rounded-xl border border-[var(--border)] bg-[var(--background)] px-6 py-3 text-sm font-bold text-[var(--foreground)] transition hover:border-[var(--primary)] sm:text-base"
             >
               Visit the official Universitaly portal
             </a>
-            <p className="mt-6 text-sm leading-6 text-[var(--muted-foreground)]">
+            <p className="mt-5 text-sm leading-6 text-[var(--muted-foreground)]">
               Confused about how pre-enrolment fits around admission and the
               visa? See our{" "}
               <Link
@@ -849,16 +1085,19 @@ export default function StudyInItalyPage() {
           </div>
         </section>
 
-        {/* 9. Costs */}
-        <section className="border-y border-[var(--border)] bg-[var(--card)]">
-          <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+        {/* Costs */}
+        <section
+          id="costs"
+          className="scroll-mt-[104px] border-y border-[var(--border)] bg-[var(--card)]"
+        >
+          <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
             <SectionHeading
               eyebrow="Tuition and living costs"
               title="Cost of Studying in Italy"
               intro="Tuition varies by institution, programme and student circumstances, and living costs vary significantly by city. Confirm exact figures for your chosen programme rather than relying on a single universal number."
             />
-            <div className="mx-auto mt-10 grid max-w-5xl gap-6 sm:grid-cols-2">
-              <article className="rounded-3xl border border-[var(--border)] bg-[var(--background)] p-6">
+            <div className="mx-auto mt-8 grid max-w-5xl gap-4 sm:grid-cols-2">
+              <article className="rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5 sm:p-6">
                 <h3 className="text-lg font-bold text-[var(--foreground)]">
                   Tuition fees
                 </h3>
@@ -869,7 +1108,7 @@ export default function StudyInItalyPage() {
                   university.
                 </p>
               </article>
-              <article className="rounded-3xl border border-[var(--border)] bg-[var(--background)] p-6">
+              <article className="rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5 sm:p-6">
                 <h3 className="text-lg font-bold text-[var(--foreground)]">
                   Living expenses
                 </h3>
@@ -880,80 +1119,82 @@ export default function StudyInItalyPage() {
                 </p>
               </article>
             </div>
-            <div className="mx-auto mt-8 max-w-3xl overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--background)]">
-              <table className="w-full text-left text-sm">
-                <caption className="px-5 pb-3 pt-5 text-left font-bold text-[var(--foreground)]">
-                  Indicative ranges (European Commission country profile for
-                  Italy) — INR at approx. €1 ≈ ₹93, rates change
-                </caption>
-                <thead>
-                  <tr className="border-b border-[var(--border)] bg-[var(--background)]">
-                    <th
-                      scope="col"
-                      className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
-                    >
-                      Category
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
-                    >
-                      EC indicative range
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
-                    >
-                      Approx. INR
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-[var(--border)]">
-                  <tr>
-                    <th
-                      scope="row"
-                      className="px-5 py-4 font-semibold text-[var(--foreground)]"
-                    >
-                      Public university tuition
-                    </th>
-                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                      Approximately €900–€4,000 per year
-                    </td>
-                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                      ≈ ₹84k–₹3.72L per year
-                    </td>
-                  </tr>
-                  <tr>
-                    <th
-                      scope="row"
-                      className="px-5 py-4 font-semibold text-[var(--foreground)]"
-                    >
-                      Private institution tuition
-                    </th>
-                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                      Approximately €6,000–€20,000+ per year
-                    </td>
-                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                      ≈ ₹5.58L–₹18.6L+ per year
-                    </td>
-                  </tr>
-                  <tr>
-                    <th
-                      scope="row"
-                      className="px-5 py-4 font-semibold text-[var(--foreground)]"
-                    >
-                      Living costs
-                    </th>
-                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                      Approximately €700–€1,100 per month, depending on the
-                      city
-                    </td>
-                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                      ≈ ₹65k–₹1.02L per month
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <div className="mx-auto mt-6 max-w-3xl overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--background)]">
+              <div className="overflow-x-auto">
+                <table className="w-full min-w-[560px] text-left text-sm">
+                  <caption className="px-5 pb-3 pt-5 text-left font-bold text-[var(--foreground)]">
+                    Indicative ranges (European Commission country profile for
+                    Italy) — INR at approx. €1 ≈ ₹93, rates change
+                  </caption>
+                  <thead>
+                    <tr className="border-b border-[var(--border)] bg-[var(--background)]">
+                      <th
+                        scope="col"
+                        className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
+                      >
+                        Category
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
+                      >
+                        EC indicative range
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
+                      >
+                        Approx. INR
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-[var(--border)]">
+                    <tr>
+                      <th
+                        scope="row"
+                        className="px-5 py-4 font-semibold text-[var(--foreground)]"
+                      >
+                        Public university tuition
+                      </th>
+                      <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                        Approximately €900–€4,000 per year
+                      </td>
+                      <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                        ≈ ₹84k–₹3.72L per year
+                      </td>
+                    </tr>
+                    <tr>
+                      <th
+                        scope="row"
+                        className="px-5 py-4 font-semibold text-[var(--foreground)]"
+                      >
+                        Private institution tuition
+                      </th>
+                      <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                        Approximately €6,000–€20,000+ per year
+                      </td>
+                      <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                        ≈ ₹5.58L–₹18.6L+ per year
+                      </td>
+                    </tr>
+                    <tr>
+                      <th
+                        scope="row"
+                        className="px-5 py-4 font-semibold text-[var(--foreground)]"
+                      >
+                        Living costs
+                      </th>
+                      <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                        Approximately €700–€1,100 per month, depending on the
+                        city
+                      </td>
+                      <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                        ≈ ₹65k–₹1.02L per month
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
               <p className="border-t border-[var(--border)] px-5 py-4 text-xs leading-5 text-[var(--muted-foreground)]">
                 These are indicative ranges only — actual costs vary by
                 university, programme, city and individual circumstances, and
@@ -973,7 +1214,7 @@ export default function StudyInItalyPage() {
                 .
               </p>
             </div>
-            <div className="mx-auto mt-6 max-w-3xl rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5">
+            <div className="mx-auto mt-5 max-w-3xl rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5">
               <h3 className="font-bold text-[var(--foreground)]">
                 Why two students can pay different fees: ISEE &amp; ISEE
                 Parificato
@@ -1010,7 +1251,7 @@ export default function StudyInItalyPage() {
                 tiers across Italian student cities.
               </Link>
             </p>
-            <p className="mx-auto mt-4 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
+            <p className="mx-auto mt-3 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
               For a detailed breakdown of tuition, living costs and how to
               verify your exact fee, see our{" "}
               <Link
@@ -1024,15 +1265,18 @@ export default function StudyInItalyPage() {
           </div>
         </section>
 
-        {/* 10. Scholarships */}
-        <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+        {/* Scholarships */}
+        <section
+          id="scholarships"
+          className="mx-auto max-w-7xl scroll-mt-[104px] px-4 py-10 sm:px-6 lg:px-8 lg:py-14"
+        >
           <SectionHeading
             eyebrow="Funding"
             title="Scholarships in Italy for Indian Students"
             intro="Several funding routes exist, but none can be promised in advance. Every scheme publishes its own eligibility rules, benefits and deadlines."
           />
-          <div className="mx-auto mt-10 grid max-w-5xl gap-6 sm:grid-cols-3">
-            <article className="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-6">
+          <div className="mx-auto mt-8 grid max-w-5xl gap-4 sm:grid-cols-3">
+            <article className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5 sm:p-6">
               <h3 className="text-lg font-bold text-[var(--foreground)]">
                 Regional (DSU) scholarships
               </h3>
@@ -1043,7 +1287,7 @@ export default function StudyInItalyPage() {
                 and deadlines vary by region and year.
               </p>
             </article>
-            <article className="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-6">
+            <article className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5 sm:p-6">
               <h3 className="text-lg font-bold text-[var(--foreground)]">
                 University scholarships
               </h3>
@@ -1053,7 +1297,7 @@ export default function StudyInItalyPage() {
                 university&apos;s official call — criteria and amounts differ.
               </p>
             </article>
-            <article className="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-6">
+            <article className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5 sm:p-6">
               <h3 className="text-lg font-bold text-[var(--foreground)]">
                 Government (MAECI) grants
               </h3>
@@ -1074,7 +1318,7 @@ export default function StudyInItalyPage() {
               </p>
             </article>
           </div>
-          <div className="mx-auto mt-8 max-w-3xl overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--background)]">
+          <div className="mx-auto mt-6 max-w-5xl overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--background)]">
             <div className="bg-[var(--card)] px-5 py-4">
               <h3 className="font-bold text-[var(--foreground)]">
                 2026/27 scholarship snapshot — verified examples
@@ -1085,88 +1329,90 @@ export default function StudyInItalyPage() {
                 scheme and university.
               </p>
             </div>
-            <table className="w-full text-left text-sm">
-              <thead>
-                <tr className="border-y border-[var(--border)] bg-[var(--background)]">
-                  <th
-                    scope="col"
-                    className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
-                  >
-                    Scheme
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
-                  >
-                    2026/27 example
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
-                  >
-                    What it offered
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-[var(--border)]">
-                <tr>
-                  <th
-                    scope="row"
-                    className="px-5 py-4 font-semibold text-[var(--foreground)]"
-                  >
-                    MAECI government grants
-                  </th>
-                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                    Applications closed at 14:00 Italian time on 26 March 2026
-                  </td>
-                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                    €10,800 total (9 months) per the{" "}
-                    <a
-                      href="https://studyinitaly.esteri.it/ListaBandi"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-semibold text-[var(--primary)] hover:underline"
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[620px] text-left text-sm">
+                <thead>
+                  <tr className="border-y border-[var(--border)] bg-[var(--background)]">
+                    <th
+                      scope="col"
+                      className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
                     >
-                      official 2026-2027 call
-                    </a>
-                    ; paid in instalments conditional on presence, enrolment and
-                    academic progress
-                  </td>
-                </tr>
-                <tr>
-                  <th
-                    scope="row"
-                    className="px-5 py-4 font-semibold text-[var(--foreground)]"
-                  >
-                    DSU Toscana (regional)
-                  </th>
-                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                    20 July–7 September 2026 for degree courses
-                  </td>
-                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                    ISEE €27,000 and ISPE €60,000 thresholds (this region/year
-                    only); need- and merit-based benefits vary by region and
-                    year
-                  </td>
-                </tr>
-                <tr>
-                  <th
-                    scope="row"
-                    className="px-5 py-4 font-semibold text-[var(--foreground)]"
-                  >
-                    University of Padua
-                  </th>
-                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                    International Excellence Scholarships 2026/27
-                  </td>
-                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                    Up to 69 scholarships — one per English-taught programme —
-                    each with a tuition fee-waiver and an €8,000 annual
-                    allowance; eligible students considered automatically
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+                      Scheme
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
+                    >
+                      2026/27 example
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
+                    >
+                      What it offered
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-[var(--border)]">
+                  <tr>
+                    <th
+                      scope="row"
+                      className="px-5 py-4 font-semibold text-[var(--foreground)]"
+                    >
+                      MAECI government grants
+                    </th>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      Applications closed at 14:00 Italian time on 26 March 2026
+                    </td>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      €10,800 total (9 months) per the{" "}
+                      <a
+                        href="https://studyinitaly.esteri.it/ListaBandi"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-semibold text-[var(--primary)] hover:underline"
+                      >
+                        official 2026-2027 call
+                      </a>
+                      ; paid in instalments conditional on presence, enrolment and
+                      academic progress
+                    </td>
+                  </tr>
+                  <tr>
+                    <th
+                      scope="row"
+                      className="px-5 py-4 font-semibold text-[var(--foreground)]"
+                    >
+                      DSU Toscana (regional)
+                    </th>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      20 July–7 September 2026 for degree courses
+                    </td>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      ISEE €27,000 and ISPE €60,000 thresholds (this region/year
+                      only); need- and merit-based benefits vary by region and
+                      year
+                    </td>
+                  </tr>
+                  <tr>
+                    <th
+                      scope="row"
+                      className="px-5 py-4 font-semibold text-[var(--foreground)]"
+                    >
+                      University of Padua
+                    </th>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      International Excellence Scholarships 2026/27
+                    </td>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      Up to 69 scholarships — one per English-taught programme —
+                      each with a tuition fee-waiver and an €8,000 annual
+                      allowance; eligible students considered automatically
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
             <p className="border-t border-[var(--border)] px-5 py-4 text-xs leading-5 text-[var(--muted-foreground)]">
               These are verified 2026/27 examples, not guarantees — India
               featured on the{" "}
@@ -1183,7 +1429,15 @@ export default function StudyInItalyPage() {
               can be promised in advance.
             </p>
           </div>
-          <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
+          <div className="mx-auto mt-5 max-w-3xl rounded-2xl border border-amber-200 bg-amber-50 p-4 sm:p-5 dark:border-amber-900/30 dark:bg-amber-950/20">
+            <p className="text-sm font-bold leading-6 text-[var(--foreground)]">
+              Scholarship rules, amounts and deadlines can change. Verify the current official call.
+            </p>
+            <p className="mt-1 text-sm leading-6 text-[var(--muted-foreground)]">
+              Check the official regional, university and MAECI calls for your intake year before applying.
+            </p>
+          </div>
+          <p className="mx-auto mt-5 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
             Students from India should also check Invest Your Talent in Italy,
             a programme combining postgraduate courses with internships at
             Italian companies for students from selected countries.
@@ -1199,7 +1453,7 @@ export default function StudyInItalyPage() {
             </a>
             .
           </p>
-          <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
+          <p className="mx-auto mt-4 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
             For the full breakdown — DSU and regional scholarships, MAECI
             government grants, university merit awards, documents and
             deadlines — see our{" "}
@@ -1211,7 +1465,7 @@ export default function StudyInItalyPage() {
             </Link>
             .
           </p>
-          <p className="mx-auto mt-8 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
+          <p className="mx-auto mt-4 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
             For the latest scholarship updates and explainers, see our{" "}
             <Link
               href="/blogs"
@@ -1223,15 +1477,18 @@ export default function StudyInItalyPage() {
           </p>
         </section>
 
-        {/* 11. Student visa */}
-        <section className="border-y border-[var(--border)] bg-[var(--card)]">
-          <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+        {/* Student visa */}
+        <section
+          id="visa"
+          className="scroll-mt-[104px] border-y border-[var(--border)] bg-[var(--card)]"
+        >
+          <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
             <SectionHeading
               eyebrow="Visa"
               title="Italy Student Visa for Indian Students"
               intro="The visa stage follows admission and pre-enrolment. Visa issuance is decided by the competent Italian authorities — prepare carefully and verify current requirements."
             />
-            <ol className="mx-auto mt-10 max-w-3xl space-y-4">
+            <ol className="mx-auto mt-8 max-w-3xl space-y-3">
               {[
                 "Secure university admission and complete Universitaly pre-enrolment.",
                 "Identify the competent mission for your jurisdiction and book your appointment.",
@@ -1241,48 +1498,61 @@ export default function StudyInItalyPage() {
               ].map((step, index) => (
                 <li
                   key={step}
-                  className="flex items-start gap-4 rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5"
+                  className="flex items-start gap-3 rounded-2xl border border-[var(--border)] bg-[var(--background)] p-4 sm:p-5"
                 >
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--primary)] text-sm font-bold text-white">
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--primary)] text-sm font-bold text-white">
                     {index + 1}
                   </span>
-                  <span className="pt-1.5 leading-6 text-[var(--foreground)]">
+                  <span className="pt-1 text-sm leading-6 text-[var(--foreground)]">
                     {step}
                   </span>
                 </li>
               ))}
             </ol>
-            <p className="mx-auto mt-8 max-w-3xl rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5 text-sm leading-6 text-[var(--muted-foreground)]">
-              Missions commonly also ask for financial evidence,
-              accommodation evidence and other supporting documents alongside
-              admission and pre-enrolment proof. There is no single universal
-              minimum — thresholds and accepted evidence are set by the
-              mission. Prepare with our{" "}
-              <Link
-                href="/visa-checklists"
-                className="font-semibold text-[var(--primary)] hover:underline"
-              >
-                visa document checklists
-              </Link>{" "}
-              and the{" "}
-              <a
-                href="https://www.universitaly.it/studenti-stranieri"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-semibold text-[var(--primary)] hover:underline"
-              >
-                official Universitaly guidance for foreign students
-              </a>
-              . For the full process, see our{" "}
-              <Link
-                href="/italy-student-visa"
-                className="font-semibold text-[var(--primary)] hover:underline"
-              >
-                Italy student visa guide
-              </Link>
-              .
-            </p>
-            <div className="mx-auto mt-6 max-w-3xl rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5 text-left">
+            <div className="mx-auto mt-5 max-w-3xl rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5">
+              <h3 className="font-bold text-[var(--foreground)]">
+                Visa checklist — prepare from your mission&apos;s current list
+              </h3>
+              <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-6 text-[var(--muted-foreground)]">
+                <li>Admission proof and Universitaly pre-enrolment summary.</li>
+                <li>Financial evidence and accommodation evidence as the mission specifies.</li>
+                <li>Jurisdiction check: apply via the competent Italian mission for your area.</li>
+                <li>Consular / VFS appointment process, including biometrics where required.</li>
+                <li>Universitaly connection: pre-enrolment validated by the university supports the visa file.</li>
+                <li>Avoid common mistakes: late preparation and relying on generic document lists.</li>
+              </ul>
+              <p className="mt-3 text-sm leading-6 text-[var(--muted-foreground)]">
+                Missions commonly also ask for financial evidence,
+                accommodation evidence and other supporting documents alongside
+                admission and pre-enrolment proof. There is no single universal
+                minimum — thresholds and accepted evidence are set by the
+                mission. Prepare with our{" "}
+                <Link
+                  href="/visa-checklists"
+                  className="font-semibold text-[var(--primary)] hover:underline"
+                >
+                  visa document checklists
+                </Link>{" "}
+                and the{" "}
+                <a
+                  href="https://www.universitaly.it/studenti-stranieri"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-[var(--primary)] hover:underline"
+                >
+                  official Universitaly guidance for foreign students
+                </a>
+                . For the full process, see our{" "}
+                <Link
+                  href="/italy-student-visa"
+                  className="font-semibold text-[var(--primary)] hover:underline"
+                >
+                  Italy student visa guide
+                </Link>
+                .
+              </p>
+            </div>
+            <div className="mx-auto mt-4 max-w-3xl rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5 text-left">
               <h3 className="font-bold text-[var(--foreground)]">
                 India-specific visa &amp; document context
               </h3>
@@ -1341,7 +1611,7 @@ export default function StudyInItalyPage() {
                 </li>
               </ul>
             </div>
-            <div className="mt-8 text-center">
+            <div className="mt-6 text-center">
               <CtaButton href="/visa-checklists">
                 View visa document checklists
               </CtaButton>
@@ -1350,14 +1620,17 @@ export default function StudyInItalyPage() {
         </section>
 
         {/* Work and post-study */}
-        <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+        <section
+          id="work"
+          className="mx-auto max-w-7xl scroll-mt-[104px] px-4 py-10 sm:px-6 lg:px-8 lg:py-14"
+        >
           <SectionHeading
             eyebrow="Careers"
             title="Work While You Study and After Graduation"
             intro="Part-time work can support your stay, and graduates may explore post-study options — both depend on current rules and your individual situation."
           />
-          <div className="mx-auto mt-10 grid max-w-5xl gap-6 sm:grid-cols-2">
-            <article className="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-6">
+          <div className="mx-auto mt-8 grid max-w-5xl gap-4 sm:grid-cols-2">
+            <article className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5 sm:p-6">
               <h3 className="text-lg font-bold text-[var(--foreground)]">
                 Part-time work during studies
               </h3>
@@ -1369,7 +1642,7 @@ export default function StudyInItalyPage() {
                 work income.
               </p>
             </article>
-            <article className="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-6">
+            <article className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5 sm:p-6">
               <h3 className="text-lg font-bold text-[var(--foreground)]">
                 After graduation
               </h3>
@@ -1382,7 +1655,7 @@ export default function StudyInItalyPage() {
               </p>
             </article>
           </div>
-          <p className="mx-auto mt-8 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
+          <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
             Source:{" "}
             <a
               href="https://education.ec.europa.eu/study-in-europe/country-profiles/italy"
@@ -1394,7 +1667,7 @@ export default function StudyInItalyPage() {
             </a>
             .
           </p>
-          <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
+          <p className="mx-auto mt-4 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
             For accommodation, living costs, transport, healthcare and
             arrival checklists, see our{" "}
             <Link
@@ -1407,14 +1680,17 @@ export default function StudyInItalyPage() {
           </p>
         </section>
 
-        {/* 12. Intakes and deadlines */}
-        <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+        {/* Intakes and deadlines */}
+        <section
+          id="intakes"
+          className="mx-auto max-w-7xl scroll-mt-[104px] px-4 py-10 sm:px-6 lg:px-8 lg:py-14"
+        >
           <SectionHeading
             eyebrow="Planning"
             title="Intakes and Application Deadlines"
             intro="Deadlines vary by university, programme and intake. There is no universal Italian application deadline — check each programme page and apply early, since visa timelines add extra weeks."
           />
-          <div className="mx-auto mt-10 max-w-5xl overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)]">
+          <div className="mx-auto mt-8 max-w-5xl overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)]">
             <div className="bg-[var(--card)] px-5 py-4">
               <h3 className="font-bold text-[var(--foreground)]">
                 Deadlines at a glance — 2026/27 verified examples
@@ -1425,155 +1701,157 @@ export default function StudyInItalyPage() {
                 carry different dates — always read the current call.
               </p>
             </div>
-            <table className="w-full text-left text-sm">
-              <thead>
-                <tr className="border-y border-[var(--border)] bg-[var(--background)]">
-                  <th
-                    scope="col"
-                    className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
-                  >
-                    University
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
-                  >
-                    Programme &amp; intake context
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
-                  >
-                    Official deadline example
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
-                  >
-                    Important caveat
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-[var(--border)]">
-                <tr>
-                  <th
-                    scope="row"
-                    className="px-5 py-4 font-semibold text-[var(--foreground)]"
-                  >
-                    Politecnico di Milano
-                  </th>
-                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                    Master&apos;s, foreign qualification; September 2026 and
-                    February 2027 Engineering intakes
-                  </td>
-                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                    Sept intake calls 1 Oct–1 Dec 2025 and 13 Jan–26 Feb 2026;
-                    Feb 2027 Engineering call 18 May–18 Jun 2026.{" "}
-                    <a
-                      href="https://www.polimi.it/en/prospective-students/how-to-apply/admission-to-laurea-magistrale/foreign-qualification/deadlines"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-semibold text-[var(--primary)] hover:underline"
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[720px] text-left text-sm">
+                <thead>
+                  <tr className="border-y border-[var(--border)] bg-[var(--background)]">
+                    <th
+                      scope="col"
+                      className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
                     >
-                      Official dates
-                    </a>
-                  </td>
-                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                    Second semester Engineering only, with named programme
-                    exclusions
-                  </td>
-                </tr>
-                <tr>
-                  <th
-                    scope="row"
-                    className="px-5 py-4 font-semibold text-[var(--foreground)]"
-                  >
-                    University of Padua
-                  </th>
-                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                    English-taught degrees; unlimited vs limited-place
-                    programmes
-                  </td>
-                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                    Unlimited places: Call One 2 Nov 2025–2 Feb 2026, Call Two 2
-                    Mar–2 May 2026; limited places, non-EU abroad: 7 Jan–7 Mar
-                    2026.{" "}
-                    <a
-                      href="https://www.unipd.it/en/studiare-inglese-come-fare-domanda"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-semibold text-[var(--primary)] hover:underline"
+                      University
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
                     >
-                      Official dates
-                    </a>
-                  </td>
-                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                    Later calls restricted to EU and Italy-resident applicants
-                  </td>
-                </tr>
-                <tr>
-                  <th
-                    scope="row"
-                    className="px-5 py-4 font-semibold text-[var(--foreground)]"
-                  >
-                    Sapienza University of Rome
-                  </th>
-                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                    English-taught programmes, pre-selection then call
-                  </td>
-                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                    Non-EU visa-seeking pre-selection 22 Dec 2025–15 May 2026;
-                    Universitaly by 30 Jun 2026; EU/equivalent to 31 Jul 2026.{" "}
-                    <a
-                      href="https://www.uniroma1.it/en/en/admissions"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-semibold text-[var(--primary)] hover:underline"
+                      Programme &amp; intake context
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
                     >
-                      Official dates
-                    </a>
-                  </td>
-                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                    Pre-selection alone does not enrol; the programme call
-                    completes admission
-                  </td>
-                </tr>
-                <tr>
-                  <th
-                    scope="row"
-                    className="px-5 py-4 font-semibold text-[var(--foreground)]"
-                  >
-                    University of Turin
-                  </th>
-                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                    Separate undergraduate and postgraduate application windows
-                  </td>
-                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                    Postgraduate 25 Nov 2025–29 Jan 2026; undergraduate and 5–6
-                    year programmes 19 Feb–15 Apr 2026.{" "}
-                    <a
-                      href="https://www.en.unito.it/studying-unito/international-degree-seeking-students/application-international-students"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-semibold text-[var(--primary)] hover:underline"
+                      Official deadline example
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
                     >
-                      Official dates
-                    </a>
-                  </td>
-                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                    Later 2026 calls reserved to Italians, EU and Italy
-                    residents
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+                      Important caveat
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-[var(--border)]">
+                  <tr>
+                    <th
+                      scope="row"
+                      className="px-5 py-4 font-semibold text-[var(--foreground)]"
+                    >
+                      Politecnico di Milano
+                    </th>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      Master&apos;s, foreign qualification; September 2026 and
+                      February 2027 Engineering intakes
+                    </td>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      Sept intake calls 1 Oct–1 Dec 2025 and 13 Jan–26 Feb 2026;
+                      Feb 2027 Engineering call 18 May–18 Jun 2026.{" "}
+                      <a
+                        href="https://www.polimi.it/en/prospective-students/how-to-apply/admission-to-laurea-magistrale/foreign-qualification/deadlines"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-semibold text-[var(--primary)] hover:underline"
+                      >
+                        Official dates
+                      </a>
+                    </td>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      Second semester Engineering only, with named programme
+                      exclusions
+                    </td>
+                  </tr>
+                  <tr>
+                    <th
+                      scope="row"
+                      className="px-5 py-4 font-semibold text-[var(--foreground)]"
+                    >
+                      University of Padua
+                    </th>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      English-taught degrees; unlimited vs limited-place
+                      programmes
+                    </td>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      Unlimited places: Call One 2 Nov 2025–2 Feb 2026, Call Two 2
+                      Mar–2 May 2026; limited places, non-EU abroad: 7 Jan–7 Mar
+                      2026.{" "}
+                      <a
+                        href="https://www.unipd.it/en/studiare-inglese-come-fare-domanda"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-semibold text-[var(--primary)] hover:underline"
+                      >
+                        Official dates
+                      </a>
+                    </td>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      Later calls restricted to EU and Italy-resident applicants
+                    </td>
+                  </tr>
+                  <tr>
+                    <th
+                      scope="row"
+                      className="px-5 py-4 font-semibold text-[var(--foreground)]"
+                    >
+                      Sapienza University of Rome
+                    </th>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      English-taught programmes, pre-selection then call
+                    </td>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      Non-EU visa-seeking pre-selection 22 Dec 2025–15 May 2026;
+                      Universitaly by 30 Jun 2026; EU/equivalent to 31 Jul 2026.{" "}
+                      <a
+                        href="https://www.uniroma1.it/en/en/admissions"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-semibold text-[var(--primary)] hover:underline"
+                      >
+                        Official dates
+                      </a>
+                    </td>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      Pre-selection alone does not enrol; the programme call
+                      completes admission
+                    </td>
+                  </tr>
+                  <tr>
+                    <th
+                      scope="row"
+                      className="px-5 py-4 font-semibold text-[var(--foreground)]"
+                    >
+                      University of Turin
+                    </th>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      Separate undergraduate and postgraduate application windows
+                    </td>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      Postgraduate 25 Nov 2025–29 Jan 2026; undergraduate and 5–6
+                      year programmes 19 Feb–15 Apr 2026.{" "}
+                      <a
+                        href="https://www.en.unito.it/studying-unito/international-degree-seeking-students/application-international-students"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-semibold text-[var(--primary)] hover:underline"
+                      >
+                        Official dates
+                      </a>
+                    </td>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      Later 2026 calls reserved to Italians, EU and Italy
+                      residents
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
             <p className="border-t border-[var(--border)] px-5 py-4 text-xs leading-5 text-[var(--muted-foreground)]">
               All examples are 2026/27 editions verified on the linked official
               pages. Your course, level and applicant category can carry
               different dates — always read the current call.
             </p>
           </div>
-          <div className="mx-auto mt-6 max-w-3xl rounded-2xl border border-amber-200 bg-amber-50 p-5 dark:border-amber-900/30 dark:bg-amber-950/20">
+          <div className="mx-auto mt-5 max-w-3xl rounded-2xl border border-amber-200 bg-amber-50 p-4 sm:p-5 dark:border-amber-900/30 dark:bg-amber-950/20">
             <h3 className="font-bold text-[var(--foreground)]">
               Understand the three different deadlines
             </h3>
@@ -1615,12 +1893,12 @@ export default function StudyInItalyPage() {
               </li>
             </ul>
           </div>
-          <div className="mt-8 text-center">
+          <div className="mt-6 text-center">
             <CtaButton href="/universities">
               Check universities and deadlines
             </CtaButton>
           </div>
-          <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
+          <p className="mx-auto mt-5 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
             For September and February intakes, the full 2026/27 timeline and
             all verified university examples, see our{" "}
             <Link
@@ -1633,14 +1911,17 @@ export default function StudyInItalyPage() {
           </p>
         </section>
 
-        {/* 12b. Deadline tracker */}
-        <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+        {/* Deadline tracker */}
+        <section
+          id="deadlines"
+          className="mx-auto max-w-7xl scroll-mt-[104px] px-4 py-10 sm:px-6 lg:px-8 lg:py-14"
+        >
           <SectionHeading
             eyebrow="What to track"
             title="Study in Italy Deadlines: What to Track"
             intro="Italian deadlines vary by university, programme, degree level, intake, applicant category and admission route. There is no single Italy-wide application deadline."
           />
-          <div className="mx-auto mt-10 max-w-5xl overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)]">
+          <div className="mx-auto mt-8 max-w-5xl overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)]">
             <div className="bg-[var(--card)] px-5 py-4">
               <h3 className="font-bold text-[var(--foreground)]">
                 Verified 2026/27 examples — intake/year labelled
@@ -1651,144 +1932,146 @@ export default function StudyInItalyPage() {
                 intake — do not treat any row as applying to all universities.
               </p>
             </div>
-            <table className="w-full text-left text-sm">
-              <thead>
-                <tr className="border-y border-[var(--border)] bg-[var(--background)]">
-                  <th
-                    scope="col"
-                    className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
-                  >
-                    University / route
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
-                  >
-                    Intake / applicant context
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
-                  >
-                    Deadline or date
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
-                  >
-                    What the date refers to
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-[var(--border)]">
-                <tr>
-                  <th
-                    scope="row"
-                    className="px-5 py-4 font-semibold text-[var(--foreground)]"
-                  >
-                    Politecnico di Milano
-                  </th>
-                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                    Master&apos;s, foreign qualification; September 2026 and
-                    February 2027 Engineering intakes
-                  </td>
-                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                    Sept 2026: 1 Oct–1 Dec 2025 and 13 Jan–26 Feb 2026; Feb
-                    2027 Engineering: 18 May–18 Jun 2026
-                  </td>
-                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                    University application call.{" "}
-                    <a
-                      href="https://www.polimi.it/en/prospective-students/how-to-apply/admission-to-laurea-magistrale/foreign-qualification/deadlines"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-semibold text-[var(--primary)] hover:underline"
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[720px] text-left text-sm">
+                <thead>
+                  <tr className="border-y border-[var(--border)] bg-[var(--background)]">
+                    <th
+                      scope="col"
+                      className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
                     >
-                      Official dates
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <th
-                    scope="row"
-                    className="px-5 py-4 font-semibold text-[var(--foreground)]"
-                  >
-                    University of Padua
-                  </th>
-                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                    English-taught degrees; unlimited vs limited-place
-                    programmes
-                  </td>
-                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                    Unlimited: Call One 2 Nov 2025–2 Feb 2026, Call Two 2
-                    Mar–2 May 2026; limited, non-EU abroad: 7 Jan–7 Mar 2026
-                  </td>
-                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                    University application call.{" "}
-                    <a
-                      href="https://www.unipd.it/en/studiare-inglese-come-fare-domanda"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-semibold text-[var(--primary)] hover:underline"
+                      University / route
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
                     >
-                      Official dates
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <th
-                    scope="row"
-                    className="px-5 py-4 font-semibold text-[var(--foreground)]"
-                  >
-                    Sapienza University of Rome
-                  </th>
-                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                    English-taught programmes, pre-selection then call
-                  </td>
-                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                    Non-EU visa-seeking pre-selection 22 Dec 2025–15 May 2026;
-                    Universitaly by 30 Jun 2026; EU/equivalent to 31 Jul 2026
-                  </td>
-                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                    Pre-selection + Universitaly window.{" "}
-                    <a
-                      href="https://www.uniroma1.it/en/en/admissions"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-semibold text-[var(--primary)] hover:underline"
+                      Intake / applicant context
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
                     >
-                      Official dates
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <th
-                    scope="row"
-                    className="px-5 py-4 font-semibold text-[var(--foreground)]"
-                  >
-                    University of Turin
-                  </th>
-                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                    Separate undergraduate and postgraduate windows
-                  </td>
-                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                    Postgraduate 25 Nov 2025–29 Jan 2026; undergraduate and
-                    5–6 year programmes 19 Feb–15 Apr 2026
-                  </td>
-                  <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                    University application call.{" "}
-                    <a
-                      href="https://www.en.unito.it/studying-unito/international-degree-seeking-students/application-international-students"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-semibold text-[var(--primary)] hover:underline"
+                      Deadline or date
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
                     >
-                      Official dates
-                    </a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+                      What the date refers to
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-[var(--border)]">
+                  <tr>
+                    <th
+                      scope="row"
+                      className="px-5 py-4 font-semibold text-[var(--foreground)]"
+                    >
+                      Politecnico di Milano
+                    </th>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      Master&apos;s, foreign qualification; September 2026 and
+                      February 2027 Engineering intakes
+                    </td>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      Sept 2026: 1 Oct–1 Dec 2025 and 13 Jan–26 Feb 2026; Feb
+                      2027 Engineering: 18 May–18 Jun 2026
+                    </td>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      University application call.{" "}
+                      <a
+                        href="https://www.polimi.it/en/prospective-students/how-to-apply/admission-to-laurea-magistrale/foreign-qualification/deadlines"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-semibold text-[var(--primary)] hover:underline"
+                      >
+                        Official dates
+                      </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th
+                      scope="row"
+                      className="px-5 py-4 font-semibold text-[var(--foreground)]"
+                    >
+                      University of Padua
+                    </th>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      English-taught degrees; unlimited vs limited-place
+                      programmes
+                    </td>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      Unlimited: Call One 2 Nov 2025–2 Feb 2026, Call Two 2
+                      Mar–2 May 2026; limited, non-EU abroad: 7 Jan–7 Mar 2026
+                    </td>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      University application call.{" "}
+                      <a
+                        href="https://www.unipd.it/en/studiare-inglese-come-fare-domanda"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-semibold text-[var(--primary)] hover:underline"
+                      >
+                        Official dates
+                      </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th
+                      scope="row"
+                      className="px-5 py-4 font-semibold text-[var(--foreground)]"
+                    >
+                      Sapienza University of Rome
+                    </th>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      English-taught programmes, pre-selection then call
+                    </td>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      Non-EU visa-seeking pre-selection 22 Dec 2025–15 May 2026;
+                      Universitaly by 30 Jun 2026; EU/equivalent to 31 Jul 2026
+                    </td>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      Pre-selection + Universitaly window.{" "}
+                      <a
+                        href="https://www.uniroma1.it/en/en/admissions"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-semibold text-[var(--primary)] hover:underline"
+                      >
+                        Official dates
+                      </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th
+                      scope="row"
+                      className="px-5 py-4 font-semibold text-[var(--foreground)]"
+                    >
+                      University of Turin
+                    </th>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      Separate undergraduate and postgraduate windows
+                    </td>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      Postgraduate 25 Nov 2025–29 Jan 2026; undergraduate and
+                      5–6 year programmes 19 Feb–15 Apr 2026
+                    </td>
+                    <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                      University application call.{" "}
+                      <a
+                        href="https://www.en.unito.it/studying-unito/international-degree-seeking-students/application-international-students"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-semibold text-[var(--primary)] hover:underline"
+                      >
+                        Official dates
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
             <p className="border-t border-[var(--border)] px-5 py-4 text-xs leading-5 text-[var(--muted-foreground)]">
               All rows are verified 2026/27 examples from the linked official
               university pages. The national visa-related date of 30 November
@@ -1796,7 +2079,7 @@ export default function StudyInItalyPage() {
               application deadline.
             </p>
           </div>
-          <div className="mx-auto mt-6 max-w-3xl rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5">
+          <div className="mx-auto mt-5 max-w-3xl rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5">
             <h3 className="font-bold text-[var(--foreground)]">
               How to use this tracker
             </h3>
@@ -1828,7 +2111,7 @@ export default function StudyInItalyPage() {
             Deadlines can change. Treat this as a planning aid and verify the
             current official programme call before applying.
           </p>
-          <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
+          <p className="mx-auto mt-4 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
             For the full timeline, all verified examples and applicant-category
             caveats, see our{" "}
             <Link
@@ -1848,20 +2131,23 @@ export default function StudyInItalyPage() {
           </p>
         </section>
 
-        {/* 13. English-taught courses */}
-        <section className="border-y border-[var(--border)] bg-[var(--card)]">
-          <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+        {/* English-taught courses */}
+        <section
+          id="english-taught"
+          className="scroll-mt-[104px] border-y border-[var(--border)] bg-[var(--card)]"
+        >
+          <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
             <SectionHeading
               eyebrow="Language of instruction"
               title="English-Taught Courses in Italy"
               intro="Many Italian universities offer programmes taught fully or partly in English, particularly at Master's level and in technical fields. Always confirm the language of instruction for your exact programme and intake."
             />
-            <div className="mt-8 text-center">
+            <div className="mt-6 text-center">
               <CtaButton href="/courses">
                 Explore English-taught courses
               </CtaButton>
             </div>
-            <div className="mx-auto mt-6 max-w-3xl rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5 text-left">
+            <div className="mx-auto mt-5 max-w-3xl rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5 text-left">
               <h3 className="font-bold text-[var(--foreground)]">
                 What Indian students should know about English requirements
               </h3>
@@ -1886,7 +2172,7 @@ export default function StudyInItalyPage() {
                 </li>
               </ul>
             </div>
-            <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
+            <p className="mx-auto mt-5 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
               For Bachelor&apos;s and Master&apos;s examples, how to verify the
               language of instruction and the full requirement table, see our{" "}
               <Link
@@ -1900,53 +2186,65 @@ export default function StudyInItalyPage() {
           </div>
         </section>
 
-        {/* 14. Popular universities */}
-        <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+        {/* Popular universities */}
+        <section
+          id="popular-universities"
+          className="mx-auto max-w-7xl scroll-mt-[104px] px-4 py-10 sm:px-6 lg:px-8 lg:py-14"
+        >
           <SectionHeading
             eyebrow="Popular choices"
             title="Popular Italian Universities"
             intro="Start your comparison with these well-known universities, then explore the full listing."
           />
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {popularUniversities.map((university) => (
               <Link
                 key={university.href}
                 href={university.href}
-                className="group rounded-3xl border border-[var(--border)] bg-[var(--card)] p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-[var(--primary)]/40 hover:shadow-xl"
+                className="group flex flex-col rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5 transition hover:-translate-y-0.5 hover:border-[var(--primary)]/40 hover:shadow-lg sm:p-6"
               >
-                <h3 className="text-xl font-bold text-[var(--foreground)] transition group-hover:text-[var(--primary)]">
+                <h3 className="text-lg font-bold text-[var(--foreground)] transition group-hover:text-[var(--primary)]">
                   {university.name}
                 </h3>
-                <p className="mt-3 text-sm leading-6 text-[var(--muted-foreground)]">
+                <p className="mt-2 flex-1 text-sm leading-6 text-[var(--muted-foreground)]">
                   {university.note}
                 </p>
-                <span className="mt-4 inline-block text-sm font-bold text-[var(--primary)]">
+                <span className="mt-3 inline-block text-sm font-bold text-[var(--primary)]">
                   View university
                 </span>
               </Link>
             ))}
           </div>
+          <div className="mt-6 text-center">
+            <CtaButton href="/universities" variant="secondary">
+              Compare all universities
+            </CtaButton>
+          </div>
         </section>
 
-        {/* 15. Step by step */}
-        <section className="border-y border-[var(--border)] bg-[var(--card)]">
-          <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+        {/* Step by step */}
+        <section
+          id="steps"
+          className="scroll-mt-[104px] border-y border-[var(--border)] bg-[var(--card)]"
+        >
+          <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
             <SectionHeading
               eyebrow="Your roadmap"
               title="Study in Italy Step-by-Step"
               intro="A clear ten-stage journey from first shortlist to arrival."
             />
-            <ol className="mx-auto mt-10 max-w-3xl space-y-4">
+            {/* Desktop: 2-col timeline; Mobile: vertical stack — CSS only */}
+            <ol className="relative mx-auto mt-8 max-w-3xl space-y-3">
               {journeySteps.map((step, index) => (
                 <li
                   key={step.title}
-                  className="flex items-start gap-4 rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5"
+                  className="relative flex items-start gap-3 rounded-2xl border border-[var(--border)] bg-[var(--background)] p-4 sm:p-5"
                 >
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--primary)] text-sm font-bold text-white">
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--primary)] text-sm font-bold text-white">
                     {index + 1}
                   </span>
-                  <span className="pt-1">
-                    <span className="font-bold text-[var(--foreground)]">
+                  <span className="pt-0.5">
+                    <span className="text-sm font-bold text-[var(--foreground)] sm:text-base">
                       {step.title}
                     </span>
                     <span className="mt-1 block text-sm leading-6 text-[var(--muted-foreground)]">
@@ -1956,7 +2254,7 @@ export default function StudyInItalyPage() {
                 </li>
               ))}
             </ol>
-            <div className="mt-10 flex flex-wrap justify-center gap-4">
+            <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap">
               <CtaButton href="/contact">Get Free Consultation</CtaButton>
               <CtaButton href="/blogs" variant="secondary">
                 Read study guides
@@ -1965,15 +2263,18 @@ export default function StudyInItalyPage() {
           </div>
         </section>
 
-        {/* 15b. Common Mistakes */}
-        <section className="border-y border-[var(--border)] bg-[var(--card)]">
-          <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+        {/* Common Mistakes */}
+        <section
+          id="mistakes"
+          className="scroll-mt-[104px] border-b border-[var(--border)] bg-[var(--card)]"
+        >
+          <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
             <SectionHeading
               eyebrow="Avoidable errors"
               title="Common Mistakes Indian Students Make When Planning to Study in Italy"
               intro="Small planning errors cause most avoidable delays. Verify every detail on official university and government sources — not on generic lists."
             />
-            <div className="mx-auto mt-10 grid max-w-5xl gap-4 sm:grid-cols-2">
+            <div className="mx-auto mt-8 grid max-w-5xl gap-4 sm:grid-cols-2">
               {[
                 {
                   title: "Relying on generic deadlines",
@@ -2016,36 +2317,152 @@ export default function StudyInItalyPage() {
           </div>
         </section>
 
-        {/* 16. FAQ */}
-        <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+        {/* FAQ — accessible accordion, SSR content */}
+        <section
+          id="faq"
+          className="mx-auto max-w-7xl scroll-mt-[104px] px-4 py-10 sm:px-6 lg:px-8 lg:py-14"
+        >
           <SectionHeading
             eyebrow="FAQ"
             title="Study in Italy: Frequently Asked Questions"
           />
-          <div className="mx-auto mt-10 max-w-3xl space-y-4">
-            {faqs.map((faq) => (
-              <article
+          <div className="mx-auto mt-8 max-w-3xl space-y-3">
+            {faqs.map((faq, index) => (
+              <details
                 key={faq.question}
-                className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6"
+                open={index === 0}
+                className="group rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5 open:shadow-sm"
               >
-                <h3 className="text-lg font-bold text-[var(--foreground)]">
-                  {faq.question}
-                </h3>
+                <summary className="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden">
+                  <span className="flex items-start justify-between gap-3">
+                    <span role="heading" aria-level="3" className="text-base font-bold text-[var(--foreground)]">
+                      {faq.question}
+                    </span>
+                    <span
+                      aria-hidden="true"
+                      className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-[var(--border)] text-sm font-bold text-[var(--primary)] group-open:rotate-45 group-open:border-[var(--primary)]"
+                    >
+                      +
+                    </span>
+                  </span>
+                </summary>
                 <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
                   {faq.answer}
                 </p>
-              </article>
+              </details>
             ))}
           </div>
-          <div className="mt-12 rounded-3xl bg-[var(--foreground)] px-6 py-10 text-center text-[var(--background)] sm:px-10">
-            <h2 className="text-2xl font-bold sm:text-3xl">
+
+          {/* Sources & verification */}
+          <div className="mx-auto mt-10 max-w-3xl rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5 sm:p-6">
+            <h2 className="text-lg font-bold text-[var(--foreground)]">
+              Sources &amp; verification
+            </h2>
+            <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
+              Figures, dates and procedures on this page are verified against
+              official sources. Always re-check the current call before applying.
+            </p>
+            <ul className="mt-3 list-disc space-y-1 pl-5 text-sm leading-6 text-[var(--muted-foreground)]">
+              <li>
+                <a href="https://www.universitaly.it" target="_blank" rel="noopener noreferrer" className="font-semibold text-[var(--primary)] hover:underline">
+                  Universitaly — official portal
+                </a>{" "}
+                and{" "}
+                <a href="https://www.universitaly.it/studenti-stranieri" target="_blank" rel="noopener noreferrer" className="font-semibold text-[var(--primary)] hover:underline">
+                  guidance for foreign students
+                </a>
+              </li>
+              <li>
+                <a href="https://studyinitaly.esteri.it/" target="_blank" rel="noopener noreferrer" className="font-semibold text-[var(--primary)] hover:underline">
+                  MAECI Study in Italy portal
+                </a>{" "}
+                and{" "}
+                <a href="https://studyinitaly.esteri.it/ListaBandi" target="_blank" rel="noopener noreferrer" className="font-semibold text-[var(--primary)] hover:underline">
+                  official 2026-2027 grants call
+                </a>
+              </li>
+              <li>
+                <a href="https://education.ec.europa.eu/study-in-europe/country-profiles/italy" target="_blank" rel="noopener noreferrer" className="font-semibold text-[var(--primary)] hover:underline">
+                  European Commission — Study in Italy country profile
+                </a>
+              </li>
+              <li>
+                <a href="https://www.cisiaonline.it/en/" target="_blank" rel="noopener noreferrer" className="font-semibold text-[var(--primary)] hover:underline">
+                  CISIA — TOLC / CEnT-S information
+                </a>{" "}
+                and{" "}
+                <a href="https://www.cimea.it/EN/pagina-attestati-di-comparabilita-e-verifica" target="_blank" rel="noopener noreferrer" className="font-semibold text-[var(--primary)] hover:underline">
+                  CIMEA comparability services
+                </a>
+              </li>
+              <li>
+                University calls:{" "}
+                <a href="https://www.polimi.it/en/prospective-students/how-to-apply/admission-to-laurea-magistrale/foreign-qualification/deadlines" target="_blank" rel="noopener noreferrer" className="font-semibold text-[var(--primary)] hover:underline">
+                  Politecnico di Milano
+                </a>
+                {", "}
+                <a href="https://www.unipd.it/en/studiare-inglese-come-fare-domanda" target="_blank" rel="noopener noreferrer" className="font-semibold text-[var(--primary)] hover:underline">
+                  University of Padua
+                </a>
+                {", "}
+                <a href="https://www.uniroma1.it/en/en/admissions" target="_blank" rel="noopener noreferrer" className="font-semibold text-[var(--primary)] hover:underline">
+                  Sapienza University of Rome
+                </a>
+                {", "}
+                <a href="https://www.en.unito.it/studying-unito/international-degree-seeking-students/application-international-students" target="_blank" rel="noopener noreferrer" className="font-semibold text-[var(--primary)] hover:underline">
+                  University of Turin
+                </a>
+              </li>
+            </ul>
+            <p className="mt-3 text-sm leading-6 text-[var(--muted-foreground)]">
+              Related guides:{" "}
+              <Link href="/italy-university-admission" className="font-semibold text-[var(--primary)] hover:underline">
+                Admission
+              </Link>
+              {" · "}
+              <Link href="/universitaly" className="font-semibold text-[var(--primary)] hover:underline">
+                Universitaly
+              </Link>
+              {" · "}
+              <Link href="/cost-of-studying-in-italy" className="font-semibold text-[var(--primary)] hover:underline">
+                Costs
+              </Link>
+              {" · "}
+              <Link href="/italy-scholarships" className="font-semibold text-[var(--primary)] hover:underline">
+                Scholarships
+              </Link>
+              {" · "}
+              <Link href="/italy-student-visa" className="font-semibold text-[var(--primary)] hover:underline">
+                Student visa
+              </Link>
+              {" · "}
+              <Link href="/visa-checklists" className="font-semibold text-[var(--primary)] hover:underline">
+                Visa checklists
+              </Link>
+              {" · "}
+              <Link href="/italy-university-intakes" className="font-semibold text-[var(--primary)] hover:underline">
+                Intakes
+              </Link>
+              {" · "}
+              <Link href="/english-taught-courses-in-italy" className="font-semibold text-[var(--primary)] hover:underline">
+                English-taught courses
+              </Link>
+              {" · "}
+              <Link href="/living-in-italy-for-students" className="font-semibold text-[var(--primary)] hover:underline">
+                Living in Italy
+              </Link>
+            </p>
+          </div>
+
+          <div className="mt-8 rounded-2xl bg-[var(--foreground)] px-6 py-8 text-center text-[var(--background)] sm:px-10 sm:py-10">
+            <h2 className="text-xl font-bold sm:text-2xl">
               Ready to start your study in Italy journey?
             </h2>
-            <p className="mx-auto mt-3 max-w-2xl opacity-80">
+            <p className="mx-auto mt-2 max-w-2xl text-sm opacity-80 sm:text-base">
               Get personalised guidance on universities, courses, applications,
               scholarships and the Italy student visa.
             </p>
-            <div className="mt-7 flex flex-wrap justify-center gap-4">
+            <div className="mt-5 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap">
               <CtaButton href="/contact">Book a free consultation</CtaButton>
               <CtaButton href="/universities" variant="secondary">
                 Explore universities
