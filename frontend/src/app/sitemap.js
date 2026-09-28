@@ -95,6 +95,7 @@ export default async function sitemap() {
     "/courses",
     "/visa-checklists",
     "/study-in-italy",
+    "/medicine-in-italy",
     "/italy-scholarships",
     "/cost-of-studying-in-italy",
     "/universitaly",
