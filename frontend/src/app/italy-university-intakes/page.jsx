@@ -575,6 +575,17 @@ export default function ItalyUniversityIntakesPage() {
             title="Verified Application & Universitaly Deadline Tracker — 2026/27"
             intro="Official sources only. Dates vary by university, programme route, degree level and applicant type. Each row separates the application window from Universitaly and national visa timing where relevant."
           />
+          <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
+            Deadlines are one part of the broader journey — see our{" "}
+            <Link
+              href="/study-in-italy"
+              className="font-semibold text-[var(--primary)] hover:underline"
+            >
+              Study in Italy planning guide
+            </Link>{" "}
+            for how admission, Universitaly pre-enrolment and the student visa
+            fit together.
+          </p>
           <div className="mx-auto mt-10 max-w-6xl overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)]">
             <div className="overflow-x-auto">
               <table className="w-full min-w-[980px] text-left text-sm">
