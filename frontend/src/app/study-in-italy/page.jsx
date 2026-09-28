@@ -988,7 +988,15 @@ export default function StudyInItalyPage() {
             >
               See the Italy university admission guide
             </Link>
-            .
+            . For 2026/27 IMAT dates, university seats and NEET/NMC
+            requirements, see our{" "}
+            <Link
+              href="/medicine-in-italy"
+              className="font-semibold text-[var(--primary)] hover:underline"
+            >
+              Medicine in Italy for Indian Students
+            </Link>{" "}
+            guide.
           </p>
         </section>
 
