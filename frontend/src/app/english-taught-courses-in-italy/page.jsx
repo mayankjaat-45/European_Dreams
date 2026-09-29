@@ -769,12 +769,47 @@ export default function EnglishTaughtCoursesPage() {
             >
               courses in Italy
             </Link>{" "}
-            listing and compare institutions via{" "}
+            listing — for instance,{" "}
+            <Link
+              href="/courses/university-of-bologna/computer-science"
+              className="font-semibold text-[var(--primary)] hover:underline"
+            >
+              Computer Science in Italy
+            </Link>
+            {", "}
+            <Link
+              href="/courses/university-of-bologna/artificial-intelligence"
+              className="font-semibold text-[var(--primary)] hover:underline"
+            >
+              Artificial Intelligence in Italy
+            </Link>{" "}
+            and{" "}
+            <Link
+              href="/courses/university-of-pisa/computer-engineering"
+              className="font-semibold text-[var(--primary)] hover:underline"
+            >
+              Computer Engineering in Italy
+            </Link>{" "}
+            — and compare institutions via{" "}
             <Link
               href="/universities"
               className="font-semibold text-[var(--primary)] hover:underline"
             >
               universities in Italy
+            </Link>
+            . For data-focused options, explore{" "}
+            <Link
+              href="/courses/sapienza-university-of-rome/data-science"
+              className="font-semibold text-[var(--primary)] hover:underline"
+            >
+              Data Science in Italy
+            </Link>{" "}
+            and{" "}
+            <Link
+              href="/courses/university-of-padua/data-science"
+              className="font-semibold text-[var(--primary)] hover:underline"
+            >
+              Data Science programs in Italy
             </Link>
             .
           </p>
