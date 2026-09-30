@@ -103,6 +103,7 @@ export default async function sitemap() {
     "/living-in-italy-for-students": "2026-09-18",
     "/medicine-in-italy": "2026-09-28",
     "/open-semester-medicine-italy": "2026-09-28",
+    "/study-in-italy-data-guide": "2026-09-30",
   };
 
   const staticPages = [
@@ -113,6 +114,7 @@ export default async function sitemap() {
     "/courses",
     "/visa-checklists",
     "/study-in-italy",
+    "/study-in-italy-data-guide",
     "/medicine-in-italy",
     "/open-semester-medicine-italy",
     "/italy-scholarships",
