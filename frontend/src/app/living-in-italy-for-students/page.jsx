@@ -410,7 +410,14 @@ export default function LivingInItalyPage() {
               <OfficialLink href="https://www.universitaly.it/it/vivere-in-italia">
                 living in Italy guidance
               </OfficialLink>
-              .
+              . See how{" "}
+              <Link
+                href="/italy-scholarships"
+                className="font-semibold text-[var(--primary)] hover:underline"
+              >
+                DSU scholarships and benefits
+              </Link>{" "}
+              can offset housing and meal costs.
             </p>
           </div>
         </section>

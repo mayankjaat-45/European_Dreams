@@ -9,7 +9,7 @@ const CANONICAL = `${SITE_URL}/medicine-in-italy`;
 export const metadata = {
   title: "Medicine in Italy for Indian Students 2026/27 | IMAT, Seats & NEET",
   description:
-    "Medicine in Italy for Indian students: 2026/27 IMAT date, English-taught Medicine universities and seats, Italian open-semester route, NEET and NMC requirements, admission process and student visa.",
+    "Medicine in Italy for Indian students: 2026/27 IMAT, English-taught universities and seats, open-semester route, NEET, NMC and visa guidance.",
   alternates: {
     canonical: CANONICAL,
   },
@@ -20,7 +20,7 @@ export const metadata = {
   openGraph: {
     title: "Medicine in Italy for Indian Students 2026/27 | IMAT, Seats & NEET",
     description:
-      "Medicine in Italy for Indian students: 2026/27 IMAT date, English-taught Medicine universities and seats, Italian open-semester route, NEET and NMC requirements, admission process and student visa.",
+      "Medicine in Italy for Indian students: 2026/27 IMAT, English-taught universities and seats, open-semester route, NEET, NMC and visa guidance.",
     url: CANONICAL,
     siteName: "European Dreams",
     type: "website",
@@ -30,7 +30,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Medicine in Italy for Indian Students 2026/27 | IMAT, Seats & NEET",
     description:
-      "Medicine in Italy for Indian students: 2026/27 IMAT date, English-taught Medicine universities and seats, Italian open-semester route, NEET and NMC requirements, admission process and student visa.",
+      "Medicine in Italy for Indian students: 2026/27 IMAT, English-taught universities and seats, open-semester route, NEET, NMC and visa guidance.",
   },
 };
 
@@ -363,7 +363,14 @@ export default function MedicineInItalyPage() {
               <h3 className="font-bold text-[var(--foreground)]">Italian-taught route: open semester</h3>
               <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
                 2026/27 open-semester system (DM 941): Biology, Chemistry and
-                Physics with national examinations and merit ranking.
+                Physics with national examinations and merit ranking. See our{" "}
+                <Link
+                  href="/open-semester-medicine-italy"
+                  className="font-semibold text-[var(--primary)] hover:underline"
+                >
+                  Italy Open Semester 2026/27
+                </Link>{" "}
+                guide.
               </p>
             </article>
           </div>
@@ -519,6 +526,20 @@ export default function MedicineInItalyPage() {
               className="font-semibold text-[var(--primary)] hover:underline"
             >
               courses in Italy
+            </Link>
+            . For a concrete English-taught example, see{" "}
+            <Link
+              href="/courses/university-of-milan/medicine-and-surgery-single-cycle-masters-6-yrs"
+              className="font-semibold text-[var(--primary)] hover:underline"
+            >
+              Medicine and Surgery at the University of Milan
+            </Link>{" "}
+            and the related{" "}
+            <Link
+              href="/courses/university-of-milan/dental-medicine-single-cycle-masters-6-yrs"
+              className="font-semibold text-[var(--primary)] hover:underline"
+            >
+              Dental Medicine at the University of Milan
             </Link>
             .
           </p>

@@ -87,6 +87,24 @@ export default async function sitemap() {
     fetchAll("/api/blogs?status=published", "blogs"),
   ]);
 
+  // Genuine last content-update dates for strategic guides, verified against
+  // git history (git log per page). Update an entry here whenever the
+  // corresponding guide content changes. Pages without a confidently
+  // established date are intentionally left without lastModified.
+  const STATIC_LAST_MODIFIED = {
+    "/study-in-italy": "2026-09-28",
+    "/italy-university-admission": "2026-09-28",
+    "/italy-student-visa": "2026-09-26",
+    "/italy-scholarships": "2026-09-18",
+    "/cost-of-studying-in-italy": "2026-09-26",
+    "/universitaly": "2026-09-18",
+    "/italy-university-intakes": "2026-09-28",
+    "/english-taught-courses-in-italy": "2026-09-29",
+    "/living-in-italy-for-students": "2026-09-18",
+    "/medicine-in-italy": "2026-09-28",
+    "/open-semester-medicine-italy": "2026-09-28",
+  };
+
   const staticPages = [
     "",
     "/about",
@@ -111,6 +129,9 @@ export default async function sitemap() {
     "/terms-and-conditions",
   ].map((path) => ({
     url: `${WEBSITE_URL}${path}`,
+    lastModified: STATIC_LAST_MODIFIED[path]
+      ? new Date(STATIC_LAST_MODIFIED[path])
+      : undefined,
     changeFrequency: path === "" ? "daily" : "weekly",
     priority: path === "" ? 1 : 0.8,
   }));

@@ -386,7 +386,14 @@ export default function ItalyScholarshipsPage() {
                   students, and exemption from the regional study tax. The cash
                   amount varies with economic band and whether you are
                   classified as in-town, commuter or out-of-town — no fixed
-                  national figure exists.
+                  national figure exists. See how these offsets fit the full{" "}
+                  <Link
+                    href="/cost-of-studying-in-italy"
+                    className="font-semibold text-[var(--primary)] hover:underline"
+                  >
+                    cost of studying in Italy
+                  </Link>
+                  .
                 </p>
               </article>
               <article className="rounded-3xl border border-[var(--border)] bg-[var(--background)] p-6">
@@ -403,6 +410,143 @@ export default function ItalyScholarshipsPage() {
                 </p>
               </article>
             </div>
+            <div className="mx-auto mt-8 max-w-3xl">
+              <h3 className="text-lg font-bold text-[var(--foreground)]">
+                2026/27 regional application map
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
+                Ordinary 2026/27 windows below have closed and are shown as
+                published reference points for the regions most represented in
+                our university listing. For students applying from India, the
+                documentation route can differ from Italian-resident students;
+                check the regional call for foreign-income documentation and
+                ISEE Parificato requirements.
+              </p>
+            </div>
+            <div className="mx-auto mt-4 max-w-3xl overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--background)]">
+              <div className="overflow-x-auto">
+                <table className="w-full min-w-[640px] text-left text-sm">
+                  <thead>
+                    <tr className="border-b border-[var(--border)]">
+                      <th
+                        scope="col"
+                        className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
+                      >
+                        Region
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
+                      >
+                        DSU authority
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
+                      >
+                        2026/27 timing
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-[var(--foreground)]"
+                      >
+                        International note
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-[var(--border)]">
+                    <tr>
+                      <th
+                        scope="row"
+                        className="px-5 py-4 font-semibold text-[var(--foreground)]"
+                      >
+                        Emilia-Romagna
+                      </th>
+                      <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                        <OfficialLink href="https://www.er-go.it/cosa-fare-per/bandi-di-concorso/scadenze/scadenze-per-richiedere-i-benefici">
+                          ER.GO
+                        </OfficialLink>
+                      </td>
+                      <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                        23 June – 24 Aug 2026, 16:00 (closed)
+                      </td>
+                      <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                        Translated, legalised foreign-income documents via the
+                        Dossier Utente.
+                      </td>
+                    </tr>
+                    <tr>
+                      <th
+                        scope="row"
+                        className="px-5 py-4 font-semibold text-[var(--foreground)]"
+                      >
+                        Piedmont
+                      </th>
+                      <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                        <OfficialLink href="https://www.edisu.piemonte.it/borse-e-contributi/benefici-economici/borsa-di-studio">
+                          EDISU Piemonte
+                        </OfficialLink>
+                      </td>
+                      <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                        22 July – 4 Sept 2026, 12:00 (closed)
+                      </td>
+                      <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                        ISEE Parificato route in the 2026/27 call; temporary
+                        access code where no SPID.
+                      </td>
+                    </tr>
+                    <tr>
+                      <th
+                        scope="row"
+                        className="px-5 py-4 font-semibold text-[var(--foreground)]"
+                      >
+                        Lazio
+                      </th>
+                      <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                        <OfficialLink href="https://laziodisco.it/bandi-aperti/bando-diritto-allo-studio-2026-2027/">
+                          DiSCo
+                        </OfficialLink>
+                      </td>
+                      <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                        10 June – 23 July 2026, closed 11 Aug 2026 (closed)
+                      </td>
+                      <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                        ISEEUP at an affiliated CAF by 10 Dec 2026;
+                        residence-permit uploads for extra-EU students.
+                      </td>
+                    </tr>
+                    <tr>
+                      <th
+                        scope="row"
+                        className="px-5 py-4 font-semibold text-[var(--foreground)]"
+                      >
+                        Veneto · Padua
+                      </th>
+                      <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                        <OfficialLink href="https://www.unipd.it/borse-studio-regionali">
+                          University of Padua
+                        </OfficialLink>
+                      </td>
+                      <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                        All steps by 30 Sept 2026 (per 2026/27 call)
+                      </td>
+                      <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                        ISEE Parificato accepted via an affiliated CAF.
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <p className="mx-auto mt-4 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
+              Open Semester exception, kept separate from the ordinary windows
+              above:{" "}
+              <OfficialLink href="https://www.er-go.it/cosa-fare-per/studenti/studente-iscritto-al-semestre-filtro-aperto">
+                ER.GO reopens applications 10 Feb – 15 Mar 2027
+              </OfficialLink>{" "}
+              for Italian-language semestre-filtro students (LM-41/LM-46/LM-42)
+              with its own rules and rankings.
+            </p>
             <p className="mx-auto mt-8 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
               Verify current regional rules on the official pages, for example
               the{" "}

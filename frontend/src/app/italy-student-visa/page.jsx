@@ -265,8 +265,14 @@ export default function ItalyStudentVisaPage() {
                 Italy Student Visa for Indian Students
               </h1>
               <p className="mt-5 max-w-2xl text-base leading-7 text-[var(--muted-foreground)] sm:text-lg">
-                The Italy student visa journey for Indian students runs from
-                university admission through Universitaly pre-enrolment to the
+                The Italy student visa journey for Indian students runs from{" "}
+                <Link
+                  href="/italy-university-admission"
+                  className="font-semibold text-[var(--primary)] hover:underline"
+                >
+                  university admission
+                </Link>{" "}
+                through Universitaly pre-enrolment to the
                 visa application. This guide explains each stage, the documents
                 involved, and where to verify current official requirements.
               </p>
@@ -694,6 +700,70 @@ export default function ItalyStudentVisaPage() {
                 </OfficialLink>
                 .
               </p>
+              <h3 className="border-t border-[var(--border)] px-5 pt-4 text-sm font-bold text-[var(--foreground)]">
+                Why you may see different proof-of-funds figures online
+              </h3>
+              <table className="w-full text-left text-sm">
+                <tbody className="divide-y divide-[var(--border)]">
+                  <tr>
+                    <th
+                      scope="row"
+                      className="px-5 py-3 font-semibold text-[var(--foreground)]"
+                    >
+                      Legal basis
+                    </th>
+                    <td className="px-5 py-3 text-[var(--muted-foreground)]">
+                      The €10,179.85 annual figure follows Tabella A of the
+                      Italian Ministry of the Interior Directive of
+                      01.03.2000, as referenced in the 2026/27
+                      international-student guidance behind the checklists
+                      linked above.
+                    </td>
+                  </tr>
+                  <tr>
+                    <th
+                      scope="row"
+                      className="px-5 py-3 font-semibold text-[var(--foreground)]"
+                    >
+                      Why older ~€6,079.45 figures appear
+                    </th>
+                    <td className="px-5 py-3 text-[var(--muted-foreground)]">
+                      That was the superseded 2024/25 figure found in older
+                      official mission and MAECI material. It is not the
+                      current 2026/27 requirement.
+                    </td>
+                  </tr>
+                  <tr>
+                    <th
+                      scope="row"
+                      className="px-5 py-3 font-semibold text-[var(--foreground)]"
+                    >
+                      Why monthly figures differ
+                    </th>
+                    <td className="px-5 py-3 text-[var(--muted-foreground)]">
+                      Some missions divide the same €10,179.85 annual total
+                      by 12 (€848.32/month), while another presents the
+                      same annual amount using a 13-month convention
+                      (€783.06/month). These are different presentations
+                      of the same annual amount — not different
+                      requirements.
+                    </td>
+                  </tr>
+                  <tr>
+                    <th
+                      scope="row"
+                      className="px-5 py-3 font-semibold text-[var(--foreground)]"
+                    >
+                      Which source to follow
+                    </th>
+                    <td className="px-5 py-3 text-[var(--muted-foreground)]">
+                      Always check the current checklist of the Italian
+                      mission competent for your jurisdiction before
+                      submitting your application.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
             <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
               Budgeting tuition alongside these means? See our{" "}
