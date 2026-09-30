@@ -784,7 +784,9 @@ export default function ItalyUniversityIntakesPage() {
                   </tr>
                   <tr>
                     <th scope="row" className="px-4 py-4 font-semibold text-[var(--foreground)]">
-                      University of Genoa
+                      <Link href="/universities/university-of-genoa" className="font-semibold text-[var(--primary)] hover:underline">
+                        University of Genoa
+                      </Link>
                     </th>
                     <td className="px-4 py-4 text-[var(--muted-foreground)]">
                       Multiple degree levels (as per official deadlines page)
