@@ -55,6 +55,15 @@ function buildUniversityDescription(university, courseCount, slug, forSchema) {
       160,
     );
   }
+  if (
+    !forSchema &&
+    (university.slug || slug) === "university-of-turin"
+  ) {
+    return truncate(
+      "Explore University of Turin (UniTo), including bachelor's and master's English-taught courses, fees and admission for international students.",
+      160,
+    );
+  }
   if (university.metaDescription?.trim()) {
     const base = truncate(university.metaDescription, 155);
     // Generic factual suffix from existing data; only when it fits.
@@ -96,6 +105,8 @@ function buildUniversityTitle(university, slug) {
     return "University of Milan (La Statale): Courses, Fees & Admission";
   if ((university.slug || slug) === "university-of-genoa")
     return "University of Genoa (UniGe): Bachelor's & English-Taught Courses";
+  if ((university.slug || slug) === "university-of-turin")
+    return "University of Turin (UniTo): Bachelor's & Master's Courses, Fees & Admission";
   if (university.seoTitle?.trim())
     return truncate(stripBrandSuffix(university.seoTitle), 60);
   const name = String(university.name || "").trim();
@@ -520,6 +531,11 @@ export default async function UniversityDetailsPage({ params }) {
         "Università degli Studi di Genova",
         "UniGe",
       ];
+    } else if (isTurin) {
+      schema.alternateName = [
+        "Università degli Studi di Torino",
+        "UniTo",
+      ];
     }
 
     const city = university.city?.trim();
@@ -539,6 +555,14 @@ export default async function UniversityDetailsPage({ params }) {
         streetAddress: "Via Balbi 5",
         addressLocality: city || "Genoa",
         addressRegion: region || "Liguria",
+        addressCountry: "IT",
+      };
+    } else if (isTurin) {
+      schema.address = {
+        "@type": "PostalAddress",
+        streetAddress: "Via Verdi 8",
+        addressLocality: city || "Turin",
+        addressRegion: region || "Piedmont",
         addressCountry: "IT",
       };
     } else if (city || region) {
@@ -567,6 +591,8 @@ export default async function UniversityDetailsPage({ params }) {
       schema.sameAs = ["https://www.unimi.it/"];
     } else if (isGenoa) {
       schema.sameAs = ["https://unige.it/en/"];
+    } else if (isTurin) {
+      schema.sameAs = ["https://en.unito.it/"];
     } else if (websiteUrl) {
       schema.sameAs = websiteUrl;
     }
@@ -604,6 +630,26 @@ export default async function UniversityDetailsPage({ params }) {
           "@id": `${canonical}#faq`,
           about: { "@id": `${canonical}#university` },
           mainEntity: genoaFaqs.map((faq) => ({
+            "@type": "Question",
+            name: faq.question,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: faq.answer,
+            },
+          })),
+        }
+      : null;
+
+  // Turin-only FAQPage: generated from the same visible turinFaqs data
+  // rendered below — no schema-only questions or answers.
+  const turinFaqSchema =
+    isTurin && turinFaqs.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "@id": `${canonical}#faq`,
+          about: { "@id": `${canonical}#university` },
+          mainEntity: turinFaqs.map((faq) => ({
             "@type": "Question",
             name: faq.question,
             acceptedAnswer: {
@@ -662,17 +708,45 @@ export default async function UniversityDetailsPage({ params }) {
         }
       : null;
 
+  // Turin-only ItemList: mirrors the course cards actually rendered
+  // below (same courses array, absolute canonical URLs, no invented
+  // tuition or admission properties).
+  const turinCourseItems = isTurin
+    ? courses.filter((course) => course?.slug && (course.name || course.title))
+    : [];
+  const turinCourseItemListSchema =
+    isTurin && turinCourseItems.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          "@id": `${canonical}#courses`,
+          about: { "@id": `${canonical}#university` },
+          name: "University of Turin courses",
+          numberOfItems: turinCourseItems.length,
+          itemListElement: turinCourseItems.map((course, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            url: `${SITE_URL}/courses/${university.slug}/${course.slug}`,
+            name: course.name || course.title,
+          })),
+        }
+      : null;
+
   return (
     <>
       <JsonLd data={breadcrumbSchema} />
       <JsonLd data={universitySchema} />
       {milanFaqSchema && <JsonLd data={milanFaqSchema} />}
       {genoaFaqSchema && <JsonLd data={genoaFaqSchema} />}
+      {turinFaqSchema && <JsonLd data={turinFaqSchema} />}
       {milanCourseItemListSchema && (
         <JsonLd data={milanCourseItemListSchema} />
       )}
       {genoaCourseItemListSchema && (
         <JsonLd data={genoaCourseItemListSchema} />
+      )}
+      {turinCourseItemListSchema && (
+        <JsonLd data={turinCourseItemListSchema} />
       )}
       <main className="min-h-screen bg-background">
         <header
@@ -715,8 +789,11 @@ export default async function UniversityDetailsPage({ params }) {
                   ? "University of Milan (La Statale)"
                   : isGenoa
                     ? "University of Genoa (UniGe)"
-                    : university.name}
-                {university.country ? `, ${university.country}` : " in Italy"}
+                    : isTurin
+                      ? "University of Turin (UniTo), Italy"
+                      : university.name}
+                {university.country && !isTurin ? `, ${university.country}` : ""}
+                {!university.country && !isTurin ? " in Italy" : ""}
               </h1>
               {location && (
                 <p className="mt-4 text-lg font-semibold text-white/90">
