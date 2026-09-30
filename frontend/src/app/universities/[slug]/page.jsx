@@ -46,6 +46,15 @@ function buildUniversityDescription(university, courseCount, slug, forSchema) {
       160,
     );
   }
+  if (
+    !forSchema &&
+    (university.slug || slug) === "university-of-genoa"
+  ) {
+    return truncate(
+      "Explore University of Genoa (UniGe), including bachelor's and English-taught courses, 2026 admission dates, fees and scholarships for international students.",
+      160,
+    );
+  }
   if (university.metaDescription?.trim()) {
     const base = truncate(university.metaDescription, 155);
     // Generic factual suffix from existing data; only when it fits.
@@ -85,6 +94,8 @@ function stripBrandSuffix(value) {
 function buildUniversityTitle(university, slug) {
   if ((university.slug || slug) === "university-of-milan")
     return "University of Milan (La Statale): Courses, Fees & Admission";
+  if ((university.slug || slug) === "university-of-genoa")
+    return "University of Genoa (UniGe): Bachelor's & English-Taught Courses";
   if (university.seoTitle?.trim())
     return truncate(stripBrandSuffix(university.seoTitle), 60);
   const name = String(university.name || "").trim();
@@ -639,7 +650,9 @@ export default async function UniversityDetailsPage({ params }) {
               <h1 className="mt-4 font-display text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
                 {isUniversityOfMilan
                   ? "University of Milan (La Statale)"
-                  : university.name}
+                  : isGenoa
+                    ? "University of Genoa (UniGe)"
+                    : university.name}
                 {university.country ? `, ${university.country}` : " in Italy"}
               </h1>
               {location && (
@@ -1175,6 +1188,13 @@ export default async function UniversityDetailsPage({ params }) {
                     science, architecture and design, and economics and
                     data science. This count reflects our database, not
                     the university&apos;s official total.
+                  </p>
+                  <p className="mt-4">
+                    For bachelor&apos;s applicants: our database
+                    currently includes 2 bachelor-level entries for
+                    UniGe, including Computer Engineering at the Imperia
+                    campus — so not every bachelor entry is based in
+                    Genoa city.
                   </p>
                   <p className="mt-4">
                     Browse the course cards below, compare with other{" "}
@@ -1946,6 +1966,254 @@ export default async function UniversityDetailsPage({ params }) {
                       official UniGeApply page
                     </a>{" "}
                     before applying.
+                  </p>
+                </Section>
+              )}
+
+              {isGenoa && (
+                <Section title="University of Genoa Application Deadlines 2026">
+                  <p>
+                    UniGe runs two UniGeApply selections per academic
+                    year with different applicant categories. The dates
+                    below are the verified 2026 admission milestones;
+                    programme-specific calls can have earlier or
+                    different deadlines, so always check the official
+                    call for the exact programme.
+                  </p>
+                  <div className="mt-4 overflow-x-auto">
+                    <table className="w-full min-w-[640px] text-left text-sm">
+                      <thead>
+                        <tr className="border-y border-border bg-background">
+                          <th
+                            scope="col"
+                            className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-foreground"
+                          >
+                            Milestone
+                          </th>
+                          <th
+                            scope="col"
+                            className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-foreground"
+                          >
+                            2026 date
+                          </th>
+                          <th
+                            scope="col"
+                            className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-foreground"
+                          >
+                            Who / what
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-border">
+                        <tr>
+                          <td className="px-5 py-4 font-semibold text-foreground">
+                            Fall selection (UniGeApply, visa applicants)
+                          </td>
+                          <td className="px-5 py-4">
+                            26 November 2025 – 20 March 2026 (CLOSED)
+                          </td>
+                          <td className="px-5 py-4">
+                            Non-EU students residing abroad who require
+                            a visa
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="px-5 py-4 font-semibold text-foreground">
+                            Spring selection, Master&apos;s (UniGeApply,
+                            residents)
+                          </td>
+                          <td className="px-5 py-4">
+                            9 April – 28 August 2026
+                          </td>
+                          <td className="px-5 py-4">
+                            Italian, EU and non-EU students already
+                            regularly resident in Italy
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="px-5 py-4 font-semibold text-foreground">
+                            Spring selection, Bachelor&apos;s and
+                            single-cycle (UniGeApply, residents)
+                          </td>
+                          <td className="px-5 py-4">
+                            9 April – 25 September 2026
+                          </td>
+                          <td className="px-5 py-4">
+                            Italian, EU and non-EU students already
+                            regularly resident in Italy
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <h3 className="mt-6 font-bold text-foreground">
+                    Early closures for selected English-taught
+                    programmes
+                  </h3>
+                  <p className="mt-2">
+                    Some English-taught programmes closed their fall
+                    selection early: Medical-Pharmaceutical
+                    Biotechnology on 13 February 2026, Maritime Science
+                    and Technology on 18 February 2026, and the
+                    bachelor&apos;s in Computer Engineering on 8 March
+                    2026. These dates applied to the 2026 fall
+                    selection only.
+                  </p>
+                  <h3 className="mt-6 font-bold text-foreground">
+                    Application conditions
+                  </h3>
+                  <p className="mt-2">
+                    Applicants can request evaluation for a maximum of
+                    2 courses on UniGeApply. English-taught programmes
+                    require B2 English or an accepted medium-of-
+                    instruction document where applicable, and CEnT,
+                    TOLC, SAT or ACT evidence may apply by programme
+                    with no universal minimum score established here.
+                    Qualifying degrees should generally be completed by
+                    15 August 2026. See our{" "}
+                    <Link
+                      href="/italy-university-admission"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Italy university admission guide
+                    </Link>
+                    ,{" "}
+                    <Link
+                      href="/universitaly"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Universitaly guidance
+                    </Link>{" "}
+                    and{" "}
+                    <Link
+                      href="/italy-student-visa"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Italy student visa guidance
+                    </Link>{" "}
+                    alongside the{" "}
+                    <a
+                      href="https://unige.it/en/internazionale/iscrizioni-internazionali/unigeapply"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      official UniGeApply page
+                    </a>{" "}
+                    and the{" "}
+                    <a
+                      href="https://unige.it/en/international-enrolment"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      official international enrolment page
+                    </a>
+                    .
+                  </p>
+                </Section>
+              )}
+
+              {isGenoa && (
+                <Section title="University of Genoa Tuition Fees">
+                  <p>
+                    The student contribution consists of stamp duty, a
+                    regional tax and a university contribution, paid in
+                    three instalments. The figures below are those shown
+                    on the verified official UniGe fee source.
+                  </p>
+                  <div className="mt-4 overflow-x-auto">
+                    <table className="w-full min-w-[480px] text-left text-sm">
+                      <thead>
+                        <tr className="border-y border-border bg-background">
+                          <th
+                            scope="col"
+                            className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-foreground"
+                          >
+                            Item
+                          </th>
+                          <th
+                            scope="col"
+                            className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-foreground"
+                          >
+                            Verified information
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-border">
+                        <tr>
+                          <td className="px-5 py-4 font-semibold text-foreground">
+                            First instalment on official fee page
+                          </td>
+                          <td className="px-5 py-4">
+                            €136 (€16 stamp duty + €120 regional tax
+                            minimum)
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="px-5 py-4 font-semibold text-foreground">
+                            ALISEO route
+                          </td>
+                          <td className="px-5 py-4">
+                            €16 initial payment under the stated route
+                            for students applying through ALISEO
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="px-5 py-4 font-semibold text-foreground">
+                            Payment structure
+                          </td>
+                          <td className="px-5 py-4">3 instalments</td>
+                        </tr>
+                        <tr>
+                          <td className="px-5 py-4 font-semibold text-foreground">
+                            Income-based calculation
+                          </td>
+                          <td className="px-5 py-4">
+                            ISEE-U / ISEE-U Parificato and contribution
+                            class/group
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="px-5 py-4 font-semibold text-foreground">
+                            2026/27 maximum contribution
+                          </td>
+                          <td className="px-5 py-4">
+                            Verify against the current UniGe regulation
+                            before publishing — 2026/27 maxima are not
+                            stated here
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <p className="mt-4">
+                    Do not read €136 as a total annual tuition fee — it
+                    is the verified first-instalment figure only. See
+                    the{" "}
+                    <a
+                      href="https://unige.it/en/tasse-e-benefici/calcolo-contributo-universitario"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      official UniGe fee calculation page
+                    </a>{" "}
+                    and our{" "}
+                    <Link
+                      href="/cost-of-studying-in-italy"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      cost of studying in Italy guide
+                    </Link>{" "}
+                    and{" "}
+                    <Link
+                      href="/italy-scholarships"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Italy scholarships guidance
+                    </Link>
+                    .
                   </p>
                 </Section>
               )}
