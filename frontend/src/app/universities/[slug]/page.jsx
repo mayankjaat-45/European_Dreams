@@ -35,7 +35,17 @@ function truncate(value, maxLength) {
   return `${text.slice(0, maxLength - 1).trim()}…`;
 }
 
-function buildUniversityDescription(university, courseCount) {
+function buildUniversityDescription(university, courseCount, slug, forSchema) {
+  if (
+    !forSchema &&
+    (university.slug || slug) === "university-of-milan"
+  ) {
+    const count = Number(courseCount) || 35;
+    return truncate(
+      `Explore University of Milan (La Statale), with ${count} courses currently listed in our database, 2026/27 fees, deadlines and scholarships for international students.`,
+      160,
+    );
+  }
   if (university.metaDescription?.trim()) {
     const base = truncate(university.metaDescription, 155);
     // Generic factual suffix from existing data; only when it fits.
@@ -72,7 +82,9 @@ function stripBrandSuffix(value) {
     .trim();
 }
 
-function buildUniversityTitle(university) {
+function buildUniversityTitle(university, slug) {
+  if ((university.slug || slug) === "university-of-milan")
+    return "University of Milan (La Statale): Courses, Fees & Admission";
   if (university.seoTitle?.trim())
     return truncate(stripBrandSuffix(university.seoTitle), 60);
   const name = String(university.name || "").trim();
@@ -101,8 +113,12 @@ export async function generateMetadata({ params }) {
   }
 
   const courseCount = totals.courses ?? courses.length;
-  const title = buildUniversityTitle(university);
-  const description = buildUniversityDescription(university, courseCount);
+  const title = buildUniversityTitle(university, slug);
+  const description = buildUniversityDescription(
+    university,
+    courseCount,
+    slug,
+  );
   const canonical = `${SITE_URL}/universities/${university.slug || slug}`;
   // Site-default OG asset when the university has no hero image.
   const ogImage =
@@ -469,6 +485,8 @@ export default async function UniversityDetailsPage({ params }) {
       description: buildUniversityDescription(
         university,
         totals.courses ?? courses.length,
+        null,
+        true,
       ),
     };
 
@@ -481,9 +499,25 @@ export default async function UniversityDetailsPage({ params }) {
       schema.logo = university.logo.trim();
     }
 
+    if (isUniversityOfMilan) {
+      schema.alternateName = [
+        "Università degli Studi di Milano",
+        "La Statale",
+      ];
+    }
+
     const city = university.city?.trim();
     const region = university.region?.trim();
-    if (city || region) {
+    if (isUniversityOfMilan) {
+      schema.address = {
+        "@type": "PostalAddress",
+        streetAddress: "Via Festa del Perdono, 7",
+        addressLocality: city || "Milan",
+        addressRegion: region || "Lombardy",
+        postalCode: "20122",
+        addressCountry: "IT",
+      };
+    } else if (city || region) {
       const address = {
         "@type": "PostalAddress",
         addressCountry: "Italy",
@@ -500,24 +534,72 @@ export default async function UniversityDetailsPage({ params }) {
     const websiteUrl = (
       university.officialWebsite ||
       university.website ||
+      (isUniversityOfMilan ? "https://www.unimi.it/" : "") ||
       (isGenoa ? "https://unige.it" : "") ||
       (isTurin ? "https://www.unito.it" : "") ||
       (isEasternPiedmont ? "https://www.uniupo.it" : "")
     ).trim();
-    if (websiteUrl) {
+    if (isUniversityOfMilan) {
+      schema.sameAs = ["https://www.unimi.it/"];
+    } else if (websiteUrl) {
       schema.sameAs = websiteUrl;
     }
 
     return schema;
   })();
 
-  // No FAQPage schema: FAQs stay visible only, per task constraints.
-  // CollegeOrUniversity + BreadcrumbList remain the only schemas here.
+  // Milan-only FAQPage: generated from the same visible milanFaqs data
+  // rendered below — no schema-only questions or answers.
+  const milanFaqSchema =
+    isUniversityOfMilan && milanFaqs.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "@id": `${canonical}#faq`,
+          about: { "@id": `${canonical}#university` },
+          mainEntity: milanFaqs.map((faq) => ({
+            "@type": "Question",
+            name: faq.question,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: faq.answer,
+            },
+          })),
+        }
+      : null;
+
+  // Milan-only ItemList: mirrors the course cards actually rendered
+  // below (same courses array, absolute canonical URLs, no invented
+  // tuition or admission properties).
+  const milanCourseItems = isUniversityOfMilan
+    ? courses.filter((course) => course?.slug && (course.name || course.title))
+    : [];
+  const milanCourseItemListSchema =
+    isUniversityOfMilan && milanCourseItems.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          "@id": `${canonical}#courses`,
+          about: { "@id": `${canonical}#university` },
+          name: "University of Milan courses",
+          numberOfItems: milanCourseItems.length,
+          itemListElement: milanCourseItems.map((course, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            url: `${SITE_URL}/courses/${university.slug}/${course.slug}`,
+            name: course.name || course.title,
+          })),
+        }
+      : null;
 
   return (
     <>
       <JsonLd data={breadcrumbSchema} />
       <JsonLd data={universitySchema} />
+      {milanFaqSchema && <JsonLd data={milanFaqSchema} />}
+      {milanCourseItemListSchema && (
+        <JsonLd data={milanCourseItemListSchema} />
+      )}
       <main className="min-h-screen bg-background">
         <header
           className="relative isolate min-h-125 overflow-hidden bg-slate-950 bg-cover bg-center"
@@ -555,7 +637,9 @@ export default async function UniversityDetailsPage({ params }) {
               </div>
 
               <h1 className="mt-4 font-display text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-                {university.name}
+                {isUniversityOfMilan
+                  ? "University of Milan (La Statale)"
+                  : university.name}
                 {university.country ? `, ${university.country}` : " in Italy"}
               </h1>
               {location && (
@@ -589,6 +673,21 @@ export default async function UniversityDetailsPage({ params }) {
                   </p>
                 );
               })()}
+              {isUniversityOfMilan && (
+                <p className="mt-4 max-w-3xl text-base leading-7 text-white/70">
+                  The Università degli Studi di Milano, commonly called
+                  La Statale, is a public university in Milan,
+                  Lombardy, Italy, founded in 1924. Its historic seat
+                  is at Via Festa del Perdono 7, with scientific
+                  faculties in the Città Studi district, and it is a
+                  member of the League of European Research
+                  Universities (LERU) and the 4EU+ European University
+                  Alliance. The university states it offers over 40
+                  English-taught programmes; its 2026/27 first
+                  instalment is €146, with deadlines and scholarships
+                  detailed in the sections below.
+                </p>
+              )}
 
               <div className="mt-8 flex flex-wrap gap-3">
                 <a
@@ -685,6 +784,18 @@ export default async function UniversityDetailsPage({ params }) {
                     </a>
                     .
                   </p>
+                  <p className="mt-4">
+                    QS World University Rankings 2026: #=276. See the{" "}
+                    <a
+                      href="https://www.topuniversities.com/universities/university-milan"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      QS profile for the University of Milan
+                    </a>
+                    .
+                  </p>
                 </Section>
               )}
 
@@ -730,18 +841,100 @@ export default async function UniversityDetailsPage({ params }) {
               )}
 
               {isUniversityOfMilan && (
+                <Section title="University of Milan vs other universities in Milan">
+                  <p>
+                    University of Milan (La Statale) is different from
+                    Politecnico di Milano and the University of
+                    Milano-Bicocca. All three are separate universities
+                    in Milan.
+                  </p>
+                  <div className="mt-4 overflow-x-auto">
+                    <table className="w-full min-w-[480px] text-left text-sm">
+                      <thead>
+                        <tr className="border-y border-border bg-background">
+                          <th
+                            scope="col"
+                            className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-foreground"
+                          >
+                            University
+                          </th>
+                          <th
+                            scope="col"
+                            className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-foreground"
+                          >
+                            Main identity
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-border">
+                        <tr>
+                          <td className="px-5 py-4 font-semibold text-foreground">
+                            University of Milan (La Statale)
+                          </td>
+                          <td className="px-5 py-4">
+                            Broad public university with programmes
+                            across multiple academic areas
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="px-5 py-4 font-semibold text-foreground">
+                            <Link
+                              href="/universities/polytechnic-university-of-milan"
+                              className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                            >
+                              Politecnico di Milano
+                            </Link>
+                          </td>
+                          <td className="px-5 py-4">
+                            Polytechnic university focused on
+                            engineering, architecture and design
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="px-5 py-4 font-semibold text-foreground">
+                            <Link
+                              href="/universities"
+                              className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                            >
+                              University of Milano-Bicocca
+                            </Link>
+                          </td>
+                          <td className="px-5 py-4">
+                            Public university with its own separate
+                            programmes and campuses
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <p className="mt-4">
+                    If you are searching specifically for University of
+                    Milan / La Statale, use the programmes and
+                    application information on this page rather than
+                    results for Politecnico di Milano or
+                    Milano-Bicocca.
+                  </p>
+                </Section>
+              )}
+
+              {isUniversityOfMilan && (
                 <Section title="English-taught programmes at the University of Milan">
                   <p>
-                    The university states it offers over 40
-                    English-taught programmes across Bachelor&apos;s,
-                    Master&apos;s and PhD level, alongside more than 20
-                    double-degree programmes run with international
-                    partner universities. This page lists{" "}
-                    {totals.courses ?? courses.length} English-taught
-                    courses currently in our database — spanning
-                    bachelor&apos;s degrees, single-cycle master&apos;s
-                    degrees such as Medicine and Surgery, and
-                    master&apos;s degrees across science, economics,
+                    The University of Milan states that it offers over 40
+                    English-taught Bachelor&apos;s, Master&apos;s and PhD
+                    programmes, together with more than 20 double-degree
+                    programmes. Our database currently lists{" "}
+                    {totals.courses ?? courses.length} programmes; this is
+                    a subset and not the University&apos;s official total
+                    — spanning bachelor&apos;s degrees, single-cycle
+                    master&apos;s degrees such as{" "}
+                    <Link
+                      href="/medicine-in-italy"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Medicine and Surgery
+                    </Link>
+                    , and master&apos;s degrees across science, economics,
                     humanities and social sciences.
                   </p>
                   <p className="mt-4">
@@ -2565,44 +2758,497 @@ export default async function UniversityDetailsPage({ params }) {
               )}
 
               {isUniversityOfMilan && (
-                <Section title="Tuition fees and scholarships">
+                <Section title="University of Milan application deadlines 2026/27">
                   <p>
-                    Tuition is paid in two instalments: a fixed first
-                    instalment covering the regional tax and stamp duty,
-                    and a variable second instalment. Students whose
-                    household has income and assets in Italy are assessed
-                    through ISEE University; students whose household
-                    earns and holds assets abroad pay a fixed second
-                    instalment based on their country group and tuition
-                    area. Amounts and country groups are reset each
-                    academic year in the official fees regulation.
+                    University of Milan deadlines vary by programme and
+                    applicant category. The dates below are the main
+                    2026/27 milestones verified from official University
+                    of Milan admission and enrolment sources.
+                  </p>
+                  <div className="mt-4 overflow-x-auto">
+                    <table className="w-full min-w-[640px] text-left text-sm">
+                      <thead>
+                        <tr className="border-y border-border bg-background">
+                          <th
+                            scope="col"
+                            className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-foreground"
+                          >
+                            Milestone
+                          </th>
+                          <th
+                            scope="col"
+                            className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-foreground"
+                          >
+                            2026/27 date
+                          </th>
+                          <th
+                            scope="col"
+                            className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-foreground"
+                          >
+                            Who / what
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-border">
+                        <tr>
+                          <td className="px-5 py-4 font-semibold text-foreground">
+                            Open-admission Master&apos;s applications open
+                          </td>
+                          <td className="px-5 py-4">
+                            22 January 2026
+                          </td>
+                          <td className="px-5 py-4">
+                            Open-admission Master&apos;s programmes
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="px-5 py-4 font-semibold text-foreground">
+                            Non-EU admission deadline
+                          </td>
+                          <td className="px-5 py-4">30 April 2026</td>
+                          <td className="px-5 py-4">
+                            Non-EU applicants residing abroad who require
+                            a visa
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="px-5 py-4 font-semibold text-foreground">
+                            Enrolment window opens
+                          </td>
+                          <td className="px-5 py-4">5 May 2026</td>
+                          <td className="px-5 py-4">
+                            Students admitted through the relevant
+                            programme process
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="px-5 py-4 font-semibold text-foreground">
+                            Universitaly pre-enrolment deadline
+                          </td>
+                          <td className="px-5 py-4">31 July 2026</td>
+                          <td className="px-5 py-4">
+                            Non-EU students residing abroad
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="px-5 py-4 font-semibold text-foreground">
+                            Foreign-qualification document completion
+                          </td>
+                          <td className="px-5 py-4">
+                            30 November 2026
+                          </td>
+                          <td className="px-5 py-4">
+                            International enrolments
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <p className="mt-4">
+                    Programme-specific calls can have different
+                    application, test, ranking and enrolment dates.
+                    Always check the official call for the exact
+                    programme. See our{" "}
+                    <Link
+                      href="/italy-university-intakes"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Italy university intakes guide
+                    </Link>
+                    ,{" "}
+                    <Link
+                      href="/italy-university-admission"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Italy university admission guide
+                    </Link>{" "}
+                    and{" "}
+                    <Link
+                      href="/universitaly"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Universitaly guidance
+                    </Link>
+                    . Official sources:{" "}
+                    <a
+                      href="https://www.unimi.it/en/study/bachelor-and-master-study/degree-programme-enrolment/enrolment-masters-programme/open-admission-master-programmes"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      open-admission Master&apos;s programmes
+                    </a>{" "}
+                    and{" "}
+                    <a
+                      href="https://www.unimi.it/en/international/coming-abroad/enrol-programme/international-enrolment-degree-programmes"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      international enrolment
+                    </a>
+                    .
+                  </p>
+                  <h3 className="mt-6 font-bold text-foreground">
+                    Medicine and Dentistry: programme-specific timelines
+                  </h3>
+                  <p className="mt-2">
+                    These Medicine timelines are programme-specific and
+                    should not be treated as general university
+                    deadlines. English-taught International Medical
+                    School (IMS): 60 EU/equivalent + 15 non-EU abroad
+                    places. Universitaly registration: 26 August–9
+                    September 2026, 15:00. IMAT: 29 September 2026 at
+                    13:30. Italian-taught Medicine, Dental Medicine and
+                    Veterinary Medicine follow the 2026/27 open-semester
+                    process rather than the English IMS IMAT route:
+                    open-semester Universitaly registration 13 July–3
+                    August 2026, 18:00; University of Milan enrolment 15
+                    July–6 August 2026, 14:00; exams 10 December 2026
+                    and 11 January 2027. See our{" "}
+                    <Link
+                      href="/medicine-in-italy"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Medicine in Italy guide
+                    </Link>
+                    , the{" "}
+                    <a
+                      href="https://apps.unimi.it/files/bandi/call-2027-1-medicine-and-surgery---international-medical-school-(classe-lm-41-r).pdf?31-AUG-26="
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      official IMS Medicine call
+                    </a>{" "}
+                    and the{" "}
+                    <a
+                      href="https://www.unimi.it/sites/default/files/2026-08/Avviso%20Semestre%20aperto%20Med%20Odonto%20Veterinaria%2026_27%20rev2_EN.pdf"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      official open-semester notice
+                    </a>
+                    .
+                  </p>
+                </Section>
+              )}
+
+              {isUniversityOfMilan && (
+                <Section title="Tuition fees at the University of Milan 2026/27">
+                  <p>
+                    For 2026/27, University of Milan students pay a first
+                    instalment of €146 (€130 regional tax + €16 stamp
+                    duty). The second instalment is calculated according
+                    to the student&apos;s ISEE University, enrolment
+                    status and tuition area; international students with
+                    household income abroad may instead fall under
+                    country-group rules.
+                  </p>
+                  <div className="mt-4 overflow-x-auto">
+                    <table className="w-full min-w-[640px] text-left text-sm">
+                      <thead>
+                        <tr className="border-y border-border bg-background">
+                          <th
+                            scope="col"
+                            className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-foreground"
+                          >
+                            Fee component
+                          </th>
+                          <th
+                            scope="col"
+                            className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-foreground"
+                          >
+                            2026/27
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-border">
+                        <tr>
+                          <td className="px-5 py-4 font-semibold text-foreground">
+                            First instalment
+                          </td>
+                          <td className="px-5 py-4">€146</td>
+                        </tr>
+                        <tr>
+                          <td className="px-5 py-4 font-semibold text-foreground">
+                            Regional tax component
+                          </td>
+                          <td className="px-5 py-4">€130</td>
+                        </tr>
+                        <tr>
+                          <td className="px-5 py-4 font-semibold text-foreground">
+                            Stamp duty
+                          </td>
+                          <td className="px-5 py-4">€16</td>
+                        </tr>
+                        <tr>
+                          <td className="px-5 py-4 font-semibold text-foreground">
+                            Area A maximum, on-track / 1-year off-track
+                          </td>
+                          <td className="px-5 py-4">€3,204</td>
+                        </tr>
+                        <tr>
+                          <td className="px-5 py-4 font-semibold text-foreground">
+                            Area B maximum, on-track / 1-year off-track
+                          </td>
+                          <td className="px-5 py-4">€4,101.12</td>
+                        </tr>
+                        <tr>
+                          <td className="px-5 py-4 font-semibold text-foreground">
+                            Area A maximum, 2+ years off-track
+                          </td>
+                          <td className="px-5 py-4">€4,806</td>
+                        </tr>
+                        <tr>
+                          <td className="px-5 py-4 font-semibold text-foreground">
+                            Area B maximum, 2+ years off-track
+                          </td>
+                          <td className="px-5 py-4">€6,151.68</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <p className="mt-4">
+                    No-tax area: for on-track students and students up
+                    to one year off-track, the second instalment can be
+                    €0 when ISEE University is up to €30,000. Students
+                    two or more years off-track have a €200 minimum
+                    second instalment.
                   </p>
                   <p className="mt-4">
+                    ISEE University should be requested by 10 October
+                    2026. Late requests between 11 October and 31
+                    December 2026 are subject to a €250 penalty; after
+                    31 December the maximum fee may apply. First-year
+                    students entering a biennial Master&apos;s programme
+                    have a separate deadline exception. See the{" "}
+                    <a
+                      href="https://www.unimi.it/en/study/bachelor-and-master-study/fees-and-how-pay-them/isee-certification"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      official ISEE certification page
+                    </a>{" "}
+                    and our{" "}
+                    <Link
+                      href="/cost-of-studying-in-italy"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      cost of studying in Italy guide
+                    </Link>{" "}
+                    and{" "}
+                    <Link
+                      href="/study-in-italy-data-guide"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      2026/27 data guide
+                    </Link>
+                    . Official fee regulation:{" "}
+                    <a
+                      href="https://www.unimi.it/sites/default/files/regolamenti/Regolamento%20tasse%20e%20contributi%202026_2027_EN.pdf"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      2026/27 fees regulation (PDF)
+                    </a>
+                    .
+                  </p>
+                  <h3 className="mt-6 font-bold text-foreground">
+                    Fees for new international students with household
+                    income abroad
+                  </h3>
+                  <p className="mt-2">
+                    For new 2026/27 international students, the
+                    University of Milan uses country groups for
+                    second-instalment amounts.
+                  </p>
+                  <div className="mt-4 overflow-x-auto">
+                    <table className="w-full min-w-[480px] text-left text-sm">
+                      <thead>
+                        <tr className="border-y border-border bg-background">
+                          <th
+                            scope="col"
+                            className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-foreground"
+                          >
+                            Country group
+                          </th>
+                          <th
+                            scope="col"
+                            className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-foreground"
+                          >
+                            Area A
+                          </th>
+                          <th
+                            scope="col"
+                            className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-foreground"
+                          >
+                            Area B
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-border">
+                        <tr>
+                          <td className="px-5 py-4 font-semibold text-foreground">
+                            Group A
+                          </td>
+                          <td className="px-5 py-4">€200</td>
+                          <td className="px-5 py-4">€256</td>
+                        </tr>
+                        <tr>
+                          <td className="px-5 py-4 font-semibold text-foreground">
+                            Group B
+                          </td>
+                          <td className="px-5 py-4">€910</td>
+                          <td className="px-5 py-4">€1,164</td>
+                        </tr>
+                        <tr>
+                          <td className="px-5 py-4 font-semibold text-foreground">
+                            Group C
+                          </td>
+                          <td className="px-5 py-4">€3,204</td>
+                          <td className="px-5 py-4">€4,101.12</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <p className="mt-4">
+                    Regional tax by country group is €130 for Group A,
+                    €160 for Group B and €190 for Group C.
+                    Country-group classification is defined in Annex 2
+                    of the University&apos;s 2026/27 fee regulation.
+                    Students should verify the applicable group for
+                    their country before estimating the fee. See the{" "}
+                    <a
+                      href="https://www.unimi.it/sites/default/files/regolamenti/Regolamento%20tasse%20e%20contributi%202026_2027_EN.pdf"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      official 2026/27 fee regulation (PDF)
+                    </a>
+                    .
+                  </p>
+                </Section>
+              )}
+
+              {isUniversityOfMilan && (
+                <Section title="Scholarships at the University of Milan 2026/27">
+                  <p>
                     International students can access the same
-                    need-and-merit benefits as Italian students,
-                    including DSU regional scholarships funded by the
-                    Lombardy Region and the Ministry of University and
-                    Research, which combine a grant with canteen access
-                    and exempt winners from the second instalment. The
-                    university also runs Excellence Scholarships for top
-                    international entrants to master&apos;s programmes,
-                    European Futures scholarships for EU students on
-                    master&apos;s programmes, and MAECI and MUR-CRUI
-                    opportunities for eligible groups. See our{" "}
+                    need-and-merit benefits as Italian students where
+                    eligible. Amounts, eligibility and calls change every
+                    academic year, so always verify the current official
+                    call before applying.
+                  </p>
+                  <div className="mt-4 overflow-x-auto">
+                    <table className="w-full min-w-[640px] text-left text-sm">
+                      <thead>
+                        <tr className="border-y border-border bg-background">
+                          <th
+                            scope="col"
+                            className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-foreground"
+                          >
+                            Scholarship
+                          </th>
+                          <th
+                            scope="col"
+                            className="px-5 py-3 text-xs font-bold uppercase tracking-wide text-foreground"
+                          >
+                            2026/27 verified information
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-border">
+                        <tr>
+                          <td className="px-5 py-4 font-semibold text-foreground">
+                            DSU Lombardia
+                          </td>
+                          <td className="px-5 py-4">
+                            Regional scholarship; international students
+                            eligible subject to call requirements;
+                            benefits vary by student status
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="px-5 py-4 font-semibold text-foreground">
+                            University scholarships
+                          </td>
+                          <td className="px-5 py-4">
+                            1,055 scholarships × €1,800
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="px-5 py-4 font-semibold text-foreground">
+                            European Futures
+                          </td>
+                          <td className="px-5 py-4">
+                            30 scholarships × €10,000; EU-country
+                            residents entering eligible Master&apos;s
+                            programmes
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="px-5 py-4 font-semibold text-foreground">
+                            MAECI
+                          </td>
+                          <td className="px-5 py-4">
+                            2026/27 call closed 26 March 2026
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <p className="mt-4">
+                    2026/27 DSU benefits vary by student category; the
+                    official call reports overall amounts ranging from
+                    €2,143 to €8,248, with additional mobility support
+                    under the call rules. DSU applications are due 30
+                    September 2026, 23:59; students seeking
+                    accommodation under the DSU call should note the 7
+                    August 2026 date. See our{" "}
                     <Link
                       href="/italy-scholarships"
                       className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
                     >
                       Italy scholarships guidance
                     </Link>{" "}
-                    and the university&apos;s{" "}
+                    and{" "}
+                    <Link
+                      href="/living-in-italy-for-students"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      living in Italy guide
+                    </Link>
+                    . Official sources:{" "}
                     <a
-                      href="https://www.unimi.it/en/international/coming-abroad/fees-scholarships-and-opportunities"
+                      href="https://www.unimi.it/en/study/financial-support/regional-scholarships"
                       target="_blank"
                       rel="noreferrer"
                       className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
                     >
-                      official fees and scholarships page
+                      regional scholarships
+                    </a>
+                    ,{" "}
+                    <a
+                      href="https://www.unimi.it/en/study/financial-support/university-scholarships"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      university scholarships
+                    </a>{" "}
+                    and{" "}
+                    <a
+                      href="https://www.unimi.it/en/study/financial-support/international-scholarships"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      international scholarships
                     </a>
                     .
                   </p>
@@ -2633,13 +3279,20 @@ export default async function UniversityDetailsPage({ params }) {
                       className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
                     >
                       Study in Italy guide
-                    </Link>{" "}
-                    and{" "}
+                    </Link>
+                    ,{" "}
                     <Link
                       href="/italy-student-visa"
                       className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
                     >
                       Italy student visa guidance
+                    </Link>{" "}
+                    and{" "}
+                    <Link
+                      href="/living-in-italy-for-students"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      living in Italy guide
                     </Link>{" "}
                     cover these steps in more depth.
                   </p>
@@ -2649,6 +3302,27 @@ export default async function UniversityDetailsPage({ params }) {
               {isUniversityOfMilan && (
                 <Section title="Applying to the University of Milan from India">
                   <p>
+                    For Indian applicants, the application route depends
+                    on the programme and applicant category.
+                    International applicants should follow the
+                    University&apos;s programme-specific admission call,
+                    then complete the required{" "}
+                    <Link
+                      href="/universitaly"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      Universitaly
+                    </Link>{" "}
+                    and{" "}
+                    <Link
+                      href="/italy-student-visa"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      visa steps
+                    </Link>{" "}
+                    when applicable.
+                  </p>
+                  <p className="mt-4">
                     Applicants applying from India follow the non-EU
                     resident-abroad pathway: an admission application on
                     apply.unimi.it, a single-choice pre-enrolment
