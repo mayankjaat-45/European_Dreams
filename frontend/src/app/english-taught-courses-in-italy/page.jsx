@@ -1140,7 +1140,12 @@ export default function EnglishTaughtCoursesPage() {
                       scope="row"
                       className="px-5 py-4 font-semibold text-[var(--foreground)]"
                     >
-                      University of Milan
+                      <Link
+                        href="/universities/university-of-milan"
+                        className="font-semibold text-[var(--primary)] hover:underline"
+                      >
+                        University of Milan
+                      </Link>
                     </th>
                     <td className="px-5 py-4 text-[var(--muted-foreground)]">
                       Per-course B1/B2 with certificate-or-test model
