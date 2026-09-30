@@ -7,7 +7,7 @@ const SITE_URL = "https://www.europeandreamss.com";
 const CANONICAL = `${SITE_URL}/study-in-italy`;
 
 export const metadata = {
-  title: "Study in Italy for Indian Students | Universities, Admission & Visa",
+  title: "Study in Italy for Indian Students 2026/27 | Fees & Visa",
   description:
     "Study in Italy for Indian students. Explore Italian universities, English-taught courses, admission requirements, scholarships, tuition fees, application process and student visa guidance.",
   alternates: {
@@ -18,7 +18,7 @@ export const metadata = {
     follow: true,
   },
   openGraph: {
-    title: "Study in Italy for Indian Students | Universities, Admission & Visa",
+    title: "Study in Italy for Indian Students 2026/27 | Fees & Visa",
     description:
       "Study in Italy for Indian students. Explore Italian universities, English-taught courses, admission requirements, scholarships, tuition fees, application process and student visa guidance.",
     url: CANONICAL,
@@ -28,7 +28,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Study in Italy for Indian Students | Universities, Admission & Visa",
+    title: "Study in Italy for Indian Students 2026/27 | Fees & Visa",
     description:
       "Study in Italy for Indian students. Explore Italian universities, English-taught courses, admission requirements, scholarships, tuition fees, application process and student visa guidance.",
   },
@@ -56,7 +56,7 @@ const webPageSchema = {
   "@type": "WebPage",
   "@id": `${CANONICAL}#webpage`,
   url: CANONICAL,
-  name: "Study in Italy for Indian Students | Universities, Admission & Visa",
+  name: "Study in Italy for Indian Students 2026/27 | Fees & Visa",
   description:
     "Guide for Indian students planning to study in Italy: universities, courses, admission, Universitaly pre-enrolment, costs, scholarships and student visa.",
   isPartOf: { "@id": `${SITE_URL}/#website` },
@@ -280,6 +280,7 @@ const tocGroups = [
     label: "Money",
     links: [
       { label: "Costs", href: "#costs" },
+      { label: "Accommodation", href: "#accommodation" },
       { label: "Scholarships", href: "#scholarships" },
     ],
   },
@@ -325,6 +326,11 @@ export default function StudyInItalyPage() {
                 Italy — universities, English-taught courses, admission
                 requirements, application steps, Universitaly pre-enrolment,
                 tuition costs, scholarships and the student visa process.
+                Long-stay study generally requires a Type D national visa;
+                after graduation a job-search residence permit (attesa
+                occupazione, generally up to 12 months subject to current
+                rules) may be available, and public-university tuition commonly
+                depends on declared family income (ISEE).
               </p>
               <p className="mt-3 max-w-2xl text-xs leading-5 text-[var(--muted-foreground)] sm:text-sm sm:leading-6">
                 Universities, admission, costs, scholarships, visa and 2026/27
@@ -503,6 +509,85 @@ export default function StudyInItalyPage() {
                 Read the admission guide
               </Link>
             </article>
+          </div>
+          <div className="mx-auto mt-6 max-w-3xl overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)]">
+            <table className="w-full text-left text-sm">
+              <caption className="px-5 pb-3 pt-5 text-left font-bold text-[var(--foreground)]">
+                Quick facts — details and sources in each section below
+              </caption>
+              <tbody className="divide-y divide-[var(--border)]">
+                <tr>
+                  <th
+                    scope="row"
+                    className="px-5 py-3 font-semibold text-[var(--foreground)]"
+                  >
+                    Capital / currency
+                  </th>
+                  <td className="px-5 py-3 text-[var(--muted-foreground)]">
+                    Rome / euro (€)
+                  </td>
+                </tr>
+                <tr>
+                  <th
+                    scope="row"
+                    className="px-5 py-3 font-semibold text-[var(--foreground)]"
+                  >
+                    Main intakes
+                  </th>
+                  <td className="px-5 py-3 text-[var(--muted-foreground)]">
+                    September (main) and February (limited) — varies by
+                    university and programme
+                  </td>
+                </tr>
+                <tr>
+                  <th
+                    scope="row"
+                    className="px-5 py-3 font-semibold text-[var(--foreground)]"
+                  >
+                    Student visa
+                  </th>
+                  <td className="px-5 py-3 text-[var(--muted-foreground)]">
+                    Type D long-stay national visa for courses over 90 days
+                  </td>
+                </tr>
+                <tr>
+                  <th
+                    scope="row"
+                    className="px-5 py-3 font-semibold text-[var(--foreground)]"
+                  >
+                    Work while studying
+                  </th>
+                  <td className="px-5 py-3 text-[var(--muted-foreground)]">
+                    Up to 20 hours per week, subject to residence-permit
+                    conditions
+                  </td>
+                </tr>
+                <tr>
+                  <th
+                    scope="row"
+                    className="px-5 py-3 font-semibold text-[var(--foreground)]"
+                  >
+                    After graduation
+                  </th>
+                  <td className="px-5 py-3 text-[var(--muted-foreground)]">
+                    Job-search residence permit (attesa occupazione), generally
+                    up to 12 months subject to current rules
+                  </td>
+                </tr>
+                <tr>
+                  <th
+                    scope="row"
+                    className="px-5 py-3 font-semibold text-[var(--foreground)]"
+                  >
+                    Tuition basis
+                  </th>
+                  <td className="px-5 py-3 text-[var(--muted-foreground)]">
+                    Public-university fees commonly depend on declared family
+                    income (ISEE)
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </section>
 
@@ -785,6 +870,26 @@ export default function StudyInItalyPage() {
                 a portfolio, motivation letter, CV or entrance examination.
               </p>
             </article>
+          </div>
+          <div className="mx-auto mt-6 max-w-3xl rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5">
+            <h3 className="font-bold text-[var(--foreground)]">
+              Documents Indian applicants commonly prepare
+            </h3>
+            <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-6 text-[var(--muted-foreground)]">
+              <li>Statement of purpose (SOP) tailored to the programme.</li>
+              <li>Letters of recommendation (LORs), usually for postgraduate applications.</li>
+              <li>Academic CV or résumé; portfolio where the programme specifies it.</li>
+              <li>
+                Qualification recognition: a CIMEA Statement of Comparability
+                or Verification, or a Declaration of Value (DoV) from the
+                competent Italian mission — requirements vary by university and
+                programme, and some require neither.
+              </li>
+            </ul>
+            <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
+              No checklist is universal — confirm the exact document list in
+              your programme&apos;s official call before applying.
+            </p>
           </div>
           <div className="mx-auto mt-6 grid max-w-5xl gap-4 sm:grid-cols-2">
             <article className="rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5">
@@ -1280,6 +1385,77 @@ export default function StudyInItalyPage() {
           </div>
         </section>
 
+        {/* Accommodation */}
+        <section
+          id="accommodation"
+          className="mx-auto max-w-7xl scroll-mt-[104px] px-4 py-10 sm:px-6 lg:px-8 lg:py-14"
+        >
+          <SectionHeading
+            eyebrow="Housing"
+            title="Student Accommodation in Italy"
+            intro="Where you live shapes your budget more than any other choice. Options and availability differ by city and university — arrange housing early."
+          />
+          <div className="mx-auto mt-8 grid max-w-5xl gap-4 sm:grid-cols-3">
+            <article className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5 sm:p-6">
+              <h3 className="text-lg font-bold text-[var(--foreground)]">
+                University dormitories
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
+                Student residences run by universities or regional student-aid
+                bodies, usually the most affordable option where available —
+                places are limited and allocated per each residence&apos;s own
+                rules.
+              </p>
+            </article>
+            <article className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5 sm:p-6">
+              <h3 className="text-lg font-bold text-[var(--foreground)]">
+                Shared accommodation
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
+                Shared apartments with other students, the most common
+                arrangement in larger cities — confirm what is included
+                (utilities, internet, registration support) before signing.
+              </p>
+            </article>
+            <article className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5 sm:p-6">
+              <h3 className="text-lg font-bold text-[var(--foreground)]">
+                Private accommodation
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
+                Private studios or apartments, generally the highest-cost
+                option — larger cities typically cost more than smaller
+                university towns, and a written rental agreement also supports
+                the visa and residence-permit file.
+              </p>
+            </article>
+          </div>
+          <p className="mx-auto mt-5 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
+            Regional DSU bodies may also offer student housing subject to
+            availability under their own calls — see our{" "}
+            <Link
+              href="/italy-scholarships"
+              className="font-semibold text-[var(--primary)] hover:underline"
+            >
+              Italy scholarships guide
+            </Link>
+            . Compare living-cost tiers in our{" "}
+            <Link
+              href="/cost-of-studying-in-italy#location-matters"
+              className="font-semibold text-[var(--primary)] hover:underline"
+            >
+              city cost guide
+            </Link>{" "}
+            and arrival essentials in our{" "}
+            <Link
+              href="/living-in-italy-for-students"
+              className="font-semibold text-[var(--primary)] hover:underline"
+            >
+              living in Italy for students guide
+            </Link>
+            .
+          </p>
+        </section>
+
         {/* Scholarships */}
         <section
           id="scholarships"
@@ -1501,7 +1677,7 @@ export default function StudyInItalyPage() {
             <SectionHeading
               eyebrow="Visa"
               title="Italy Student Visa for Indian Students"
-              intro="The visa stage follows admission and pre-enrolment. Visa issuance is decided by the competent Italian authorities — prepare carefully and verify current requirements."
+              intro="The visa stage follows admission and pre-enrolment. For courses over 90 days, Indian students apply for a Type D long-stay national visa. Visa issuance is decided by the competent Italian authorities — prepare carefully and verify current requirements."
             />
             <ol className="mx-auto mt-8 max-w-3xl space-y-3">
               {[
@@ -1586,14 +1762,31 @@ export default function StudyInItalyPage() {
                     Italy student visa guide for Indian students
                   </Link>{" "}
                   and{" "}
-                  <Link
-                    href="/visa-checklists"
-                    className="font-semibold text-[var(--primary)] hover:underline"
-                  >
-                    jurisdiction-wise visa document checklists
-                  </Link>
-                  .
-                </li>
+                    <Link
+                      href="/visa-checklists"
+                      className="font-semibold text-[var(--primary)] hover:underline"
+                    >
+                      jurisdiction-wise visa document checklists
+                    </Link>
+                    .
+                  </li>
+                  <li>
+                    <span className="font-semibold text-[var(--foreground)]">
+                      VFS Global channel:
+                    </span>{" "}
+                    In India, applications are lodged through VFS Global centres
+                    acting for the competent mission — see the{" "}
+                    <a
+                      href="https://visa.vfsglobal.com/ind/en/ita/book-an-appointment"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-semibold text-[var(--primary)] hover:underline"
+                    >
+                      official VFS appointment page
+                    </a>
+                    . Slots fill up in peak intake season, so confirm your
+                    jurisdiction and book early.
+                  </li>
                 <li>
                   <span className="font-semibold text-[var(--foreground)]">
                     CIMEA vs Declaration of Value (DOV):
@@ -1662,8 +1855,10 @@ export default function StudyInItalyPage() {
                 After graduation
               </h3>
               <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
-                Graduates may be able to explore post-study stay and employment
-                routes under current immigration rules. Nothing is automatic:
+                Graduates may be able to apply for a residence permit for
+                job-search purposes (permesso di soggiorno per attesa
+                occupazione), generally up to 12 months subject to current
+                immigration rules. Nothing is automatic:
                 eligibility depends on the individual case, and rules can
                 change, so verify with official Italian authorities. No
                 employment or residence outcome can be promised.
