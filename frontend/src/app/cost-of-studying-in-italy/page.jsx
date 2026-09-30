@@ -572,7 +572,12 @@ export default function CostOfStudyingInItalyPage() {
                     scope="row"
                     className="px-5 py-4 font-semibold text-[var(--foreground)]"
                   >
-                    University of Milan
+                    <Link
+                      href="/universities/university-of-milan"
+                      className="font-semibold text-[var(--primary)] hover:underline"
+                    >
+                      University of Milan
+                    </Link>
                   </th>
                   <td className="px-5 py-4 text-[var(--muted-foreground)]">
                     First instalment €146 (€130 regional tax + €16 stamp).

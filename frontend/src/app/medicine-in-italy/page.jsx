@@ -541,8 +541,15 @@ export default function MedicineInItalyPage() {
             >
               Dental Medicine at the University of Milan
             </Link>
-            .
-          </p>
+            . See also the{" "}
+            <Link
+              href="/universities/university-of-milan"
+              className="font-semibold text-[var(--primary)] hover:underline"
+            >
+              University of Milan
+            </Link>{" "}
+            for its programmes, fees and admission.
+            </p>
         </section>
 
         {/* IMAT */}
