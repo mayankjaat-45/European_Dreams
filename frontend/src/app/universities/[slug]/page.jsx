@@ -515,6 +515,11 @@ export default async function UniversityDetailsPage({ params }) {
         "Università degli Studi di Milano",
         "La Statale",
       ];
+    } else if (isGenoa) {
+      schema.alternateName = [
+        "Università degli Studi di Genova",
+        "UniGe",
+      ];
     }
 
     const city = university.city?.trim();
@@ -526,6 +531,14 @@ export default async function UniversityDetailsPage({ params }) {
         addressLocality: city || "Milan",
         addressRegion: region || "Lombardy",
         postalCode: "20122",
+        addressCountry: "IT",
+      };
+    } else if (isGenoa) {
+      schema.address = {
+        "@type": "PostalAddress",
+        streetAddress: "Via Balbi 5",
+        addressLocality: city || "Genoa",
+        addressRegion: region || "Liguria",
         addressCountry: "IT",
       };
     } else if (city || region) {
@@ -552,6 +565,8 @@ export default async function UniversityDetailsPage({ params }) {
     ).trim();
     if (isUniversityOfMilan) {
       schema.sameAs = ["https://www.unimi.it/"];
+    } else if (isGenoa) {
+      schema.sameAs = ["https://unige.it/en/"];
     } else if (websiteUrl) {
       schema.sameAs = websiteUrl;
     }
@@ -569,6 +584,26 @@ export default async function UniversityDetailsPage({ params }) {
           "@id": `${canonical}#faq`,
           about: { "@id": `${canonical}#university` },
           mainEntity: milanFaqs.map((faq) => ({
+            "@type": "Question",
+            name: faq.question,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: faq.answer,
+            },
+          })),
+        }
+      : null;
+
+  // Genoa-only FAQPage: generated from the same visible genoaFaqs data
+  // rendered below — no schema-only questions or answers.
+  const genoaFaqSchema =
+    isGenoa && genoaFaqs.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "@id": `${canonical}#faq`,
+          about: { "@id": `${canonical}#university` },
+          mainEntity: genoaFaqs.map((faq) => ({
             "@type": "Question",
             name: faq.question,
             acceptedAnswer: {
@@ -603,13 +638,41 @@ export default async function UniversityDetailsPage({ params }) {
         }
       : null;
 
+  // Genoa-only ItemList: mirrors the course cards actually rendered
+  // below (same courses array, absolute canonical URLs, no invented
+  // tuition or admission properties).
+  const genoaCourseItems = isGenoa
+    ? courses.filter((course) => course?.slug && (course.name || course.title))
+    : [];
+  const genoaCourseItemListSchema =
+    isGenoa && genoaCourseItems.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          "@id": `${canonical}#courses`,
+          about: { "@id": `${canonical}#university` },
+          name: "University of Genoa courses",
+          numberOfItems: genoaCourseItems.length,
+          itemListElement: genoaCourseItems.map((course, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            url: `${SITE_URL}/courses/${university.slug}/${course.slug}`,
+            name: course.name || course.title,
+          })),
+        }
+      : null;
+
   return (
     <>
       <JsonLd data={breadcrumbSchema} />
       <JsonLd data={universitySchema} />
       {milanFaqSchema && <JsonLd data={milanFaqSchema} />}
+      {genoaFaqSchema && <JsonLd data={genoaFaqSchema} />}
       {milanCourseItemListSchema && (
         <JsonLd data={milanCourseItemListSchema} />
+      )}
+      {genoaCourseItemListSchema && (
+        <JsonLd data={genoaCourseItemListSchema} />
       )}
       <main className="min-h-screen bg-background">
         <header
