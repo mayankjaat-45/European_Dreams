@@ -2611,6 +2611,75 @@ export default async function UniversityDetailsPage({ params }) {
               )}
 
               {isTurin && (
+                <Section title="Key application deadlines (2026-27)">
+                  <p>
+                    Verified windows for 2026-27 entry on Apply@UniTo.
+                    Application calls, eligible applicant categories and
+                    dates change every academic year and differ by
+                    programme, so always verify the current call before
+                    applying.
+                  </p>
+                  <div className="mt-4 overflow-x-auto">
+                    <table className="w-full border-collapse text-sm">
+                      <thead>
+                        <tr>
+                          <th className="border border-border px-3 py-2 text-left font-bold text-foreground">
+                            Application route
+                          </th>
+                          <th className="border border-border px-3 py-2 text-left font-bold text-foreground">
+                            2026-27 window
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td className="border border-border px-3 py-2">
+                            Postgraduate programmes on Apply@UniTo
+                          </td>
+                          <td className="border border-border px-3 py-2">
+                            25 November 2025 – 29 January 2026
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="border border-border px-3 py-2">
+                            Undergraduate and 5–6 year programmes on
+                            Apply@UniTo
+                          </td>
+                          <td className="border border-border px-3 py-2">
+                            19 February – 15 April 2026
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="border border-border px-3 py-2">
+                            Universitaly visa pre-enrolment for non-EU
+                            students residing abroad
+                          </td>
+                          <td className="border border-border px-3 py-2">
+                            By 15 July 2026
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <p className="mt-4">
+                    Later calls in the year are reserved for Italians, EU
+                    citizens and residents, so non-EU applicants residing
+                    abroad should treat the windows above as their
+                    deadlines. Confirm every date on the{" "}
+                    <a
+                      href="https://en.unito.it/studying-unito/international-degree-seeking-students/application-international-students"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-primary transition hover:text-primary-hover hover:underline"
+                    >
+                      official international application page
+                    </a>{" "}
+                    before applying.
+                  </p>
+                </Section>
+              )}
+
+              {isTurin && (
                 <Section title="International and non-EU admission">
                   <p>
                     Non-EU students residing abroad who need a study
@@ -2695,6 +2764,149 @@ export default async function UniversityDetailsPage({ params }) {
                       official tuition fees page
                     </a>
                     .
+                  </p>
+                  <p className="mt-4">
+                    For 2026-27 the university sets the first instalment
+                    at €156 in every GDP-PPP band — the €16 stamp duty
+                    plus the €140 regional tax above. For students
+                    resident abroad, up to the 2nd year of enrolment
+                    beyond the nominal duration, the remaining
+                    instalments depend on the GDP per capita (PPP) band
+                    of the country of residence:
+                  </p>
+                  <div className="mt-4 overflow-x-auto">
+                    <table className="w-full border-collapse text-sm">
+                      <thead>
+                        <tr>
+                          <th className="border border-border px-3 py-2 text-left font-bold text-foreground">
+                            Instalment
+                          </th>
+                          <th className="border border-border px-3 py-2 text-left font-bold text-foreground">
+                            GDP-PPP up to €26,000
+                          </th>
+                          <th className="border border-border px-3 py-2 text-left font-bold text-foreground">
+                            GDP-PPP €26,000.01 – €34,000
+                          </th>
+                          <th className="border border-border px-3 py-2 text-left font-bold text-foreground">
+                            GDP-PPP €34,000.01 – €40,000
+                          </th>
+                          <th className="border border-border px-3 py-2 text-left font-bold text-foreground">
+                            GDP-PPP €40,000.01 – €50,000
+                          </th>
+                          <th className="border border-border px-3 py-2 text-left font-bold text-foreground">
+                            GDP-PPP €50,000.01 – €60,000
+                          </th>
+                          <th className="border border-border px-3 py-2 text-left font-bold text-foreground">
+                            GDP-PPP over €60,000
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td className="border border-border px-3 py-2 font-bold text-foreground">
+                            1st instalment
+                          </td>
+                          <td className="border border-border px-3 py-2">
+                            €156
+                          </td>
+                          <td className="border border-border px-3 py-2">
+                            €156
+                          </td>
+                          <td className="border border-border px-3 py-2">
+                            €156
+                          </td>
+                          <td className="border border-border px-3 py-2">
+                            €156
+                          </td>
+                          <td className="border border-border px-3 py-2">
+                            €156
+                          </td>
+                          <td className="border border-border px-3 py-2">
+                            €156
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="border border-border px-3 py-2 font-bold text-foreground">
+                            2nd instalment
+                          </td>
+                          <td className="border border-border px-3 py-2">
+                            €300
+                          </td>
+                          <td className="border border-border px-3 py-2">
+                            €300
+                          </td>
+                          <td className="border border-border px-3 py-2">
+                            €300
+                          </td>
+                          <td className="border border-border px-3 py-2">
+                            €300
+                          </td>
+                          <td className="border border-border px-3 py-2">
+                            €400
+                          </td>
+                          <td className="border border-border px-3 py-2">
+                            €500
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="border border-border px-3 py-2 font-bold text-foreground">
+                            3rd instalment
+                          </td>
+                          <td className="border border-border px-3 py-2">
+                            €200
+                          </td>
+                          <td className="border border-border px-3 py-2">
+                            €200
+                          </td>
+                          <td className="border border-border px-3 py-2">
+                            €200
+                          </td>
+                          <td className="border border-border px-3 py-2">
+                            €300
+                          </td>
+                          <td className="border border-border px-3 py-2">
+                            €300
+                          </td>
+                          <td className="border border-border px-3 py-2">
+                            €500
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="border border-border px-3 py-2 font-bold text-foreground">
+                            4th instalment
+                          </td>
+                          <td className="border border-border px-3 py-2">
+                            —
+                          </td>
+                          <td className="border border-border px-3 py-2">
+                            €100
+                          </td>
+                          <td className="border border-border px-3 py-2">
+                            €200
+                          </td>
+                          <td className="border border-border px-3 py-2">
+                            €200
+                          </td>
+                          <td className="border border-border px-3 py-2">
+                            €300
+                          </td>
+                          <td className="border border-border px-3 py-2">
+                            €500
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <p className="mt-4">
+                    The 2026-27 reduction request is due by 20 November
+                    2026, with a €150 penalty for requests made by 26
+                    February 2027; different instalment amounts apply
+                    from the 3rd year of enrolment beyond the nominal
+                    duration. The applicable band follows the country of
+                    residence declared in MyUniTo, and bands and amounts
+                    change yearly — verify the current contribution
+                    regulation and simulator on the official tuition fees
+                    page before paying.
                   </p>
                 </Section>
               )}
