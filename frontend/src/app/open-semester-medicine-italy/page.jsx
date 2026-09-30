@@ -11,9 +11,9 @@ const UNIVERSITALY_STUDENTS_URL =
 
 export const metadata = {
   title:
-    "Italy Open Semester 2026/27 for Indian Students | Medicine, Exams & Ranking",
+    "Italy Open Semester 2026/27: Medicine Guide for Indian Students",
   description:
-    "Italy open semester 2026/27 for Italian-taught Medicine, Dentistry and Veterinary: enrolment, 3 exams, 18/30 threshold, national ranking, deadlines, non-EU process and NEET/NMC considerations for Indian students.",
+    "Italy open semester 2026/27 for Italian-taught Medicine: enrolment, 3 exams, 18/30 threshold, ranking, deadlines and NEET/NMC notes for Indian students.",
   alternates: {
     canonical: CANONICAL,
   },
@@ -23,9 +23,9 @@ export const metadata = {
   },
   openGraph: {
     title:
-      "Italy Open Semester 2026/27 for Indian Students | Medicine, Exams & Ranking",
+      "Italy Open Semester 2026/27: Medicine Guide for Indian Students",
     description:
-      "Italy open semester 2026/27 for Italian-taught Medicine, Dentistry and Veterinary: enrolment, 3 exams, 18/30 threshold, national ranking, deadlines, non-EU process and NEET/NMC considerations for Indian students.",
+      "Italy open semester 2026/27 for Italian-taught Medicine: enrolment, 3 exams, 18/30 threshold, ranking, deadlines and NEET/NMC notes for Indian students.",
     url: CANONICAL,
     siteName: "European Dreams",
     type: "website",
@@ -34,9 +34,9 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title:
-      "Italy Open Semester 2026/27 for Indian Students | Medicine, Exams & Ranking",
+      "Italy Open Semester 2026/27: Medicine Guide for Indian Students",
     description:
-      "Italy open semester 2026/27 for Italian-taught Medicine, Dentistry and Veterinary: enrolment, 3 exams, 18/30 threshold, national ranking, deadlines, non-EU process and NEET/NMC considerations for Indian students.",
+      "Italy open semester 2026/27 for Italian-taught Medicine: enrolment, 3 exams, 18/30 threshold, ranking, deadlines and NEET/NMC notes for Indian students.",
   },
 };
 
@@ -116,6 +116,11 @@ const faqs = [
     question: "How does the national ranking work?",
     answer:
       "The ranking has three ordered sections: students with three valid exams (≥18/30 each) are placed with 300 points plus the sum of their grades; two valid exams with 200 points plus the sum; one valid exam with 100 points plus the grade. A higher section always outranks a lower one. Ties are broken by disability status, then younger age, then higher exam average. Students admitted with one or two valid exams must recover the missing credits before second-semester enrolment.",
+  },
+  {
+    question: "Does completing the Open Semester guarantee admission to Medicine?",
+    answer:
+      "No. Enrolment in the semester is free, but Italian-taught Medicine, Dentistry and Veterinary places remain capped. After the national exams, separate EU/residents and non-EU-abroad merit rankings admit students to the second semester strictly by ranking position and available places. Completing lessons and sitting the exams only makes you rankable — it reserves no place.",
   },
   {
     question: "When is the ranking published and what happens next?",
@@ -254,6 +259,23 @@ export default function OpenSemesterMedicineItalyPage() {
             </div>
           </div>
         </section>
+
+        {/* Verified for 2026/27 */}
+        <div className="border-b border-[var(--border)] bg-[var(--background)]">
+          <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-3xl rounded-xl border border-[var(--border)] bg-[var(--card)] px-4 py-3">
+              <p className="text-sm font-bold text-[var(--foreground)]">
+                Verified for 2026/27
+              </p>
+              <p className="mt-1 text-sm leading-6 text-[var(--muted-foreground)]">
+                This guide was reviewed against MUR Decree D.M. 941/2026 and
+                the official 2026/27 admission notices. Key dates, exam rules,
+                ranking mechanics and eligibility details were checked against
+                official sources.
+              </p>
+            </div>
+          </div>
+        </div>
 
         {/* Direct answer */}
         <section

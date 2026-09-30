@@ -620,6 +620,14 @@ export default function UniversitalyPage() {
                     <td className="px-5 py-4 text-[var(--muted-foreground)]">
                       Set per institution and programme, often earlier than
                       the national date — these are the binding deadlines.
+                      Track them in our{" "}
+                      <Link
+                        href="/italy-university-intakes"
+                        className="font-semibold text-[var(--primary)] hover:underline"
+                      >
+                        Italy university application deadlines
+                      </Link>{" "}
+                      guide.
                     </td>
                   </tr>
                   <tr>
