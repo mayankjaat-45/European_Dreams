@@ -731,7 +731,9 @@ export default function StudyInItalyPage() {
               (the equivalent indicator used where family income and assets
               are outside Italy, where applicable) → Universitaly pre-enrolment → Student visa →
               Travel → Residence formalities (permesso di soggiorno) after
-              arrival.
+              arrival. Requirements vary by university and programme at each
+              stage — use the detailed guides below rather than any single
+              generic checklist.
             </p>
             <div className="mx-auto mt-5 flex max-w-3xl flex-wrap justify-center gap-2 text-sm">
               <Link href="/universities" className="font-semibold text-[var(--primary)] hover:underline">
@@ -742,16 +744,44 @@ export default function StudyInItalyPage() {
                 Browse courses
               </Link>
               <span aria-hidden="true" className="text-[var(--muted-foreground)]">·</span>
+              <Link href="/english-taught-courses-in-italy" className="font-semibold text-[var(--primary)] hover:underline">
+                Explore English-taught options
+              </Link>
+              <span aria-hidden="true" className="text-[var(--muted-foreground)]">·</span>
               <Link href="/italy-university-admission" className="font-semibold text-[var(--primary)] hover:underline">
-                Check admission steps
+                See the Italy university admission guide
+              </Link>
+              <span aria-hidden="true" className="text-[var(--muted-foreground)]">·</span>
+              <Link href="/cost-of-studying-in-italy" className="font-semibold text-[var(--primary)] hover:underline">
+                Compare Italy tuition and living costs
+              </Link>
+              <span aria-hidden="true" className="text-[var(--muted-foreground)]">·</span>
+              <Link href="/italy-scholarships" className="font-semibold text-[var(--primary)] hover:underline">
+                Explore scholarships for international students
+              </Link>
+              <span aria-hidden="true" className="text-[var(--muted-foreground)]">·</span>
+              <Link href="/italy-university-intakes" className="font-semibold text-[var(--primary)] hover:underline">
+                Check the latest university intake deadlines
               </Link>
               <span aria-hidden="true" className="text-[var(--muted-foreground)]">·</span>
               <Link href="/universitaly" className="font-semibold text-[var(--primary)] hover:underline">
-                Universitaly guide
+                Understand the Universitaly process
               </Link>
               <span aria-hidden="true" className="text-[var(--muted-foreground)]">·</span>
               <Link href="/italy-student-visa" className="font-semibold text-[var(--primary)] hover:underline">
-                Visa guide
+                Review Italy student visa requirements
+              </Link>
+              <span aria-hidden="true" className="text-[var(--muted-foreground)]">·</span>
+              <Link href="/living-in-italy-for-students" className="font-semibold text-[var(--primary)] hover:underline">
+                Living in Italy for students
+              </Link>
+              <span aria-hidden="true" className="text-[var(--muted-foreground)]">·</span>
+              <Link href="/medicine-in-italy" className="font-semibold text-[var(--primary)] hover:underline">
+                Medicine in Italy for Indian students
+              </Link>
+              <span aria-hidden="true" className="text-[var(--muted-foreground)]">·</span>
+              <Link href="/study-in-italy-data-guide" className="font-semibold text-[var(--primary)] hover:underline">
+                Study in Italy data guide
               </Link>
             </div>
           </div>
