@@ -201,6 +201,11 @@ const faqs = [
     answer:
       "IMAT (International Medical Admissions Test) is an admission test used for certain English-taught Medicine and Surgery routes in Italy when the relevant programme's call requires it. It is not a universal requirement for every Italian degree — always check whether your specific programme and intake uses IMAT or another selection route.",
   },
+  {
+    question: "How much CGPA is required to study in Italy?",
+    answer:
+      "There is no single CGPA cutoff for studying in Italy. Admission requirements are set by the individual university and programme and may consider your previous qualification, subjects, grades, entrance tests or interviews, and language requirements. Check the official admission call for your chosen programme for the applicable academic requirements.",
+  },
 ];
 
 const faqSchema = {
