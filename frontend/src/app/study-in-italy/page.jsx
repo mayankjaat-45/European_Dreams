@@ -225,15 +225,15 @@ function SectionHeading({ eyebrow, title, intro }) {
   return (
     <div className="mx-auto max-w-3xl text-center">
       {eyebrow && (
-        <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--primary)]">
+        <p className="text-sm font-bold uppercase tracking-[0.18em] text-[var(--primary)]">
           {eyebrow}
         </p>
       )}
-      <h2 className="mt-2 text-2xl font-bold tracking-tight text-[var(--foreground)] sm:text-3xl">
+      <h2 className="mt-3 text-3xl font-bold tracking-tight text-[var(--foreground)] sm:text-4xl">
         {title}
       </h2>
       {intro && (
-        <p className="mt-3 text-sm leading-6 text-[var(--muted-foreground)] sm:text-base sm:leading-7">
+        <p className="mt-4 leading-7 text-[var(--muted-foreground)]">
           {intro}
         </p>
       )}
@@ -249,7 +249,7 @@ function CtaButton({ href, children, variant = "primary" }) {
   return (
     <Link
       href={href}
-      className={`inline-flex min-h-12 items-center justify-center rounded-xl px-6 py-3 text-sm font-bold transition sm:text-base ${styles}`}
+      className={`inline-flex min-h-12 items-center justify-center rounded-xl px-7 py-3 font-bold transition ${styles}`}
     >
       {children}
     </Link>
@@ -315,18 +315,20 @@ export default function StudyInItalyPage() {
       <JsonLd data={webPageSchema} />
       <JsonLd data={faqSchema} />
       <main className="min-h-screen bg-[var(--background)]">
-        {/* 1. Hero — compact, premium, fast */}
-        <section className="border-b border-[var(--border)] bg-[var(--hero-gradient)]">
-          <div className="mx-auto max-w-7xl px-4 pb-10 pt-8 sm:px-6 sm:pb-12 sm:pt-10 lg:px-8">
+        {/* 1. Hero */}
+        <section className="relative overflow-hidden border-b border-[var(--border)] bg-[var(--hero-gradient)]">
+          <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[var(--primary)]/10 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-32 -left-24 h-72 w-72 rounded-full bg-[var(--primary)]/10 blur-3xl" />
+          <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
             <Breadcrumbs items={breadcrumbItems} />
-            <div className="mt-5 max-w-3xl">
-              <span className="mb-3 inline-flex rounded-full border border-[var(--primary)]/20 bg-[var(--primary)]/10 px-3 py-1 text-xs font-semibold text-[var(--primary)] sm:text-sm">
+            <div className="mt-7 max-w-3xl">
+              <span className="mb-4 inline-flex rounded-full border border-[var(--primary)]/20 bg-[var(--primary)]/10 px-4 py-1.5 text-sm font-semibold text-[var(--primary)]">
                 Guide for the 2026/27 and 2027 intakes
               </span>
-              <h1 className="text-3xl font-bold tracking-tight text-[var(--foreground)] sm:text-4xl lg:text-5xl">
+              <h1 className="text-4xl font-bold tracking-tight text-[var(--foreground)] sm:text-5xl lg:text-6xl">
                 Study in Italy for Indian Students
               </h1>
-              <p className="mt-3 max-w-2xl text-sm leading-6 text-[var(--muted-foreground)] sm:text-base sm:leading-7">
+              <p className="mt-5 max-w-2xl text-base leading-7 text-[var(--muted-foreground)] sm:text-lg">
                 Everything Indian students need to plan higher education in
                 Italy — universities, English-taught courses, admission
                 requirements, application steps, Universitaly pre-enrolment,
@@ -341,7 +343,7 @@ export default function StudyInItalyPage() {
                 Universities, admission, costs, scholarships, visa and 2026/27
                 planning — with official sources cited throughout.
               </p>
-              <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <div className="mt-8 flex flex-wrap gap-4">
                 <CtaButton href="/universities">Explore Universities</CtaButton>
                 <CtaButton href="/courses" variant="secondary">
                   Explore Courses
@@ -350,9 +352,6 @@ export default function StudyInItalyPage() {
                   Get Free Consultation
                 </CtaButton>
               </div>
-              <p className="mt-4 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--muted-foreground)]">
-                Last updated: September 2026
-              </p>
             </div>
           </div>
         </section>
@@ -390,7 +389,10 @@ export default function StudyInItalyPage() {
         {/* How to use this guide */}
         <section className="border-b border-[var(--border)] bg-[var(--card)]">
           <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-            <h2 className="text-lg font-bold text-[var(--foreground)]">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--muted-foreground)]">
+              Last updated: September 2026
+            </p>
+            <h2 className="mt-2 text-lg font-bold text-[var(--foreground)]">
               How to use this guide
             </h2>
             <p className="mt-2 max-w-3xl text-sm leading-6 text-[var(--muted-foreground)]">
@@ -414,7 +416,7 @@ export default function StudyInItalyPage() {
         {/* 2. At a glance — verified facts only */}
         <section
           aria-label="Study in Italy at a glance"
-          className="mx-auto max-w-7xl scroll-mt-[104px] px-4 py-10 sm:px-6 lg:px-8 lg:py-14"
+          className="mx-auto max-w-7xl scroll-mt-[104px] px-4 py-14 sm:px-6 lg:px-8 lg:py-20"
         >
           <SectionHeading
             eyebrow="At a glance"
@@ -599,7 +601,7 @@ export default function StudyInItalyPage() {
         {/* 3. Why study in Italy */}
         <section
           id="why-italy"
-          className="mx-auto max-w-7xl scroll-mt-[104px] px-4 py-10 sm:px-6 lg:px-8 lg:py-14"
+          className="mx-auto max-w-7xl scroll-mt-[104px] px-4 py-14 sm:px-6 lg:px-8 lg:py-20"
         >
           <SectionHeading
             eyebrow="Why Italy"
@@ -702,7 +704,7 @@ export default function StudyInItalyPage() {
           id="journey"
           className="scroll-mt-[104px] border-y border-[var(--border)] bg-[var(--card)]"
         >
-          <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
+          <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
             <SectionHeading
               eyebrow="From India to Italy"
               title="Study in Italy from India: the Overall Journey"
@@ -795,7 +797,7 @@ export default function StudyInItalyPage() {
         {/* Universities */}
         <section
           id="universities"
-          className="mx-auto max-w-7xl scroll-mt-[104px] px-4 py-10 sm:px-6 lg:px-8 lg:py-14"
+          className="mx-auto max-w-7xl scroll-mt-[104px] px-4 py-14 sm:px-6 lg:px-8 lg:py-20"
         >
           <SectionHeading
             eyebrow="Universities"
@@ -814,7 +816,7 @@ export default function StudyInItalyPage() {
           id="courses"
           className="scroll-mt-[104px] border-y border-[var(--border)] bg-[var(--card)]"
         >
-          <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
+          <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
             <SectionHeading
               eyebrow="Programmes"
               title="Courses to Study in Italy"
@@ -859,7 +861,7 @@ export default function StudyInItalyPage() {
         {/* Admission requirements */}
         <section
           id="admission"
-          className="mx-auto max-w-7xl scroll-mt-[104px] px-4 py-10 sm:px-6 lg:px-8 lg:py-14"
+          className="mx-auto max-w-7xl scroll-mt-[104px] px-4 py-14 sm:px-6 lg:px-8 lg:py-20"
         >
           <SectionHeading
             eyebrow="Eligibility"
@@ -1052,7 +1054,7 @@ export default function StudyInItalyPage() {
         {/* Medicine in Italy */}
         <section
           id="medicine"
-          className="mx-auto max-w-7xl scroll-mt-[104px] px-4 py-10 sm:px-6 lg:px-8 lg:py-14"
+          className="mx-auto max-w-7xl scroll-mt-[104px] px-4 py-14 sm:px-6 lg:px-8 lg:py-20"
         >
           <SectionHeading
             eyebrow="Medicine"
@@ -1152,7 +1154,7 @@ export default function StudyInItalyPage() {
           id="how-to-apply"
           className="scroll-mt-[104px] border-y border-[var(--border)] bg-[var(--card)]"
         >
-          <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
+          <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
             <SectionHeading
               eyebrow="Application process"
               title="How to Apply to Italian Universities"
@@ -1205,7 +1207,7 @@ export default function StudyInItalyPage() {
         {/* Universitaly */}
         <section
           id="universitaly"
-          className="mx-auto max-w-7xl scroll-mt-[104px] px-4 py-10 sm:px-6 lg:px-8 lg:py-14"
+          className="mx-auto max-w-7xl scroll-mt-[104px] px-4 py-14 sm:px-6 lg:px-8 lg:py-20"
         >
           <SectionHeading
             eyebrow="Pre-enrolment"
@@ -1245,7 +1247,7 @@ export default function StudyInItalyPage() {
           id="costs"
           className="scroll-mt-[104px] border-y border-[var(--border)] bg-[var(--card)]"
         >
-          <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
+          <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
             <SectionHeading
               eyebrow="Tuition and living costs"
               title="Cost of Studying in Italy"
@@ -1423,7 +1425,7 @@ export default function StudyInItalyPage() {
         {/* Accommodation */}
         <section
           id="accommodation"
-          className="mx-auto max-w-7xl scroll-mt-[104px] px-4 py-10 sm:px-6 lg:px-8 lg:py-14"
+          className="mx-auto max-w-7xl scroll-mt-[104px] px-4 py-14 sm:px-6 lg:px-8 lg:py-20"
         >
           <SectionHeading
             eyebrow="Housing"
@@ -1494,7 +1496,7 @@ export default function StudyInItalyPage() {
         {/* Scholarships */}
         <section
           id="scholarships"
-          className="mx-auto max-w-7xl scroll-mt-[104px] px-4 py-10 sm:px-6 lg:px-8 lg:py-14"
+          className="mx-auto max-w-7xl scroll-mt-[104px] px-4 py-14 sm:px-6 lg:px-8 lg:py-20"
         >
           <SectionHeading
             eyebrow="Funding"
@@ -1708,7 +1710,7 @@ export default function StudyInItalyPage() {
           id="visa"
           className="scroll-mt-[104px] border-y border-[var(--border)] bg-[var(--card)]"
         >
-          <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
+          <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
             <SectionHeading
               eyebrow="Visa"
               title="Italy Student Visa for Indian Students"
@@ -1865,7 +1867,7 @@ export default function StudyInItalyPage() {
         {/* Work and post-study */}
         <section
           id="work"
-          className="mx-auto max-w-7xl scroll-mt-[104px] px-4 py-10 sm:px-6 lg:px-8 lg:py-14"
+          className="mx-auto max-w-7xl scroll-mt-[104px] px-4 py-14 sm:px-6 lg:px-8 lg:py-20"
         >
           <SectionHeading
             eyebrow="Careers"
@@ -1928,7 +1930,7 @@ export default function StudyInItalyPage() {
         {/* Intakes and deadlines */}
         <section
           id="intakes"
-          className="mx-auto max-w-7xl scroll-mt-[104px] px-4 py-10 sm:px-6 lg:px-8 lg:py-14"
+          className="mx-auto max-w-7xl scroll-mt-[104px] px-4 py-14 sm:px-6 lg:px-8 lg:py-20"
         >
           <SectionHeading
             eyebrow="Planning"
@@ -2159,7 +2161,7 @@ export default function StudyInItalyPage() {
         {/* Deadline tracker */}
         <section
           id="deadlines"
-          className="mx-auto max-w-7xl scroll-mt-[104px] px-4 py-10 sm:px-6 lg:px-8 lg:py-14"
+          className="mx-auto max-w-7xl scroll-mt-[104px] px-4 py-14 sm:px-6 lg:px-8 lg:py-20"
         >
           <SectionHeading
             eyebrow="What to track"
@@ -2381,7 +2383,7 @@ export default function StudyInItalyPage() {
           id="english-taught"
           className="scroll-mt-[104px] border-y border-[var(--border)] bg-[var(--card)]"
         >
-          <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
+          <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
             <SectionHeading
               eyebrow="Language of instruction"
               title="English-Taught Courses in Italy"
@@ -2434,7 +2436,7 @@ export default function StudyInItalyPage() {
         {/* Popular universities */}
         <section
           id="popular-universities"
-          className="mx-auto max-w-7xl scroll-mt-[104px] px-4 py-10 sm:px-6 lg:px-8 lg:py-14"
+          className="mx-auto max-w-7xl scroll-mt-[104px] px-4 py-14 sm:px-6 lg:px-8 lg:py-20"
         >
           <SectionHeading
             eyebrow="Popular choices"
@@ -2446,7 +2448,7 @@ export default function StudyInItalyPage() {
               <Link
                 key={university.href}
                 href={university.href}
-                className="group flex flex-col rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5 transition hover:-translate-y-0.5 hover:border-[var(--primary)]/40 hover:shadow-lg sm:p-6"
+                className="group flex flex-col rounded-3xl border border-[var(--border)] bg-[var(--card)] p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-[var(--primary)]/40 hover:shadow-xl"
               >
                 <h3 className="text-lg font-bold text-[var(--foreground)] transition group-hover:text-[var(--primary)]">
                   {university.name}
@@ -2472,7 +2474,7 @@ export default function StudyInItalyPage() {
           id="steps"
           className="scroll-mt-[104px] border-y border-[var(--border)] bg-[var(--card)]"
         >
-          <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
+          <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
             <SectionHeading
               eyebrow="Your roadmap"
               title="Study in Italy Step-by-Step"
@@ -2513,7 +2515,7 @@ export default function StudyInItalyPage() {
           id="mistakes"
           className="scroll-mt-[104px] border-b border-[var(--border)] bg-[var(--card)]"
         >
-          <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
+          <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
             <SectionHeading
               eyebrow="Avoidable errors"
               title="Common Mistakes Indian Students Make When Planning to Study in Italy"
@@ -2565,18 +2567,18 @@ export default function StudyInItalyPage() {
         {/* FAQ — accessible accordion, SSR content */}
         <section
           id="faq"
-          className="mx-auto max-w-7xl scroll-mt-[104px] px-4 py-10 sm:px-6 lg:px-8 lg:py-14"
+          className="mx-auto max-w-7xl scroll-mt-[104px] px-4 py-14 sm:px-6 lg:px-8 lg:py-20"
         >
           <SectionHeading
             eyebrow="FAQ"
             title="Study in Italy: Frequently Asked Questions"
           />
-          <div className="mx-auto mt-8 max-w-3xl space-y-3">
+          <div className="mx-auto mt-10 max-w-3xl space-y-4">
             {faqs.map((faq, index) => (
               <details
                 key={faq.question}
                 open={index === 0}
-                className="group rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5 open:shadow-sm"
+                className="group rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6 open:shadow-sm"
               >
                 <summary className="cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden">
                   <span className="flex items-start justify-between gap-3">
@@ -2699,7 +2701,7 @@ export default function StudyInItalyPage() {
             </p>
           </div>
 
-          <div className="mt-8 rounded-2xl bg-[var(--foreground)] px-6 py-8 text-center text-[var(--background)] sm:px-10 sm:py-10">
+          <div className="mx-auto mt-12 max-w-3xl rounded-3xl bg-[var(--foreground)] px-6 py-10 text-center text-[var(--background)] sm:px-10">
             <h2 className="text-xl font-bold sm:text-2xl">
               Ready to start your study in Italy journey?
             </h2>
@@ -2707,7 +2709,7 @@ export default function StudyInItalyPage() {
               Get personalised guidance on universities, courses, applications,
               scholarships and the Italy student visa.
             </p>
-            <div className="mt-5 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap">
+            <div className="mt-7 flex flex-wrap justify-center gap-4">
               <CtaButton href="/contact">Book a free consultation</CtaButton>
               <CtaButton href="/universities" variant="secondary">
                 Explore universities
