@@ -1752,9 +1752,21 @@ export default function StudyInItalyPage() {
               <p className="mt-3 text-sm leading-6 text-[var(--muted-foreground)]">
                 Missions commonly also ask for financial evidence,
                 accommodation evidence and other supporting documents alongside
-                admission and pre-enrolment proof. There is no single universal
-                minimum — thresholds and accepted evidence are set by the
-                mission. Prepare with our{" "}
+                admission and pre-enrolment proof. For the 2026/27 and 2027/28
+                procedures, the Ministry sets the student-visa proof of means
+                at €10,179.85 per year from lawful, traceable sources (
+                <a
+                  href="https://consmelbourne.esteri.it/en/news/dal_consolato/2026/06/visa-procedures-for-international-students"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-[var(--primary)] hover:underline"
+                >
+                  national procedure
+                </a>
+                ). This is a visa evidence threshold, not a universal estimate
+                of your actual annual living costs. Check your responsible
+                Italian mission&apos;s current checklist for the documents used
+                to demonstrate those funds. Prepare with our{" "}
                 <Link
                   href="/visa-checklists"
                   className="font-semibold text-[var(--primary)] hover:underline"
@@ -1940,12 +1952,15 @@ export default function StudyInItalyPage() {
           <div className="mx-auto mt-8 max-w-5xl overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)]">
             <div className="bg-[var(--card)] px-5 py-4">
               <h3 className="font-bold text-[var(--foreground)]">
-                Deadlines at a glance — 2026/27 verified examples
+                Deadlines at a glance — 2026/27 verified examples (past
+                windows)
               </h3>
               <p className="mt-1 text-xs leading-5 text-[var(--muted-foreground)]">
                 Each row is one institution&apos;s 2026/27 position — never an
-                Italy-wide rule. Your course, level and applicant category can
-                carry different dates — always read the current call.
+                Italy-wide rule. These application windows have now closed and
+                are retained for reference only. Your course, level and
+                applicant category can carry different dates — always read the
+                current call.
               </p>
             </div>
             <div className="overflow-x-auto">
@@ -2094,8 +2109,9 @@ export default function StudyInItalyPage() {
             </div>
             <p className="border-t border-[var(--border)] px-5 py-4 text-xs leading-5 text-[var(--muted-foreground)]">
               All examples are 2026/27 editions verified on the linked official
-              pages. Your course, level and applicant category can carry
-              different dates — always read the current call.
+              pages. These university application windows are now past. Your
+              course, level and applicant category can carry different dates
+              — always read the current call.
             </p>
           </div>
           <div className="mx-auto mt-5 max-w-3xl rounded-2xl border border-amber-200 bg-amber-50 p-4 sm:p-5 dark:border-amber-900/30 dark:bg-amber-950/20">
@@ -2130,13 +2146,16 @@ export default function StudyInItalyPage() {
                     30 November 2026
                   </a>
                 </span>{" "}
-                — the latest date by which visa applications for 2026/27
-                ordinary degree courses (Bachelor&apos;s, Master&apos;s,
-                single-cycle) may be submitted under the current national
-                procedure. This is a final ceiling, not a university application
-                deadline. Institutions may require far earlier dates, and this
-                date does not create extra time beyond the university&apos;s
-                own deadline.
+                — the national 2026/27 visa application ceiling: the latest date
+                by which visa applications for 2026/27 ordinary degree courses
+                (Bachelor&apos;s, Master&apos;s, single-cycle) may be submitted
+                under the national procedure. For 2027/28 degree programmes the
+                national visa application ceiling is 31 October 2027. These are
+                final ceilings, not university application deadlines.
+                Universities may require far earlier action, and these dates do
+                not create extra time beyond the university&apos;s own
+                deadline. 2027/28 university calls and Universitaly timings are
+                announced separately.
               </li>
             </ul>
           </div>
@@ -2171,11 +2190,12 @@ export default function StudyInItalyPage() {
           <div className="mx-auto mt-8 max-w-5xl overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)]">
             <div className="bg-[var(--card)] px-5 py-4">
               <h3 className="font-bold text-[var(--foreground)]">
-                Verified 2026/27 examples — intake/year labelled
+                Verified 2026/27 examples — intake/year labelled (past windows)
               </h3>
               <p className="mt-1 text-xs leading-5 text-[var(--muted-foreground)]">
-                Each row is one programme&apos;s position for 2026/27 only.
-                Programme and university calls define the binding date for that
+                Each row is one programme&apos;s position for 2026/27 only, and
+                these windows have now closed. Programme and university calls
+                define the binding date for that
                 intake — do not treat any row as applying to all universities.
               </p>
             </div>
@@ -2321,9 +2341,11 @@ export default function StudyInItalyPage() {
             </div>
             <p className="border-t border-[var(--border)] px-5 py-4 text-xs leading-5 text-[var(--muted-foreground)]">
               All rows are verified 2026/27 examples from the linked official
-              university pages. The national visa-related date of 30 November
-              2026 is a separate visa ceiling and is not a university
-              application deadline.
+              university pages; these application windows are now past. The
+              national visa-related ceilings — 30 November 2026 for 2026/27 and
+              31 October 2027 for 2027/28 degree programmes — are separate visa
+              ceilings and are not university
+              application deadlines.
             </p>
           </div>
           <div className="mx-auto mt-5 max-w-3xl rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5">
