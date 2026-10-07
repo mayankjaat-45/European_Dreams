@@ -104,7 +104,7 @@ const processSteps = [
   },
   {
     title: "Complete Universitaly pre-enrolment when required",
-    text: "Students who need a visa generally submit pre-enrolment on the Universitaly portal after admission, for the university to validate.",
+    text: "Students who need a visa generally submit pre-enrolment on the Universitaly portal of the Italian Ministry of University and Research (MUR — Ministero dell’Università e della Ricerca) after admission, for the university to validate.",
   },
   {
     title: "Prepare your visa documents",
@@ -171,7 +171,7 @@ const faqs = [
   {
     question: "How long does the Italy student visa take?",
     answer:
-      "Timelines vary by mission, season and case. For example, published consulate guidance notes that long-stay decisions can take up to 90 days from receipt, longer if additional documents are requested. Apply as early as your mission allows — no timeline can be guaranteed.",
+      "Published consulate guidance notes that long-stay decisions can take up to 90 days from receipt, longer if additional documents are requested. Timelines vary by mission, season and case. Apply as early as your mission allows — no timeline can be guaranteed.",
   },
   {
     question: "Can I work while studying in Italy?",
@@ -773,7 +773,16 @@ export default function ItalyStudentVisaPage() {
               >
                 cost of studying in Italy guide
               </Link>
-              .
+              . Scholarship proof follows the applicable checklist rules;
+              admission or a scholarship does not replace the visa decision.
+              See the{" "}
+              <Link
+                href="/italy-scholarships"
+                className="font-semibold text-[var(--primary)] hover:underline"
+              >
+                Italy scholarships guide
+              </Link>{" "}
+              for current scholarship calls and eligibility.
             </p>
           </div>
         </section>

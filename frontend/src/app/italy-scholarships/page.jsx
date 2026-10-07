@@ -875,7 +875,8 @@ export default function ItalyScholarshipsPage() {
                   Universitaly pre-enrolment
                 </strong>{" "}
                 — after admission, visa-seeking students submit pre-enrolment
-                on the official Universitaly portal. It is independent of any
+                on the official Universitaly portal of the Italian Ministry of
+                University and Research (MUR — Ministero dell’Università e della Ricerca). It is independent of any
                 scholarship outcome.
               </p>
               <p className="rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5">

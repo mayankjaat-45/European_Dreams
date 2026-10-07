@@ -380,7 +380,7 @@ export default function EnglishTaughtCoursesPage() {
               <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
                 Degrees delivered entirely in English from lectures to
                 examinations — the category this guide focuses on, and the
-                one the Universitaly language filter is built to find.
+                one the language filter on Universitaly, the Italian Ministry of University and Research portal (MUR — Ministero dell’Università e della Ricerca), is built to find.
               </p>
             </article>
             <article className="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-6">
@@ -895,7 +895,7 @@ export default function EnglishTaughtCoursesPage() {
             <SectionHeading
               eyebrow="Without IELTS"
               title="Can Indian Students Study in Italy Without IELTS?"
-              intro="What ΓÇ£study in Italy without IELTSΓÇ¥ really means for Indian students ΓÇö documented routes, not blanket exemptions."
+              intro="What “study in Italy without IELTS” really means for Indian students — documented routes, not blanket exemptions."
             />
             <div className="mx-auto mt-8 max-w-3xl rounded-2xl border border-[var(--border)] bg-[var(--background)] p-6">
               <p className="text-sm leading-6 text-[var(--muted-foreground)]">
@@ -919,9 +919,9 @@ export default function EnglishTaughtCoursesPage() {
                   For its relevant Master&apos;s foreign-qualification route,
                   a Bachelor&apos;s degree taught in English for at least 3
                   years can qualify for exemption from English certification
-                  ΓÇö but a certified university document is required, and it
+                  — but a certified university document is required, and it
                   must confirm that at least 75% of the courses were taught
-                  in English. IELTS ΓëÑ6 is otherwise one accepted
+                  in English. IELTS ≥6 is otherwise one accepted
                   certification route for that Master&apos;s admission
                   context.{" "}
                   <OfficialLink href="https://www.polimi.it/en/prospective-students/how-to-apply/admission-to-laurea-magistrale/foreign-qualification/application/list-of-documents-required-by-the-admissions-office">
@@ -932,7 +932,7 @@ export default function EnglishTaughtCoursesPage() {
                 <p className="mt-3 text-sm leading-6 text-[var(--muted-foreground)]">
                   Bologna and Turin also have programme-dependent
                   English-medium routes where their official sources
-                  explicitly support them ΓÇö Bologna&apos;s DHDK Master&apos;s
+                  explicitly support them — Bologna&apos;s DHDK Master&apos;s
                   page lists a Bachelor&apos;s or Master&apos;s with English
                   as medium of instruction as one way to meet B2, and Turin
                   states some programmes accept a university certificate
@@ -941,7 +941,7 @@ export default function EnglishTaughtCoursesPage() {
                   <OfficialLink href="https://corsi.unibo.it/2cycle/DigitalHumanitiesKnowledge/english-language-requirement-for-admission">
                     Bologna DHDK English requirement
                   </OfficialLink>
-                  {" ┬╖ "}
+                  {" · "}
                   <OfficialLink href="https://en.unito.it/studying-unito/international-degree-seeking-students/faqs/language-requirements">
                     Turin language-requirements FAQ
                   </OfficialLink>
@@ -954,7 +954,7 @@ export default function EnglishTaughtCoursesPage() {
                 </h3>
                 <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
                   MOI means proof from the previous institution that the
-                  relevant education was delivered in English ΓÇö but acceptance
+                  relevant education was delivered in English — but acceptance
                   depends on the specific university and programme. Check
                   whether your call requires a particular certificate, a
                   certified institutional document, a percentage of coursework
@@ -965,7 +965,7 @@ export default function EnglishTaughtCoursesPage() {
                   Sapienza&apos;s documented waiver list is a good cautionary
                   example: it covers specific qualifications and
                   MOI-country nationalities (UK, US, Canada, Ireland,
-                  Australia, New Zealand) ΓÇö India is not on its listed
+                  Australia, New Zealand) — India is not on its listed
                   MOI-country nationality waiver, so Indian applicants should
                   not assume that waiver applies to them.{" "}
                   <OfficialLink href="https://www.uniroma1.it/sites/default/files/field_file_allegati/language_requirements_sapienza_2026.pdf">
@@ -984,7 +984,7 @@ export default function EnglishTaughtCoursesPage() {
                   route, while its relevant Master&apos;s foreign-qualification
                   route centres on certified English testing unless the
                   documented 3-year/75% English-medium exemption applies.
-                  Treat this as one university&apos;s example ΓÇö always check
+                  Treat this as one university&apos;s example — always check
                   the call for your exact level and programme.{" "}
                   <OfficialLink href="https://www.polimi.it/en/students/language-requirements/students-of-an-english-language-laurea-study-programme">
                     Polimi Bachelor&apos;s language requirements
@@ -1000,7 +1000,7 @@ export default function EnglishTaughtCoursesPage() {
               <p className="mx-auto mt-2 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
                 How the IELTS requirement and English-medium options compare
                 across documented routes. There is no verified list of
-                &ldquo;Italy universities without IELTS&rdquo; ΓÇö check each
+                &ldquo;Italy universities without IELTS&rdquo; — check each
                 call.
               </p>
             </div>
@@ -1052,11 +1052,11 @@ export default function EnglishTaughtCoursesPage() {
                       Master&apos;s foreign-qualification route
                     </td>
                     <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                      Listed certificates including IELTS ΓëÑ6
+                      Listed certificates including IELTS ≥6
                     </td>
                     <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                      Exempt with Bachelor&apos;s taught in English ΓëÑ3 years
-                      plus certified document confirming ΓëÑ75% courses in
+                      Exempt with Bachelor&apos;s taught in English ≥3 years
+                      plus certified document confirming ≥75% courses in
                       English
                     </td>
                     <td className="px-5 py-4">
@@ -1093,7 +1093,7 @@ export default function EnglishTaughtCoursesPage() {
                       scope="row"
                       className="px-5 py-4 font-semibold text-[var(--foreground)]"
                     >
-                      University of Bologna ΓÇö DHDK Master&apos;s example
+                      University of Bologna — DHDK Master&apos;s example
                     </th>
                     <td className="px-5 py-4 text-[var(--muted-foreground)]">
                       Programme example, not a university-wide rule
@@ -1119,7 +1119,7 @@ export default function EnglishTaughtCoursesPage() {
                       University of Turin
                     </th>
                     <td className="px-5 py-4 text-[var(--muted-foreground)]">
-                      Programme-dependent ΓÇö check Apply@UniTo
+                      Programme-dependent — check Apply@UniTo
                     </td>
                     <td className="px-5 py-4 text-[var(--muted-foreground)]">
                       Listed certificates including IELTS where the programme
@@ -1180,17 +1180,19 @@ export default function EnglishTaughtCoursesPage() {
               </h3>
               <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
                 The Indian mission checklists treat language separately from
-                admission: for an English-taught course they provide for
+                admission: university admission MOI rules and visa-checklist
+                MOI wording are separate requirements; meeting one does not
+                automatically satisfy the other. For an English-taught course they provide for
                 B2-level English certification or an equivalent Medium of
                 Education (MOI) declaration from the previous Higher Education
                 Institution. So do not tell Indian students the visa
-                universally requires IELTS ΓÇö while remembering the
+                universally requires IELTS — while remembering the
                 university&apos;s own call can still require IELTS or another
                 recognized certificate.{" "}
                 <OfficialLink href="https://conscalcutta.esteri.it/wp-content/uploads/2026/06/checklist-studio-2026-2027-2028-INDIA.pdf">
                   Kolkata 2026-27/2027-28 checklist (PDF)
                 </OfficialLink>
-                {" ┬╖ "}
+                {" · "}
                 <OfficialLink href="https://assets.ctfassets.net/xxg4p8gt3sg6/1ZYRulWbCqUIuOwoUJxnqK/585138aa7caa983f43ea2a35e2af188d/checklist_studio__2026_2027_2028_Italy_in_INDIA._Rev_India_16.06.pdf">
                   New Delhi 2026-27/2027-28 checklist (PDF)
                 </OfficialLink>
@@ -1206,7 +1208,7 @@ export default function EnglishTaughtCoursesPage() {
             <SectionHeading
               eyebrow="Your sequence"
               title="Indian Student Application Flow for English Courses"
-              intro="Nine stages from research to arrival."
+              intro="Eight stages from research to arrival."
             />
             <ol className="mx-auto mt-10 max-w-3xl space-y-4">
               {applicationFlow.map((step, index) => (

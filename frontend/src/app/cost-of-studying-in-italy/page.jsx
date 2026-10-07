@@ -148,12 +148,12 @@ const faqs = [
   {
     question: "How much does it cost to study in Italy?",
     answer:
-      "It depends on your institution, programme, city and lifestyle. As current official guidance, public universities generally fall around €900–€4,000 per year, private institutions around €6,000–€20,000+ per year, and students typically spend €700–€1,100 per month on living costs. These are indicative ranges, not fixed prices — confirm your exact figures officially.",
+      "As current official guidance, public universities generally fall around €900–€4,000 per year, private institutions around €6,000–€20,000+ per year, and students typically spend €700–€1,100 per month on living costs. It depends on your institution, programme, city and lifestyle. These are indicative ranges, not fixed prices — confirm your exact figures officially.",
   },
   {
     question: "What are Italy university fees for international students?",
     answer:
-      "Fees are set per institution and programme, and EU/non-EU treatment can differ. The European Commission notes that fees depend on declared family income and the chosen degree course, with reductions or exemptions offered by many universities. Always check the tuition regulations of your specific university and intake.",
+      "As indicative guidance, public universities generally fall around €900–€4,000 per year and private institutions around €6,000–€20,000+ per year. Fees are set per institution and programme, and EU/non-EU treatment can differ. The European Commission notes that fees depend on declared family income and the chosen degree course, with reductions or exemptions offered by many universities. Always check the tuition regulations of your specific university and intake.",
   },
   {
     question: "Is studying in Italy cheap for Indian students?",

@@ -161,7 +161,7 @@ const faqs = [
   {
     question: "Is Universitaly free?",
     answer:
-      "Yes. Universitaly is the official Italian Ministry portal and using it is free. Any charge you encounter elsewhere relates to other services or intermediaries, not to the portal itself.",
+      "Yes. Universitaly is the official Italian Ministry portal and using it is free. Any charge you encounter elsewhere relates to other services or intermediaries, not to the portal itself; university, visa, VFS and translation fees may still apply.",
   },
   {
     question: "Who needs Universitaly pre-enrolment?",
@@ -330,7 +330,7 @@ export default function UniversitalyPage() {
           <div className="mx-auto mt-10 max-w-3xl space-y-4 text-sm leading-6 text-[var(--muted-foreground)]">
             <p className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5">
               Universitaly is the official — and free — portal of the Italian
-              Ministry for higher education. It publishes course information,
+              Ministry for higher education (MUR — Ministero dell’Università e della Ricerca). It publishes course information,
               first-step guidance for foreign students and, crucially, the
               pre-enrolment channel used by international students who require
               a visa for study in Italy.
@@ -568,7 +568,9 @@ export default function UniversitalyPage() {
             ))}
           </ol>
           <p className="mx-auto mt-8 max-w-3xl text-center text-sm leading-6 text-[var(--muted-foreground)]">
-            Continue with our{" "}
+            After Universitaly validation, the visa application is submitted
+            to the competent Italian mission through its VFS channel in
+            India. Continue with our{" "}
             <Link
               href="/italy-student-visa"
               className="font-semibold text-[var(--primary)] hover:underline"
@@ -649,7 +651,7 @@ export default function UniversitalyPage() {
         <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
           <SectionHeading
             eyebrow="From India"
-            title="Universitaly Pre-Enrolment for Indian Students"
+            title="Indian Applicants: Consular Flow & Jurisdiction"
             intro="The official consular flow for Indian applicants, and where jurisdiction matters."
           />
           <div className="mx-auto mt-10 max-w-3xl space-y-4 text-sm leading-6 text-[var(--muted-foreground)]">

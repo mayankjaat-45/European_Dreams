@@ -290,7 +290,8 @@ export default function ItalyUniversityAdmissionPage() {
               requirements, deadlines and fees are set by individual
               universities and programmes — always confirm them on the official
               programme page. Visa and pre-enrolment rules come from the
-              competent Italian authorities and Universitaly.
+              competent Italian authorities and Universitaly, the Italian
+              Ministry of University and Research portal (MUR — Ministero dell’Università e della Ricerca).
             </p>
           </div>
         </section>
@@ -956,6 +957,15 @@ export default function ItalyUniversityAdmissionPage() {
               className="font-semibold text-[var(--primary)] hover:underline"
             >
               Universitaly pre-enrolment guide for Indian students
+            </Link>
+            . Admission does not itself grant a visa; visa submission
+            follows your residence jurisdiction through the VFS channel
+            for the competent Italian mission — see the{" "}
+            <Link
+              href="/italy-student-visa"
+              className="font-semibold text-[var(--primary)] hover:underline"
+            >
+              Italy student visa guide
             </Link>
             .
           </p>

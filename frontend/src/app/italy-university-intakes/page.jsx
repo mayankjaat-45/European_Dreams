@@ -422,7 +422,8 @@ export default function ItalyUniversityIntakesPage() {
               </p>
               <p className="rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5">
                 Visa applicants should apply in the earliest round open to
-                them: admission, Universitaly pre-enrolment with university
+                them: admission, Universitaly pre-enrolment on the Italian
+                Ministry of University and Research portal (MUR — Ministero dell’Università e della Ricerca) with university
                 validation, and the consular process must all complete
                 before courses begin. The university examples further down
                 show how early these windows really open.
@@ -1017,7 +1018,7 @@ export default function ItalyUniversityIntakesPage() {
           <SectionHeading
             eyebrow="Verify before you apply"
             title="How to Find Your Exact Deadline"
-            intro="Five checks that beat any deadline list — plus the rule about lists."
+            intro="Six checks that beat any deadline list — plus the rule about lists."
           />
           <ol className="mx-auto mt-10 max-w-3xl space-y-4">
             {findDeadlineSteps.map((step, index) => (
