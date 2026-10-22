@@ -644,6 +644,14 @@ export default function UniversitalyPage() {
                 </tbody>
               </table>
             </div>
+            <p className="mx-auto mt-4 max-w-3xl text-sm leading-6 text-[var(--muted-foreground)]">
+              National dates follow the{" "}
+              <OfficialLink href="https://studyinitaly.esteri.it/static/ProcedureIscrizione">
+                Study in Italy enrolment procedures
+              </OfficialLink>
+              ; always confirm the current procedure, since annual rules
+              can change.
+            </p>
           </div>
         </section>
 

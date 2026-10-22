@@ -1079,6 +1079,15 @@ export default function ItalyStudentVisaPage() {
                     <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
                       {faq.answer}
                     </p>
+                    {faq.question ===
+                      "Can I work while studying in Italy?" && (
+                      <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
+                        Source:{" "}
+                        <OfficialLink href={EC_ITALY_PROFILE_URL}>
+                          European Commission country profile
+                        </OfficialLink>
+                      </p>
+                    )}
                   </article>
                 ))}
               </div>

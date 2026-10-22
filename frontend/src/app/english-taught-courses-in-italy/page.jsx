@@ -723,6 +723,10 @@ export default function EnglishTaughtCoursesPage() {
                 admission
               </Link>
               {" · "}
+              <Link href="/italy-university-intakes" className="font-semibold text-[var(--primary)] hover:underline">
+                application intakes
+              </Link>
+              {" · "}
               <Link href="/universitaly" className="font-semibold text-[var(--primary)] hover:underline">
                 Universitaly
               </Link>

@@ -941,9 +941,7 @@ export default function ItalyUniversityIntakesPage() {
             </p>
             <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-6 text-[var(--muted-foreground)]">
               <li>Turin: by 15 Jul 2026</li>
-              <li>Milan: by 31 Jul 2026</li>
               <li>Macerata: 29 Jul 2026 extended (integration 31 Aug where applicable)</li>
-              <li>Roma Tre: by 15 Sep 2026</li>
               <li>Pisa: by 30 Sep 2026; visas only issued by 30 Nov 2026</li>
             </ul>
             <p className="mt-3 text-sm leading-6 text-[var(--muted-foreground)]">

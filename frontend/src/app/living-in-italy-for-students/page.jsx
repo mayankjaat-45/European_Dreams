@@ -125,12 +125,12 @@ const faqs = [
   {
     question: "How much does it cost to live in Italy as a student?",
     answer:
-      "Current official guidance puts typical student spending at roughly €700–€1,100 per month depending on the city, with accommodation as the largest part. Actual costs vary by city, housing type and lifestyle — see our cost of studying in Italy guide.",
+      "Current official guidance puts typical student spending at roughly €700–€1,100 per month depending on the city, with accommodation as the largest part. Actual costs vary by city, housing type and lifestyle — see our cost of studying in Italy guide. Source: European Commission Italy country profile (https://education.ec.europa.eu/study-in-europe/country-profiles/italy).",
   },
   {
     question: "Can Indian students work while studying in Italy?",
     answer:
-      "Work eligibility depends on immigration status and the rules in force — European Commission guidance notes non-EU students may work up to 20 hours per week with a valid residence permit. Verify the current rules before accepting any employment, and never budget around assumed earnings.",
+      "Work eligibility depends on immigration status and the rules in force — European Commission guidance notes non-EU students may work up to 20 hours per week with a valid residence permit (https://education.ec.europa.eu/study-in-europe/country-profiles/italy). Verify the current rules before accepting any employment, and never budget around assumed earnings.",
   },
   {
     question: "Do international students need to know Italian?",
@@ -145,7 +145,7 @@ const faqs = [
   {
     question: "What is permesso di soggiorno?",
     answer:
-      "The residence permit non-EU students apply for after arrival. For students arriving with a type D national study visa for university enrolment, Universitaly states the permit-of-stay application appointment must be initiated within 8 working days of arrival — follow current official and Questura instructions exactly.",
+      "The residence permit non-EU students apply for after arrival. For students arriving with a type D national study visa for university enrolment, Universitaly states the permit-of-stay application appointment must be initiated within 8 days of arrival (https://www.universitaly.it/it/first-steps). Follow current official and Questura instructions exactly.",
   },
   {
     question: "Can students live in university accommodation?",
@@ -613,7 +613,7 @@ export default function LivingInItalyPage() {
               },
               {
                 title: "Permesso di soggiorno",
-                text: "For students arriving with a type D national study visa for university enrolment, Universitaly states the permit-of-stay application appointment must be initiated within 8 working days of arrival.",
+                text: "For students arriving with a type D national study visa for university enrolment, Universitaly states the permit-of-stay application appointment must be initiated within 8 days of arrival (https://www.universitaly.it/it/first-steps).",
               },
               {
                 title: "Local requirements",
@@ -659,7 +659,11 @@ export default function LivingInItalyPage() {
                 Work eligibility depends on immigration status and the
                 rules in force. European Commission guidance notes that
                 non-EU students may work up to 20 hours per week with a
-                valid residence permit — that scope is specific, so verify
+                valid residence permit{" "}
+                <OfficialLink href="https://education.ec.europa.eu/study-in-europe/country-profiles/italy">
+                  European Commission Italy country profile
+                </OfficialLink>{" "}
+                — that scope is specific, so verify
                 the current rules for your own status before accepting any
                 employment.
               </p>

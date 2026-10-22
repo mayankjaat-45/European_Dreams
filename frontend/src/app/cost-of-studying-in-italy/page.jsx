@@ -446,8 +446,14 @@ export default function CostOfStudyingInItalyPage() {
                 </h3>
                 <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
                   Your exact fee lives in the university&apos;s tuition
-                  regulations or annual call for your intake, cross-checked at
-                  course level on{" "}
+                  regulations or annual call for your{" "}
+                  <Link
+                    href="/italy-university-intakes"
+                    className="font-semibold text-[var(--primary)] hover:underline"
+                  >
+                    intake
+                  </Link>{" "}
+                  , cross-checked at course level on{" "}
                   <OfficialLink href="https://www.universitaly.it/it/studenti-stranieri">
                     Universitaly
                   </OfficialLink>
@@ -1432,7 +1438,13 @@ export default function CostOfStudyingInItalyPage() {
             <p className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5">
               <strong className="text-[var(--foreground)]">Visa</strong> —
               decided by the competent authorities on admission,
-              pre-enrolment and supporting evidence including financial
+              <Link
+                href="/universitaly"
+                className="font-semibold text-[var(--primary)] hover:underline"
+              >
+                pre-enrolment
+              </Link>{" "}
+              and supporting evidence including financial
               means. Costs here are administrative, not tuition; detail is in
               the{" "}
               <Link
