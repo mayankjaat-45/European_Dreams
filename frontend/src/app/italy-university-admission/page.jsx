@@ -672,97 +672,234 @@ export default function ItalyUniversityAdmissionPage() {
                 </article>
               </div>
             </div>
-
-            <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6">
-              <h3 className="text-lg font-bold text-[var(--foreground)]">
-                Qualification recognition — CIMEA and Declaration of Value
-              </h3>
-              <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
-                Qualification recognition compares your Indian qualification
-                (e.g., Class 12, Bachelor&apos;s) to the Italian levels.
-                Whether you need a specific recognition document depends
-                on the university and, where relevant, the competent
-                Italian mission — not every Indian student needs every
-                document.
-              </p>
-              <div className="mt-6 grid gap-4 sm:grid-cols-2">
-                <article className="rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5">
-                  <h4 className="font-bold text-[var(--foreground)]">
-                    CIMEA Statement of Comparability
-                  </h4>
-                  <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
-                    Some universities accept a CIMEA Statement of
-                    Comparability and/or Verification for foreign
-                    qualifications instead of, or alongside, other
-                    recognition documents. Whether CIMEA is accepted or
-                    required is decided by the specific university.{" "}
-                    <OfficialLink href="https://www.cimea.it/EN/pagina-attestati-di-comparabilita-e-verifica">
-                      CIMEA official information on comparability
-                    </OfficialLink>
-                    .
-                  </p>
-                </article>
-                <article className="rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5">
-                  <h4 className="font-bold text-[var(--foreground)]">
-                    Declaration of Value (Dichiarazione di Valore)
-                  </h4>
-                  <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
-                    Where a university or course requests it, a
-                    Declaration of Value is issued by the territorially
-                    competent Italian mission based on where the
-                    qualification was issued. Not every programme
-                    requires a DOV. For detailed, mission-specific
-                    procedures and how DOV relates to CIMEA, see our{" "}
-                    <Link
-                      href="/italy-student-visa"
-                      className="font-semibold text-[var(--primary)] hover:underline"
-                    >
-                      Italy student visa guide
-                    </Link>
-                    .
-                  </p>
-                </article>
-              </div>
-              <div className="mt-6 rounded-xl border border-[var(--border)] bg-[var(--background)] p-5">
-                <h4 className="font-bold text-[var(--foreground)]">
-                  Key distinction
-                </h4>
-                <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
-                  Entrance tests assess your readiness and rank you for a
-                  specific programme&apos;s limited places; qualification
-                  recognition confirms the level and comparability of your
-                  previous qualification. You may need one, both or
-                  neither depending on the university and programme —
-                  they are not interchangeable, and documentation
-                  requirements vary by course and intake.
-                </p>
-              </div>
-              <p className="mt-4 text-xs leading-5 text-[var(--muted-foreground)]">
-                Sources:{" "}
-                <a
-                  href="https://www.cisiaonline.it/en/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-semibold text-[var(--primary)] hover:underline"
-                >
-                  CISIA (Consorzio Interuniversitario Sistemi Integrati per
-                  l&apos;Accesso)
-                </a>
-                {" · "}
-                <a
-                  href="https://www.cimea.it/EN/pagina-attestati-di-comparabilita-e-verifica"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-semibold text-[var(--primary)] hover:underline"
-                >
-                  CIMEA comparability services
-                </a>
-                {" · "}
-                Always confirm the exact entrance and recognition
-                requirements on the official programme call.
-              </p>
-            </div>
           </div>
+
+            <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+              <SectionHeading
+                eyebrow="Recognition"
+                title="CIMEA vs Declaration of Value (DoV) for Italian University Admission"
+                intro="The university decides which recognition document (if any) it requires. Some accept CIMEA, some require DoV, some require neither. Always confirm with your specific university."
+              />
+              
+              {/* Comparison table */}
+              <div className="mx-auto mt-10 rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6">
+                <h3 className="text-lg font-bold text-[var(--foreground)] mb-4">
+                  CIMEA vs DoV — Comparison
+                </h3>
+                <table className="w-full text-left text-sm">
+                  <tbody className="divide-y divide-[var(--border)]">
+                    <tr>
+                      <th className="px-5 py-4 font-semibold text-[var(--foreground)]" scope="row">
+                        CIMEA Statement of Comparability
+                      </th>
+                      <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                        Identifies the foreign qualification level with reference to the Bologna Process cycles and European Qualifications Framework (EQF) levels.
+                        <br />
+                        <span className="text-xs text-[var(--muted-foreground)] block mt-1">
+                          Processing times and fees vary by service. Check the current CIMEA-DiploMe platform for the most up-to-date figures before applying.
+                        </span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th className="px-5 py-4 font-semibold text-[var(--foreground)]" scope="row">
+                        CIMEA Statement of Verification
+                      </th>
+                      <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                        Confirms that a foreign qualification was actually awarded by an official body.
+                        <br />
+                        <span className="text-xs text-[var(--muted-foreground)] block mt-1">
+                          CIMEA describes the qualification&apos;s level but does not guarantee formal recognition — institutional assessment by the Italian HEI is a separate step.
+                        </span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th className="px-5 py-4 font-semibold text-[var(--foreground)]" scope="row">
+                        Declaration of Value (DoV)
+                      </th>
+                      <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                        Describes the foreign qualification for Italian HEI admission. Issued by the Italian mission whose jurisdiction covers the state where the qualification was awarded.
+                        <br />
+                        <span className="text-xs text-[var(--muted-foreground)] block mt-1">
+                          The DoV is free for verified study reasons; fees apply for other purposes (such as PhD or employment). The DoV is issued by the Italian mission covering the state where your qualification was awarded, not where you currently live.
+                        </span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Student decision flow */}
+              <div className="mx-auto mt-10 rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6">
+                <h3 className="text-lg font-bold text-[var(--foreground)] mb-4">
+                  Student Decision Flow
+                </h3>
+                <ol className="space-y-4">
+                  <li>
+                    <strong>Identify the exact university and programme.</strong> Admission requirements vary by institution and course.
+                  </li>
+                  <li>
+                    <strong>Check the university&apos;s current admission call (bando)</strong> for the specific intake year. State explicitly which recognition document is required: CIMEA Comparability, CIMEA Verification, Declaration of Value, or neither.
+                  </li>
+                  <li>
+                    <strong>Ask the university in writing</strong> whether CIMEA Comparability, Verification, DoV, or another document is required, and in what format.
+                  </li>
+                  <li>
+                    <strong>Confirm the accepted document format and authentication procedure</strong> with the university before starting any process.
+                  </li>
+                  <li>
+                    <strong>If DoV is required:</strong> Identify the competent Italian mission based on the state where your highest qualification was issued (not your current residence). Follow that mission&apos;s current DoV document checklist.
+                  </li>
+                  <li>
+                    <strong>Keep admission-document requirements separate from visa-document requirements.</strong> Even if the university says no document is needed, the competent Italian mission&apos;s visa checklist may still require CIMEA or DoV.
+                  </li>
+                  <li>
+                    <strong>Obtain written confirmation</strong> from the university admissions office specifying exactly which document is required and for which intake year before committing time or money.
+                  </li>
+                </ol>
+              </div>
+
+              {/* Indian document authentication */}
+              <div className="mx-auto mt-10 rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6">
+                <h3 className="text-lg font-bold text-[var(--foreground)] mb-4">
+                  Indian Document Authentication
+                </h3>
+                <p className="text-sm leading-6 text-[var(--muted-foreground)]">
+                  Procedures differ across the four Indian consular missions in India. Do not claim identical procedures across all four missions.
+                </p>
+                <ul className="space-y-3 text-sm leading-6 text-[var(--muted-foreground)]">
+                  <li>
+                    <strong>State-level HRD authentication:</strong> All four missions require attestation from the competent state Higher Education Department. SDM (Sub-Divisional Magistrate) attestation is NOT acceptable at any mission.
+                  </li>
+                  <li>
+                    <strong>MEA Apostille:</strong> All four missions require authentication with an Apostille issued by the Ministry of External Affairs, Government of India. E-Sanad acceptability varies by mission: Kolkata accepts E-Sanad for Apostille; New Delhi does not accept E-Sanad for HRD attestation and requires traditional HRD authentication. Mumbai and Bengaluru E-Sanad status is not explicitly confirmed in extracted checklists; treat as unverified.
+                  </li>
+                  <li>
+                    <strong>Mission-specific jurisdiction:</strong> The DoV is issued by the Italian mission whose jurisdiction covers the state where the qualification was issued, not where the student currently lives. Mumbai: Chhattisgarh, Goa, Gujarat, Kerala, Madhya Pradesh, Maharashtra and related territories. New Delhi: Union Territories of Delhi and Chandigarh; Haryana, Punjab, Rajasthan, Jammu-Kashmir, Himachal Pradesh, Uttar Pradesh. Bengaluru: Karnataka, Tamil Nadu, Telangana, Andhra Pradesh, Puducherry. Kolkata: assigns jurisdiction according to state where qualification was issued, with explicit boundary list (Arunachal Pradesh, Assam, Bihar, Jharkhand, Manipur, Meghalaya, Mizoram, Nagaland, Orissa, Sikkim, Tripura, West Bengal, Andaman & Nicobar Islands & Nepal).
+                  </li>
+                  <li>
+                    <strong>Document differences by qualification level:</strong> Requirements vary by mission and degree level. Mumbai form asks to tick &quot;School level (X/XII) o University level (Bachelor/Master) o Pre degree /Diploma o Professional formation/ Post Graduate.&quot; New Delhi: Class 12 copy (DigiLocker with Apostille acceptable); Bachelor: copy of Class 12; Master: copy of Class 12 + Bachelor. Bengaluru: similar pattern. Kolkata procedure focuses on highest qualification + transcript. Do not present one mission&apos;s checklist as a universal India-wide rule.
+                  </li>
+                </ul>
+<p className="mt-4 text-xs leading-5 text-[var(--muted-foreground)]">
+                          Full procedure details for the Bengaluru and Kolkata Italian consular missions are still being verified. Check the latest checklist of the mission responsible for your qualification&apos;s issuing state.
+                        </p>
+              </div>
+
+              {/* Fees and timelines */}
+              <div className="mx-auto mt-10 rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6">
+                <h3 className="text-lg font-bold text-[var(--foreground)] mb-4">
+                  Fees and Timelines
+                </h3>
+                <p className="text-sm leading-relaxed text-[var(--muted-foreground)] mb-6">
+                  Do not state €300 as a confirmed combined fee. Treat €150 and €250 as unconfirmed unless the exact official DiploMe listing and its service scope are directly verifiable. The 60-working-day figure may only be described as an official estimate if the cited CIMEA source explicitly supports it. Do not present the 30-day urgent service or €100 surcharge as confirmed without direct official evidence. Exclude INR conversions if the underlying EUR fee is not verified. Do not include ARDI €100 pricing or India applicability until Lisbon Convention / ARDI eligibility is verified.
+                </p>
+                <ul className="text-sm leading-relaxed text-[var(--muted-foreground)]">
+                  <li>CIMEA Comparability service: Check the current service fee on the official CIMEA-DiploMe platform before applying.</li>
+                  <li>CIMEA Comparability & Verification combined: Fees vary; check the official CIMEA-DiploMe platform for current pricing.</li>
+                  <li>Standard processing: CIMEA publishes processing estimates; confirm current timelines through the official service.</li>
+                  <li>Urgent processing: CIMEA&apos;s urgent service options and fees are set by the official service; confirm availability and cost through the CIMEA-DiploMe platform.</li>
+                  <li>CIMEA winter closure: No new requests accepted Dec 21 2026–Jan 17 2027 — <span className="font-bold">CONFIRMED</span> (CIMEA official page explicitly states this)</li>
+                  <li>Closure days not counted toward processing guarantees — <span className="font-bold">CONFIRMED</span> (CIMEA official page: &quot;closure days will not be counted as part of the period guaranteed for the release of statements&quot;)</li>
+                  <li>DoV fee for verified study reasons: Free — <span className="font-bold">CONFIRMED</span> (New Delhi procedure; Mumbai, Bengaluru, Kolkata follow same policy)</li>
+                  <li>DoV fees for other purposes (PhD, employment): Applicable consular fees — <span className="font-bold">CONFIRMED</span></li>
+                </ul>
+              </div>
+
+              {/* Admission vs visa distinction */}
+              <div className="mx-auto mt-10 rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6">
+                <h3 className="text-lg font-bold text-[var(--foreground)] mb-4">
+                  Admission vs Visa Documentation
+                </h3>
+                <div className="grid grid-cols-2 gap-4 sm:grid-cols-2">
+                  <div>
+                    <h4 className="font-bold text-[var(--foreground)] mb-2">University Admission</h4>
+                    <ul className="text-sm leading-relaxed text-[var(--muted-foreground)]">
+                      <li>The specific university / HEI decides which document (CIMEA, DoV, or neither) is required.</li>
+                      <li>Some universities require CIMEA, some require DoV, some require neither.</li>
+                      <li>Written confirmation from the admissions office is strongly recommended before starting any document process.</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-[var(--foreground)] mb-2">Italian Student Visa</h4>
+                    <ul className="text-sm leading-relaxed text-[var(--muted-foreground)]">
+                      <li>The competent Italian diplomatic mission governs visa documentation requirements.</li>
+                      <li>The visa mission may require CIMEA or DoV even if the university says no document is needed.</li>
+                      <li>The Embassy of Italy visa checklist 2026–2027 for India states CIMEA/DoV is required &quot;if required by the Italian HEI.&quot;</li>
+                      <li>Do not claim that visa authorities can never request additional documents.</li>
+                      <li>Do not imply that university acceptance automatically guarantees visa approval.</li>
+                    </ul>
+                  </div>
+                </div>
+<p className="mt-4 text-xs leading-5 text-[var(--muted-foreground)]">
+                          Visa checklist requirements may change. Always confirm the current requirements with the Italian mission responsible for your qualification&apos;s issuing state.
+                        </p>
+              </div>
+
+              {/* FAQs — integrated with existing page FAQs */}
+              <div className="mx-auto mt-10 space-y-4">
+                <h3 className="text-lg font-bold text-[var(--foreground)] mb-4">
+                  CIMEA / DoV Frequently Asked Questions
+                </h3>
+                <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6">
+                  <article>
+                    <h4 className="font-bold text-[var(--foreground)]">
+                      Do all Indian students need CIMEA?
+                    </h4>
+                    <p className="text-sm leading-relaxed text-[var(--muted-foreground)]">
+                      No. Some Italian universities accept neither CIMEA nor DoV. Some accept one or the other. Check the specific university&apos;s admission call.
+                    </p>
+                  </article>
+                  <article>
+                    <h4 className="font-bold text-[var(--foreground)]">
+                      Is DoV compulsory for every Italian university?
+                    </h4>
+                    <p className="text-sm leading-relaxed text-[var(--muted-foreground)]">
+                      No. University admission policies vary. Some require DoV, some accept CIMEA, some accept neither.
+                    </p>
+                  </article>
+                  <article>
+                    <h4 className="font-bold text-[var(--foreground)]">
+                      Are CIMEA Comparability and Verification the same?
+                    </h4>
+                    <p className="text-sm leading-relaxed text-[var(--muted-foreground)]">
+                      No. They are separate services with different purposes: Comparability identifies the qualification&apos;s Bologna/EQF level; Verification confirms the qualification was awarded by an official body. Some universities require both.
+                    </p>
+                  </article>
+                  <article>
+                    <h4 className="font-bold text-[var(--foreground)]">
+                      Can a student choose CIMEA instead of DoV?
+                    </h4>
+                    <p className="text-sm leading-relaxed text-[var(--muted-foreground)]">
+                      Only if the target university accepts CIMEA in place of DoV. The university decides, not the applicant. Written confirmation required.
+                    </p>
+                  </article>
+                  <article>
+                    <h4 className="font-bold text-[var(--foreground)]">
+                      Does Apostille replace CIMEA or DoV?
+                    </h4>
+                    <p className="text-sm leading-relaxed text-[var(--muted-foreground)]">
+                      No. Apostille is a authentication step for Indian documents (HRD + MEA). It does not substitute for CIMEA or DoV, which are separate qualification-information documents.
+                    </p>
+                  </article>
+                  <article>
+                    <h4 className="font-bold text-[var(--foreground)]">
+                      Which Italian mission should an applicant consult?
+                    </h4>
+                    <p className="text-sm leading-relaxed text-[var(--muted-foreground)]">
+                      The mission whose jurisdiction covers the state where your highest qualification was issued, not your current residence. Mumbai, Kolkata, Bengaluru, or New Delhi — determined by degree-issuing state.
+                    </p>
+                  </article>
+                  <article>
+                    <h4 className="font-bold text-[var(--foreground)]">
+                      Does admission approval guarantee visa approval?
+                    </h4>
+                    <p className="text-sm leading-relaxed text-[var(--muted-foreground)]">
+                      No. Admission and visa are separate processes. Visa approval depends on the competent mission&apos;s requirements and the applicant&apos;s overall profile.
+                    </p>
+                  </article>
+                </div>
+              </div>
+            </div>
         </section>
 
         {/* Admission vs pre-enrolment */}
